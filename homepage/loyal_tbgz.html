@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <title>忠诚度营销-特别关注</title>
+</head>
+<style>
+    select {
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+    }
+</style>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:rgb(247, 112, 49);">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;" ></a>
+        <h1 class="mui-title" style="color:white;">特别关注</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <!-- 总部 -->
+        <div class="mui-input-row mui-select" style="height:40px;">
+            <select name="" style=" color:rgb(105, 104,104);">
+                <option value="">选择部门</option>
+                <option value="">上海部门</option>
+                <option value="">广州部门</option>
+            </select>
+        </div>
+        <!-- 所以门店 -->
+        <div class="mui-input-row mui-select">
+            <select name="" style=" color:rgb(105, 104,104);">
+                <option value="">所有门店</option>
+                <option value="">山嘎达</option>
+                <option value="">八达岭</option>
+            </select>
+        </div>
+        <!-- 关系客户 -->
+        <div style="height:50px;line-height: 50px;background-color: white;overflow: hidden;border-bottom: 1px solid #cccccc; color: #696868;">
+            <span class="scfl" style="margin-left:20px;">关系客户</span>
+            <span style="float:right; margin-right: 10px;" class="iconfont icon-right"></span>
+            <span style="float:right;color:#f77031;">0&nbsp;</span>
+        </div>
+        <!-- 重要客户 -->
+        <div style="height:50px;line-height: 50px;background-color: white;overflow: hidden;border-bottom: 1px solid #cccccc;color: #696868;">
+            <span class="scfl" style="margin-left:20px;">重要客户</span>
+            <span style="float:right; margin-right: 10px;" class="iconfont icon-right"></span>
+            <span style="float:right;color:#f77031;">0&nbsp;</span>
+        </div>
+        <!-- 普通客户 -->
+        <div style="height:50px;line-height: 50px;background-color: white;overflow: hidden;border-bottom: 1px solid #cccccc;color: #696868;">
+            <span class="scfl" style="margin-left:20px;">普通客户</span>
+            <span style="float:right; margin-right: 10px;" class="iconfont icon-right"></span>
+            <span style="float:right;color:#f77031;">0&nbsp;</span>
+        </div>
+        <!-- 睡眠客户 -->
+        <div style="height:50px;line-height: 50px;background-color: white;overflow: hidden;border-bottom: 1px solid #cccccc;color: #696868;">
+            <span class="scfl" style="margin-left:20px;">睡眠客户</span>
+            <span style="float:right; margin-right: 10px;" class="iconfont icon-right"></span>
+            <span style="float:right;color:#f77031;">0&nbsp;</span>
+        </div>
+        <!-- 主客关注 -->
+        <div style="height:50px;line-height: 50px;background-color: white;overflow: hidden;border-bottom: 1px solid #cccccc;color: #696868;">
+            <span class="scfl" style="margin-left:20px;">主客关注</span>
+            <span style="float:right; margin-right: 10px;" class="iconfont icon-right"></span>
+            <span style="float:right;color:#f77031;">0&nbsp;</span>
+        </div>
+        <!-- 大单关注 -->
+        <div style="height:50px;line-height: 50px;background-color: white;overflow: hidden;border-bottom: 1px solid #cccccc;color: #696868;">
+            <span class="scfl" style="margin-left:20px;">大单关注</span>
+            <span style="float:right; margin-right: 10px;" class="iconfont icon-right"></span>
+            <span style="float:right;color:#f77031;">0&nbsp;</span>
+        </div>
+        <!-- 未消关注 -->
+        <div style="height:50px;line-height: 50px;background-color: white;overflow: hidden;border-bottom: 1px solid #cccccc;color: #696868;">
+            <span class="scfl" style="margin-left:20px;">未消关注</span>
+            <span style="float:right; margin-right: 10px;" class="iconfont icon-right"></span>
+            <span style="float:right;color:#f77031;">0&nbsp;</span>
+        </div>
+        <!-- 冻结关注 -->
+        <div style="height:50px;line-height: 50px;background-color: white;overflow: hidden;border-bottom: 1px solid #cccccc;color: #696868;">
+            <span class="scfl" style="margin-left:20px;">冻结关注</span>
+            <span style="float:right; margin-right: 10px;" class="iconfont icon-right"></span>
+            <span style="float:right;color:#f77031;">0&nbsp;</span>
+        </div>
+        <!-- 默认关注 -->
+        <div style="height:50px;line-height: 50px;background-color: white;overflow: hidden;border-bottom: 1px solid #cccccc;color: #696868;">
+            <span class="scfl" style="margin-left:20px;">默认关注</span>
+            <span style="float:right; margin-right: 10px;" class="iconfont icon-right"></span>
+            <span style="float:right;color:#f77031;">0&nbsp;</span>
+        </div>
+        <div id="tianjia">
+
+        </div>
+        <!-- 自定义分类 -->
+        <div style="height:40px;line-height: 40px;overflow: hidden;color: #696868;">
+            <span style="margin-left:10px;">自定义分类</span>
+            <span style="float:right;color:#f77031;margin-right: 25px;">0&nbsp;</span>
+        </div>
+        <!-- 没有任何特别关注分类 -->
+        <div style="height:40px;line-height: 40px;overflow: hidden;color: #696868;text-align: center;">
+            <span style="margin-left:10px;">没有任何特别关注分类</span>
+        </div>
+        <!-- 添加分类按钮 -->
+        <div style="background-color: white; text-align: center;padding-bottom: 10px;">
+            <input id="tjfl" type="text" placeholder="添加分类">
+            <button typle="button" style="width:45%;background-color: #f77031;color: white;">编辑分类</button>&nbsp;
+            <button typle="button" style="width:45%;background-color: #f77031;color: white;">删除分类</button>
+        </div>
+    </div>
+</body>
+<script>
+    var tianjia = document.getElementById("tianjia");
+    var tjfl = document.getElementById("tjfl");
+    var button_ = document.getElementsByTagName("button");
+    var scfl = document.getElementsByClassName("scfl");
+
+    // 添加分类
+    button_[0].onclick = function () {
+        var b = 0;
+        if (tjfl.value != "") {
+            for (h = 0; h < scfl.length; h++) {
+                if (scfl[h].innerHTML != tjfl.value) {
+                    b += 1;
+                    if (b == scfl.length) {
+                        tianjia.innerHTML = tianjia.innerHTML + "<div style=\"height:50px;line-height: 50px;background-color: white;overflow: hidden;border-bottom: 1px solid #cccccc;color: #696868;\">" +
+                            "<span  class=\"scfl\" style=\"margin-left:20px;\">" + tjfl.value + "</span>" +
+                            "<span style=\"float:right; margin-right: 10px;\" class=\"iconfont icon-right\"></span>" +
+                            "<span style=\"float:right;color:#f77031;\">0&nbsp;</span>" +
+                            "</div>"
+                        break;
+                    }
+                } else {
+                    alert("上面已有此分类");
+                }
+            }
+        } else {
+            alert("请添加分类");
+        }
+    }
+    // 删除分类
+    button_[1].onclick = function () {
+        var a = 0;
+        if (tjfl.value != "") {
+            for (i = 0; i < scfl.length; i++) {
+                if (scfl[i].innerHTML == tjfl.value) {
+                    scfl[i].parentNode.parentNode.removeChild(scfl[i].parentNode);
+                } else {
+                    a = a + 1;
+                    if (a == scfl.length) {
+                        alert("没有匹配到" + tjfl.value + "字段");
+                        break;
+                    }
+                }
+            }
+        } else {
+            alert("删除分类不能为空");
+        }
+    }
+</script>
+
+</html>

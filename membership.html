@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>我的会员</title>
+  <link href="./mui/css/mui.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/iconfont.css">
+  <script src="./mui/js/mui.min.js"></script>
+  <style>
+    .span_font_style {
+      /* background-color: #3abeee; */
+      background: -webkit-linear-gradient(0deg, rgba(233, 153, 4, 0.973), #f5f10cf1);
+      /* Safari 5.1 - 6.0 */
+      background: -o-linear-gradient(0deg, rgba(247, 168, 23, 0.973), #f5f10cf1);
+      /* Opera 11.1 - 12.0 */
+      background: -moz-linear-gradient(0deg, rgba(233, 153, 4, 0.973), #f5f10cf1);
+      /* Firefox 3.6 - 15 */
+      background: linear-gradient(0deg, rgba(233, 153, 4, 0.973), #f5f10cf1);
+      /* 标准的语法（必须放在最后） */
+      /* 标准的语法（必须放在最后） */
+      color: white;
+      background-color: orange;
+      border-radius: 10px;
+      font-size: 20px;
+    }
+
+    li {
+      list-style: none;
+      background-color: white;
+      border-right: 1px solid #cccccc;
+      border-bottom: 1px solid #cccccc;
+      text-align: center;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+
+    .li_style {
+      border-right: none;
+
+      height: 147px;
+    }
+
+    .li_photo_style {
+      border: 1px solid black;
+    }
+
+    .div_style {
+      text-align: left;
+      overflow: hidden;
+
+      line-height: 40px;
+    }
+
+    .div_style_1 {
+      border-bottom: 1px solid #cccccc;
+    }
+
+    .input_style {
+
+      float: right;
+      margin-bottom: 10px;
+    }
+
+    select {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      /* select居中 */
+      text-align-last: center;
+    }
+
+    .title_display {
+      display: none;
+
+    }
+
+    /* 样式 */
+    .oa-contact-cell.mui-table .mui-table-cell {
+      padding: 11px 0;
+      vertical-align: middle;
+    }
+
+    .oa-contact-cell {
+      position: relative;
+      margin: -11px 0;
+    }
+
+    .oa-contact-content {
+      width: 100%;
+
+    }
+
+    .oa-contact-name,
+    oa-contact-position {
+      float: left;
+    }
+
+    li {
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <!-- 头部 -->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg title_display" id="header_title">
+      <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back"></a>
+      <h1 class="mui-title" id="h1_title">会员管理</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+      <!-- 所有门店 -->
+      <div class="mui-input-row mui-select" style="margin:0px;padding:0px;">
+        <select name="" style=" color:rgb(105, 104,104);margin-bottom: 4px; ">
+          <option value="">所有门店</option>
+          <option value="">上海部门</option>
+          <option value="">海南部门</option>
+          <option value="">澳大利亚部门</option>
+        </select>
+      </div>
+      <!-- 请选择导购 -->
+      <div class="mui-input-row mui-select">
+        <select name="" style=" color:rgb(105, 104,104);margin-bottom: 4px; ">
+          <option value="">请选择导购</option>
+          <option value="">上海部门</option>
+          <option value="">海南部门</option>
+          <option value="">澳大利亚部门</option>
+        </select>
+      </div>
+      <!-- 搜索 -->
+      <div class="mui-input-row mui-search" style="height:40px;">
+        <input type="search" class="mui-input-clear" placeholder="请输入会员卡号" style="background-color:white;">
+      </div>
+      <div class="mui-row">
+        <div class="mui-col-xs-3 mui-col-sm-3">
+          <li class="mui-table-view-cell" style="border-right:none">
+            <a href="./membership.html#true">
+              <span class="iconfont icon-group span_font_style"></span>
+              <p>全部会员</p>
+            </a>
+          </li>
+        </div>
+        <div class="mui-col-xs-3 mui-col-sm-3">
+          <li class="mui-table-view-cell" style="border-right:none">
+            <a href="./homepage/new_addition_member.html">
+              <span class="iconfont icon-creative span_font_style"></span>
+              <p>新入会员</p>
+            </a>
+          </li>
+        </div>
+        <div class="mui-col-xs-3 mui-col-sm-3">
+          <li class="mui-table-view-cell" style="border-right:none">
+            <a href="./homepage/active_member.html">
+              <span class="iconfont icon-friendfamous span_font_style"></span>
+              <p>活跃会员</p>
+            </a>
+          </li>
+        </div>
+        <div class="mui-col-xs-3 mui-col-sm-3">
+          <li class="mui-table-view-cell" style="border-right:none">
+            <a href="./homepage/grade_member.html">
+              <span class="iconfont icon-choiceness span_font_style"></span>
+              <p>会员等级</p>
+            </a>
+          </li>
+        </div>
+      </div>
+      <!-- 详细资料 -->
+      <!-- <div id="xxzl">
+        <div class="mui-row">
+          <div class="mui-col-xs-3 mui-col-sm-3">
+            <li class="mui-table-view-cell li_style li_photo_style">
+              <div>照片</div>
+            </li>
+          </div>
+          <div class="mui-col-xs-9 mui-col-sm-9">
+            <li class="mui-table-view-cell li_style">
+              <div class="div_style div_style_1">
+                <span>孙仲平</span>&nbsp;&nbsp;
+                <span>1964-12-27</span>
+                <input type="button" value="会员资料" class="input_style">
+                <div><span>从未消费/￥0/0次</span></div>
+              </div>
+              <div class="div_style">
+                <span>从未回访</span>
+                <input type="button" value="会员标签" style="float:right;margin-top: 10px;">
+              </div>
+            </li>
+          </div>
+        </div><br>
+      </div> -->
+      <!-- 详细资料 -->
+      <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed" id="member_data">
+        <!-- 里面详细内容 -->
+        <!-- <li class="mui-table-view-cell" style="padding-left:5px;">
+          <div class="mui-slider-cell">
+            <div class="oa-contact-cell mui-table">
+              <div class="mui-table-cell" style="width:100px;height:100px;">
+                <img src="./images/g.jpg" style="width:79%;height:100%;border: 1px solid black;border-radius:50%;" />
+              </div>
+              <div class="oa-contact-content mui-table-cell" style="padding-top:30px;padding-left: 12px;">
+                <div class="mui-clearfix" style="text-align:left;line-height: 28px;width: 80%;">
+                  <h4 class="oa-contact-name">叶文洁</h4>&nbsp;
+                  <span class="oa-contact-position mui-h5">1964-12-27</span>
+                </div>
+                <p class="mui-h6" style="text-align:left;width: 80%;">
+                  <span>从未消费/</span>
+                  <span>¥</span>
+                  <span>0</span>
+                  <span>/</span>
+                  <span>0</span>
+                  <span>次</span>
+                </p>
+                <button style="float: right;">会员资料</button>
+              </div>
+            </div>
+          </div>
+        </li> -->
+      </ul>
+    </div>
+  </div>
+  <script>
+    //获取会员管理的id
+    var hd = window.parent.document.getElementById("hd");
+    //页面的margin-top
+    var hh = window.parent.document.getElementsByClassName("mui-iframe-wrapper");
+    //控制详细资料输出的次数
+    var variable = 5;
+    //获取地址后四位
+    var str = location.href;
+    var true_t = str.substr(str.length - 4);
+    document.body.onload = function () {
+      //js控制页面输出详细资料
+      var member = mui("#member_data");
+      var kk = document.getElementById("member_data");
+      for (i = 0; i < variable; i++) {
+        kk.innerHTML = kk.innerHTML
+          + '<li class="mui-table-view-cell" style="padding-left:5px;">'
+          + '<div class="mui-slider-cell">'
+          + ' <div class="oa-contact-cell mui-table">'
+          + ' <div class="mui-table-cell" style="width:100px;height:100px;">'
+          + ' <img src="./images/g.jpg" style="width:79%;height:100%;border: 1px solid black;border-radius:50%;" />'
+          + '</div>'
+          + '<div class="oa-contact-content mui-table-cell" style="padding-top:30px;padding-left: 12px;">'
+          + ' <div class="mui-clearfix" style="text-align:left;line-height: 28px;width: 80%;">'
+          + '  <h4 class="oa-contact-name">叶文洁</h4>&nbsp;'
+          + ' <span class="oa-contact-position mui-h5">1964-12-27</span>'
+          + '</div>'
+          + '<p class="mui-h6" style="text-align:left;width: 80%;">'
+          + '<span>从未消费/</span>'
+          + '<span>¥</span>'
+          + '<span>0</span>'
+          + '<span>/</span>'
+          + '<span>0</span>'
+          + '<span>次</span>'
+          + '</p>'
+          + '<button style="float: right;" onclick="location.href=\'./homepage/member_data.html#this\'">会员资料</button>'
+          + '</div>'
+          + '</div>'
+          + '</div>'
+          + '</li>'
+      }
+      if (true_t == "true") {
+        header_title.classList.remove("title_display");
+        hd.style.display = "none";
+        hh[0].style.top = "0px";
+      } else {
+        hh[0].style.top = "0px";
+        hd.style.display = "";
+      }
+
+    }
+  </script>
+</body>
+
+</html>

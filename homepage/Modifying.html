@@ -1,0 +1,189 @@
+<html>
+
+<head>
+  <title>修改资料</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="stylesheet" href="../mui/css/mui.min.css">
+  <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+  <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+  <link rel="stylesheet" href="../mui/css/mui.poppicker.css">
+  <link rel="stylesheet" href="../css/iconfont.css">
+
+  <script src="../mui/js/mui.min.js"></script>
+  <script src="../mui/js/mui.picker.min.js"></script>
+  <script src="../mui/js/mui.dtpicker.js"></script>
+  <script src="../mui/js/city.data-3.js"></script>
+  <script src="../mui/js/mui.poppicker.js"></script>
+  <style>
+    a:hover{
+            text-decoration: none;
+        }
+   .yyyzm{
+      
+        width:80px;height:30px;
+        line-height:30px;
+        text-align: center;
+        float: right;
+        margin-right: 5px;
+        border-radius: 5px;
+       
+   }
+   .dxyzm{
+       width:80px;
+        height:30px;
+        text-align: center;
+        line-height:30px;
+        float: left;
+        margin-left: 5px;
+        border-radius: 5px;
+       
+   }
+   .div_xgmm{
+        text-align:center;
+        height: 50px;
+        line-height:50px;
+    
+        
+   }
+   .div_xgzl{
+        text-align:center;
+        line-height:50px;
+       
+   }
+   .gb_orang{
+     background-color:orange;
+     color: white;
+   }
+   .gb_orangered{
+     background-color: orangered;
+     color: white;
+   }
+    </style>
+</head>
+
+<body>
+  <div id="xgdatum">
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg">
+      <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" ></a>
+      <h1 class="mui-title">修改密码</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+      <div class="mui-row">
+        <div class="mui-col-xs-6 mui-col-sm-6 div_xgmm gb_orang" id="xgmm">
+          <span>修改密码</span>
+        </div>
+        <div class="mui-col-xs-6 mui-col-sm-6 div_xgzl" id="xgzl">
+          <span>修改资料</span>
+        </div>
+      </div>
+      <form action="" class="mui-input-group">
+        <div class="mui-input-row">
+          <label for="">原密码：</label>
+          <input type="password" class="mui-input-password" placeholder="请输入原密码">
+        </div>
+        <div class="mui-input-row">
+          <label for="">新密码：</label>
+          <input type="password" class="mui-input-password" placeholder="请输入新密码" id="xmm">
+        </div>
+        <div class="mui-input-row">
+          <label for="">确认密码：</label>
+          <input type="password" class="mui-input-password" placeholder="请再次输入新密码" id="qrxmm">
+        </div>
+        <div class="mui-button-row" style="height: 50px;">
+          <button type="button" class="mui-btn mui-btn-primary" style="width:280px;">确认</button>
+        </div>
+      </form>
+
+      <form action="" class="mui-input-group" style="display:none" ;>
+        <div class="mui-input-row">
+          <label for="">帐&nbsp;号:</label>
+          <input type="password" class="mui-input-clear" placeholder="请输入帐号">
+        </div>
+        <div class="mui-input-row">
+          <label for="">姓&nbsp;名:</label>
+          <input type="password" class="mui-input-clear" placeholder="请输入姓名">
+        </div>
+        <div class="mui-input-row">
+          <label for="">手机号：</label>
+          <input type="text" class="mui-input-clear" placeholder="">
+        </div>
+        <div class="mui-input-row">
+          <label for="">验证码：</label>
+          <input type="text" class="mui-input-clear" placeholder="">
+        </div>
+        <div style="height:10px;"></div>
+        <div class="mui-row" overflow="hidden">
+          <div class="mui-col-xs-6 mui-col-sm-6" overflow="hidden">
+            <p class="yyyzm gb_orangered" id="yyyzm">语音验证码</p>
+          </div>
+          <div class="mui-col-xs-6 mui-col-sm-6" overflow="hidden">
+            <p class="dxyzm " id="dxyzm">短信验证码</p>
+          </div>
+        </div>
+        <div class="mui-row">
+          <div class="mui-button-row" style="height: 50px;">
+            <button type="button" class="mui-btn mui-btn-primary" style="width:280px;">提交</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    var xgmm = document.getElementById("xgmm");
+    var xgzl = document.getElementById("xgzl");
+    var form_0 = document.getElementsByTagName("form")[0];
+    var form_1 = document.getElementsByTagName("form")[1];
+    var yyyzm =document.getElementById("yyyzm");
+    var dxyzm =document.getElementById("dxyzm");
+    //获取父页面
+    var hd = window.parent.document.getElementById("hd");
+     //页面的margin-top
+  var hh = window.parent.document.getElementsByClassName("mui-iframe-wrapper");
+    window.onload = function () {
+      hd.style.display = "none";
+      hh[0].style.top="0px";
+    }
+
+
+    // 点击修改密码
+    xgmm.onclick = function () {
+      document.getElementsByTagName("h1")[0].innerHTML = "修改密码";
+      form_0.style.display = "";
+      form_1.style.display = "none";
+      //  改变bg颜色
+      xgmm.classList.add("gb_orang");
+      xgzl.classList.remove("gb_orang");
+    }
+    // 点击修改资料
+    xgzl.onclick = function () {
+      document.getElementsByTagName("h1")[0].innerHTML = "修改资料";
+      form_0.style.display = "none";
+      form_1.style.display = "";
+      //  改变bg颜色
+      xgmm.classList.remove("gb_orang");
+      xgzl.classList.add("gb_orang");
+    }
+
+
+    var input = document.getElementsByTagName("input");
+    var button = document.getElementsByTagName("button");
+    button[0].onclick = function () {
+      if (input[1].value != input[2].value) {
+        alert("两次密码不一致，请重新输入");
+      }
+    }
+    yyyzm.onclick=function(){
+      yyyzm.classList.add("gb_orangered");
+      dxyzm.classList.remove("gb_orangered");
+    }
+    dxyzm.onclick=function(){
+      dxyzm.classList.add("gb_orangered");
+      yyyzm.classList.remove("gb_orangered");
+    }
+  </script>
+</body>
+
+</html>

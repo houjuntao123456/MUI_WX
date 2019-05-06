@@ -1,0 +1,54 @@
+<html>
+
+<head>
+  <title>会员回访</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="stylesheet" href="../mui/css/mui.min.css">
+  <link rel="stylesheet" href="../css/iconfont.css">
+  <script src="../mui/js/mui.min.js"></script>
+  <style></style>
+</head>
+
+<body>
+  <!--  头部-->
+  <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:rgb(247, 112, 49);">
+    <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+    <h1 class="mui-title" style="color:white;">活动回访项目</h1>
+  </header>
+  <!-- 内容 -->
+  <div class="mui-content">
+    <div class="mui-row" style="background-color:white;">
+      <div id="qb" class="mui-col-xs-6 mui-col-sm-6" style="border-bottom:1px solid rgb(247, 112, 49); text-align: center;height: 40px;line-height: 40px;">
+        <span>当前项目</span>
+      </div>
+      <div class="mui-col-xs-6 mui-col-sm-6" style="text-align: center;height: 40px;line-height: 40px;" id="wsx">
+        <span>历史项目</span>
+      </div>
+    </div>
+  </div>
+  <div style="margin-left:130px;padding-top:20px;">暂时没有数据</div>
+</body>
+<script>
+  var qb = document.getElementById("qb");
+  var wsx = document.getElementById("wsx");
+  var hd =window.parent.document.getElementById("hd");
+ //页面的margin-top
+ var hh = window.parent.document.getElementsByClassName("mui-iframe-wrapper");
+  window.onload=function(){
+    hd.style.display="none";
+     hh[0].style.top="0px";
+  }
+  // 点击当前项目
+  qb.onclick = function () {
+    qb.style.borderBottom = "1px solid rgb(247, 112, 49)";
+    wsx.style.borderBottom = "0px solid white";
+  }
+  // 点击历史项目
+  wsx.onclick = function () {
+    wsx.style.borderBottom = "1px solid rgb(247, 112, 49)";
+    qb.style.borderBottom = "0px solid white";
+  }
+</script>
+
+</html>

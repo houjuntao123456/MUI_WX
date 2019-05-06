@@ -1,0 +1,205 @@
+<html>
+<head>
+  <title>卡劵赠送</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="stylesheet" href="../mui/css/mui.min.css">
+  <script src="../mui/js/mui.min.js"></script>
+  <link rel="stylesheet" href="../css/iconfont.css">
+  <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+  <script src="../mui/js/mui.dtpicker.js"></script>
+  <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+  <script src="../mui/js/mui.picker.min.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/jweixin-1.4.0.js"></script>
+  <style>
+    .div_kjzs {
+      text-align: center;
+      height: 50px;
+      line-height: 50px;
+      background-color: orange;
+      color: white;
+    }
+    .div_kjzsjl {
+      text-align: center;
+      line-height: 50px;
+    }
+    #input_text{
+	    outline:none;  
+	    border:0px;
+    }
+    .div_bg{
+      background-color:white;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+    }
+    .div_bg_2{
+      background-color:white;
+      height: 40px;
+      line-height: 40px;
+      text-align: left;
+    }
+    p .button_style{
+      width:100%;
+      border: 0;
+      background-color: orange;
+      border-radius: 5px;
+      outline: none;
+      color: white;
+    }
+    .button_style_1{
+    width: 100%;
+    }
+    .display_none{
+      display: none
+    }
+  </style>
+</head>
+<body>
+  <!-- 头部 -->
+  <header class="mui-bar mui-bar-nav mui-bar-nav-bg">
+    <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" id="back_kjWrite"></a>
+    <h1 class="mui-title">卡劵赠送</h1>
+  </header>
+  <!-- 内容 -->
+  <div class="mui-content">
+    <div class="mui-row">
+      <div class="mui-col-xs-6 mui-col-sm-6 div_kjzs" id="kjzs">
+        <span>卡劵赠送</span>
+      </div>
+      <div class="mui-col-xs-6 mui-col-sm-6 div_kjzsjl" id="kjzsjl">
+        <span>卡劵赠送记录</span>
+      </div>
+    </div><br>
+    <!-- 卡劵赠送 -->
+    <div id="zengsong" class="">
+      <!-- 搜索条 -->
+      <div class="mui-row">
+        <div class="mui-col-xs-1 mui-col-sm-1"></div>
+        <div class="mui-col-xs-2 mui-col-sm-2 div_bg">会员:</div>
+        <div class="mui-col-xs-7 mui-col-sm-7">
+          <input type="text" id="input_text" placeholder="请输入会员手机号" >
+        </div>
+        <div class="mui-col-xs-1 mui-col-sm-1 div_bg_2"  id="saoma">
+          <i class="iconfont icon-scan" style="font-size:20px;"></i>
+        </div>
+        <div class="mui-col-xs-1 mui-col-sm-1"></div>
+      </div>
+      <!-- 下一条 -->
+      <div class="mui-row">
+        <div class="mui-col-xs-1 mui-col-sm-1"></div>
+        <div class="mui-col-xs-10 mui-col-sm-10">
+          <p>查我要赠送卡劵的任务</p>
+          <p><input type="button" value="下一步" class="button_style"></p>
+        </div>
+        <div class="mui-col-xs-1 mui-col-sm-1"></div>
+      </div>
+    </div>
+    <!-- 卡捐赠送记录 -->
+    <div id="zengsongjilu" class="display_none">
+      <div class="mui-row">
+        <div class="mui-col-xs-1 mui-col-sm-1"></div>
+        <div class="mui-col-xs-4 mui-col-sm-4 div_bg">&nbsp;&nbsp;会员手机号:</div>
+        <div class="mui-col-xs-6 mui-col-sm-6">
+          <input type="text" id="input_text" placeholder="输入会员手机号/卡号">
+        </div>
+        <div class="mui-col-xs-1 mui-col-sm-1"></div>
+      </div>
+      <!-- 下一条 -->
+      <div class="mui-row">
+        <div class="mui-col-xs-1 mui-col-sm-1"></div>
+        <div class="mui-col-xs-10 mui-col-sm-10">
+          <p>赠送时间</p>
+          <p><input type="button" value="开始时间" class="button_style_1" onclick="start();" id="startTime"></p>
+          <p><input type="button" value="结束时间" class="button_style_1" onclick="finish();" id="overTime"></p>
+          <p><input type="button" value="下一步" class="button_style"></p>
+        </div>
+        <div class="mui-col-xs-1 mui-col-sm-1"></div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  var kjzs = document.getElementById("kjzs");
+  var kjzsjl = document.getElementById("kjzsjl");
+  var hd = window.parent.document.getElementById("hd");
+ //页面的margin-top
+ var hh = window.parent.document.getElementsByClassName("mui-iframe-wrapper");
+  window.onload=function(){
+    hd.style.display="none";
+   hh[0].style.top="0px";
+  }
+  kjzs.onclick = function () {
+    // 模块切换样式
+    kjzs.classList.remove("div_kjzsjl");
+    kjzs.classList.add("div_kjzs");
+    kjzsjl.classList.remove("div_kjzs");
+    kjzsjl.classList.add("div_kjzsjl");
+    // 模块切换
+    document.getElementById("zengsong").classList.remove("display_none");
+    document.getElementById("zengsongjilu").classList.add("display_none");
+  }
+  kjzsjl.onclick = function () {
+    // 模块切换样式
+    kjzsjl.classList.remove("div_kjzsjl");
+    kjzsjl.classList.add("div_kjzs");
+    kjzs.classList.remove("div_kjzs");
+    kjzs.classList.add("div_kjzsjl");
+    // 模块切换
+    document.getElementById("zengsong").classList.add("display_none");
+    document.getElementById("zengsongjilu").classList.remove("display_none");
+  }
+  //开始时间
+  function start() {
+    var dtpicker = new mui.DtPicker({
+      type: "date",//设置日历初始视图模式 
+      beginDate: new Date(1970, 01, 01),//设置开始日期 
+      endDate: new Date(2070, 01, 01),//设置结束日期 
+      labels: ['年', '月', '日'],//设置默认标签区域提示语 
+    });
+    dtpicker.show(function (items) {
+      document.getElementById("startTime").value = items.y.value + "年" + items.m.value + "月" + items.d.value + "日";
+      console.log(items);
+    })
+  }
+  //结束时间
+  function finish() {
+    var dtpicker = new mui.DtPicker({
+      type: "date",//设置日历初始视图模式 
+      beginDate: new Date(1970, 01, 01),//设置开始日期 
+      endDate: new Date(2070, 01, 01),//设置结束日期 
+      labels: ['年', '月', '日'],//设置默认标签区域提示语 
+    });
+    dtpicker.show(function (items) {
+      document.getElementById("overTime").value = items.y.value + "年" + items.m.value + "月" + items.d.value + "日";
+      console.log(items);
+    })
+  }
+  document.getElementById("back_kjWrite").onclick=function(){
+    top.location.href="../index.html"
+  }
+    //点击调用二维码
+    $.get("http://wx.mc2.top/demo.php", function (data, status) {
+    wx.config({
+      appId: data["appId"],
+      timestamp: data["timestamp"],
+      nonceStr: data["nonceStr"],
+      signature: data["signature"],
+      jsApiList: [
+        'scanQRCode'
+      ]
+    });
+    wx.ready(function () {
+      // 在这里调用 API 
+      // wx.scanQRCode();
+      document.getElementById("saoma").onclick = function () {
+        wx.scanQRCode();
+      }
+    });
+    wx.error(function (res) {
+      alert(res.errMsg);
+    });
+  });
+</script>
+</html>

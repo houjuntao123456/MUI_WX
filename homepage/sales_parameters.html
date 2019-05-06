@@ -1,0 +1,107 @@
+<html>
+
+<head>
+  <title>销售内参</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="stylesheet" href="../mui/css/mui.min.css">
+  <link rel="stylesheet" href="../css/iconfont.css">
+  <script src="../mui/js/mui.min.js"></script>
+
+  <style>
+    select {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="xsnc">
+    <!-- 头部 -->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg">
+      <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back"></a>
+      <h1 class="mui-title">销售内参</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+      <p></p>
+      <form action="" class="mui-input-group">
+        <div class="mui-row">
+          <div class="mui-input-row mui-select">
+            <label>内参分类:</label>
+            <select name="" id="select_xx" onfocus="setback();" style="color:rgb(105, 104,104)  ">
+              <option value="">请选内参分类</option>
+              <option value="">1</option>
+              <option value="">2</option>
+              <option value="">3</option>
+            </select>
+          </div>
+        </div>
+        <div class="mui-button-row" style="height: 50px;">
+          <button type="button" class="mui-btn mui-btn-danger" style="width:240px;">查询</button>
+        </div>
+      </form>
+      <p></p>
+      <div class="mui-row" style=" background:white;padding-top: 10px;">
+        <div class="mui-col-xs-3 mui-col-sm-3">
+          <li class="mui-table-view-cell ">
+            <div>照片</div>
+          </li>
+        </div>
+
+        <div class="mui-col-xs-7 mui-col-sm-7">
+          <h6>作者：李红玉</h6>
+          <h6>发布时间 ： 2010-6-21 17:03</h6>
+          <h6>内参分类：通知</h6>
+        </div>
+        <div class="mui-col-xs-2 mui-col-sm-2" style="height: 90px;line-height: 90px;">&nbsp;&nbsp;&nbsp;
+          <span class="iconfont icon-right" style="font-size:30px;color: #a7a5a5;"></span>
+        </div>
+      </div>
+      <br>
+      <div class="mui-row" style=" background:white;padding-top: 10px;">
+        <div class="mui-col-xs-3 mui-col-sm-3">
+          <li class="mui-table-view-cell ">
+            <div>照片</div>
+          </li>
+        </div>
+        <div class="mui-col-xs-7 mui-col-sm-7" id="div_lz">
+          <p style="font-size: 20px;">关于和文君任职通知</p>
+          <h6>作者：李红玉</h6>
+          <h6>发布时间 ： 2010-6-21 17:03</h6>
+          <h6>内参分类：通知</h6>
+        </div>
+        <div class="mui-col-xs-2 mui-col-sm-2" style="height: 90px;line-height: 90px;" id="div_lz2">&nbsp;&nbsp;&nbsp;
+          <span class="iconfont icon-right" style="font-size:30px;color: #a7a5a5;" id="span_font_zt"></span>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+  <script>
+    // 会员等级
+    var mySelect = document.getElementById("select_xx");
+    var myOption = mySelect.options;
+    //获取父页面
+    var hd = window.parent.document.getElementById("hd");
+    //页面的margin-top
+    var hh = window.parent.document.getElementsByClassName("mui-iframe-wrapper");
+    function setback() {
+      myOption[0].disabled = "disabled";
+    };
+    window.onload = function () {
+      var div_lz = document.getElementById("div_lz");
+      var div_lz2 = document.getElementById("div_lz2");
+      // 根据产生的行高，改变图标的位置
+      div_lz2.style.height = div_lz.offsetHeight + "px";
+      document.getElementById("span_font_zt").style.lineHeight = div_lz.offsetHeight + "px";
+      hd.style.display = "none";
+      hh[0].style.top = "0px";
+    }
+
+  </script>
+</body>
+
+</html>

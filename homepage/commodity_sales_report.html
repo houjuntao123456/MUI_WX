@@ -1,0 +1,81 @@
+<html>
+
+<head>
+  <title>商品销售情况</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="stylesheet" href="../mui/css/mui.min.css">
+  <script src="../mui/js/mui.min.js"></script>
+  <style>
+    .main_div_row{
+  border-bottom: 1px solid #cccccc;
+  padding-bottom: 5px;
+
+}
+  </style>
+</head>
+
+<body>
+  <!--  头部-->
+  <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:rgb(247, 112, 49);">
+    <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+    <h1 class="mui-title" style="color:white;"><span>商品销售报告</span></h1>
+    <!-- 反选框 -->
+    <div style=" width:60px;overflow: hidden;float: right;margin-top: 18px;">
+      <div style="width: 36px;float: left;color: #e4e0e0;font-size: 15px;"> 全选</div>
+      <div style="width: 20px; float:right;margin-top: 3px;"><input type="checkbox" id="quanxuan"></div>
+    </div>
+  
+  </header>
+  <!-- 内容 -->
+  <div class="mui-content">
+    <div class="main" id="main" style="margin-bottom:35px; ">
+      <p>
+        <div class="mui-row main_div_row" style="line-height: 50px;">
+          <div class="mui-col-xs-3 mui-col-sm-3">
+            <div style="border:1px solid red;width: 50px;height:50px;margin-left: 10px;"></div>
+          </div>
+          <div class="mui-col-xs-8 mui-col-sm-8 ">低价家具鞋</div>
+          <div class="mui-col-xs-1 mui-col-sm-1 ">
+            <input type="checkbox" style="margin-top: 15px;" class="cb">
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- 底部导航 -->
+  <nav class="mui-bar mui-bar-tab"style="height:30px;">
+    <div class="mui-row">
+      <div class="mui-col-xs-10 mui-col-sm-10"></div>
+      <div class="mui-col-xs-2 mui-col-sm-2"style="height: 31px;color: white;background-color: rgb(247, 112, 49);;text-align:center;line-height:30px;">完成</div>
+    </div>
+  </nav>
+</body>
+<script>
+  var main = document.getElementById("main");
+  var vv = 15;
+  window.onload = function () {
+    for (i = 0; i < vv; i++) {
+      main.innerHTML = main.innerHTML + " <p>" +
+        "<div class=\"mui-row main_div_row\" style=\"line-height: 50px;\">" +
+        "<div class=\"mui-col-xs-3 mui-col-sm-3\">" +
+        "<div style=\"border:1px solid red;width: 50px;height:50px;margin-left: 10px;\"></div>" +
+        "</div>" +
+        "<div class=\"mui-col-xs-8 mui-col-sm-8 \">低价家具鞋</div>" +
+        "<div class=\"mui-col-xs-1 mui-col-sm-1 \">" +
+        "<input type=\"checkbox\" style=\"margin-top: 15px\" class=\"cb\">" +
+        "</div>" +
+        "</div>"
+    }
+  }
+  // 全选
+  var quanxuan =document.getElementById("quanxuan");
+  var cb = document.getElementsByClassName("cb");
+  quanxuan.onclick=function(){
+    var zhuangtai= quanxuan.checked;
+    for (const key in cb) {
+      cb[key].checked=zhuangtai;
+    }
+  }
+</script>
+
+</html>

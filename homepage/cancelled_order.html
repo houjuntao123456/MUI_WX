@@ -1,0 +1,79 @@
+<html>
+
+<head>
+  <title>已核销订单</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="stylesheet" href="../mui/css/mui.min.css">
+  <link rel="stylesheet" href="../css/iconfont.css">
+  <script src="../mui/js/mui.min.js"></script>
+  <script src="../mui/js/mui.pullToRefresh.js"></script>
+  <style></style>
+</head>
+
+<body>
+  <div id="yhx">
+    <!-- 头部 -->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg">
+      <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back"></a>
+      <h1 class="mui-title">全部订单</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+      <div class="mui-row">
+        <div class="mui-input-row ">
+          <div class="mui-input-row mui-search">
+            <input type="search" class="mui-input-clear" placeholder="请输入要查询的会员号/手机号/姓名" style="background-color:white;">
+          </div>
+        </div>
+        <div class="mui-button-row" style="height: 50px;">
+          <button type="button" class="mui-btn mui-btn-danger" style="width:280px;">确认</button>
+        </div>
+      </div>
+      <div id="nr">
+        <!-- <div class="mui-row" style=" background:white;padding-top: 10px;">
+        <div class="mui-col-xs-3 mui-col-sm-3">
+          <div class="mui-table-view-cell ">
+            <div>照片</div>
+          </div>
+        </div>
+        <div class="mui-col-xs-7 mui-col-sm-7">
+          <h6>张金凤 /13803356858</h6>
+          <h6>0.00元/4999.00分/件/交易成功</h6>
+          <h6>2018-09-23 10：49：02/操作人：孙红然</h6>
+        </div>
+      </div> -->
+      </div>
+    </div>
+</body>
+<script>
+  var nr = document.getElementById("nr");
+  var bl = 5;
+  //页面的margin-top
+  var hh = window.parent.document.getElementsByClassName("mui-iframe-wrapper");
+  var hd = window.parent.document.getElementById("hd");
+  window.onload = function () {
+    for (i = 0; i < bl; i++) {
+      nr.innerHTML = nr.innerHTML +
+        "<div class=\"mui-row\" style=\" background:white;padding-top: 10px;\">" +
+        "<div class=\"mui-col-xs-3 mui-col-sm-3\">" +
+        "<div class=\"mui-table-view-cell \">" +
+        "<div>照片</div>" +
+        "</div>" +
+        "</div>" +
+        "<div class=\"mui-col-xs-7 mui-col-sm-7\">" +
+        "<h6>张金凤 /13803356858</h6>" +
+        "<h6>0.00元/4999.00分/件/交易成功</h6>" +
+        "<h6>2018-09-23 10：49：02/操作人：孙红然</h6>" +
+        "</div>" +
+        "</div>" + "<br>"
+    }
+    //隐藏父页标题，改变父页iframe的margin-top，将父页iframe的高等于本页面的高度
+    hd.style.display = "none";
+   hh[0].style.top="0px";
+  }
+
+
+</script>
+
+</html>

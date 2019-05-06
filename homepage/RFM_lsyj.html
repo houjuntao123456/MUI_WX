@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>RFM营销-流失预警</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <style>
+        select {
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:rgb(247, 112, 49);">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;">流失预警(125)</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <!--回访时间 -->
+        <div class="mui-input-row" style="line-height:40px;font-size:15px;">
+            <label>回访时间:</label>
+            <span onclick="start_time();" class="time_">开始时间</span>&nbsp;至&nbsp;
+            <span onclick="over_time();" class="time_">结束时间</span>
+        </div>
+        <!--是否回访 -->
+        <div class="mui-input-row mui-select" style="border-top:1px solid #ccc;font-size:15px;">
+            <label>是否回访:</label>
+            <select name="" style="background-color:#efeff4;font-size: 15px; ">
+                <option value="">不限</option>
+                <option value="">国庆七天</option>
+                <option value="">中秋兑换劵</option>
+            </select>
+        </div>
+        <!--是否绑定 -->
+        <div class="mui-input-row mui-select" style="border-top:1px solid #ccc;font-size:15px;">
+            <label>是否绑定:</label>
+            <select name="" style="background-color:#efeff4;font-size: 15px; ">
+                <option value="">不限</option>
+                <option value="">国庆七天</option>
+                <option value="">中秋兑换劵</option>
+            </select>
+        </div>
+        <!--选择机构 -->
+        <div class="mui-input-row mui-select" style="border-top:1px solid #ccc;font-size:15px;">
+            <label>选择机构:</label>
+            <select name="" style="background-color:#efeff4;font-size: 15px; ">
+                <option value="">--选择所有--</option>
+                <option value="">国庆七天</option>
+                <option value="">中秋兑换劵</option>
+            </select>
+        </div>
+        <!--选择门店 -->
+        <div class="mui-input-row mui-select" style="border-top:1px solid #ccc;font-size:15px;">
+            <label>选择门店:</label>
+            <select name="" style="background-color:#efeff4;font-size: 15px; ">
+                <option value="">--选择所有--</option>
+                <option value="">国庆七天</option>
+                <option value="">中秋兑换劵</option>
+            </select>
+        </div>
+        <!--选择店员 -->
+        <div class="mui-input-row mui-select" style="font-size:15px;border-top:1px solid #ccc;border-bottom:1px solid #ccc;">
+            <label>选择店员:</label>
+            <select name="" style="background-color:#efeff4; font-size: 15px;">
+                <option value=""></option>
+                <option value="">国庆七天</option>
+                <option value="">中秋兑换劵</option>
+            </select>
+        </div>
+        <div class="mui-row" style="text-align:center;"><br>
+            <button type="button" style="width:80%;color:white;background-color:rgb(247, 112, 49);">确认搜索</button>
+        </div>
+        <!-- 小内容 -->
+        <div id="xiao_content">
+            <div class="mui-row" style="border-bottom:1px solid #ccc;padding-top: 10px;">
+                <div class="mui-col-xs-3 mui-col-sm-3" style="border: 1px solid red;height: 124px;">
+                    <div style="width:80%;height:90%;border:1px solid blue;margin:0 auto;">
+                        照片
+                    </div>
+                </div>
+                <div class="mui-col-xs-8 mui-col-sm-8">
+                    <p>赵黎明【伊丽莎卡白】</p>
+                    <p>1天未消费/35次/292433.00元</p>
+                    <p>241天 未回访</p>
+                    <p>
+                        <span class="iconfont icon-message"></span>聊天&nbsp;&nbsp;
+                        <span class="iconfont icon-pay"></span>资料&nbsp;&nbsp;
+                        <span class="iconfont icon-tag"></span>标签&nbsp;&nbsp;
+                        <span class="iconfont icon-same"></span>电话
+                    </p>
+                </div>
+                <div class="mui-col-xs-1 mui-col-sm-1"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+var birth = document.getElementsByClassName("time_");
+var xiao_content=document.getElementById("xiao_content");
+//开始时间
+function start_time() {
+  var dtpicker = new mui.DtPicker({
+    type: "date",//设置日历初始视图模式 
+    beginDate: new Date(1970, 01, 01),//设置开始日期 
+    endDate: new Date(2070, 01, 01),//设置结束日期 
+    labels: ['年', '月', '日'],//设置默认标签区域提示语 
+  });
+  dtpicker.show(function (items) {
+    birth[0].innerHTML = items.y.value + "-" + items.m.value + "-" + items.d.value;
+    console.log(items);
+  })
+}
+
+//结束时间
+function over_time() {
+  var dtpicker = new mui.DtPicker({
+    type: "date",//设置日历初始视图模式 
+    beginDate: new Date(1970, 01, 01),//设置开始日期 
+    endDate: new Date(2070, 01, 01),//设置结束日期 
+    labels: ['年', '月', '日'],//设置默认标签区域提示语 
+  });
+  dtpicker.show(function (items) {
+    birth[1].innerHTML = items.y.value + "-" + items.m.value + "-" + items.d.value;
+    console.log(items);
+  })
+}
+window.onload=function(){
+  for(i=0;i<8;i++){
+    xiao_content.innerHTML=xiao_content.innerHTML+"<div class=\"mui-row\" style=\"border-bottom:1px solid #ccc;padding-top: 10px;\">"+
+      "<div class=\"mui-col-xs-3 mui-col-sm-3\" style=\"border: 1px solid red;height: 124px;\">"+
+        "<div style=\"width:80%;height:90%;border:1px solid blue;margin:0 auto;\">"+
+          "照片"+
+       "</div>"+
+      "</div>"+
+      "<div class=\"mui-col-xs-8 mui-col-sm-8\">"+
+        "<p>赵黎明【伊丽莎卡白】</p>"+
+        "<p>1天未消费/35次/292433.00元</p>"+
+        "<p>241天 未回访</p>"+
+        "<p>"+
+          "<span class=\"iconfont icon-message\"></span>聊天&nbsp;&nbsp;"+
+          "<span class=\"iconfont icon-pay\"></span>资料&nbsp;&nbsp;"+
+          "<span class=\"iconfont icon-tag\"></span>标签&nbsp;&nbsp;"+
+          "<span class=\"iconfont icon-same\"></span>电话"+
+        "</p>"+
+      "</div>"+
+      "<div class=\"mui-col-xs-1 mui-col-sm-1\"></div>"+
+    "</div>"
+    }
+}
+</script>
+</html>

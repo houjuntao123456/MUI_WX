@@ -1,0 +1,100 @@
+<html>
+
+<head>
+  <title>商品管理-锁客商城</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="stylesheet" href="../mui/css/mui.min.css">
+  <script src="../mui/js/mui.min.js"></script>
+  <style>
+    .margin_top {
+      margin-top: 10px;
+    }
+
+    .p_color {
+      color: crimson;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="commoditySk">
+    <!-- 头部 -->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg">
+      <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back"></a>
+      <h1 class="mui-title">锁客商城</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+      <div class="mui-row" style="background-color:white;">
+        <div class="mui-col-xs-6 mui-col-sm-6" style="border-bottom:1px solid red; text-align: center;height: 40px;line-height: 40px;"
+          id="qb">
+          <span>全部</span>
+        </div>
+        <div class="mui-col-xs-6 mui-col-sm-6" style="text-align: center;height: 40px;line-height: 40px;" id="wsx">
+          <span>未上线</span>
+        </div>
+      </div>
+      <br>
+      <!-- 商品展示 -->
+      <div id="spzs">
+        <div class="mui-row" style="background-color:white;">
+          <div class="mui-col-xs-4 mui-col-sm-4" style="border:1px solid black;height: 185px;">
+            <div class="mui-table-view-cell">照片</div>
+          </div>
+          <div class="mui-col-xs-8 mui-col-sm-8">
+            <div class="mui-table-view-cell">
+              <p class="p_color">家具鞋</p><br>
+              <div><button type="button" style="background-color:#ccc;width:90px;color:white;">上线</button></div>
+              <p style="height:10px;"></p>
+              <div><button type="button" style="background-color:#ccc;width:90px;color:white;">自提</button></div>
+              <p style="height:10px;"></p>
+              <div><button type="button" style="background-color:#ccc;width:90px;color:white;">体验</button></div>
+            </div>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  var spzs = document.getElementById("spzs");
+  var spzsnr =5;
+  window.onload = function () {
+    for (i = 0; i < spzsnr; i++) {
+      spzs.innerHTML = spzs.innerHTML + "<div class=\"mui-row\" style=\"background-color:white;\">" +
+        "<div class=\"mui-col-xs-4 mui-col-sm-4\" style=\"border:1px solid black;height: 185px;\">" +
+        "<div class=\"mui-table-view-cell\">照片</div>" +
+        "</div>" +
+        "<div class=\"mui-col-xs-8 mui-col-sm-8\">" +
+        "<div class=\"mui-table-view-cell\">" +
+        "<p class=\"p_color\">家具鞋</p><br>" +
+        "<div><button type=\"button\" style=\"background-color:#ccc;width:90px;color:white;\">上线</button></div>" +
+        "<p style=\"height:10px;\"></p>" +
+        "<div><button type=\"button\" style=\"background-color:#ccc;width:90px;color:white;\">自提</button></div>" +
+        "<p style=\"height:10px;\"></p>" +
+        " <div><button type=\"button\" style=\"background-color:#ccc;width:90px;color:white;\">体验</button></div>" +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+         "<br>"
+    }
+  }
+  var qb = document.getElementById("qb");
+  var wsx = document.getElementById("wsx");
+  //当点击全部发生的改变
+  qb.onclick = function () {
+    qb.style.borderBottom = "1px solid red";
+    wsx.style.borderBottom = "0px solid white";
+  }
+  //当点击未上线发生的改变
+  wsx.onclick = function () {
+    wsx.style.borderBottom = "1px solid red";
+    qb.style.borderBottom = "0px solid white";
+  }
+
+
+</script>
+
+</html>

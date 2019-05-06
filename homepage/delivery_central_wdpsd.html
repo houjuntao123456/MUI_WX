@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>配送中心-我的配送单</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <link rel="stylesheet" href="../css/iconfont.css">
+</head>
+<style>
+    .bottom_color{
+        border-bottom:2px solid orange;
+    }
+    select{
+            appearance:none; 
+            -moz-appearance:none;
+            -webkit-appearance:none;
+            border: 1px solid #cccccc;
+            border-radius: 0px;
+    }
+</style>
+
+<body>
+    <!-- 头部 -->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back"></a>
+        <h1 class="mui-title">我的配送单</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <div class="mui-row" style="text-align:center;">
+            <div style="height:40px;line-height: 40px;" class="class_qh mui-col-xs-4 mui-col-sm-4 bottom_color" onclick="tab_qh(0)">全部</div>
+            <div style="height:40px;line-height: 40px;" class="class_qh mui-col-xs-4 mui-col-sm-4" onclick="tab_qh(1)">配送中</div>
+            <div style="height:40px;line-height: 40px;" class="class_qh mui-col-xs-4 mui-col-sm-4" onclick="tab_qh(2)">已完成</div>
+        </div>
+         <div class="mui-row" style="margin-top:20px;text-align:center;background-color: white;height: 40px;line-height: 40px;color: #cccccc;">没有更多了...</div>
+    </div>
+</body>
+<script>
+    var xiao_main = document.getElementById("xiao_main");
+    var class_qh = document.getElementsByClassName("class_qh")
+    var b = ["1", 2, 3, 4, "霸气"];
+    function tab_qh(e) {
+        for (a = 0; a < 3; a++) {
+            if (a == e) {
+                class_qh[a].classList.add("bottom_color");
+            } else {
+                class_qh[a].classList.remove("bottom_color");
+            }
+        }
+    }
+</script>
+
+</html>

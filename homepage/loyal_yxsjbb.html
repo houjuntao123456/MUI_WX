@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <title>忠诚度营销-营销数据报表</title>
+    <style>
+        select {
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .table_style {
+            border: 1px solid #cccccc;
+            width: 100%;
+            text-align: center;
+        }
+
+        tr,
+        td {
+            border: 1px solid #cccccc;
+            text-align: center;
+        }
+
+        tr td div {
+            width: 80%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:rgb(247, 112, 49);">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;">营销数据报表</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <p>总管理员营销报表</p>
+        <div>
+            <table class="table_style">
+                <!-- 门店名称 -->
+                <tr>
+                    <td style="width:25%;">门店名称</td>
+                    <td style="width:15%;">
+                        <div>关键客户</div>
+                    </td>
+                    <td style="width:15%;">
+                        <div>重要客户</div>
+                    </td>
+                    <td style="width:15%;">
+                        <div>普通客户</div>
+                    </td>
+                    <td style="width:15%;">
+                        <div>睡眠客户</div>
+                    </td>
+                    <td style="width:15%;">总数</td>
+                </tr>
+
+            </table>
+            <p>级别说明：</p>
+            <p>关键客户：三个月累计消费5000元或者单次消费满5000元</p>
+            <p>重要客户：三个月累计消费3000元或者单次消费满4999元</p>
+            <p>普通客户：三个月消费0元之200元</p>
+            <p>睡眠客户：6个月以上未消费</p>
+            <p>主客观注：累计消费金额6000元</p>
+        </div>
+    </div>
+</body>
+<script>
+    var table_tr = document.getElementsByTagName("table");
+    window.onload = function () {
+        for (i = 0; i < 10; i++) {
+            table_tr[0].innerHTML = table_tr[0].innerHTML + "<!--商城阿丹娜-->" +
+                "<tr>" +
+                "<td style=\"color:blue;\">商城阿丹娜</td>" +
+                "<td>0</td>" +
+                "<td>1520</td>" +
+                "<td>6650</td>" +
+                "<td>120</td>" +
+                "<td>30</td>" +
+                "</td>"
+        }
+    }
+</script>
+
+</html>

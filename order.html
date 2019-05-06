@@ -1,0 +1,218 @@
+<html>
+
+<head>
+  <title>订单管理</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link href="./mui/css/mui.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/iconfont.css">
+  <script src="./mui/js/mui.min.js"></script>
+  <style>
+    a:hover {
+      text-decoration: none;
+    }
+    li {
+      list-style: none;
+      background-color: white;
+      border-right: 1px solid #cccccc;
+      border-bottom: 1px solid #cccccc;
+      text-align: center;
+    }
+    /* 内容的样式 */
+    .div_mddd{
+      text-align: center;
+      height: 50px;
+      line-height: 50px;
+    
+    }
+    .div_spdd {
+      text-align: center;
+      line-height: 50px;
+    }
+    /* 资料显示的样式 */
+    .li_style{
+          border-right:none;
+          height: 147px;
+        }
+        .li_photo_style{
+          border: 1px solid black;
+        }
+        .title_display{
+            display: none ;
+          
+        }
+        .bg_style_tab{
+          background-color: orange;
+          color: white;
+        }
+        select{
+            appearance:none; 
+            -moz-appearance:none;
+            -webkit-appearance:none;
+            /* select手机上居中 */
+            text-align-last: center;
+        }
+  </style>
+</head>
+<body>
+  <div id="dingdan">
+    <!-- 头部 -->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg title_display" id="header_title">
+      <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back"></a>
+      <h1 class="mui-title" id="h1_title">订单管理</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+      <div class="mui-row">
+        <div class="mui-col-xs-6 mui-col-sm-6 div_mddd bg_style_tab " id="mddd">
+          <span>门店订单</span>
+        </div>
+        <div class="mui-col-xs-6 mui-col-sm-6 div_spdd" id="spdd">
+          <span>商城订单</span>
+        </div>
+      </div><br>
+      <!-- 查询卡号 -->
+      <div class="mui-row">
+        <div class="mui-col-xs-1 mui-col-sm-1">
+        </div>
+        <div class="mui-col-xs-10 mui-col-sm-10">
+          <div class="mui-input-row mui-search">
+            <input type="search" class="mui-input-clear" placeholder=" 卡号   请输入要查询的卡号" style="background:white;">
+          </div>
+        </div>
+        <div class="mui-col-xs-1 mui-col-sm-1">
+        </div>
+      </div>
+      <!-- 查询手机号 -->
+      <div class="mui-row">
+        <div class="mui-col-xs-1 mui-col-sm-1">
+        </div>
+        <div class="mui-col-xs-10 mui-col-sm-10">
+          <div class="mui-input-row mui-search">
+            <input type="search" class="mui-input-clear" placeholder="手机号  请输入要查询的手机号" style="background:white;">
+          </div>
+        </div>
+        <div class="mui-col-xs-1 mui-col-sm-1">
+        </div>
+      </div>
+      <!-- 总部 -->
+      <div class="mui-input-row mui-select" >
+          <select name="" style="text-align: center; color:rgb(105, 104,104);">
+            <option value="">选择部门</option>
+            <option value="">上海部门</option>
+            <option value="">广州部门</option>
+          </select>
+        </div>
+      <!-- 所以门店 -->
+      <div class="mui-input-row mui-select" >
+          <select name="" style="text-align: center; color:rgb(105, 104,104);">
+            <option value="">所有门店</option>
+            <option value="">山嘎达</option>
+            <option value="">八达岭</option>
+          </select>
+        </div>
+      <div class="mui-button-row" style="height: 50px;margin-top:20px;">
+        <button type="button" class="mui-btn mui-btn-danger" style="width:300px;">确认</button>
+      </div>
+      <!-- 资料显示 -->
+      <div id="xxzl">
+        <div class="mui-row">
+          <div class="mui-col-xs-3 mui-col-sm-3">
+            <li class="mui-table-view-cell li_style li_photo_style">
+              <div>照片</div>
+            </li>
+          </div>
+          <div class="mui-col-xs-6 mui-col-sm-6" style="height: 147px;background-color:white;">
+            <div style="border-bottom:1px solid #ccc;height: 55%;">
+              <p style=" margin-top: 20px;"> &nbsp;&nbsp;<span>孙中山</span> </p>
+              <p> &nbsp;&nbsp;<span>购买商品</span> <span>2018/01/7</span></p>
+              <p></p>
+            </div>
+            <div>
+              <p style="margin-top: 10px;">&nbsp;&nbsp; <span>购买商品</span> <span>2018/01/7</span></p>
+            </div>
+          </div>
+          <div class="mui-col-xs-3 mui-col-sm-3" style="background-color:white;height: 147px;">
+            <div style="border-bottom:1px solid #ccc;overflow:hidden;height: 69%;">
+              <br>
+              <p style="float:right;overflow:hidden;"> <button>会员资料</button>&nbsp;&nbsp;&nbsp; </p>
+            </div>
+            <div style="overflow:hidden;">
+              <p style="margin-top:10px; float: right;"><button>提交</button>&nbsp;&nbsp;&nbsp;</p>
+            </div>
+          </div>
+        </div><br>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  var hd = window.parent.document.getElementById("hd");
+  //获取订单id
+  var dingdan = document.getElementById("dingdan");
+  //获取门店订单的id
+  var mddd = document.getElementById("mddd");
+  //获取商品订单的id
+  var spdd = document.getElementById("spdd");
+  //获取标题id
+  var header_title = document.getElementById("header_title");
+  //页面的margin-top
+  var hh = window.parent.document.getElementsByClassName("mui-iframe-wrapper");
+  //控制资料显示的条数
+  var variable = 2;
+  //获取地址后四位
+  var str = location.href;
+  var true_t = str.substr(str.length - 4);
+  document.body.onload = function () {
+    if (true_t == "true") {
+      header_title.classList.remove("title_display");
+      hd.style.display = "none";
+      hh[0].style.top="0px";
+    }else{
+        hh[0].style.top="0px";
+        hd.style.display="";
+    }
+    //通过父页面传过来的参数控制标题显示与与否
+    for (i = 0; i < variable; i++) {
+      document.getElementById("xxzl").innerHTML = document.getElementById("xxzl").innerHTML + " <div class=\"mui-row\">" +
+        "<div class=\"mui-col-xs-3 mui-col-sm-3\">" +
+        "<li class=\"mui-table-view-cell li_style li_photo_style\">" +
+        "<div>照片</div>" +
+        "</li>" +
+        "</div>" +
+        "<div class=\"mui-col-xs-6 mui-col-sm-6\" style=\"height: 147px;background-color:white;\">" +
+        "<div style=\"border-bottom:1px solid #ccc;height: 55%;\">" +
+        "<p style=\" margin-top: 20px;\"> &nbsp;&nbsp;<span>孙中山</span> </p>" +
+        "<p > &nbsp;&nbsp;<span>购买商品</span> <span>2018/01/7</span></p>" +
+        "<p></p>" +
+        "</div>" +
+        "<div>" +
+        "<p style=\"margin-top: 10px;\">&nbsp;&nbsp; <span>购买商品</span> <span>2018/01/7</span></p>" +
+        "</div>" +
+        "</div>" +
+        "<div class=\"mui-col-xs-3 mui-col-sm-3\" style=\"background-color:white;height: 147px;\">" +
+        "<div style=\"border-bottom:1px solid #ccc;overflow:hidden;height: 69%;\" >" +
+        "<br>" +
+        "<p style=\"float:right;overflow:hidden;\"> <button>会员资料</button>&nbsp;&nbsp;&nbsp; </p>" +
+        "</div>" +
+        "<div style=\"overflow:hidden;\">" +
+        " <p style=\"margin-top:10px; float: right;\"><button>提交</button>&nbsp;&nbsp;&nbsp;</p>" +
+        "</div>" +
+        "</div>" +
+        "</div><br>"
+    }
+  }
+  //控制门店订单的样式
+  mddd.onclick = function () {
+    mddd.classList.add("bg_style_tab");
+    spdd.classList.remove("bg_style_tab");
+  }
+  //控制商品订单的样式
+  spdd.onclick = function () {
+    spdd.classList.add("bg_style_tab");
+    mddd.classList.remove("bg_style_tab");
+  }
+</script>
+</html>

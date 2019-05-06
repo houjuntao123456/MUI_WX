@@ -1,0 +1,302 @@
+<html>
+<head>
+  <title>会员登录界面</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>主页</title>
+  <link href="../mui/css/mui.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/iconfont.css">
+  <link rel="stylesheet" href="../css/demo.css">
+  <script src="../mui/js/mui.min.js"></script>
+  <style>
+    a:hover {
+      text-decoration: none;
+    }
+    li {
+      list-style: none;
+      background-color: white;
+      text-align: center;
+    }
+    .tb_color {
+      color: rgb(30, 133, 230);
+    }
+    .span_size {
+      font-size: 25px;
+      border-radius: 10px;
+      color: #3abeee;
+    }
+    .div_mk {
+      background-color: white;
+      padding-left: 20px;
+      font-family: monospace;
+      text-align: left;
+      height: 40px;
+      line-height: 40px;
+      font-size: 15px;
+      font-weight: bold;
+      border-bottom: 1px solid #ebeaea;
+    }
+    .sdh {
+      background-color: white;
+      text-align: center;
+      height: 100px;
+    }
+    #vip_s {
+      position: absolute;
+      top: 6%;
+      left: 10%;
+    }
+    p{
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <!-- 中间 -->
+  <div class="mui-content">
+    <!-- 会员卡片 -->
+    <div class="mui-row" style="background:white;"><br>
+      <div style="width:90%;margin:0 auto;">
+        <img src="../images/66.png" alt="" style="width:100%;height:29%;border-radius: 10px;">
+      </div>
+    </div>
+    <!-- 上导航部分 -->
+    <div class="mui-row sdh"><br><br>
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <p style="font-size:17px;">7.38</p>
+        <p style="font-size:17px;">余额(元)</p>
+      </div>
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <p style="font-size:17px;">381</p>
+        <p style="font-size:17px;">积分</p>
+      </div>
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <p style="font-size:17px;">---</p>
+        <p style="font-size:17px;">成长值</p>
+      </div>
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <p style="font-size:17px;">0</p>
+        <p style="font-size:17px;">我的卡卷</p>
+      </div>
+    </div><br>
+    <!-- 第一模块 -->
+    <div class="mui-row div_mk">第一模块</div>
+    <!-- 第一列 -->
+    <div class="mui-row">
+      <!-- 业绩报表 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell">
+          <a id="aaaaa">
+            <span class="iconfont icon-edit span_size" style="color:#55cebc;"></span>
+            <p>业绩报表</p>
+          </a>
+        </li>
+      </div>
+      <!-- 绩效报表 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell">
+          <a href="./homepage/performance_report.html">
+            <span class="iconfont  icon-calendar span_size" style="color:#f88b2a;"></span>
+            <p>绩效报表</p>
+          </a>
+        </li>
+      </div>
+      <!-- RFM营销 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell" style="border-right:none">
+          <a href="./homepage/RFM.html">
+            <span class="iconfont icon-brand span_size" style="color:#ff7b93;"></span>
+            <p>RFM营销</p>
+          </a>
+        </li>
+      </div>
+      <!-- 忠诚度营销 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell">
+          <a href="./homepage/loyal.html">
+            <span class="iconfont icon-evaluate span_size" style="color:#00ad8e;"></span>
+            <p>忠诚度营销</p>
+          </a>
+        </li>
+      </div>
+    </div>
+    <!-- 第二列 -->
+    <div class="mui-row">
+      <!-- 客服中心 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell">
+          <a href="##">
+            <span class="iconfont icon-service_light span_size" style="color:#ff7b93;"></span>
+            <p>客服中心</p>
+          </a>
+        </li>
+      </div>
+      <!-- 新建会员 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell" id="xj_member">
+          <span>
+            <span class="iconfont icon-friendadd span_size" style="color:#ff7b93;"></span>
+            <p>新建会员</p>
+          </span>
+        </li>
+      </div>
+      <!-- 会员管理 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell">
+          <a href="./homepage/commodity.html">
+            <span class="iconfont icon-friend_settings_light span_size" style="color:#239df7;"></span>
+            <p>会员管理</p>
+          </a>
+        </li>
+      </div>
+      <!-- 会员邀请码 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell">
+          <a href="">
+            <span class="iconfont icon-album span_size" style="color:#f88b2a;"></span>
+            <p>会员邀请码</p>
+          </a>
+        </li>
+      </div>
+    </div>
+    <br>
+    <!-- 第二模块 -->
+    <div class="mui-row div_mk">第二模块</div>
+    <!-- 第三列 -->
+    <div class="mui-row">
+      <!-- 卡劵赠送 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell" style="border-right:none">
+          <a href="">
+            <span class="iconfont icon-news_light span_size" style="color:#f88b2a;"></span>
+            <p>卡劵赠送</p>
+          </a>
+        </li>
+      </div>
+      <!-- 卡卷核销 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell">
+          <a href="">
+            <span class="iconfont icon-copy span_size" style="color:#239df7;"></span>
+            <p>卡劵核销</p>
+          </a>
+        </li>
+      </div>
+      <!-- 会员回访 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell">
+          <a href="./homepage/members_return_visit.html">
+            <span class="iconfont icon-friend_light span_size" style="color:#00ae8f;"></span>
+            <p>会员回访</p>
+          </a>
+        </li>
+      </div>
+      <!-- 订单管理 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell" style="border-right:none">
+          <a href="./order.html#true" id="ddgl">
+            <span class="iconfont icon-vip_code_light span_size" style="color:#f88b2a;"></span>
+            <p>订单管理</p>
+          </a>
+        </li>
+      </div>
+      <!-- 第四列 -->
+      <!-- 商品管理 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell">
+          <a href="./homepage/commodity.html">
+            <span class="iconfont icon-shop span_size" style="color:#00ae8f;"></span>
+            <p>商品管理</p>
+          </a>
+        </li>
+      </div>
+      <!-- 商品销售 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell">
+          <a href="">
+            <span class="iconfont icon-ask span_size" style="color:#ff4d6d;"></span>
+            <p>商品销售</p>
+          </a>
+        </li>
+      </div>
+      <!-- 配送中心 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell" style="border-right:none">
+          <a href="">
+            <span class="iconfont icon-deliver span_size" style="color:#ff4d6d;"></span>
+            <p>配送中心</p>
+          </a>
+        </li>
+      </div>
+      <!-- 订单审核 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell">
+          <a href="./homepage/order_audit.html">
+            <span class="iconfont icon-form span_size" style="color:#00ad8e;"></span>
+            <p>订单审核</p>
+          </a>
+        </li>
+      </div>
+    </div>
+  </div>
+  <br>
+  <!-- 第三模块 -->
+  <div class="mui-row div_mk">第三模块</div>
+  <!-- 第五列 -->
+  <div class="mui-row">
+    <div class="mui-row">
+      <!-- 已核销订单 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell">
+          <a href="./homepage/cancelled_order.html">
+            <span class="iconfont icon-subtitle_unblock_light span_size" style="color:#3abeee;"></span>
+            <p>已核销订单</p>
+          </a>
+        </li>
+      </div>
+      <!-- 任务目标 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell" style="border-right:none">
+          <a href="./homepage/task.html">
+            <span class="iconfont icon-activity span_size" style="color:#f88b2a;"></span>
+            <p>任务目标</p>
+          </a>
+        </li>
+      </div>
+      <!-- 销售内参 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell">
+          <a href="./homepage/sales_parameters.html">
+            <span class="iconfont icon-searchlist span_size" style="color:#f88b2a;"></span>
+            <p>销售内参</p>
+          </a>
+        </li>
+      </div>
+      <!-- 修改资料 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell">
+          <a href="./homepage/Modifying.html">
+            <span class="iconfont icon-skin span_size" style="color:#ff7b93;"></span>
+            <p>修改资料</p>
+          </a>
+        </li>
+      </div>
+    </div>
+    <div class="mui-row">
+      <!-- 第六列 -->
+      <!-- 帐号切换 -->
+      <div class="mui-col-xs-3 mui-col-sm-3">
+        <li class="mui-table-view-cell" style="border-right:none">
+          <a href="" id="zhqh">
+            <span class="iconfont icon-round_transfer span_size"></span>
+            <p>帐号切换</p>
+          </a>
+        </li>
+      </div>
+    </div>
+    <br><br><br><br><br>
+  </div>
+  <script>
+  </script>
+</body>
+</html>

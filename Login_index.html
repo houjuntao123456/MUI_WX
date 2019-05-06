@@ -1,0 +1,76 @@
+<html>
+
+<head>
+  <title>帐号切换</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="stylesheet" href="./mui/css/mui.min.css">
+  <script src="./mui/js/mui.min.js"></script>
+  <style>
+    .user{
+      background-image: url(images/account.png);/*设置小图标*/
+      background-size: 25px 25px;
+      background-position: 5px 4px;
+      background-repeat: no-repeat;   
+    }
+    .password{
+      background-image: url(images/password.png);/*设置小图标*/
+      background-size: 25px 25px;
+      background-position: 5px 4px;
+      background-repeat: no-repeat;
+    }
+    #banben{
+     margin: 0 auto;
+     width: 40%;
+      text-align: center;
+      color: white;
+      font-size: 12px;     
+    }
+    #biaodan{
+      position: relative;
+      position: absolute;
+      bottom: 20%;
+    }
+    #banben_position{
+      position: relative;
+      position: absolute;
+      bottom: 0;
+      width:100%
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 标题/Logo -->
+  <div class="mui-content" style="background-color:#3772d6;height: 100%;">
+    <br><br><br>
+    <div class="mui-row" style="width:65%;height:160px;margin:0 auto;overflow: hidden;">
+      <img src="./images/logo_tu_white.png" alt="" style="width:50%;float: left;">
+      <img src="./images/suokewhite.png" alt="" style="width:50%;float: left;">
+    </div><br><br><br>
+    <!-- 登陆 -->
+    <form action="" class="" id="biaodan">
+      <div class="mui-row" style="width:60%; margin: 0 auto;text-align: center;">
+        <input type="text" class="user" style="padding-left:2.2em;border-radius: 5px;" placeholder="输入用户名">
+        <input type="password" class="password " style="padding-left:2.2em;border-radius: 5px;" placeholder="输入用户名">
+        <input type="button" value="登陆" style="width:50%;border-radius: 5px;">
+      </div>
+    </form>
+    <!-- 版号 -->
+    <div  id="banben_position">
+      <div class="mui-row" id="banben">
+        <div>版本号：4.0.4</div>
+        <div>&copy;锁客版权所有</div>
+        <p></p>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  // var _body = document.getElementsByTagName("body")[0];
+  // window.onload = function () {
+  //   _body.style.height = _body.clientHeight + "px";
+  // }
+</script>
+
+</html>
