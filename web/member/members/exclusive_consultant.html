@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>我的客服</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../../css/iconfont.css">
+    <script src="../../mui/js/muiR.js"></script>
+    <script src="../../js/stm_Pull_up_loading.js"></script>
+    <link rel="stylesheet" href="../../css/card_coupon.css">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jquery.cookie.js"></script>
+    <style>
+        .mmm {
+            border: 1px white solid;
+            border-radius: 10px;
+            width: 75px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body style="background: linear-gradient(to right,rgb(135, 186, 252),#007aff)">
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg"
+        style="background: linear-gradient(to right,rgb(135, 186, 252),#007aff)">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;width: 50%;margin: 0 auto;" id="ttt"></h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content" style="width: 100%;background: linear-gradient(to right,rgb(135, 186, 252),#007aff)"
+        id="vo">
+        <!-- 头像 名字 -->
+        <div style="width: 100%;margin-top: 50px;" class="mui-row">
+            <div class="mui-col-sm-4 mui-col-xs-4"></div>
+            <div class="mui-col-sm-4 mui-col-xs-4" style="text-align: center;">
+                <div class="data_head">
+                    <img src="../../images/suoke.jpg" alt="" id="data_photo"
+                        style="width: 70%;height:70%;border-radius:50%">
+                </div>
+                <p style="margin-top:10px;color: #ffffff;">
+                    <span style="font-size:20px;" id="data_username">白白</span>
+                </p>
+            </div>
+            <div class="mui-col-sm-4 mui-col-xs-4"></div>
+        </div>
+        <!-- 三链接 -->
+        <div style="width: 100%;margin-top: 20px;" class="mui-row">
+            <!-- <div class="mui-col-sm-4 mui-col-xs-4" style="text-align: right">
+                <div class="mmm"  onclick="javascript:location.href='./all_customer_service.html'">全部客服</div>
+            </div>
+            <div class="mui-col-sm-4 mui-col-xs-4">
+                <div class="mmm" style="width: 120px;"> <a href="./wx_chart_kefu.html" style="color: white;">专属顾问对话</a></div>
+            </div> -->
+            <div class="mui-col-sm-12 mui-col-xs-12" style="text-align: center;">
+                <div class="mmm"> <a href="tel:###" style="color: white;" id="kefu">致电客服</a></div>
+            </div>
+
+        </div>
+        <!-- 全部客服 -->
+        <!-- <div style="width: 100%;margin-top: 30px;" class="mui-row">
+            <div class="mui-col-sm-4 mui-col-xs-4" style="">
+            </div>
+            <div class="mui-col-sm-4 mui-col-xs-4" style="text-align: center;">
+                    <button type="button" class="mui-btn mui-btn-outlined" style="color:white;border-color: white;font-size:18px;">全部客服</button>            
+                </div>
+            <div class="mui-col-sm-4 mui-col-xs-4">   
+            </div>
+       </div> -->
+        <!-- 历史聊天记录 -->
+        <!-- <div style="width: 100%;margin-top:40px;" class="mui-row">
+                <div class="mui-col-sm-3 mui-col-xs-3">
+                </div>
+                <div class="mui-col-sm-6 mui-col-xs-6" style="text-align: center;">
+                    <a href="./all_customer_service.html" style="color: white;font-size:20px;">历史聊天记录 ></a>
+                </div>
+                <div class="mui-col-sm-3 mui-col-xs-3">   
+                </div>
+        </div> -->
+    </div>
+</body>
+<script>
+    //进来加载
+    // 进来加载的方法
+    // $.cookie("code", '13773033340', { path: '/' })
+    $(function () {
+        mui.post('/index.php/webViplistVipStaff/', {
+            code: $.cookie("code")
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                document.getElementById("data_username").innerHTML = data.data.name;
+                if(data.data.phone==""){
+                    document.getElementById("kefu").setAttribute("href", 'tel:' + '###');
+                }else{
+                    document.getElementById("kefu").setAttribute("href", 'tel:' + data.data.phone);
+                }
+            }
+        }, 'json'
+        );
+    });
+</script>
+
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>回购人数</title>
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <script src="../mui/js/muiR.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+
+    <script src="../mui/js/mui.picker.min.js"></script>
+
+</head>
+<style>
+    p {
+        margin-bottom: 5px;
+    }
+
+    a {
+        color: black;
+    }
+</style>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" id="a_title" style="color:white;"></a>
+        <h1 class="mui-title" id="title_" style="color:white;">回购人数</h1>
+    </header>
+    <!-- 头部选择器 -->
+    <div id="da" class="mui-content">
+        <!-- body内容 -->
+        <div id="xiao" class="mui-content">
+            <div id="form_css">
+                <div class="mui-input-row mui-search" style="height:40px;width: 90%;margin: 10px auto">
+                    <input type="search" class="mui-input-clear" placeholder="搜索会员信息" style="background-color:white;"
+                        id="phone_num">
+                </div>
+            </div>
+            <!-- 下拉刷新内容 -->
+            <div id="pullrefresh" class="mui-scroll-wrapper ">
+                <div class="mui-scroll">
+                    <!--数据列表-->
+                    <div id="qqq" style="width: 100%;">
+                        <div class="num_wl"
+                            style="border-bottom:#ccc solid 1px;float: left;width: 100%;background-color: white;">
+                            <div style="height: 80px;width:25%;text-align: center;float: left;">
+                                <img src="../images/1.jpg" alt=""
+                                    style="width: 60px;height: 60px;border-radius:50px;margin-top:9px;">
+                            </div>
+                            <div style="width:75%;float: left;">
+
+                                <p style="font-size: 15px;padding-top:5px;float: left;width: 100%;"> <span
+                                        style="color: black;float: left;">刘天华</span><span
+                                        style="color: chocolate;margin-right:6%;float: right;">1054元</span></p>
+                                <p style="float: left;width: 100%;">卡类型: <span>普通卡</span></p>
+                                <p style="float: left">卡号: <span>1012230</span></p>
+
+                            </div>
+                        </div>
+                        <!-- 2 -->
+                        <div class="num_wl"
+                            style="border-bottom:#ccc solid 1px;float: left;width: 100%;background-color: white;">
+                            <div style="height: 80px;width:25%;text-align: center;float: left;">
+                                <img src="../images/1.jpg" alt=""
+                                    style="width: 60px;height: 60px;border-radius:50px;margin-top:9px;">
+                            </div>
+                            <div style="width:75%;float: left;">
+
+                                <p style="font-size: 15px;padding-top:5px;float: left;width: 100%;"> <span
+                                        style="color: black;float: left;">刘天华</span><span
+                                        style="color: chocolate;margin-right:6%;float: right;">1054元</span></p>
+                                <p style="float: left;width: 100%;">卡类型: <span>普通卡</span></p>
+                                <p style="float: left">卡号: <span>1012230</span></p>
+
+                            </div>
+                        </div>
+                        <!-- 3 -->
+                        <div class="num_wl"
+                            style="border-bottom:#ccc solid 1px;float: left;width: 100%;background-color: white;">
+                            <div style="height: 80px;width:25%;text-align: center;float: left;">
+                                <img src="../images/1.jpg" alt=""
+                                    style="width: 60px;height: 60px;border-radius:50px;margin-top:9px;">
+                            </div>
+                            <div style="width:75%;float: left;">
+
+                                <p style="font-size: 15px;padding-top:5px;float: left;width: 100%;"> <span
+                                        style="color: black;float: left;">刘天华</span><span
+                                        style="color: chocolate;margin-right:6%;float: right;">1054元</span></p>
+                                <p style="float: left;width: 100%;">卡类型: <span>普通卡</span></p>
+                                <p style="float: left">卡号: <span>1012230</span></p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+<script>
+    //a标签不能用
+    mui('body').on('tap', 'a', function () {
+        window.top.location.href = this.href;
+    });
+    var pp = document.getElementById("form_css");
+    var vop = document.getElementById("pullrefresh");
+    window.onload = function () {
+        vop.style.marginTop = pp.clientHeight + 60 + 'px';
+    }
+    var num_wl = document.getElementsByClassName("num_wl");
+    //个人信息循环
+    for (let o = 0; o < num_wl.length; o++) {
+        gethuicoass(o);
+    }
+    function gethuicoass(o) {
+        mui(".num_wl")[o].addEventListener("tap", function () {
+            window.location.href = '../homepage/buy_back.html'
+        })
+    }
+</script>
+<script>
+
+    mui.init({
+
+        pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+                callback: pulldownRefresh
+            },
+            up: {
+                contentrefresh: '正在加载...',
+                // auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+	/**
+	 * 下拉刷新具体业务实现
+	 */
+    function pulldownRefresh() {
+    }
+	/**
+	 * 上拉加载具体业务实现
+	 */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+    function pullupRefresh() {
+        if (Date.parse(birth[0].innerHTML) > Date.parse(birth[1].innerHTML)) {
+            mui.alert('开始时间不能大于结束时间', '提示', '确定'['div']);
+        } else {
+            mui.post('/index.php/WreHundred/', {
+                start: birth[0].innerHTML,//开始时间
+                end: birth[1].innerHTML,//结束时间
+                splb: select_store.options[select_store.selectedIndex].value,//选择机构
+                store: select_clerk.options[select_clerk.selectedIndex].value,//选择门店
+                staff: select_clerker.options[select_clerker.selectedIndex].value,//选择员工
+                page: ++count,//分页
+                limit: limit_num//每页的条数
+            }, function (data) {
+                // 服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    setTimeout(function () {
+                        mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                        // var table = document.body.querySelector('.mui-table-view');
+                        var qq = document.getElementById("qqq");
+                        for (i = 0; i < data.data.data.length; i++) {
+                            var li = document.createElement('tr');
+                            // li.className = 'mui-table-view-cell';
+                            li.style = "height:35px;line-height:35px;color: #282f8c;font-size: 14px;border-bottom:1px solid #ccc;"
+                            li.innerHTML = '<td style="width: 25%">' + data.data.data[i].total_name + '</td>'
+                                + '<td style="width: 25%">' + data.data.data[i].name + '</td>'
+                                + '<td style="width: 20%">' + data.data.data[i].time + '</td>'
+                                + '<td style="width: 15%">' + data.data.data[i].member + '</td>'
+                                + '<td style="width: 15%"><button name="' + data.data.data[i].remark + '" name1="' + data.data.data[i].name + '" name2="' + data.data.data[i].executor_code + '" name3="' + data.data.data[i].time + '" onclick="member(this)" class="mui-icon mui-icon-search mui-btn mui-btn-primary button_style"style="font-size:30px;"></button></td>'
+                            qq.appendChild(li);
+                        }
+                    }, 1000);
+                }
+            }, 'json'
+            );
+        }
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+</script>
+
+</html>

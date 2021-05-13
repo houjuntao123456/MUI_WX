@@ -1,0 +1,711 @@
+<html>
+
+<head>
+    <title>VIP会员精准营销方案</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/iconfont_tubiao1.css">
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+    <style>
+        /* a:hover {
+            text-decoration: none;
+        } */
+        table,
+        table tr th,
+        table tr td {
+            border: 1px solid #e9e9e9;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        .width-40 {
+            width: 40%;
+        }
+
+        .width-25 {
+            width: 25%;
+        }
+
+        .width-15 {
+            width: 15%;
+        }
+
+        .width-10 {
+            width: 10%;
+        }
+
+        .width-20 {
+            width: 20%;
+        }
+
+        .mui-table-view-cell.mui-active {
+            background-color: #ebf0f5;
+        }
+
+        .mui-table-view-cell::after {
+            left: 0;
+            right: 0;
+            background-color: #efeff0;
+        }
+
+        .mui-table-view::after {
+            background-color: #efeff0;
+        }
+
+        .mui-navigate-right::after {
+            color: #007aff;
+        }
+
+        button,
+        .mui-btn {
+            padding: 3px 11px;
+        }
+
+        .tr-1 {
+            height: 40px;
+            line-height: 40px;
+            font-size: 15px;
+            letter-spacing: 2px;
+        }
+
+        .tr-2 {
+            height: 50px;
+            font-size: 14px;
+        }
+
+        .mui-popover {
+            height: 300px;
+        }
+
+        /* 控制弹框 */
+        #popover a {
+            text-align: center;
+        }
+
+        li {
+            list-style: none;
+            background-color: white;
+            text-align: center;
+        }
+
+        .span_size {
+            color: #3abeee;
+            font-size: 26px;
+        }
+
+        .li2 {
+            height: 50px;
+        }
+
+        /* 控制模块的高度 */
+        li {
+            height: 80px;
+        }
+
+        p {
+            color: black;
+            padding-top: 10px;
+            /* font-size: 17px; */
+        }
+
+        .lett-spac-3 {
+            letter-spacing: 3px;
+            font-size: 24px;
+        }
+
+        .ellipsiss {
+            width: 80px;
+            overflow: hidden;
+            /*自动隐藏文字*/
+            text-overflow: ellipsis;
+            /*文字隐藏后添加省略号*/
+            white-space: nowrap;
+            -webkit-line-clamp: 1;
+            /*想要显示的行数*/
+            -webkit-box-orient: vertical;
+        }
+
+        .mui-pciker-list li.highlight {
+            color: #007aff;
+            font-size: 24px;
+            font-weight: 500;
+            font-family: inherit;
+        }
+
+        .mui-pciker-list li.highlight,
+        .mui-pciker-list li.visible {
+            visibility: visible;
+            background-color: #DDDDDD;
+        }
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;margin: 0 auto; width: 50%;">消费画像</h1>
+        <a href="#popover" class="ellipsiss" style="float: right;line-height: 44px;color: white;" id="menu">选择门店</a>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <div id="switch_store" class="mui-row" style="height: 40px;line-height: 40px;">
+            &nbsp;<span style="padding-left: 2px; background-color: #007aff;"></span>&nbsp; <span
+                id="member_txt">形象顾问</span> <span class="mui-icon mui-icon-arrowdown"
+                style="float: right;line-height: 38px;margin-right: 5px;"></span>
+        </div>
+        <div class="mui-row">
+            <!-- 休眠预警 -->
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-yujing span_size" style="color:#00ae8f;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>休眠预警</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 睡眠激活 -->
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell">
+                    <a class="kkk" href="./contribution_degree_memben.html" id="">
+                        <span class="iconfont icon-jihuo span_size" style="color:#f88b2a;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>睡眠激活</p>
+
+                    </a>
+                </li>
+            </div>
+            <!-- 回购预警 -->
+            <div class="mui-col-xs-4 mui-col-sm-4" style="display: none;">
+                <li class="mui-table-view-cell">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-renyuanyidongyujing span_size"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>回购预警</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 回购激活 -->
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-huigou002 span_size" style="color:#ff7b93;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>回购激活</p>
+                        <span id="RFM"></span>
+                    </a>
+                </li>
+            </div>
+            <!-- 高价值关注 -->
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-gaojiazhifensi span_size" style="color:#239df7;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>高价值关注</p>
+                        <span id="RFM"></span>
+                    </a>
+                </li>
+            </div>
+            <!-- 低价值预警 -->
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell" id="">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-shangpinyuji span_size" style="color:#ff4d6d;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>低价值预警</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 高件数关注 -->
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell" id="">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-jianjunjia span_size" style="color:#239df7;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>高件数关注</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 低件数预警 -->
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell" id="">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-ziyuan span_size" style="color:#00ad8e;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>低件数预警</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 高客单关注 -->
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell" id="">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-tigaokedanjia span_size" style="color:#ff4d6d;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>高客单关注</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 低客单预警 -->
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell" id="">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-ziyuan2 span_size" style="color:#239df7;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>低客单预警</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 高件单关注 -->
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell" id="">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-tisheng span_size" style="color:#ff4d6d;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>高件单关注</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 低件单预警 -->
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell" id="">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-iconfontzhizuobiaozhunbduan19 span_size" style="color:#239df7;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>低件单预警</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 高连带关注 -->
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell" id="">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-liandai span_size" style="color:#00ad8e;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>高连带关注</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 低连带预警 -->
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-ziyuan1 span_size" style="color:#ff4d6d;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>低连带预警</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 高消费关注 -->
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-kerenxiaofei span_size" style="color:#00ad8e;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>高消费关注</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 低消费提升 -->
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-dixiaofei span_size" style="color:#f88b2a;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>低消费提升</p>
+                        <span id="RFM"></span>
+                    </a>
+                </li>
+            </div>
+        </div><br>
+    </div>
+    <!-- 弹框区域 -->
+    <div id="popover" class="mui-popover">
+        <div class="mui-popover-arrow"></div>
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <ul class="mui-table-view" id="popover_ul">
+                    <!-- <li class="mui-table-view-cell"><a href="#" ></a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item2</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item3</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item4</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item5</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item6</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item7</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item8</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item9</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item10</a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- 控制弹框 -->
+<script>
+    var staff_code2 = '';
+    var localStorage_code = [];
+    // 禁用点击遮盖层弹出菜单
+    window.addEventListener('tap', function (e) {
+        e.target.className == 'mui-backdrop mui-active' && e.stopPropagation();
+    }, true)
+
+    //加载动画
+    var load = new Loading();
+    load.init();
+    load.start();
+    // 弹框区域
+    mui('#popover').on('tap', 'a', function (e) {
+        var code = this.getAttribute('code');
+        mui("#menu")[0].innerHTML = this.innerHTML;
+        mui('.mui-popover').popover('toggle', document.getElementById("menu"));
+        localStorage_code[0] = code;
+        localStorage_code[1] = "";
+        localStorage_code[2] = this.innerHTML;
+        mui("#member_txt")[0].innerHTML = '形象顾问';
+        men(code);
+        staff_code(code);
+
+        add_huncun();
+
+    })
+    //滚动区域
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+
+</script>
+<script>
+    //进来加载
+    window.onload = function () {
+        // 隐藏标题
+
+        hidden_title();
+        select_men(localStorage.getItem("location_tui"));
+    }
+    //进来查询门店
+    function select_men(dan) {
+        mui.post('/index.php/RfmActiveStore/', {
+        }, function (data) {
+            if (data.code == 200) {
+                var popover_ul = document.getElementById("popover_ul");
+                if (data.data.count < 6) {
+                    document.getElementById("popover").style.height = (data.data.count * 50) + 'px';
+                }
+                for (i = 0; i < data.data.count; i++) {
+
+                    var li = document.createElement('li');
+                    li.className = 'mui-table-view-cell li2'
+                    li.innerHTML = '<a href="#" code=' + data.data.data[i].code + '>' + data.data.data[i].name + '</a>'
+                    popover_ul.appendChild(li);
+                }
+
+                if (dan == 'true') {
+                    console.log(5555);
+                    mui('.mui-popover').popover('toggle', document.getElementById("menu"));
+                }
+                load.stop();
+            }
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+
+    var kkk = document.getElementsByClassName("kkk");
+    var number = document.getElementsByClassName("number");
+    function men(code) {
+        localStorage.setItem("vip_staff_code", staff_code2);
+        load.start();
+        // 休眠,睡眠
+        mui.post('/index.php/RfmActiveSel/', {
+            search: code,
+            staff_code: staff_code2
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            var ul_down_content = "";
+            if (data.code == 200) {
+                for (i = 0; i < data.data.count; i++) {
+                    if (data.data.data[i].r_type == "休眠") {
+                        kkk[0].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$休眠';
+                        number[0].innerHTML = data.data.data[i].numbertime;
+                    }
+                    if (data.data.data[i].r_type == "睡眠") {
+                        kkk[1].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$休眠';
+                        number[1].innerHTML = data.data.data[i].numbertime;
+                    }
+                }
+
+            }
+        }, 'json'
+        );
+        // 回购
+        mui.post('/index.php/RfmBackSel/', {
+            search: code,
+            staff_code: staff_code2
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            var ul_down_content = "";
+            if (data.code == 200) {
+                for (i = 0; i < data.data.count; i++) {
+                    if (data.data.data[i].f_type == "低回头率") {
+                        kkk[2].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$低回头率';
+                        number[2].innerHTML = data.data.data[i].numbertime;
+                    }
+                    if (data.data.data[i].f_type == "超低回头率") {
+                        kkk[3].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$低回头率';
+                        number[3].innerHTML = data.data.data[i].numbertime;
+                    }
+                }
+
+            }
+        }, 'json'
+        );
+        // 高价值
+        mui.post('/index.php/RfmContributionSel/', {
+            search: code,
+            staff_code: staff_code2
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            var ul_down_content = "";
+            if (data.code == 200) {
+                for (i = 0; i < data.data.count; i++) {
+                    if (data.data.data[i].m_type == "高价值") {
+                        kkk[4].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$高价值';
+                        number[4].innerHTML = data.data.data[i].numbertime;
+                    }
+                    if (data.data.data[i].m_type == "低价值") {
+                        kkk[5].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$高价值';
+                        number[5].innerHTML = data.data.data[i].numbertime;
+                    }
+                }
+
+            }
+        }, 'json'
+        );
+        // 高件数
+        mui.post('/index.php/RfmNumberSel/', {
+            search: code,
+            staff_code: staff_code2
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            var ul_down_content = "";
+            if (data.code == 200) {
+                for (i = 0; i < data.data.count; i++) {
+                    if (data.data.data[i].n_type == "高件数") {
+                        kkk[6].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$高件数';
+                        number[6].innerHTML = data.data.data[i].numbertime;
+                    }
+                    if (data.data.data[i].n_type == "低件数") {
+                        kkk[7].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$高件数';
+                        number[7].innerHTML = data.data.data[i].numbertime;
+                    }
+                }
+
+            }
+        }, 'json'
+        );
+        // 高客单
+        mui.post('/index.php/RfmPriceSel/', {
+            search: code,
+            staff_code: staff_code2
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            var ul_down_content = "";
+            if (data.code == 200) {
+                for (i = 0; i < data.data.count; i++) {
+                    if (data.data.data[i].p_type == "高客单价") {
+                        kkk[8].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$高客单价';
+                        number[8].innerHTML = data.data.data[i].numbertime;
+                    }
+                    if (data.data.data[i].p_type == "低客单价") {
+                        kkk[9].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$高客单价';
+                        number[9].innerHTML = data.data.data[i].numbertime;
+                    }
+                }
+
+            }
+        }, 'json'
+        );
+        // 高件单
+        mui.post('/index.php/RfmUnivalentSel/', {
+            search: code,
+            staff_code: staff_code2
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            var ul_down_content = "";
+            if (data.code == 200) {
+                for (i = 0; i < data.data.count; i++) {
+                    if (data.data.data[i].a_type == "高价位") {
+                        kkk[10].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$高价位';
+                        number[10].innerHTML = data.data.data[i].numbertime;
+                    }
+                    if (data.data.data[i].a_type == "低价位") {
+                        kkk[11].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$高价位';
+                        number[11].innerHTML = data.data.data[i].numbertime;
+                    }
+                }
+
+            }
+        }, 'json'
+        );
+
+        // 高连带
+        mui.post('/index.php/RfmJointSel/', {
+            search: code,
+            staff_code: staff_code2
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            var ul_down_content = "";
+            if (data.code == 200) {
+                for (i = 0; i < data.data.count; i++) {
+                    if (data.data.data[i].j_type == "高连带率") {
+                        kkk[12].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$高连带率';
+                        number[12].innerHTML = data.data.data[i].numbertime;
+                    }
+                    if (data.data.data[i].j_type == "低连带率") {
+                        kkk[13].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$高连带率';
+                        number[13].innerHTML = data.data.data[i].numbertime;
+                    }
+                }
+            }
+        }, 'json'
+        );
+
+        // 高消费
+        mui.post('/index.php/RfmConsumptionSel/', {
+            search: code,
+            staff_code: staff_code2
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            var ul_down_content = "";
+            if (data.code == 200) {
+                for (i = 0; i < data.data.count; i++) {
+                    if (data.data.data[i].c_type == "高消费") {
+                        kkk[14].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$高消费';
+                        number[14].innerHTML = data.data.data[i].numbertime;
+                    }
+                    if (data.data.data[i].c_type == "低消费") {
+                        kkk[15].href = "./contribution_degree_memben.html?" + 'id=' + data.data.data[i].id + 'code*' + data.data.data[i].store_code + 'stroe$高消费';
+                        number[15].innerHTML = data.data.data[i].numbertime;
+                    }
+                }
+                load.stop();
+            }
+        }, 'json'
+        );
+
+
+    }
+
+
+
+    var json = []
+
+    var switch_store = document.getElementById("switch_store");
+
+    switch_store.addEventListener("tap", function () {
+        let picker = new mui.PopPicker();
+        picker.setData(json);
+        picker.show(function (selectItems) {
+            staff_code2 = selectItems[0].value;
+            localStorage_code[1] = staff_code2;
+            localStorage_code[3] = selectItems[0].text;
+            mui("#member_txt")[0].innerHTML = selectItems[0].text;
+            men(selectItems[0].mem_code);
+            // add_huncun();
+        })
+    });
+
+    function staff_code(code) {
+        staff_code2 = '';
+        json = [];
+        // localStorage.setItem("vip_staff_code", '');
+        mui.post('/index.php/UserlistStaff/', {
+            code: code,
+        }, function (data) {
+            console.log(data);
+            // 服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                for (let i = 0; i < data.data.length; i++) {
+                    let son = {
+                        mem_code: code,
+                        value: data.data[i].code,
+                        text: data.data[i].name
+                    }
+                    json.push(son);
+                }
+
+
+            }
+        }, 'json'
+        );
+
+    }
+</script>
+
+
+<script>
+
+    function add_huncun() {
+        localStorage.setItem("location_tui", false); //false 操作了.后退事件  true 第一次进入
+
+        localStorage.setItem("localStorage_code", localStorage_code);
+    }
+
+
+    (function () {
+        let location_tui = localStorage.getItem("location_tui");
+        if (location_tui == 'true') {
+            // true 第一次进入
+        } else {
+            // 后退事件
+            console.log(8888)
+            location_tui2();
+        }
+    })();
+
+
+    function location_tui2() {
+        mui('.mui-popover').popover('close', document.getElementById("menu"));
+        let localStorage_codes = localStorage.getItem("localStorage_code").split(',');
+        localStorage_code = localStorage_codes;
+        staff_code2 = localStorage_codes[1]
+        men(localStorage_codes[0]);
+        staff_code(localStorage_codes[0]);
+        mui("#menu")[0].innerHTML = localStorage_codes[2];
+        if ((localStorage_codes[3] == "") || (localStorage_codes[3] == undefined) || (localStorage_codes[3] == 'undefined')) {
+            console.log(typeof (localStorage_codes[3]))
+
+        } else {
+            mui("#member_txt")[0].innerHTML = localStorage_codes[3];
+        }
+
+
+    }
+
+</script>
+
+</html>

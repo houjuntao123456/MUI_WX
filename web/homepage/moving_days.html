@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>会员生日</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <!-- <script src="../mui/js/mui.min.js"></script> -->
+    <script src="../mui/js/muiR.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <link rel="stylesheet" href="../css/app.css">
+</head>
+<style>
+    .button_style{
+      padding: 0px 5px 0px 5px;
+      border-radius: 13px;
+    }
+    
+  </style>
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;" id="back_jxbb"></a>
+        <h1 class="mui-title" style="color:white;">会员生日</h1>
+    </header>
+    <!-- 内容 -->
+    <div class=" mui-content-white mui-content">
+        <!-- 1541435135 -->
+        <!-- 查询 -->
+        <div action="" class="mui-input-group" id="form_css">
+            <!-- 时间选择 -->
+            <div class="mui-row" style="height:30px;background-color:#efeff4;">
+                <p style="line-height:30px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时间选择</p>
+            </div>
+            <!-- 开始时间 -->
+            <div class="mui-row " style="border-bottom: 1px solid #eee;height: 37px;line-height: 37px;">
+                <div class="mui-col-xs-4 mui-col-sm-4">
+                    &nbsp;&nbsp;&nbsp;&nbsp;开始时间：
+                </div>
+                <div class="mui-col-xs-8 mui-col-sm-8" onclick="start_time();">
+                    &nbsp;
+                    <span class="time_">2018</span>
+
+                </div>
+            </div>
+            <!-- 结束时间 -->
+            <div class="mui-row " style="height: 37px;line-height: 37px;">
+                <div class="mui-col-xs-4 mui-col-col-sm-4">
+                    &nbsp;&nbsp;&nbsp;&nbsp;结束时间：
+                </div>
+                <div class="mui-col-xs-8 mui-col-sm-8" onclick="over_time();">&nbsp;
+                    <span class="time_">2018</span>
+                </div>
+            </div>
+            <!-- 范围 -->
+            <div class="mui-row" style="height:30px;background-color:#efeff4;">
+                <p style="line-height:30px;">&nbsp;&nbsp;&nbsp;&nbsp;范围选择</p>
+            </div>
+            <!-- 选择机构 -->
+            <div class="mui-input-row mui-select" style="border-bottom: 1px solid #eee;">
+                <label>选择机构：</label>
+                <select name="" style="color:rgb(105, 104,104)" id="select_store" onchange="gradeChange1()">
+                    <option value="">选择机构</option>
+                </select>
+            </div>
+            <!-- 选择门店 -->
+            <div class="mui-input-row mui-select" style="border-bottom: 1px solid #eee;">
+                <label>选择门店：</label>
+                <select name="" style="color:rgb(105, 104,104)" id="select_clerk" onchange="gradeChange()">
+                    <option value="">不限门店</option>
+                </select>
+            </div>
+            <!-- 选择员工 -->
+            <div class="mui-input-row mui-select">
+                <label>选择员工：</label>
+                <select name="" style="color:rgb(105, 104,104)" id="select_clerker">
+                    <option value="">选择员工</option>
+                </select>
+            </div>
+            <!-- 按钮 -->
+            <div class="mui-button-row" style="height: 50px; background-color: #efeff4;">
+                <button type="button" data-loading-icon="mui-spinner mui-spinner-white" data-loading-text="查询中"
+        class="mui-btn mui-btn-primary" style="width:80%;background-color:#007aff;color:white;" id="query">立即查询</button>
+            </div>
+            <table style="width: 100%;">
+                <tr style="height:35px;line-height:35px;border-bottom: 1px solid #eee;">
+                    <th style="width: 25%">所属层级</th>
+                    <th style="width: 25%">互动名称</th>
+                    <th style="width: 20%">时间日期</th>
+                    <th style="width: 15%">人数</th>
+                    <th style="width: 15%">查看</th>
+                </tr>
+            </table>
+        </div>
+        <!--下拉刷新容器-->
+        <div id="pullrefresh" class="mui-scroll-wrapper ">
+            <div class="mui-scroll">
+                <!--数据列表-->
+                <table id="qqq" style="width: 100%;">
+                    <!-- <tr style="height:35px;line-height:35px;color: #282f8c;font-size: 14px;">
+						<td >
+                            <span>秦皇岛山海关</span>-
+                            <span>唯美店面</span>-
+                            <span>李欣悦</span>
+                        </td>
+						<td>北京门店</td>
+						<td>6</td>
+                        <td>20</td>
+                        <td><button type="button" class="mui-btn mui-btn-primary">会员</button></td>
+					</tr> -->
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var pp = document.getElementById("form_css");
+  var vop = document.getElementById("pullrefresh");
+  var select_store = document.getElementById("select_store");
+  var select_clerk=document.getElementById("select_clerk");
+  window.onload = function () {
+    vop.style.marginTop = pp.clientHeight + 45 + 'px';
+    onload_select();
+    new_data();
+    hidden_title();
+  }
+  // 获取当前时间
+  var new_star = "";
+  var new_end = "";
+  function new_data() {
+    var myDate = new Date();
+     if ((myDate.getMonth() + 1) < 9) {
+      new_star = myDate.getFullYear() + '-' + '0' + (myDate.getMonth() + 1) + '-' + (myDate.getDate() - 1);
+      new_end = myDate.getFullYear() + '-' + '0' + (myDate.getMonth() + 1) + '-' + myDate.getDate();
+    } else {
+      new_star = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + (myDate.getDate() - 1);
+      new_end = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate();
+    }
+    birth[0].innerHTML = new_star;
+    birth[1].innerHTML = new_end;
+
+  }
+  var birth = document.getElementsByClassName("time_");
+  //开始时间
+  function start_time() {
+    var dtpicker = new mui.DtPicker({
+      type: "date",//设置日历初始视图模式 
+      beginDate: new Date(1970, 01, 01),//设置开始日期 
+      endDate: new Date(2070, 01, 01),//设置结束日期 
+      labels: ['年', '月', '日'],//设置默认标签区域提示语 
+    });
+    dtpicker.show(function (items) {
+      birth[0].innerHTML = items.y.value + '-' + items.m.value + '-' + items.d.value;
+    })
+  }
+  // 结束时间
+  function over_time() {
+    var dtpicker = new mui.DtPicker({
+      type: "date",//设置日历初始视图模式 
+      beginDate: new Date(1970, 01, 01),//设置开始日期 
+      endDate: new Date(2170, 01, 01),//设置结束日期 
+      labels: ['年', '月', '日'],//设置默认标签区域提示语 
+    });
+    dtpicker.show(function (items) {
+      birth[1].innerHTML = items.y.value + '-' + items.m.value + '-' + items.d.value
+    })
+  }
+
+  // 进来加载的方法
+  // 选择组织
+  function onload_select() {
+    mui.post('/index.php/UserlistOrg/', {
+    }, function (data) {
+      //服务器返回响应，根据响应结果，分析是否登录成功；
+      if (data.code == 200) {
+        for (i = 0; i < data.data.length; i++) {
+          var option = document.createElement('option');
+          option.value = data.data[i].code;
+          option.innerHTML = data.data[i].name
+          document.getElementById("select_store").appendChild(option);
+        }
+      }
+    }, 'json'
+    );
+  } 
+  //选择组织 门店下拉发生变化
+    function gradeChange1() {
+        
+        mui.post('/index.php/UserlistStore/', {
+          code: select_store.options[select_store.selectedIndex].value
+        }, function (data) {
+          //服务器返回响应，根据响应结果，分析是否登录成功；
+          if (data.code == 200) {
+        document.getElementById("select_clerk").innerHTML='<option value="">选择门店</option>'
+        for (i = 0; i < data.data.length; i++) {
+          var option = document.createElement('option');
+          option.value = data.data[i].code;
+          option.innerHTML = data.data[i].name;
+          document.getElementById("select_clerk").appendChild(option);
+        }
+      }
+        }, 'json'
+        );
+      }
+// 选择门店 店员下拉发生改变
+  function gradeChange (){
+    // alert(select_store.options[select_store.selectedIndex].value);
+      mui.post('/index.php/UserlistStaff/', {
+        code: select_clerk.options[select_clerk.selectedIndex].value
+    }, function (data) {
+      //服务器返回响应，根据响应结果，分析是否登录成功；
+      if (data.code == 200) {
+        document.getElementById("select_clerker").innerHTML='<option value="">选择店员</option>'
+        for (i = 0; i < data.data.length; i++) {
+          var option = document.createElement('option');
+          option.value = data.data[i].code;
+          option.innerHTML = data.data[i].name;
+          document.getElementById("select_clerker").appendChild(option);
+        }
+      }
+    }, 'json'
+    );
+  }
+
+  // 点击按钮查询
+  var query = document.getElementById("query");
+  query.onclick = function () {
+    document.getElementById("qqq").innerHTML = "";
+		count = 0;
+		mui('#pullrefresh').pullRefresh().refresh(true);
+		pullupRefresh();
+		mui(this).button('loading');
+    	setTimeout(function () {
+			
+			mui(this).button('reset');
+		}.bind(this), 2000);
+  }
+</script>
+<script>
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+                callback: pulldownRefresh
+            },
+            up: {
+                contentrefresh: '正在加载...',
+                // auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+	/**
+	 * 下拉刷新具体业务实现
+	 */
+    function pulldownRefresh() {
+    }
+	/**
+	 * 上拉加载具体业务实现 
+	 */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+    function pullupRefresh() {
+        if (Date.parse(birth[0].innerHTML) > Date.parse(birth[1].innerHTML)) {
+            mui.alert('开始时间不能大于结束时间', '提示', '确定'['div']);
+        } else {
+            mui.post('/index.php/WreThreeGd/', {
+                start: birth[0].innerHTML,//开始时间
+                end: birth[1].innerHTML,//结束时间
+                splb: select_store.options[select_store.selectedIndex].value,//选择机构
+				        store: select_clerk.options[select_clerk.selectedIndex].value,//选择门店
+                staff: select_clerker.options[select_clerker.selectedIndex].value,//选择员工
+                page: ++count,//分页
+                limit: limit_num//每页的条数
+            }, function (data) {
+                // 服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    setTimeout(function () {
+                        mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                        // var table = document.body.querySelector('.mui-table-view');
+                        var qq = document.getElementById("qqq");
+                        for (i = 0; i < data.data.data.length; i++) {
+                            var li = document.createElement('tr');
+                            // li.className = 'mui-table-view-cell';
+                            li.style = "height:35px;line-height:35px;color: #282f8c;font-size: 14px;border-bottom:1px solid #ccc;"
+                            li.innerHTML = '<td style="width: 25%">' +data.data.data[i].total_name + '</td>'
+                                + '<td style="width: 25%">' + data.data.data[i].name + '</td>'
+                                + '<td style="width: 20%">' + data.data.data[i].time_g+ '</td>'
+                                + '<td style="width: 15%">' + data.data.data[i].member +'</td>'
+                                +'<td style="width: 15%"><button name="' + data.data.data[i].remark + '" name1="' + data.data.data[i].name + '" name2="' + data.data.data[i].executor_code + '" name3="' + data.data.data[i].time + '" onclick="member(this)" class="mui-icon mui-icon-search mui-btn mui-btn-primary button_style"style="font-size:30px;"></button></td>'
+                            qq.appendChild(li);
+                        }
+                    }, 1000);
+                }
+            }, 'json'
+            );
+        }
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+    // 点击按钮,将参数传递到另一个页面
+    function member(e) {
+        // location.href = '../homepage/R_report_member.html';
+        location.href = '../homepage/hundred_member.html?' + 'name=' + e.getAttribute("name1") + 'remark*' + e.getAttribute("name") + "code!" + e.getAttribute("name2") + "time#" + e.getAttribute("name3");
+    }
+</script>
+
+</html>

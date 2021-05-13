@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <link rel="stylesheet" href="../css/iconfont_tubiao3.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/loading.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <title>精准营销</title>
+    <style>
+        .span_font_style {
+            /* background-color: #3abeee; */
+            background: -webkit-linear-gradient(0deg, rgba(233, 153, 4, 0.973), #f5f10cf1);
+            /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(0deg, rgba(247, 168, 23, 0.973), #f5f10cf1);
+            /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(0deg, rgba(233, 153, 4, 0.973), #f5f10cf1);
+            /* Firefox 3.6 - 15 */
+            background: linear-gradient(0deg, rgba(233, 153, 4, 0.973), #f5f10cf1);
+            /* 标准的语法（必须放在最后） */
+            /* 标准的语法（必须放在最后） */
+            color: white;
+            background-color: orange;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+
+        li {
+            list-style: none;
+            background-color: white;
+            border-right: 1px solid #cccccc;
+            border-bottom: 1px solid #cccccc;
+            text-align: center;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .li_style {
+            border-right: none;
+            height: 100px;
+        }
+
+        .li_photo_style {
+            border: 1px solid black;
+        }
+
+        .div_style {
+            text-align: left;
+            overflow: hidden;
+            line-height: 40px;
+        }
+
+        .div_style_1 {
+            border-bottom: 1px solid #cccccc;
+        }
+
+        .input_style {
+            float: right;
+            margin-bottom: 10px;
+        }
+
+        select {
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            /* select居中 */
+            text-align-last: center;
+        }
+
+        .title_display {
+            display: none;
+        }
+
+        /* 样式 */
+        .oa-contact-cell.mui-table .mui-table-cell {
+            padding: 4px 0 4px 0;
+            vertical-align: middle;
+        }
+
+        .oa-contact-cell {
+            position: relative;
+            margin-left: 10px;
+        }
+
+        .oa-contact-content {
+            width: 48%;
+
+        }
+
+        .oa-contact-name {
+            width: 100%;
+        }
+
+        .oa-contact-name,
+        oa-contact-position {
+            float: left;
+        }
+
+        li {
+            border: none;
+        }
+
+        .mui-select::before {
+            color: rgb(11, 80, 246);
+        }
+
+        /* .mui-scroll-wrapper {
+      margin-top: 20px;
+    } */
+
+        .mui-btn-danger {
+            border: 1px solid #1b69f2;
+            background-color: #1b69f2;
+            font-size: 15px;
+            letter-spacing: 2px;
+            padding: 5px 12px;
+        }
+
+        .mui-table-view-cell:after {
+            left: 0;
+            background-color: #ececed;
+        }
+
+        .mui-table-view::before {
+            background-color: #ececed;
+        }
+
+        .mui-table-view:after {
+            background-color: #ececed;
+        }
+
+        .mui-search .mui-placeholder,
+        .mui-input-row select {
+            font-size: 14px;
+            height: 30px;
+        }
+
+        .mui-content>.mui-table-view:first-child {
+            margin-top: 0px;
+        }
+
+        .mui-table-view-cell {
+            padding: 0px 15px;
+        }
+
+        .qf {
+            width: 96%;
+            border: 1px #ecebeb solid;
+            margin: 0 auto;
+            height: 90px;
+            margin-top: 10px;
+            border-radius: 10px;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href=" javascript: history.go(-1);" class="mui-icon mui-icon-back" id="a_title" style="color:white;"></a>
+        <h1 class="mui-title" id="title_" style="color:white;">精准营销</h1>
+    </header>
+
+    <!-- 头部选择器 -->
+    <div id="da" class="mui-content">
+        <!-- body内容 -->
+        <div id="xiao">
+            <div id="form_css">
+                <!-- 群发 -->
+                <div onclick="javascript:location.href='../homepage/group_members.html'" class="mui-row qf">
+                    <div class="mui-col-xs-3 mui-col-sm-3" style="line-height: 80px;text-align: center;">
+                        <span class="iconfont icon-huiyuanqunfa" style="color: #007aff; font-size: 45px;"></span>
+                    </div>
+                    <div class="mui-col-xs-8 mui-col-sm-8">
+                        <p style="color: black;font-size:16px;margin-top: 20px;">精准筛选</p>
+                        <p>批量给我的会员发消息</p>
+                    </div>
+                    <div class="mui-col-xs-1 mui-col-sm-1" style="line-height: 90px;">
+                        <span class="mui-icon mui-icon-forward" style="color: rgb(161, 161, 161);"></span>
+                    </div>
+                </div>
+                <!-- 条件 -->
+                <!-- 选择组织 -->
+                <!-- <div class="mui-input-row mui-select" style="border-bottom: 1px solid #eee;">
+                    <select name="" style="color:rgb(105, 104,104);padding-left: 40%;" id="select_store"
+                        onchange="gradeChange1()">
+                        <option value="">选择机构</option>
+                    </select>
+                </div> -->
+                <!-- 选择门店 -->
+                <!-- <div class="mui-input-row mui-select" style="border-bottom: 1px solid #eee;margin-top:-16px;">
+                    <select name="" style="color:rgb(105, 104,104);padding-left: 40%" id="select_clerk"
+                        onchange="gradeChange()">
+                        <option value="">所有门店</option>
+                    </select>
+                </div> -->
+                <!-- 选择员工 -->
+                <!-- <div class="mui-input-row mui-select" style="margin-top:-16px;">
+                    <select name="" style="color:rgb(105, 104,104);padding-left: 40%" id="select_clerker">
+                        <option value="">选择店员</option>
+                    </select>
+                </div> -->
+                <!-- 按钮 -->
+                <!-- <div class="mui-button-row" style="height: 50px; background-color: #efeff4;margin-top:-10px;">
+            <button type="button" data-loading-icon="mui-spinner mui-spinner-white" data-loading-text="查询中"
+            class="mui-btn mui-btn-primary" style="width:80%;background-color:#007aff;color:white;" id="query">立即查询</button>
+          </div> -->
+
+            </div>
+
+
+
+
+
+        </div>
+        <!-- 下拉刷新内容 -->
+        <div id="pullrefresh" class="mui-scroll-wrapper" style="top: 155px;border-top:1px solid #eee;">
+            <div class="mui-scroll">
+                <!-- 数据列表 -->
+                <div id="qqq" style="width: 100%;">
+                    <ul class="mui-table-view mui-table-view-chevron" id="member_data">
+                        <!-- 里面详细内容 -->
+                        <!-- <li class="mui-table-view-cell" style="padding-left:5px;padding-right: 5px;">
+                            <div class="mui-slider-cell">
+                                <div class="oa-contact-cell mui-table">
+                                    <div class="mui-table-cell" style="width:60px;height:60px;">
+                                        <img src="../images/suoke.jpg"
+                                            style="width:60%;height:100%;border-radius:50%;"/>
+                                    </div>
+
+                                    <div class="oa-contact-content mui-table-cell">
+                                        <div class="mui-clearfix"
+                                            style="text-align:left;line-height: 28px;width: 100%;">
+                                            <h4 class="oa-contact-name">叶文洁</h4>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li> -->
+
+                        <!-- <li class="mui-table-view-cell" style="padding-left:5px;padding-right: 5px;">
+                            <div class="mui-slider-cell">
+                                <div class="oa-contact-cell mui-table">
+                                    <div class="mui-table-cell" style="width:60px;height:60px;">
+                                        <img src="../images/g.jpg"
+                                            style="width:60%;height:100%;border: 1px solid black;border-radius:50%;" />
+                                    </div>
+
+                                    <div class="oa-contact-content mui-table-cell">
+                                        <div class="mui-clearfix"
+                                            style="text-align:left;line-height: 28px;width: 100%;">
+                                            <h4 class="oa-contact-name">叶文洁
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li> -->
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+       var nav = window.parent.document.getElementById("nav");
+        nav.style.display = "";
+        hh[0].style.bottom = "50px";
+    //a标签不能用
+    // mui('body').on('tap','a',function(){
+
+    //   window.top.location.href=this.href;
+    // });
+
+    //加载动画
+    var load = new Loading();
+    load.init();
+    
+
+    var pp = document.getElementById("form_css");
+    // var vop = document.getElementById("pullrefresh");
+    window.onload = function () {
+        // vop.style.marginTop = pp.clientHeight + 45 + 'px';
+        hidden_title();
+        
+        // onload_select();
+    }
+    // 进来加载的方法
+    // 选择组织
+
+    // 点击按钮查询
+    // var query = document.getElementById("query");
+    // query.onclick = function () {
+    //     document.getElementById("qqq").innerHTML = "";
+    //     count = 0;
+    //     mui('#pullrefresh').pullRefresh().refresh(true);
+    //     pullupRefresh();
+    //     mui(this).button('loading');
+    //     setTimeout(function () {
+
+    //         mui(this).button('reset');
+    //     }.bind(this), 2000);
+    //     // load.start();
+    // }
+
+    mui(".mui-table-view").on('tap', '.mui-table-view-cell', function () {
+        //获取id
+        var id = this.getAttribute("id");
+        var name = this.firstElementChild.getAttribute("name");
+        var img = this.firstElementChild.firstElementChild.firstElementChild.firstElementChild.getAttribute("src");
+        localStorage.setItem("data_photo", img)
+        //传值给详情页面，通知加载新数据
+        location.href = './wx_chat2.html?code=' + name;
+    }) 
+</script>
+<script>
+
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+                // callback: pulldownRefresh
+            },
+            up: {
+                contentrefresh: '正在加载...',
+                // auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh,
+                auto: true
+            }
+        }
+    });
+	/**
+	 * 下拉刷新具体业务实现
+	 */
+    function pulldownRefresh() {
+    }
+	/**
+	 * 上拉加载具体业务实现
+	 */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+    function pullupRefresh() {
+        load.start();
+        //console.log(select_store.options[select_store.selectedIndex].value)
+        mui.post('/index.php/webCustomerServiceIndex/', {
+            page: ++count,//分页
+            limit: limit_num//每页的条数
+        }, function (data) {
+            // 服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                    // var table = document.body.querySelector('.mui-table-view');
+                    var qq = document.getElementById("member_data");
+                    for (i = 0; i < data.data.data.length; i++) {
+                        if (data.data.data[i].img == "") {
+                            data.data.data[i].img = "../images/suoke.jpg";
+                        }
+                        if (data.data.data[i].username == "" || data.data.data[i].username == null || data.data.data[i].username == undefined) {
+                            data.data.data[i].username = '&nbsp;';
+                        }
+                        var li = document.createElement('li');
+                        li.className = 'mui-table-view-cell';
+                        li.style = "padding-left:5px;padding-right: 5px;"
+                        li.innerHTML = '<div class="mui-slider-cell" name="' + data.data.data[i].code + '">'
+                            + '<div class="oa-contact-cell mui-table">'
+                            + '<div class="mui-table-cell" style="width:60px;height:60px;">'
+                            + '<img src="' + data.data.data[i].img + '"style="width:60%;height:100%;border-radius:50%;"/>'
+                            + '</div>'
+                            + '<div class="oa-contact-content mui-table-cell">'
+                            + '<div class="mui-clearfix" style="text-align:left;line-height: 28px;width: 100%;">'
+                            + '<h4 class="oa-contact-name">' + data.data.data[i].username + '</h4>'
+                            + '</div>'
+                            + '</div>'
+                            + '</div>'
+                            + '</div>'
+                        qq.appendChild(li);
+                    }
+                    load.stop();
+                }, 1000); 
+            }
+        }, 'json');
+       
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+</script>
+
+</html>

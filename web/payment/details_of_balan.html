@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>余额明细</title>
+	<link rel="stylesheet" href="../mui/css/mui.min.css">
+	<!-- <link rel="stylesheet" href="../css/iconfont.css"> -->
+	<!-- <script src="../mui/js/mui.min.js"></script> -->
+	<script src="../mui/js/muiR.js"></script>
+	<link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+	<script src="../mui/js/mui.dtpicker.js"></script>
+	<link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+	<script src="../js/jquery.min.js"></script>
+	<script src="../mui/js/mui.picker.min.js"></script>
+	<script src="../js/hidden-titile.js"></script>
+	<script src="../js/loading.js"></script>
+	<link rel="stylesheet" href="../css/loading.css">
+</head>
+<style>
+  .size_lue {
+            overflow: hidden;
+            /*自动隐藏文字*/
+            text-overflow: ellipsis;
+            /*文字隐藏后添加省略号*/
+            white-space: nowrap;
+            -webkit-line-clamp: 1;
+            /*想要显示的行数*/
+            -webkit-box-orient: vertical;
+        }
+
+</style>
+
+<body>
+	<!-- 原回购人数链接D:\www\wx\web\homepage\wepurchase_number.html-->
+	<header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+		<a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" id="a_title" style="color:white;"></a>
+		<h1 class="mui-title" id="title_" style="color:white;">余额明细</h1>
+
+	</header>
+	<!-- 头部选择器 -->
+	<div id="da" class="mui-content">
+
+		<!-- body内容 -->
+		<div id="xiao" class="mui-content">
+			<div id="form_css">
+
+			</div>
+			<!-- 下拉刷新内容 -->
+			<div id="pullrefresh" class="mui-scroll-wrapper ">
+
+				<div class="mui-scroll">
+					<!--数据列表-->
+					<div>
+						<p style="padding-left:2%;">当前余额</p>
+						<h1>￥0.00</h1>
+						<div class="mui-row" style="text-align: center;font-size:13px;">
+							<div class="mui-col-sm-4 mui-col-xs-4">
+								充值: <span>￥11111111.00</span>
+							</div>
+							<div class="mui-col-sm-4 mui-col-xs-4">
+								赠送: <span>￥0.00</span>
+							</div>
+							<div class="mui-col-sm-4 mui-col-xs-4">
+								已使用: <span>￥0.00</span>
+							</div>
+						</div>
+					</div>
+					<!-- 分类 -->
+					<div class="mui-row">
+						<!-- <div class="mui-col-sm-8 mui-col-xs-8 mui-input-row mui-select">
+              <select name="" style=" color:rgb(105, 104,104);margin-bottom: 4px;" id="all_organization">
+                <option class="cl" value="">全部类型</option>
+                <option class="cl" value="">后台修改增加余额</option>
+                <option class="cl" value="">后台修改减少余额</option>
+                <option class="cl" value="">会员充值</option>
+                <option value="">会员消费</option>
+                <option value="">消费退款</option>
+                <option value="">充值撤销</option>
+                <option value="">会员导入</option>
+                <option value="">升级赠送</option>
+                <option value="">升级撤销</option>
+                <option value="">会员退卡</option>
+                <option value="">消费有礼</option>
+                <option value="">活动赠送余额退还商家</option>
+                <option value="">会员充值推荐人返利</option>
+                <option value="">会员消费推荐人返利</option>
+                <option value="">分享有礼</option>
+                <option value="">开卡有礼</option>
+                <option value="">生日有礼</option>
+                <option value="">评价有礼</option>
+                <option value="">营销赠送</option>
+              </select>
+            </div> -->
+
+						<div class="mui-col-sm-6 mui-col-xs-6" id="store"
+							style="margin-top: 1px; text-align: center;background-color: white">
+							<div style="height: 37px; width: 90%;" class="size_lue">&nbsp;
+								<span id="store_xinagxi"  style="line-height: 37px;">会员消费</span>&nbsp;
+							</div>
+							<span style="color: #ccc; font-size: 16px;position: absolute;top: 12px;right: 0px;" class="mui-icon mui-icon-arrowdown"></span>
+						</div>
+
+						<div class="mui-col-sm-6 mui-col-xs-6" id="divid"
+							style="margin-top: 1px; text-align: center;background-color: white">
+							<div id="over_time" style="height: 37px;">&nbsp;
+								<span class="time_" style="line-height: 37px;"></span>&nbsp;<span
+									style="color: #ccc; font-size: 16px;" class="mui-icon mui-icon-arrowdown"></span>
+							</div>
+						</div>
+					</div>
+
+					<!-- 查询 -->
+					<div class="mui-button-row" style="height: 45px;margin-top: 10px;">
+						<button type="button" class="mui-btn mui-btn-blue" style="width:300px;" id="query">查询</button>
+					</div>
+					<!-- 循环的内容 -->
+					<div id="qqq" style="width: 100%;">
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</body>
+<script>
+	//   var load = new Loading();
+	// load.init();
+	// load.start();
+	// load.stop();
+	//a标签不能用
+	mui('body').on('tap', 'a', function () {
+		window.top.location.href = this.href;
+	});
+	mui("#divid").on("tap", "#over_time", function () {
+		// 逻辑代码，例如跳转详情页、ajax
+		var dtpicker = new mui.DtPicker({
+			type: "month",//设置日历初始视图模式 
+			beginDate: new Date(1970, 01),//设置开始日期 
+			endDate: new Date(2170, 01),//设置结束日期 
+			labels: ['年', '月'],//设置默认标签区域提示语 
+		});
+		dtpicker.show(function (items) {
+			birth[0].innerHTML = items.y.value + '-' + items.m.value
+		})
+	});
+	var pp = document.getElementById("form_css");
+	var pullrefresh = document.getElementById("pullrefresh");
+	window.onload = function () {
+		new_data();
+		// onload_select_innerHTML();
+		onload_select();
+		pullrefresh.style.marginTop = pp.clientHeight + 50 + 'px';
+	}
+	// 获取当前时间
+	var new_star = "";
+	var new_end = "";
+	function new_data() {
+		var myDate = new Date();//获取系统当前时间
+		if ((myDate.getMonth() + 1) < 9) {
+			// new_star = myDate.getFullYear() + '-' + '0'+(myDate.getMonth() + 1) + '-' + (myDate.getDate() - 1);
+			new_end = myDate.getFullYear() + '-' + '0' + (myDate.getMonth() + 1);
+		} else {
+			// new_star = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + (myDate.getDate() - 1);
+			new_end = myDate.getFullYear() + '-' + (myDate.getMonth() + 1);
+		}
+		// birth[0].innerHTML = new_star;
+		birth[0].innerHTML = new_end;
+
+	}
+	var birth = document.getElementsByClassName("time_");
+	// 下拉框初始赋值
+	function onload_select_innerHTML() {
+		// 给组织加载多余
+		// var  cll = document.getElementsByClassName("cl");
+		// cll[0].innerHTML = "1";
+		// console.log(1)
+		// var option_all_organization = document.createElement("option");
+		// var textnode=document.createTextNode("类型筛选");
+		// option_all_organization.appendChild(textnode);
+		// picture3.insertBefore(option_all_organization,picture3.childNodes[0]);
+	}
+	// 选择组织
+	function onload_select() {
+		mui.post('/index.php/UserlistOrg/', {
+		}, function (data) {
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+			if (data.code == 200) {
+				for (i = 0; i < data.data.length; i++) {
+					var option = document.createElement('option');
+					option.value = data.data[i].code;
+					option.innerHTML = data.data[i].name
+					document.getElementById("all_organization").appendChild(option);
+				}
+			}
+		}, 'json'
+		);
+	}
+	// 点击按钮查询
+	var query = document.getElementById("query");
+	query.onclick = function () {
+		select_org = document.getElementById("all_organization").options[document.getElementById("all_organization").selectedIndex].value;
+		select_store = all_stores.options[all_stores.selectedIndex].value;
+		select_staff = all_shopping.options[all_shopping.selectedIndex].value
+		document.getElementById("qqq").innerHTML = "";
+		count = 0;
+		mui('#pullrefresh').pullRefresh().refresh(true);
+		pullupRefresh();
+	}
+	// //select安卓和ios的判断样式
+	var picture3 = document.getElementById("all_organization");
+	//苹果手机采用CSS1
+	if (/iphone/i.test(navigator.userAgent)) {
+		picture3.style.paddingLeft = "18%";
+		// picture3.style.textAlign = "center"
+		// addStyleLink('CSS1.css');
+
+	}
+	// 安卓手机采用CSS2
+	if (/android/i.test(navigator.userAgent)) {
+		//alert("安卓");
+		picture3.style.paddingLeft = "18%";
+		// addStyleLink('CSS2.css');
+
+	}
+</script>
+<script>
+	mui.init({
+		pullRefresh: {
+			container: '#pullrefresh',
+			down: {
+				callback: pulldownRefresh
+			},
+			up: {
+				contentrefresh: '正在加载...',
+				// auto: true,//可选,默认false.首次加载自动上拉刷新一次
+				callback: pullupRefresh
+			}
+		}
+	});
+	/**
+	 * 下拉刷新具体业务实现
+	 */
+	function pulldownRefresh() {
+	}
+	/**
+	 * 上拉加载具体业务实现
+	 */
+	// 重新开启加载
+	// mui('#pullrefresh').pullRefresh().refresh(true);
+	// 分页计数
+	var count = 0;
+	var splb = "";
+	var store = "";
+	var staff = "";
+	// 分的条数
+	var limit_num = 10;
+	function pullupRefresh() {
+		load.start();
+		mui.post('/index.php/MAttainmentSel/', {
+			time_month: birth[0].innerHTML,
+			splb: document.getElementById("all_organization").options[document.getElementById("all_organization").selectedIndex].value,//组织
+			page: ++count,//分页
+			limit: limit_num//每页的条数
+		}, function (data) {
+			// 服务器返回响应，根据响应结果，分析是否登录成功；
+			if (data.code == 200) {
+
+				setTimeout(function () {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+					// var table = document.body.querySelector('.mui-table-view');
+					var qq = document.getElementById("qqq");
+					for (i = 0; i < data.data.data.length; i++) {
+						var li = document.createElement('div');
+						// li.className = 'mui-table-view-cell';
+						li.style = "margin-top: 10px; background-color: white; height: 140px;;border: 1px solid white; box-shadow: 0px 0px 10px #ccc;width:98%;border-radius:5px;margin-left: 1%;;"
+						li.innerHTML = '<div style="margin-left: 2%;margin-top:10px;">'
+							+ '<span>' + data.data.data[i].vyname + '</span>(<span style="">' + data.data.data[i].vsname + '</span>)'
+							+ '</div>'
+							+ '<div style="margin-left: 2%;margin-top:10px;font-size: 18px;">'
+							+ '销售金额:  <span style="color: chocolate;">' + data.data.data[i].realNumber + '</span>'
+							+ '</div>'
+							+ '<div style="margin-left: 2%;margin-top:10px;font-size: 13px;">'
+							+ ' 目标金额: <span style="color: chocolate;">' + data.data.data[i].totalMission + '</span>'
+							+ '</div>'
+							+ '<div class="mui-row" style="margin-left: 2%;margin-top:10px;font-size: 18px;">'
+							+ '<div class="mui-col-xs-6 mui-col-sm-6">'
+							+ '同比: <span style="color: chocolate;">' + data.data.data[i].sameRate + '%</span>'
+							+ '</div>'
+							+ '<div class="mui-col-xs-6 mui-col-sm-6">'
+							+ ' 环比: <span style="color: chocolate;">' + data.data.data[i].ringRate + '%</span>'
+							+ '</div>'
+							+ '</div>'
+							+ '<div style="margin-left:58%;margin-top:-80px;" class="tiao">'
+							+ '<span>达成率:</span>'
+							+ '<div class="circle-bar" style="margin-left: 60px;margin-top:-45px;">'
+							+ '<div class="circle-bar-left"></div>'
+							+ '<div class="circle-bar-right"></div>'
+							+ '<div class="mask">'
+							+ '<span class="percent" style="color:chocolate ">' + data.data.data[i].completion + '%</span>'
+							+ '</div>'
+							+ '</div>'
+							+ '</div>'
+						qq.appendChild(li);
+					}
+				}, 1000);
+			}
+			load.stop();
+		}, 'json'
+		);
+
+	}
+	mui('.mui-scroll-wrapper').scroll({
+		indicators: false, //是否显示滚动条
+	});
+</script>
+<script>
+	var json = [{
+		value: "first",
+		text: "后台修改增加余额"
+	}, {
+		value: "second",
+		text: "后台修改减少余额"
+	}, {
+		value: "third",
+		text: "会员充值"
+	}, {
+		value: "fourth",
+		text: "会员消费"
+	}, {
+		value: "fifth",
+		text: "消费退款"
+	}, {
+		value: "fifth",
+		text: "充值撤销"
+	}, {
+		value: "fifth",
+		text: "升级撤销"
+	}, {
+		value: "fifth",
+		text: "升级赠送"
+	}, {
+		value: "fifth",
+		text: "会员退卡"
+	}, {
+		value: "fifth",
+		text: "消费有礼"
+	}, {
+		value: "fifth",
+		text: "活动赠送余额退还商家"
+	}, {
+		value: "fifth",
+		text: "会员充值推荐人返利"
+	}, {
+		value: "fifth",
+		text: "营销赠送"
+	}]
+	var store = document.getElementById("store");
+	store.addEventListener("tap", function () {
+		var picker = new mui.PopPicker();
+		picker.setData(json);
+		picker.show(function (selectItems) {
+			console.log(selectItems[0].text);//智子
+			mui("#store_xinagxi")[0].innerHTML = selectItems[0].text;
+			console.log(selectItems[0].value);//存储切换的值 
+		})
+	});
+</script>
+
+
+
+</html>

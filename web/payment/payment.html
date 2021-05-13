@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./mui/css/mui.css">
+    <script src="./mui/js/mui.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <title>订单管理-支付成功</title>
+    <style>
+        body{
+            background: #fff;
+            font-family: '微软雅黑';
+        }
+       .main{
+           width: 100%;
+           text-align: center;
+           margin-top: 20%;
+       } 
+        span{
+            display: inline-block;
+        }
+        img{
+            width: 30%;
+            vertical-align: 0.45em;
+        }
+        h3{
+            font-weight: normal;
+            letter-spacing: 2px;
+            color: #222;
+            margin-bottom: 25px;
+        }
+        button{
+            width: 90%;
+            height: 40px;
+            margin-top: 20px;
+        }
+        .mui-btn{
+            border: 1px solid #E8E8E8;
+            font-size: 16px;
+            letter-spacing: 2px;
+        }
+        .mui-btn-success{
+            border: 1px solid #22ac38;
+            background-color: #22ac38;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <span>
+            <img src="images/pay.png" alt="支付成功">
+        </span>
+        <h3>支付成功</h3>
+        <button type="button" class="mui-btn mui-btn-success">继续销售</button>
+        <button type="button" class="mui-btn mui-btn-outlined">回到首页</button>
+    </div>
+</body>
+<script>
+    mui(".main").on('tap', '.mui-btn-success', function () {
+    //    window.location = "commodity_payment.html" ;
+      history.go(-1);
+    })
+    mui(".main").on('tap', '.mui-btn-outlined', function () {
+      location.href = "../index_centent.html" ;
+    })
+</script>
+</html>

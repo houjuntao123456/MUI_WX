@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+    <script src="../js/vconsole.js"></script>
+    <title>SOCOR</title>
+</head>
+<style>
+    .kajuan {
+        height: 50px;
+        line-height: 50px;
+        background-color: white
+    }
+
+    .kajuan>p {
+        color: black;
+        padding-left: 15px;
+    }
+
+    .kajuan>p>span {
+        float: right;
+        margin-right: 15px;
+    }
+
+    .kajuan_red {
+        color: red;
+    }
+
+    .display_none {
+        display: none;
+    }
+</style>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a class="mui-icon mui-icon-back mui-action-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;">卡劵核销</h1>
+    </header>
+
+    <div class="mui-content">
+        <h3 class="display_none" id="index_content" style="text-align: center;">暂无卡劵详情!</h3>
+        <div id="dingdan">
+            <!-- 卡劵号 -->
+            <div class="mui-row" style="border-bottom: 1px solid #caccd1;">
+                <div class="kajuan">
+                    <p>卡劵号:<span class="kajuan_red" id="card_name"></span></p>
+                </div>
+            </div>
+            <!-- 卡劵名称 -->
+            <div class="mui-row" style="border-bottom: 1px solid #caccd1;">
+                <div class="kajuan">
+                    <p>卡劵名称:<span id="name_name"></span></p>
+                </div>
+            </div>
+            <!-- 卡劵类型 -->
+            <div class="mui-row" style="border-bottom: 1px solid #caccd1;">
+                <div class="kajuan">
+                    <p>卡劵类型:<span id="type_name"></span></p>
+                </div>
+            </div>
+            <!-- 卡劵种类 -->
+            <div class="mui-row" style="border-bottom: 1px solid #caccd1;">
+                <div class="kajuan">
+                    <p>适用门店:<span id="species_name"></span></p>
+                </div>
+            </div>
+            <div class="mui-row" style=" background-color: white;padding-top: 10px; padding-bottom: 20px;">
+                <fieldset>
+                    <legend>有效期</legend>
+                    <textarea rows="2" cols="10" id="text_area" placeholder="" style="margin-bottom: 0px;"
+                        disabled></textarea>
+                </fieldset>
+
+                <div class="display_none" style="text-align: center;margin-top: 20px;" id="HX_card">
+                    <button type="button" class="mui-btn mui-btn-primary" onclick="bt()"
+                        style="text-align: center;">&nbsp;&nbsp;核&nbsp;销&nbsp;卡&nbsp;劵&nbsp;&nbsp;</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+<script>
+    // var vConsole = new VConsole();
+    var cound = decodeURIComponent(getQueryVariable("coupon"));
+ 
+    window.onload = function () {
+        modify_mysql();
+    }
+
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) { return pair[1]; }
+        }
+        return (false);
+    }
+
+    function modify_mysql() {
+        mui.post('/index.php/dataBase/', {
+            database: getQueryVariable("company"),
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                card_Malist();
+                // card_off();
+            }
+        }, 'json'
+        );
+    }
+
+
+    function card_Malist() {
+        mui.post('/index.php/CouponListMalist/', {
+            code: cound
+            // type: card_type
+        }, function (data) {
+            // console.log(data);
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                if (data.data.length == 0) {
+                    document.getElementById("dingdan").classList.add("display_none");
+                    document.getElementById("index_content").classList.remove("display_none");
+                } else {
+                    if (data.data.card_code == "" || data.data.card_code == null || data.data.card_code == undefined) {
+                        data.data.card_code = "";
+                    }
+                    if (data.data.card_name == "" || data.data.card_name == null || data.data.card_name == undefined) {
+                        data.data.card_name = "";
+                    }
+                    if (data.data.time == "" || data.data.time == null || data.data.time == undefined) {
+                        data.data.time = "";
+                    }
+                    mui("#card_name")[0].innerHTML = data.data.card_code; //卡号
+                    mui("#name_name")[0].innerHTML = data.data.card_name; //名称
+                    mui("#type_name")[0].innerHTML = (data.data.type == "") || (data.data.type == undefined) ? "" : data.data.type; //类型
+                    mui("#species_name")[0].innerHTML = (data.data.store_name == "") || (data.data.store_name == undefined) ? "" : data.data.store_name; //种类
+                    mui("#text_area")[0].placeholder = data.data.time; //说明备注
+                }
+
+                document.getElementById("HX_card").classList.remove("display_none");
+            }
+        }, 'json'
+        );
+    }
+
+    function bt() {
+        mui.confirm('', '是否核销[' + document.getElementById("name_name").innerHTML + ']', ['确定', '取消'], function (e) {
+            if (e.index == 0) {
+                card_off();
+            }
+        }, 'div')
+    }
+
+
+    function card_off() {
+        mui.post('/index.php/OffCouponSweepCodeOff/', {
+            coupon: cound
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            // console.log(data);
+            if (data.code == 200) {
+                mui.confirm('', data.msg, ['确定'], function () {
+                }, 'div')
+            } else {
+                mui.confirm('', data.msg, ['确定'], function () {
+                }, 'div')
+            }
+        }, 'json'
+        );
+    }
+</script>
+
+</html>

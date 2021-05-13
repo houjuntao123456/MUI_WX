@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>积分记录</title>
+    <link rel="stylesheet" href="../../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../../mui/css/icons-extra.css">
+    <link rel="stylesheet" href="../../mui/fonts/mui-icons-extra.ttf">
+    <script src="../../mui/js/muiR.js"></script>
+    <script src="../../js/stm_Pull_up_loading.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jquery.cookie.js"></script>
+    <style>
+        .yinying {
+            border-radius: 5px;
+            box-shadow: #666 0px 0px 3px;
+            -webkit-box-shadow: #666 0px 0px 3px;
+            -moz-box-shadow: #666 0px 0px 3px;
+        }
+
+        .tubiao {
+            padding: 10px;
+            /* border: 1px solid red; */
+            border-radius: 11px;
+            background-color: rgba(0, 122, 255, 0.83);
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;">积分记录</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <div id="pullrefresh" class="mui-scroll-wrapper" style="top: 45px;">
+            <div class="mui-scroll">
+                <!--数据列表-->
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                        <div class="mui-row">
+                            <div class="mui-col-sm-2 mui-col-xs-2" style="text-align: center;">
+                                <span class="mui-icon-extra mui-icon-extra-gold tubiao"></span>
+                            </div>
+                            <div class="mui-col-sm-8 mui-col-xs-8" style="padding-left: 20px;">
+                                <h4>10元代金券</h4>
+                                <p>&nbsp;<span>2012-12-07</span>&nbsp;&nbsp;<span>13:59:46</span></p>
+                            </div>
+                            <div class="mui-col-sm-2 mui-col-xs-2">
+                                <h3 style="text-align: center;line-height: 35px;">-1</h3>
+                            </div>
+                        </div>
+
+                    </li>
+
+                  
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+<script>
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+                callback: pulldownRefresh
+            },
+            up: {
+                contentrefresh: '正在加载...',
+                auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+
+    /**
+       * 下拉刷新具体业务实现
+       */
+    function pulldownRefresh() {
+    }
+    /**
+     * 上拉加载具体业务实现
+     */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+    function pullupRefresh() {
+        mui.post('/index.php/webViplistIntegralFlow/', {
+            // code: $.cookie("code"),
+            code: '13773033340',
+            page: ++count,
+            limit: limit_num
+        }, function (data) {
+            console.log(data);
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                    var table = document.body.querySelector('.mui-table-view');
+                    for (i = 0; i < data.data.data.length; i++) {
+                        // // 名称
+                        // data.data.data[i].vip_name = (data.data.data[i].vip_name == "") || (data.data.data[i].vip_name == undefined) || (data.data.data[i].vip_name == null) ? "" : data.data.data[i].vip_name;
+                        // // 途径
+                        // data.data.data[i].road = (data.data.data[i].road == "") || (data.data.data[i].road == undefined) || (data.data.data[i].road == null) ? "" : data.data.data[i].road;
+                        // // 操作店面
+                        // data.data.data[i].store_name = (data.data.data[i].store_name == "") || (data.data.data[i].store_name == undefined) || (data.data.data[i].store_name == null) ? "" : data.data.data[i].store_name;
+
+                        // 进行判断,如果为空执行默认路径的图片
+                        var li = document.createElement('li');
+                        li.className = 'mui-table-view-cell';
+                        li.innerHTML = '<div class="mui-row">'
+                       + '<div class="mui-col-sm-2 mui-col-xs-2" style="text-align: center;">'
+                        +'<span class="mui-icon-extra mui-icon-extra-gold tubiao"></span>'
+                        +'</div>'
+                       + '<div class="mui-col-sm-8 mui-col-xs-8" style="padding-left: 20px;">'
+                       + ' <h4>'+ data.data.data[i].vip_name+'</h4>'
+                       + ' <p>&nbsp;<span>'+ data.data.data[i].create_time+'</span></p>'
+                       + '</div>'
+                       + ' <div class="mui-col-sm-2 mui-col-xs-2" >'
+                       + '<h3 style="text-align: center;line-height: 35px;">-'+ data.data.data[i].integral+'</h3>'
+                       + '</div>'
+                        +'</div>'
+                        table.appendChild(li);
+                    }
+                }, 1000);
+            }
+            // }
+        }, 'json'
+        );
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+
+</script>
+
+</html>

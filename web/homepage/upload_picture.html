@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../mui/css/mui.css">
+    <link rel="stylesheet" href="../css/iconfont_centent.css">
+    <script src="../mui/js/mui.js"></script>
+    <!-- <script src="../mui/js/muiR.js"></script> -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+
+
+    <script src="../js/vconsole.js"></script>
+    <title>上传商品</title>
+    <style>
+        .mui-off-canvas-left,
+        .mui-off-canvas-right {
+            width: 100%;
+        }
+
+
+        /* 标签样式 */
+        .RadioStyle input,
+        .checkboxStyle input {
+            display: none
+        }
+
+        .checkboxStyle label {
+            /* border: 1px solid #00a4ff; */
+            padding: 2px 5px 2px 5px;
+            line-height: 28px;
+            min-width: 75px;
+            text-align: center;
+            float: left;
+            margin: 0px;
+            margin-left: 5px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+            background: #faf6f6;
+
+        }
+
+        .checkboxStyle input:checked+label {
+            color: #00a4ff;
+            border-radius: 10px;
+            background: #d4e5f6;
+            font-size: 14px;
+        }
+
+        .RadioStyle label {
+            border: 1px solid #00a4ff;
+            padding: 2px 10px 2px 10px;
+            line-height: 23px;
+            min-width: 60px;
+            text-align: center;
+            margin-left: 10px;
+            margin-bottom: 5px;
+            float: left;
+            margin-top: 5px;
+            border-radius: 4px;
+            color: #6c6c6f;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .RadioStyle input:checked+label {
+            background: url(../images/ico_checkon.svg) no-repeat right bottom;
+            background-size: 25px 25px;
+            background-color: #d4e5f6;
+            color: #00a4ff
+        }
+
+        .labls {
+            background: url(../images/ico_checkon.svg) no-repeat right bottom;
+            background-size: 25px 25px;
+            background-color: #d4e5f6;
+            color: #00a4ff
+        }
+
+        .ellipsiss {
+            /* width: 80px; */
+            overflow: hidden;
+            /*自动隐藏文字*/
+            text-overflow: ellipsis;
+            /*文字隐藏后添加省略号*/
+            white-space: nowrap;
+            -webkit-line-clamp: 1;
+            /*想要显示的行数*/
+            -webkit-box-orient: vertical;
+        }
+
+        .display_none {
+            display: none;
+        }
+
+        .picture_width {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .picture_height {
+            width: 70%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="mui-bar mui-bar-nav" style="background-color: #007AFF;">
+        <a class="mui-action-back  mui-icon mui-icon-back mui-pull-left" style="color:white;"></a>
+        <!-- <a class="mui-icon mui-icon-plus  mui-pull-right" style="color:white;" onclick="add_shop()" id="iconss"></a> -->
+        <h1 class="mui-title" id="ppp" style="color:white;">添加商品</h1>
+    </header>
+    <div class="mui-content">
+        <div class="mui-card" style="margin: 0;">
+            <!--页眉，放置标题-->
+            <div class="mui-card-header">
+                <div class="mui-media-body mui-row" style="width: 100%;text-align: center;">
+                    <!-- 卡劵类型 -->
+                    <div style="
+                                                                      margin: 0 auto;
+                                                                        background: white;
+                                                                        ">
+                        <form class="mui-input-group">
+                            <div class="mui-input-row">
+                                <label style="font-size: 16px;">名称<span style="color: red;">*</span>:</label>
+                                <input type="text" class="mui-input-clear" placeholder="请输入名称" id="text_name">
+                            </div>
+                            <div class="mui-input-row">
+                                <label style="font-size: 16px;">货号<span style="color: red;">*</span>:</label>
+                                <input type="text" class="mui-input-clear" placeholder="请输入货号" id="text_num">
+                            </div>
+                            <div class="mui-input-row">
+                                <label style="font-size: 16px;">金额<span style="color: red;">*</span>:</label>
+                                <input type="number" class="mui-input-clear" placeholder="请输入价格" id="text_price">
+                            </div>
+                        </form>
+                    </div>
+                    <!-- <div class="mui-col-sm-4 mui-col-xs-4 ellipsiss" id="shop_name">名称</div>
+                                            <div class="mui-col-sm-4 mui-col-xs-4 ellipsiss" id="shop_num">货号</div>
+                                            <div class="mui-col-sm-4 mui-col-xs-4 ellipsiss" id="shop_price">金额</div> -->
+
+                </div>
+            </div>
+            <!--内容区-->
+            <div class="mui-card-content" style="text-align: center;padding-top: 5px;">
+                <!-- 上传照片 -->
+                <input type="file" accept="image/*" multiple id="upload_picture" class="display_none"
+                    onchange="uploadImageHandle(this,0.5)">
+
+                <img id="up_photos" class="up_photo picture_width" src="../images/upt.png" alt="上传图片">
+            </div>
+            <!--页脚，放置补充信息或支持的操作-->
+            <div class="mui-card-footer" style="text-align: center;">
+                <div class="mui-col-sm-6 mui-col-xs-6">
+                    <button type="button" class="mui-btn mui-btn-warning" style="width: 70%;"
+                        onclick="button_color()">颜&nbsp;色</button>
+                </div>
+
+                <div class="mui-col-sm-6 mui-col-xs-6">
+                    <button type="button" class="mui-btn" style="width: 70%;" onclick="button_size()">尺&nbsp;码</button>
+                </div>
+            </div>
+            <div class="mui-col-sm-12 mui-col-xs-12" style="text-align: center;padding-bottom: 30px;">
+                <button type="button" class="mui-btn mui-btn-primary" style="width: 80%;"
+                    onclick="quedings()">添&nbsp;加</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 颜色 -->
+    <div id="bu_color" class="mui-popover mui-popover-bottom mui-popover-action" style="min-height: 200px">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell" style="color: #868282;">
+                选择颜色
+            </li>
+        </ul>
+        <div class="mui-scroll-wrapper" style="top: 55px;">
+            <div class="mui-scroll">
+                <ul class="mui-table-view">
+                    <li class="RadioStyle checkbox_color" id="color_show_id">
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- 尺码 -->
+    <div id="bu_size" class="mui-popover mui-popover-bottom mui-popover-action" style="min-height: 200px">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell" style="color: #868282;">
+                选择尺码
+            </li>
+        </ul>
+        <!-- 可选择菜单 -->
+        <div class="mui-scroll-wrapper" style="top: 55px;">
+            <div class="mui-scroll">
+                <ul class="mui-table-view">
+                    <li class="RadioStyle checkbox_size" id="size_show_id">
+                        <!-- <label class="lable_size" name='尺码' code='456'>尺码</label> -->
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    var load = new Loading();
+    load.init();
+    var imgs_url = '';
+    // var vConsole = new VConsole();
+    window.onload = function () {
+        loade_color();
+        loade_size();
+    }
+    var color_show_id = document.getElementById("color_show_id");
+    var size_show_id = document.getElementById("size_show_id");
+    function loade_color() {
+        mui.post('/index.php/webGoodsYanse/', {
+
+        }, function (data) {
+            // console.log(data);
+            if (data.data.length < 20) {
+                document.getElementById("bu_color").style.minHeight = '200px';
+            } else {
+                document.getElementById("bu_color").style.minHeight = '400px';
+            }
+            for (let i = 0; i < data.data.length; i++) {
+                var lable = document.createElement('label');
+                lable.className = 'lable_color';
+                lable.setAttribute('code', data.data[i].info);
+                lable.setAttribute("name", 'colo' + data.data[i].id);
+                lable.innerHTML = data.data[i].info;
+                color_show_id.appendChild(lable);
+            }
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+    function loade_size() {
+        mui.post('/index.php/webGoodsChima/', {
+        }, function (data) {
+             if (data.data.length < 20) {
+                    document.getElementById("bu_size").style.minHeight = '200px';
+                } else {
+                    document.getElementById("bu_size").style.minHeight = '400px';
+                }
+            // console.log(data);
+            for (let i = 0; i < data.data.length; i++) {
+                var lable = document.createElement('label');
+                lable.className = 'lable_size';
+                lable.setAttribute('code', data.data[i].info);
+                lable.setAttribute("name", 'colo' + data.data[i].id);
+                lable.innerHTML = data.data[i].info;
+                size_show_id.appendChild(lable);
+            }
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+    // 颜色
+    function button_color() {
+        mui('#bu_color').popover('toggle');
+
+    }
+    // 颜色复选
+    mui(".checkbox_color").on('tap', '.lable_color', function () {
+        //获取id
+        // var id = this.getAttribute("id");
+        let name = this.getAttribute("name");
+        let code = this.getAttribute("code");
+        // console.log(this);
+        if (this.classList.contains("labls")) {
+            // 不包含 (未选中状态)
+            this.classList.remove("labls");
+            // console.log('未选中状态')
+            remove_shu_color(code);
+        } else {
+            // 包含(选中状态)
+            this.classList.add("labls");
+            // console.log('选中状态')
+            add_shu_color(code);
+        }
+        //传值给详情页面，通知加载新数据
+
+    })
+    // 尺码
+    function button_size() {
+        mui('#bu_size').popover('toggle');
+
+    }
+    // 尺码复选
+    mui(".checkbox_size").on('tap', '.lable_size', function () {
+        let name = this.getAttribute("name");
+        let code = this.getAttribute("code");
+        //获取id
+        // var id = this.getAttribute("id");
+        if (this.classList.contains("labls")) {
+            // 不包含 (未选中状态)
+            this.classList.remove("labls");
+            // console.log('未选中状态')
+            // 放入数组
+            remove_shu_size(code)
+        } else {
+            // 包含(选中状态)
+            this.classList.add("labls");
+            add_shu_size(code)
+        }
+    })
+    // 界面添加尺码
+    var shuzu_color = [];
+    var shuzu_size = [];
+    // 向数组添加颜色
+    function add_shu_color(code) {
+        shuzu_color.push(code)
+        // console.log(shuzu_color);
+    }
+    // 向数组添加尺码
+    function add_shu_size(code) {
+        shuzu_size.push(code)
+        // console.log(shuzu_size);
+    }
+    // 向数组删除颜色
+    function remove_shu_color(code) {
+        for (let i = 0; i < shuzu_color.length; i++) {
+            if (shuzu_color[i] == code) {
+                shuzu_color.splice(i, 1);
+            }
+        }
+        // console.log(shuzu_color);
+    }
+
+    // 向数组删除尺码
+    function remove_shu_size(code) {
+        for (let i = 0; i < shuzu_size.length; i++) {
+            if (shuzu_size[i] == code) {
+                shuzu_size.splice(i, 1);
+            }
+        }
+        // console.log(shuzu_size);
+    }
+    // 确定添加
+    function quedings() {
+        let name = mui("#text_name")[0].value;
+        let num = mui("#text_num")[0].value;
+        let price = mui("#text_price")[0].value;
+        //  frenum 货号, name 名称, price 价格, img 图片路径, color 颜色数组, sizes 尺码数组
+        if ((name != "") && (num != "") && (price != "")) {
+            load.start();
+            mui.post('/index.php/webGoodsGoodsAdd/', {
+                frenum: num,
+                name: name,
+                price: price,
+                img: imgs_url,
+                color: shuzu_color,
+                sizes: shuzu_size,
+            }, function (data) {
+                load.stop();
+                // console.log(data);
+                if (data.code == 200) {
+                    mui.toast('商品添加成功', {
+                        duration: 'long',
+                        type: 'div'
+                    });
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                } else {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    });
+                }
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+        } else {
+            let spans = '<span style="color: red;">*</span>'
+            mui.toast('未填写名称,货号,金额(带' + spans + '为必填内容)', {
+                duration: 'long',
+                type: 'div'
+            });
+
+        }
+
+    }
+    // 上传照片
+    mui(".mui-card-content").on('tap', '.up_photo', function () {
+        //获取id
+        // var id = this.getAttribute("id");
+        $('#upload_picture').click();
+    })
+
+
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+</script>
+
+
+<script>
+    //  $('#upload_picture').click();
+    var up_photos = document.getElementById("up_photos");
+    var file_File = ""; //接收file变量
+    var base64_YS = "";//接收压缩的base64编码
+    function uploadImageHandle(File_domain, Multiple) {
+        // 创建实例
+        var reader = new FileReader();
+        var img = document.createElement('img');
+        // 读取上传的图片的信息(lastModified, lastModifiedDate, name, size, type等)
+        var file = File_domain.files[0];
+        // 记下上传的图片的name, 后面会用到
+        var flieName = File_domain.files[0].name;
+        // console.log(flieName);
+        // 记下上传的图片的类型, 后面会用到
+        var fileType = file.type;
+        // 生成canvas画布
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
+        // MDN: 该方法会读取指定的 Blob 或 File 对象。读取操作完成的时候，
+        // readyState 会变成已完成（DONE），并触发 loadend 事件，
+        // 同时 result 属性将包含一个data:URL格式的字符串（base64编码）以表示所读取文件的内容。
+        // 也就是说, 将File对象转化为base64位字符串
+        reader.readAsDataURL(file);
+        // 上一步是异步操作, 读取完成后会执行onload事件, 而base64的字符串在e.target.rusult中
+        reader.onload = function (e) {
+            // 获得图片dom
+            var base64 = e.target.result
+            img.src = base64;
+            //  console.log(base64.length+ base64);
+            //   create_content(789, '的暑假', base64);
+        };
+
+        img.onload = function () {
+            // 图片原始尺寸
+            var originWidth = this.width;
+            var originHeight = this.height;
+            let pd = true;
+            if (originWidth > originHeight) {
+                // 宽>高
+                pd = true;
+                // console.log('宽>高');
+            } else {
+                pd = false;
+                // console.log('宽<高');
+            }
+
+            // console.log('width' + originWidth);
+            // console.log('width' + originHeight);
+            // 最大尺寸限制
+            var maxWidth = this.width * Multiple,
+                maxHeight = this.height * Multiple;
+            // console.log('maxWidth' + maxWidth)
+            // console.log('maxHeight' + maxHeight)
+            // 目标尺寸
+            var targetWidth = originWidth,
+                targetHeight = originHeight;
+            // 图片尺寸超过800x800的限制
+            if (originWidth > maxWidth || originHeight > maxHeight) {
+                if (originWidth / originHeight > maxWidth / maxHeight) {
+                    // 更宽，按照宽度限定尺寸
+                    targetWidth = maxWidth;
+                    targetHeight = Math.round(
+                        maxWidth * (originHeight / originWidth)
+                    );
+                } else {
+                    targetHeight = maxHeight;
+                    targetWidth = Math.round(
+                        maxHeight * (originWidth / originHeight)
+                    );
+                }
+            }
+            // canvas对图片进行缩放
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+            // 清除画布
+            context.clearRect(0, 0, targetWidth, targetHeight);
+            // 将图片划到canvas上
+            context.drawImage(img, 0, 0, targetWidth, targetHeight);
+            // 把canvas转成base64格式并去除头
+            var base64 = canvas
+                .toDataURL(fileType)
+            // .replace(/^data:image\/(jpeg|jpg|png|gif);base64,/, '');
+            base64_YS = base64;
+            file_File = base_flie(base64, flieName);
+
+
+            update_Photo(base64_YS, file_File, pd);
+        };
+    }
+
+
+    function base_flie(dataurl, filename) {//将base64转换为文件
+        var arr = dataurl.split(',');
+        var mime = arr[0].match(/:(.*?);/)[1];
+        var bstr = atob(arr[1]);
+        var n = bstr.length;
+        var u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, { type: mime });
+    }
+
+    function update_Photo(img, file, pd) {
+        // 上传图片
+        // console.log(pd);
+
+
+        load.start();
+        var data = new FormData();
+        data.append('file', file);
+        data.append('model', 'goods');
+        // data.append('code', title_size);
+        // data.append('color', color);
+        $.ajax({
+            data: data,
+            type: "POST",
+            url: '/index.php/UserlistUploadImg/',
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (JSON.parse(data).code == 200) {
+                    imgs_url = JSON.parse(data).data;
+                    if (pd) {
+                        // true
+                        up_photos.classList.add("picture_width");
+                        up_photos.classList.remove("picture_height");
+                    } else {
+                        // false
+                        up_photos.classList.remove("picture_width");
+                        up_photos.classList.add("picture_height");
+                    }
+                    up_photos.setAttribute("src", img);
+
+                } else if (JSON.parse(data).code == 400) {
+                    mui.toast(JSON.parse(data).msg, {
+                        duration: 'long',
+                        type: 'div'
+                    });
+                }
+                load.stop();
+            },
+            error: function (xhr) {
+                mui.toast('上传失败,照片尺寸过大,照片尺寸不能大于4M', {
+                    duration: 'long',
+                    type: 'div'
+                });
+                load.stop();
+            }
+        }, 'JSON');
+    }
+
+</script>
+<!-- 放大图片 -->
+<!-- <script>
+    // 点击上传照片触发事件
+    mui("#product").on('tap', '.enlarge_picture', function () {
+        console.log('放大');
+        console.log(this.width);
+
+        // 给回显图片传入路径
+        document.getElementById("show_qunyu").classList.remove('display_none');
+        document.getElementById("show_img").setAttribute("src", this.src);
+        // 照片
+
+        var show_div = document.getElementById("show_div");
+
+        var windowW = $(window).width();//获取当前窗口宽度  
+        var windowH = $(window).height();//获取当前窗口高度  
+        var realWidth = document.getElementById("show_img").width;//获取图片真实宽度  
+        var realHeight = document.getElementById("show_img").height;//获取图片真实高度  
+        var imgWidth, imgHeight;
+        var scale = 1;//缩放尺寸，当图片真实宽度和高度大于窗口宽度和高度时进行缩放  
+        if (realHeight > windowH * scale) {//判断图片高度  
+            imgHeight = windowH * scale;//如大于窗口高度，图片高度进行缩放  
+            imgWidth = imgHeight / realHeight * realWidth;//等比例缩放宽度  
+            if (imgWidth > windowW * scale) {//如宽度扔大于窗口宽度  
+                imgWidth = windowW * scale;//再对宽度进行缩放  
+            }
+        } else if (realWidth > windowW * scale) {//如图片高度合适，判断图片宽度  
+            imgWidth = windowW * scale;//如大于窗口宽度，图片宽度进行缩放  
+            imgHeight = imgWidth / realWidth * realHeight;//等比例缩放高度  
+        } else {//如果图片真实高度和宽度都符合要求，高宽不变  
+            imgWidth = realWidth;
+            imgHeight = realHeight;
+        }
+
+        document.getElementById("show_img").style.width = imgWidth + 'px';//以最终的宽度对图片缩放  
+        var w = (windowW - imgWidth) / 2;//计算图片与窗口左边距  
+        var h = (windowH - imgHeight) / 2;//计算图片与窗口上边距  
+
+        show_div.style.marginTop = h + 'px';
+        show_div.style.marginLeft = w + 'px';
+    })
+
+
+    $("#show_qunyu").click(function () {
+        document.getElementById("show_qunyu").classList.add('display_none');
+    })
+</script> -->
+
+
+
+</html>

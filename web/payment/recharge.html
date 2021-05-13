@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../mui/css/icons-extra.css">
+    <link rel="stylesheet" href="../mui/fonts/mui-icons-extra.ttf">
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <!-- <script src="../mui/js/mui.min.js"></script> -->
+    <script src="../mui/js/mui.js"></script>
+    <script src="../js/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <title>会员充值</title>
+    <style>
+        .photo_Apple {
+            height: 120px;
+            font-family: "黑体";
+            font-weight: bolder;
+        }
+
+        #picture {
+            width: 100%;
+            background: url(../../images/chongzhi.jpg) no-repeat;
+            background-size: 100% 100%;
+            /* margin: 10px auto; */
+            /* border-radius: 20px; */
+            color: #ffffff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .Record div {
+            height: 50px;
+            max-height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: white;
+        }
+
+        .Record div span:nth-child(1) {
+            color: white;
+            border-radius: 50%;
+            padding: 6px;
+            font-size: 20px;
+        }
+
+        .Record div span:nth-child(2) {
+            font-size: 15px;
+        }
+
+        #pppp {
+            display: -webkit-inline-box;
+            height: 29px;
+            width: 1px;
+            background-color: #cccccc;
+            float: right;
+            margin-top: 10px;
+        }
+
+        .Recharge_name div {
+            /* border: 1px solid blue; */
+            line-height: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+
+        .Recharge_name div p {
+            height: 60px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid #ccc;
+            margin: 0 auto;
+            font-size: 16px;
+            color: black;
+            border-radius: 5px;
+        }
+
+        .pp_Recharge_color {
+            border: 1px solid #FF9557 !important;
+            color: #FF9557 !important;
+        }
+
+        .size_lue {
+            overflow: hidden;
+            /*自动隐藏文字*/
+            text-overflow: ellipsis;
+            /*文字隐藏后添加省略号*/
+            white-space: nowrap;
+            -webkit-line-clamp: 1;
+            /*想要显示的行数*/
+            -webkit-box-orient: vertical;
+        }
+
+        .display {
+            display: none;
+        }
+
+        .footer {
+
+            border-top: 1px solid #ccc;
+            line-height: 50px;
+            height: 50px;
+            background-color: white;
+            margin-bottom: 0px;
+        }
+
+        .footer button {
+            float: right;
+            margin-top: 10px;
+            margin-right: 10px;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back " style="color:#fff;"></a>
+        <h1 class="mui-title" style="color:#fff;">会员充值</h1>
+    </header>
+    <div class="mui-content">
+        <div style="width: 95%; margin: 10px auto;">
+            <div class="photo_Apple" id="picture">
+                <div style="color: #ffffff;overflow: hidden;bottom: 0px;position: absolute; left: 20px;">
+                    <p>
+                        <span>我的余额</span>
+                    </p>
+                    <p style="font-size:18px; color: white;">
+                        ¥<span>123456</span>
+                    </p>
+                </div>
+
+            </div>
+            <div class="mui-row Record">
+                <div class="mui-col-xs-6 mui-col-sm-6" id="Record_chongzhi">
+                    <span class="mui-icon-extra mui-icon-extra-gift" style=" background-color:#FF9557;"></span>
+                    <span>充值记录</span>
+                    <p id="pppp"></p>
+                </div>
+                <div class="mui-col-xs-6 mui-col-sm-6" id="Record_xiaofei">
+                    <span class="mui-icon-extra mui-icon-extra-order" style=" background-color:#2586ED;"></span>
+                    <span>消费记录</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="width: 95%; margin: 0 auto;background-color: white;">
+            <div id="switch_store" class="mui-row" style="height: 40px;line-height: 40px;">
+                &nbsp;<span style="padding-left: 2px; background-color: #007aff;"></span>&nbsp; <span
+                    id="member_txt">微信会员AI系统3店</span> <span class="mui-icon mui-icon-arrowdown"
+                    style="float: right;line-height: 38px;margin-right: 5px;"></span>
+            </div>
+
+            <div class="mui-row Recharge_name">
+                <div class="mui-col-xs-6 mui-col-sm-6">
+                    <p class="pp_Recharge pp_Recharge_color" price="1">充一送一</p>
+                </div>
+
+                <div class="mui-col-xs-6 mui-col-sm-6">
+                    <p class="pp_Recharge" value="充一百松花" price="10">充10送一</p>
+                </div>
+                <div class="mui-col-xs-6 mui-col-sm-6">
+                    <p class="pp_Recharge " price="0.01">充0.01送100</p>
+                </div>
+
+                <div class="mui-col-xs-6 mui-col-sm-6">
+                    <p class="pp_Recharge" price="1">充1</p>
+                </div>
+                <div class="mui-col-xs-6 mui-col-sm-6">
+                    <p class="pp_Recharge " price="300">充300</p>
+                </div>
+
+                <div class="mui-col-xs-6 mui-col-sm-6">
+                    <p class="pp_Recharge" value="自定义金额">自定义金额</p>
+                </div>
+            </div>
+            <p id="p_gif" class="display"
+                style="width: 90%;border-bottom: 1px solid #8f8f94;margin: 0 auto;padding-bottom:10px;"><span
+                    class="mui-icon-extra mui-icon-extra-gift" style="font-size: 17px;"></span> <span
+                    id="p_gif_span"></span>
+            </p>
+            <!-- 添加充值备注 -->
+            <div>
+                <p id="chongzhibeizhu" class="size_lue" style="text-align: center; width: 60%;margin: 0 auto;"><span
+                        class="mui-icon mui-icon-compose"></span> <span id="add_chongzhi_beizhu">添加充值备注</span></p>
+            </div>
+            <br>
+        </div>
+    </div>
+    <!-- 底部导航 -->
+    <nav class="mui-bar mui-bar-tab ">
+        <p class="footer">&nbsp;&nbsp;&nbsp;支付金额:&nbsp;&nbsp; <span style="color: black;">¥</span> <span id="pay_price"
+                style="font-size: 18px; color: black;">0.12</span>
+            <button type="button" class="mui-btn mui-btn-primary">立即充值</button>
+    </nav>
+    <!-- 自定义充值 -->
+    <div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+                <a href="#sheet1" style="text-align: left;color: #8f8f94; font-size: 14px;">自定义充值金额 <span
+                        class="mui-icon mui-icon-closeempty" style=" float: right;"></span></a>
+            </li>
+        </ul>
+        <!-- 可选择菜单 -->
+        <ul class="mui-table-view">
+
+            <li class="mui-table-view-cell">
+                <input type="text" style="margin-bottom: 0px;">
+            </li>
+            <li class="mui-table-view-cell">
+                <p style="text-align: left;"><span style="color: red;">*</span> 自定义充值不参与营销活动</p>
+            </li>
+        </ul>
+        <!-- 取消菜单 -->
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+                <b>立即充值</b>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 添加充值备注 -->
+    <div id="sheet2" class="mui-popover mui-popover-bottom mui-popover-action ">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+                <a href="#sheet2" style="text-align: left;color: #8f8f94; font-size: 14px;">充值备注<span
+                        class="mui-icon mui-icon-closeempty" style=" float: right;"></span></a>
+            </li>
+        </ul>
+        <!-- 可选择菜单 -->
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+                <textarea name="" cols="30" rows="5" id="add_text" style="color: black;"></textarea>
+            </li>
+        </ul>
+        <!-- 立即添加 -->
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell add_beizhu">
+                <b>立即添加</b>
+            </li>
+        </ul>
+    </div>
+
+</body>
+<script>
+    var p_gif = document.getElementById("p_gif");
+    var p_gif_span = document.getElementById("p_gif_span");
+    var pay_price = document.getElementById("pay_price");
+    mui(".Recharge_name").on('tap', '.pp_Recharge', function (e) {
+        // 添加颜色
+        var pp_Recharge = document.getElementsByClassName("pp_Recharge_color");
+        for (i = 0; i < pp_Recharge.length; i++) {
+            pp_Recharge[i].classList.remove("pp_Recharge_color");
+        }
+        this.classList.add('pp_Recharge_color');
+
+
+        if (this.getAttribute("value") == "自定义金额") {
+            mui('#sheet1').popover('toggle');
+        } else if ((this.getAttribute("value") == "") || (this.getAttribute("value") == undefined) || (this.getAttribute("value") == null)) {
+            p_gif.classList.add("display");
+            pay_price.innerHTML = this.getAttribute("price");
+        } else {
+            p_gif.classList.remove("display");
+            p_gif_span.innerHTML = this.getAttribute("value");
+            pay_price.innerHTML = this.getAttribute("price");
+        }
+
+    })
+
+
+    // 备注
+    var chongzhibeizhu = document.getElementById("chongzhibeizhu");
+    chongzhibeizhu.addEventListener("tap", function () {
+        mui('#sheet2').popover('toggle');
+
+    });
+
+    var add_text = document.getElementById("add_text");
+    mui(".mui-table-view").on('tap', '.add_beizhu', function (e) {
+        //获取id
+        mui('#sheet2').popover('toggle');
+
+        if (add_text.value.length == 0) {
+            document.getElementById("add_chongzhi_beizhu").innerHTML = '添加充值备注';
+
+        } else {
+            document.getElementById("add_chongzhi_beizhu").innerHTML = "备注:" + add_text.value;
+        }
+    })
+
+    // 充值和消费记录
+
+    var Record_chongzhi = document.getElementById("Record_chongzhi");
+    Record_chongzhi.addEventListener("tap", function () {
+        location.href = "./details_of_balan.html";
+    });
+
+    var Record_xiaofei = document.getElementById("Record_xiaofei");
+    Record_xiaofei.addEventListener("tap", function () {
+        location.href = "./details_of_balan.html";
+    });
+</script>
+
+<script>
+    var json = [{
+        value: "first",
+        text: "维信会员Ai系统会员版店"
+    }, {
+        value: "second",
+        text: "维信会员Ai系统会员版2店"
+    }, {
+        value: "third",
+        text: "维信会员Ai系统会员版3店"
+    }, {
+        value: "fourth",
+        text: "维信会员Ai系统会员版4店"
+    }, {
+        value: "fifth",
+        text: "维信会员Ai系统会员版5店"
+    }]
+
+
+
+
+
+    var switch_store = document.getElementById("switch_store");
+
+    switch_store.addEventListener("tap", function () {
+        var picker = new mui.PopPicker();
+        picker.setData(json);
+        picker.show(function (selectItems) {
+            console.log(selectItems[0].text);//智子
+            mui("#member_txt")[0].innerHTML = selectItems[0].text;
+            console.log(selectItems[0].value);//存储切换的值 
+        })
+    });
+
+</script>
+
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>门店pk</title>
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <!-- <link rel="stylesheet" href="../css/iconfont.css"> -->
+    <!-- <script src="../mui/js/mui.min.js"></script> -->
+    <script src="../mui/js/muiR.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/loading.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+</head>
+<style>
+    p {
+        margin-bottom: 5px;
+    }
+
+    a {
+        color: black;
+    }
+    .mui-search:before{top: 62%;}
+    input[type=search],.mui-input-row select,.mui-search .mui-placeholder{font-size: 14px;}
+    body{font-size: 15px;}
+</style>
+
+<body>
+    <!-- 原回购人数链接D:\www\wx\web\homepage\wepurchase_number.html-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" id="a_title" style="color:white;"></a>
+        <h1 class="mui-title" id="title_" style="color:white;">门店pk</h1>
+    </header>
+    <!-- 头部选择器 -->
+    <div id="da" class="mui-content">
+       
+        <!-- body内容 -->
+        <div id="xiao" class="mui-content">
+            <div id="form_css">
+                
+            </div>
+            <!-- 下拉刷新内容 -->
+            <div id="pullrefresh" class="mui-scroll-wrapper ">
+                
+                <div class="mui-scroll">
+                    <!--数据列表-->
+
+                    <!-- 选择组名 -->
+                    <div class="mui-input-row mui-search" style="height:40px;padding:0px;">
+                        <input type="search" class="mui-input-clear" placeholder="请输入组名" style="background-color:white;"
+                          id="phone_num">
+                      </div>
+              <!-- 请选择导购 -->
+              <div class="mui-input-row mui-select" >
+                <select name="" style="color:rgb(105, 104,104);margin-bottom: 4px;" id="all_shopping">
+                  <!-- <option value="">形象顾问</option> -->
+                  <!-- <option value="">上海部门</option>
+                          <option value="">海南部门</option>
+                          <option value="">澳大利亚部门</option> -->
+                </select>
+              </div>
+            <!-- 查询 -->
+            <div id="sss" class="mui-button-row" style="height: 45px;">
+                <button type="button" data-loading-text="查询中" data-loading-icon="mui-spinner mui-spinner-custom"  class="mui-btn mui-btn-blue" style="width:300px;" id="query">查询</button>
+              </div>
+                <!-- 循环的内容 -->
+                    <div id="qqq" style="width: 100%;" >
+                        <!-- <div>
+                            <div class="zuming" style="border-bottom: 1px solid #ccc; width: 100%;background-color: white;padding-left: 2%;height: 41px;line-height: 41px;">
+                                组名: <span style="color: coral;">敢死队</span> 
+                            </div>
+                        </div> -->
+                    </div>
+                 </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+<script>
+    //查询按钮
+    mui("#sss").on('tap', '.mui-btn', function(e) {
+    select_staff = all_shopping.options[all_shopping.selectedIndex].value;
+    phone_num1 = document.getElementById("phone_num").value;
+    document.getElementById("qqq").innerHTML = "";
+    count = 0;
+    contont = true;
+    mui('#pullrefresh').pullRefresh().refresh(true);
+    pullupRefresh();
+    var gg = [phone_num1, select_staff];
+    localStorage.setItem("best_pk", gg);
+    
+    mui(this).button('loading');
+    setTimeout(function() {
+        mui(this).button('reset');
+    }.bind(this), 2000);
+})
+      //加载动画
+        var load = new Loading();
+        load.init();
+         //load.start();
+        // load.stop();
+    mui('#qqq').on('tap', '.zuming', function () {
+        window.location.href='../homepage/ranking_details1.html?'+ 'id=' +this.getAttribute("id")+'code*' + this.getAttribute("name")+'cod#' + this.getAttribute("code")
+    });
+    var pp = document.getElementById("form_css");
+    var pullrefresh = document.getElementById("pullrefresh");
+    var all_shopping = document.getElementById("all_shopping");
+    var all_tiaojian = document.getElementById("all_tiaojian");
+    window.onload = function () {
+       
+        if (localStorage.getItem("best_pk") == "") {
+            contont = true;
+      onload_select_innerHTML();
+      gradeChange_organization();
+    }
+        
+        hidden_title();
+        pullrefresh.style.marginTop = pp.clientHeight + 50 + 'px';
+        pullupRefresh();
+    }
+     // 下拉框初始赋值
+  function onload_select_innerHTML() {
+     // 形象顾问加载多余
+    var option_all_shopping = document.createElement("option");
+    option_all_shopping.value = "";
+    option_all_shopping.innerHTML = "选择门店";
+    document.getElementById("all_shopping").appendChild(option_all_shopping);
+  }
+// 进来加载员工 
+
+function gradeChange_organization() {
+    mui.post('/index.php/MStoreGroupStoreSel/', {
+    }, function (data) {
+        //console.log(data)
+      //服务器返回响应，根据响应结果，分析是否登录成功；
+      if (data.code == 200) {
+        for (i = 0; i < data.data.length; i++) { 
+      var option = document.createElement('option');
+          option.value = data.data[i].code;
+          option.innerHTML = data.data[i].name
+          document.getElementById("all_shopping").appendChild(option);
+        }
+      }
+    }, 'json'
+    );
+}
+
+// 点击按钮查询
+var query = document.getElementById("query");
+  query.onclick = function () {
+    
+    // select_staff = all_shopping.options[all_shopping.selectedIndex].value;
+    // phone_num1 = document.getElementById("phone_num").value;
+    // document.getElementById("qqq").innerHTML = "";
+    // count = 0;
+    // contont = true;
+    // mui('#pullrefresh').pullRefresh().refresh(false);
+    // pullupRefresh();
+    // var gg = [phone_num1, select_staff];
+    // localStorage.setItem("best_pk", gg);
+  }
+   // //select安卓和ios的判断样式
+
+  var picture1 = document.getElementById("all_shopping");
+//   var picture2 = document.getElementById("all_tiaojian");
+
+  //苹果手机采用CSS1
+  if (/iphone/i.test(navigator.userAgent)) {
+    picture1.style.paddingLeft = "43%";
+    // picture2.style.paddingLeft = "40%";
+    // addStyleLink('CSS1.css');
+  }
+  // 安卓手机采用CSS2
+  if (/android/i.test(navigator.userAgent)) {
+    //alert("安卓");
+    picture1.style.paddingLeft = "43%";
+    // picture2.style.paddingLeft = "40%";
+    // addStyleLink('CSS2.css');
+  }
+  　　
+
+</script>
+<script>
+    mui.init({
+
+        pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+                callback: pulldownRefresh
+            },
+            up: {
+                contentrefresh: '正在加载...',
+                // auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+	/**
+	 * 下拉刷新具体业务实现
+	 */
+    function pulldownRefresh() {
+    }
+	/**
+	 * 上拉加载具体业务实现
+	 */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var phone_num1 = "";
+    var select_staff = "";
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+    var contont = false; //进入页面 根据是否为true 进行判断  false执行初始化操作或者缓存操作  true进行页面操作
+    function pullupRefresh() {
+        if (contont) {
+      jiaai();
+    } else {
+      if (localStorage.getItem("best_pk") == "") {
+        jiaai();
+      } else {
+        phone_num1 = localStorage.getItem("best_pk").split(',')[0];
+        select_staff = localStorage.getItem("best_pk").split(',')[1];
+        onload_zu_ji(select_staff)
+      }
+    }
+    }
+    function jiaai(){
+        load.start();
+        mui.post('/index.php/MStoreGroupSel/', {
+                search:phone_num1,
+                store_code:select_staff,
+                page: ++count,//分页
+                limit: limit_num//每页的条数
+            }, function (data) {
+                // 服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) { 
+                    setTimeout(function () {
+                        mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                        // var table = document.body.querySelector('.mui-table-view');
+                        var qq = document.getElementById("qqq");
+                        for (i = 0; i < data.data.data.length; i++) {
+                            var li = document.createElement('div');
+                            // li.className = 'mui-table-view-cell';
+                            li.innerHTML = '<div class="zuming" code="'+all_shopping.value+'"  name="'+data.data.data[i].name+'" id="'+data.data.data[i].id+'" style="border-bottom: 1px solid #ccc; width: 100%;background-color: white;padding-left: 2%;height: 41px;line-height: 41px;">'
+                                +'组名: <span style="color: coral;border-bottom: 1px solid coral;">'+data.data.data[i].name+'</span> '
+                                +'</div>'
+                            qq.appendChild(li);
+                        }
+                    }, 1000);
+                    
+                }
+                load.stop();
+            }, 'json'
+            );
+       
+    }
+    
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+
+    function onload_zu_ji(select_staff) {
+        load.start();
+            mui.post('/index.php/MStoreGroupStoreSel/', {
+            }, function (data) {
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    // document.getElementById("all_shopping").innerHTML = "";
+                    for (i = 0; i < data.data.length; i++) {
+                        if (data.data[i].code == select_staff) {
+                            var option = document.createElement('option');
+                            option.value = data.data[i].code;
+                            option.selected = true;
+                            option.innerHTML = data.data[i].name
+                            document.getElementById("all_shopping").appendChild(option);
+                        } else {
+                            var option = document.createElement('option');
+                            option.value = data.data[i].code;
+                            option.innerHTML = data.data[i].name
+                            document.getElementById("all_shopping").appendChild(option);
+                        }
+                    }
+                    jiaai();
+                }
+                load.stop();
+            }, 'json'
+            );
+        }
+</script>
+</html>

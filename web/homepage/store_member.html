@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>门店微会员</title>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" href="../mui/css/mui.min.css">
+	<link rel="stylesheet" href="../css/iconfont.css">
+	<!-- <script src="../mui/js/mui.min.js"></script> -->
+	<script src="../mui/js/muiR.js"></script>
+	<link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+	<script src="../mui/js/mui.dtpicker.js"></script>
+	<link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+	<script src="../mui/js/mui.picker.min.js"></script>
+	<script src="../js/hidden-titile.js"></script>
+	<link rel="stylesheet" href="../css/app.css">
+	<link rel="stylesheet" href="../css/loading.css">
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/loading.js"></script>
+	<script src="../js/vconsole.js"></script>
+	<style>
+		body {
+			font-size: 15px;
+		}
+	</style>
+</head>
+
+<body>
+	<!--  头部-->
+	<header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+		<a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;" id="back_jxbb"></a>
+		<h1 class="mui-title" style="color:white;">门店微会员</h1>
+	</header>
+	<!-- 内容 -->
+	<div class=" mui-content-white mui-content">
+		<!-- 1541435135 -->
+		<!-- 查询 -->
+		<div action="" class="mui-input-group" id="form_css">
+			<!-- 时间选择 -->
+			<!-- <div class="mui-row" style="height:30px;background-color:#efeff4;">
+				<p style="line-height:30px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时间选择</p>
+			</div> -->
+			<!-- 开始时间 -->
+			<div class="mui-row " style="border-bottom: 1px solid #eee;height: 37px;line-height: 37px;">
+				<div class="mui-col-xs-4 mui-col-sm-4">
+					&nbsp;&nbsp;&nbsp;&nbsp;开始时间：
+				</div>
+				<div class="mui-col-xs-8 mui-col-sm-8" onclick="start_time();">
+					&nbsp;
+					<span class="time_"></span>
+
+				</div>
+			</div>
+			<!-- 结束时间 -->
+			<div class="mui-row " style="height: 37px;line-height: 37px;border-bottom: 1px solid #eee;">
+				<div class="mui-col-xs-4 mui-col-col-sm-4">
+					&nbsp;&nbsp;&nbsp;&nbsp;结束时间：
+				</div>
+				<div class="mui-col-xs-8 mui-col-sm-8" onclick="over_time();">&nbsp;
+					<span class="time_"></span>
+				</div>
+			</div>
+			<!-- 范围 -->
+			<!-- <div class="mui-row" style="height:30px;background-color:#efeff4;">
+				<p style="line-height:30px;">&nbsp;&nbsp;&nbsp;&nbsp;范围选择</p>
+			</div> -->
+			<!-- 选择组织 -->
+			<div class="mui-input-row mui-select" style="border-bottom: 1px solid #eee;">
+				<label>选择组织：</label>
+				<select name="" style="color:rgb(105, 104,104)" id="select_store" onchange="gradeChange()">
+					<option value="">选择组织</option>
+				</select>
+			</div>
+			<!-- 选择门店 -->
+			<div class="mui-input-row mui-select" style="border-bottom: 1px solid #eee;">
+				<label>选择门店：</label>
+				<select name="" style="color:rgb(105, 104,104)" id="select_clerk">
+					<option value="">不限门店</option>
+				</select>
+			</div>
+			<!-- 按钮 -->
+			<div class="mui-button-row" style="height: 50px; background-color: #efeff4;">
+				<button type="button" data-loading-icon="mui-spinner mui-spinner-white" data-loading-text="查询中"
+					class="mui-btn mui-btn-primary" style="width:80%;background-color:#007aff;color:white;"
+					id="query">立即查询</button>
+			</div>
+			<table style="width: 100%;">
+				<tr style="height:35px;line-height:35px;border-bottom: 1px solid #eee;">
+					<td>排 名</td>
+					<td>门 店</td>
+					<td>微会员新增</td>
+					<td>消费人数</td>
+				</tr>
+			</table>
+		</div>
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-scroll-wrapper ">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<table id="qqq" style="width: 100%;">
+					<!-- <tr style="height:35px;line-height:35px;color: #282f8c;">
+						<td>1</td>
+						<td>北京门店</td>
+						<td>6</td>
+						<td>20</td>
+					</tr> -->
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	localStorage.setItem("data_huancun_member", "");
+	var json = {
+		code: "",
+		type: "store",
+		startTime: "",
+		endTime: ""
+	}
+	// console.log(localStorage.getItem("data_huancun_member"));
+	// console.log(JSON.parse(localStorage.getItem("data_huancun_member")).type)
+	// 查看微会员
+	mui("#qqq").on('tap', '.table_add', function () {
+		//获取id
+		var code = this.getAttribute("code");
+		json.code = code;
+		//将信息存入
+		localStorage.setItem("data_huancun_member", JSON.stringify(json));
+		//传值给详情页面，通知加载新数据
+		// console.log(code)
+		location.href = '../homepage/new_wechat_members.html';
+
+	})
+	// 查看消费人数
+	mui("#qqq").on('tap', '.table_nums', function () {
+		//获取id
+		var code = this.getAttribute("code");
+		json.code = code;
+		localStorage.setItem("data_huancun_member", JSON.stringify(json));
+		//传值给详情页面，通知加载新数据
+		// console.log(code)
+		location.href = '../homepage/consumption_figures.html';
+
+	})
+
+</script>
+<script>
+	//var vConsole = new VConsole();
+	//加载动画
+	var load = new Loading();
+	load.init();
+
+	var pp = document.getElementById("form_css");
+	var vop = document.getElementById("pullrefresh");
+	var select_store = document.getElementById("select_store");
+	var select_clerk = document.getElementById("select_clerk");
+	window.onload = function () {
+		vop.style.marginTop = pp.clientHeight + 45 + 'px';
+		onload_select();
+		new_data();
+		hidden_title();
+		pullupRefresh();
+	}
+	// 获取当前时间
+	function new_data() {
+		var myDate = new Date();
+		var preDate = new Date(myDate.getTime() - 24 * 60 * 60 * 1000); //前一天
+		var nextDate = new Date(myDate.getTime() + 24 * 60 * 60 * 1000); //后一天
+		var Past_year = preDate.getFullYear(); //前一天 年份
+		var Future_year = nextDate.getFullYear(); //后一天 年份
+		var Past_month = preDate.getMonth() + 1; //前一天 月份
+		var Future_month = nextDate.getMonth() + 1; //后一天 月份
+		var Past_time_data = preDate.getDate(); //过去一天
+		var Future_time_data = nextDate.getDate(); //未来一天
+
+		if (Past_month >= 1 && Past_month <= 9) {
+			Past_month = "0" + Past_month;
+		}
+		if (Future_month >= 1 && Future_month <= 9) {
+			Future_month = "0" + Future_month;
+		}
+		if (Past_time_data >= 1 && Past_time_data <= 9) {
+			Past_time_data = "0" + Past_time_data;
+		}
+		if (Future_time_data >= 1 && Future_time_data <= 9) {
+			Future_time_data = "0" + Future_time_data;
+		}
+
+		birth[0].innerHTML = Past_year + "-" + Past_month + "-" + Past_time_data;
+		birth[1].innerHTML = Future_year + "-" + Future_month + "-" + Future_time_data;
+
+	}
+
+	var birth = document.getElementsByClassName("time_");
+	//开始时间
+	function start_time() {
+		var dtpicker = new mui.DtPicker({
+			type: "date",//设置日历初始视图模式 
+			beginDate: new Date(1970, 01, 01),//设置开始日期 
+			endDate: new Date(2070, 01, 01),//设置结束日期 
+			labels: ['年', '月', '日'],//设置默认标签区域提示语 
+		});
+		dtpicker.show(function (items) {
+			birth[0].innerHTML = items.y.value + '-' + items.m.value + '-' + items.d.value;
+		})
+	}
+	// 结束时间
+	function over_time() {
+		var dtpicker = new mui.DtPicker({
+			type: "date",//设置日历初始视图模式 
+			beginDate: new Date(1970, 01, 01),//设置开始日期 
+			endDate: new Date(2170, 01, 01),//设置结束日期 
+			labels: ['年', '月', '日'],//设置默认标签区域提示语 
+		});
+		dtpicker.show(function (items) {
+			birth[1].innerHTML = items.y.value + '-' + items.m.value + '-' + items.d.value
+		})
+	}
+
+	// 进来加载的方法
+	// 选择组织
+	function onload_select() {
+		mui.post('/index.php/UserlistOrg/', {
+		}, function (data) {
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+			if (data.code == 200) {
+				for (i = 0; i < data.data.length; i++) {
+					var option = document.createElement('option');
+					option.value = data.data[i].code;
+					option.innerHTML = data.data[i].name
+					document.getElementById("select_store").appendChild(option);
+				}
+			}
+		}, 'json'
+		);
+	}
+	// 选择组织 门店下拉发生改变
+	function gradeChange() {
+		// alert(select_store.options[select_store.selectedIndex].value);
+		mui.post('/index.php/UserlistStore/', {
+			code: select_store.options[select_store.selectedIndex].value
+		}, function (data) {
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+			if (data.code == 200) {
+				document.getElementById("select_clerk").innerHTML = '<option value="">选择门店</option>'
+				for (i = 0; i < data.data.length; i++) {
+					var option = document.createElement('option');
+					option.value = data.data[i].code;
+					option.innerHTML = data.data[i].name;
+					document.getElementById("select_clerk").appendChild(option);
+				}
+			}
+		}, 'json'
+		);
+	}
+
+	// 点击按钮查询
+	var numbers = 0;
+	var query = document.getElementById("query");
+	query.onclick = function () {
+		numbers = 0;
+		document.getElementById("qqq").innerHTML = "";
+		count = 0;
+		mui('#pullrefresh').pullRefresh().refresh(true);
+		pullupRefresh();
+		mui(this).button('loading');
+		setTimeout(function () {
+			mui(this).button('reset');
+		}.bind(this), 2000);
+
+	}
+
+</script>
+<script>
+	mui.init({
+		pullRefresh: {
+			container: '#pullrefresh',
+			down: {
+				callback: pulldownRefresh
+			},
+			up: {
+				contentrefresh: '正在加载...',
+				auto: false,//可选,默认false.首次加载自动上拉刷新一次
+				callback: pullupRefresh
+			}
+		}
+	});
+	/**
+	 * 下拉刷新具体业务实现
+	 */
+
+	function pulldownRefresh() {
+	}
+	/**
+	 * 上拉加载具体业务实现
+	 */
+	// 重新开启加载
+	// mui('#pullrefresh').pullRefresh().refresh(true);
+	// 分页计数
+	var count = 0;
+	// 分的条数
+	var limit_num = 50;
+	function pullupRefresh() {
+
+		if (Date.parse(birth[0].innerHTML) > Date.parse(birth[1].innerHTML)) {
+			mui.alert('开始时间不能大于结束时间', '提示', '确定'['div']);
+		} else {
+			json.startTime = birth[0].innerHTML;
+			json.endTime = birth[1].innerHTML;
+
+
+			load.start();
+			mui.post('/index.php/Storemicromember/', {
+				starttime: birth[0].innerHTML,//开始时间
+				endTime: birth[1].innerHTML,//结束时间
+				orgwhere: select_store.options[select_store.selectedIndex].value,//选择机构
+				storewhere: select_clerk.options[select_clerk.selectedIndex].value,
+				page: ++count,//分页
+				limit: limit_num//每页的条数
+			}, function (data) {
+				// 服务器返回响应，根据响应结果，分析是否登录成功；
+				if (data.code == 200) {
+					setTimeout(function () {
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+						//console.log((count > (data.data.count / limit_num)))
+						// var table = document.body.querySelector('.mui-table-view');
+						var qq = document.getElementById("qqq");
+						for (i = 0; i < data.data.data.length; i++) {
+							var li = document.createElement('tr');
+							// li.className = 'mui-table-view-cell';
+							li.style = "height:35px;line-height:35px;color: #282f8c;border-bottom:1px solid rgb(243, 239, 239);";
+							li.innerHTML = '<td>' + (numbers + data.data.data[i].number) + '</td>'
+								+ '<td>' + data.data.data[i].name + '</td>'
+								+ '<td class="table_add" code="' + data.data.data[i].code + '">' + data.data.data[i].vvip + '</td>'
+								+ '<td class="table_nums" code="' + data.data.data[i].code + '">' + data.data.data[i].consume + '</td>'
+							qq.appendChild(li);
+						}
+
+						if (data.data.data.length != 0) {
+							numbers = numbers + data.data.data[data.data.data.length - 1].number;
+						}
+					}, 1000);
+					load.stop();
+				}
+			}, 'json'
+			);
+		}
+
+
+	}
+	mui('.mui-scroll-wrapper').scroll({
+		indicators: false, //是否显示滚动条
+	});
+
+
+</script>
+
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>免费策略</title>
+    <script src="../js/vconsole.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.css">
+    <script src="../mui/js/mui.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/loading.js"></script>
+    <style>
+        body {
+            font-size: 16px;
+        }
+
+        p {
+            line-height: 25px;
+            color: #777;
+        }
+
+        .mui-table-view-cell.mui-active {
+            background-color: #efeff0;
+        }
+
+        .mui-table-view-cell::after {
+            right: 15px;
+            background-color: #e8e8e8;
+        }
+
+        .mui-popover {
+            height: 300px;
+        }
+
+        .mui-content {
+            background: #fff
+        }
+        .mui-table-view:after,.mui-table-view:before{background-color: #fff;}
+        
+        table{width: 100%;}
+        table tr{
+            border-bottom: 1px solid #929292;
+            line-height: 35px;
+            /* font-size: 15px; */
+            color: #777;
+        }
+        table tr:nth-child(1){
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+            color: #333;
+        }
+        #ul_content tr:nth-child(1){
+            border-bottom: 1px solid #eee;
+            line-height: 30px;
+            font-weight: normal;
+            color: #333;
+        }
+        table tr td{
+            padding: 0 10px;
+        }
+        .borderR1{border-right: 1px solid #E4E3E3;}
+        button, .mui-btn{
+            padding: 4px 12px;
+            margin: 3px;
+        }
+        .mui-off-canvas-left, .mui-off-canvas-right{width:100%}
+        pre{
+            white-space:pre-wrap; /* css3.0 */ 
+            white-space:-moz-pre-wrap; /* Firefox */ 
+            white-space:-o-pre-wrap; /* Opera 7 */ 
+            white-space:-pre-wrap; /* Opera 4-6 */
+            word-wrap:break-word; /* Internet Explorer 5.5+ */
+            /* 以上自动换行 */
+            font-size: 15px;
+            padding: 0 12px;
+            color: #333;
+            line-height: 25px; 
+        }
+    </style>
+</head>
+
+<body>
+    <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable mui-slide-in">
+        <!--侧滑菜单部分-->
+        <aside id="offCanvasSide" class="mui-off-canvas-left">
+            <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+                <a class="mui-icon mui-icon-back" id="cans" style="color:white;"></a>
+                <h1 class="mui-title" id="title_" style="color:white;">免费策略话术</h1>
+            </header>
+            <div id="offCanvasSideScroll" class="mui-scroll-wrapper" style="background: #fff;top: 44px;padding-top: 8px;">
+                <div class="mui-scroll">
+                    <div id="member_h">
+                    </div>
+                </div>
+        </aside>
+        <!--主界面部分-->
+        <div class="mui-inner-wrap">
+            <!--  头部-->
+            <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+                <a id="a_title" class="mui-icon mui-icon-back" style="color:white;"></a>
+                <h1 class="mui-title" style="color:white;width: 50%;margin: 0 auto;">免费策略</h1>
+            </header>
+            <!-- 详细内容 -->
+            <div class="mui-content">
+                <table>
+                    <tr style="background: #f3f1f1;">
+                        <td class="mui-col-sm-8 mui-col-xs-8 borderR1">免费服务名称</td>
+                        <td class="mui-col-sm-4 mui-col-xs-4">话术标准</td>
+                    </tr>
+                </table>
+                <div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="top: 80px;">
+                    <!--数据列表-->
+                    <div class="mui-row mui-scroll">
+                        <table id="ul_content">
+                            <!-- <tr>
+                                <td class="mui-col-sm-8 mui-col-xs-8 borderR1">标题</td>
+                                <td class="mui-col-sm-4 mui-col-xs-4">
+                                    <button type="button" class="offCanvasShow mui-btn mui-btn-primary" text="暂无话术">话术</button>
+                                </td>
+                            </tr> -->
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- off-canvas backdrop -->
+            <div class="mui-off-canvas-backdrop"></div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    //加载动画
+    var load = new Loading();
+    load.init();
+
+    window.onload = function () {
+        hidden_title();
+        pullupRefresh();
+    }
+    //点击返回主页面
+    document.getElementById("cans").addEventListener("tap", function () {
+        mui('#offCanvasWrapper').offCanvas('close');
+    });
+    //点击返回首页
+    document.getElementById("a_title").addEventListener("tap", function () {
+        location.href = '../index_centent.html';
+    });
+    //禁止滑动侧滑菜单时返回主界面
+    $('.mui-off-canvas-left').on('drag', function (event) {
+        event.stopPropagation();
+    });
+    //禁止滑动主界面的时候出现侧滑菜单
+    $('.mui-inner-wrap').on('drag', function (event) {
+        event.stopPropagation();
+    });
+    //主界面‘话术’按钮的点击事件
+    var headtitle_ = document.getElementById("title_");
+    var member_h = document.getElementById("member_h");
+    mui("#ul_content").on('tap', '.offCanvasShow', function () {
+        load.start();
+        mui('#offCanvasWrapper').offCanvas('show'); 
+        headtitle_.innerHTML = this.getAttribute("name");
+        member_h.innerHTML = '<pre>' + this.getAttribute("text") + '</pre>'
+        load.stop();
+    }) 
+
+    //进来查询门店
+    // load.start();
+    // load.stop();
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            up: {
+                contentrefresh: '正在加载...',
+                callback: pullupRefresh
+            }
+        }
+    });
+
+    var count = 0;
+    var limit_num = 15;
+
+    
+    var ul_content = document.getElementById("ul_content");
+    // 上拉加载具体业务实现
+    function pullupRefresh() {
+        load.start();
+        mui.post('/index.php/webRefreeIndex/', {
+            page: ++count,
+            limit: limit_num
+        }, function (data) {
+            // console.log(data);
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                    if (data.data.data.length == 0) {
+                        ul_content.innerHTML = '<p style="text-align:center;">暂无数据</p>';
+                    } else {
+                        for (i = 0; i < data.data.data.length; i++) {
+                            if (data.data.data[i].name == "" || data.data.data[i].name == null) {
+                                data.data.data[i].name = "";
+                            }
+                            if (data.data.data[i].standard == "" || data.data.data[i].standard == null) {
+                                data.data.data[i].standard = "暂无话术";
+                            }
+                            ul_content.innerHTML = ul_content.innerHTML + '<tr><td class="mui-col-sm-8 mui-col-xs-8 borderR1">' + data.data.data[i].name + '</td>' +                                
+                                '<td class="mui-col-sm-4 mui-col-xs-4"> ' +
+                                '<button type="button" class="offCanvasShow mui-btn mui-btn-primary" name="' + data.data.data[i].name + '" text="' + data.data.data[i].standard + '">查看</button>' +
+                                '</td></tr>'
+                           
+                        }
+                    }
+                    load.stop();
+                    
+                }, 1500);
+            }
+        }, 'json');
+    }
+
+
+    //滚动区域
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+
+</script>
+
+</html>

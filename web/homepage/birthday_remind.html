@@ -1,0 +1,316 @@
+<html>
+
+<head>
+    <title>VIP会员精准营销方案</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/iconfont_birthday.css">
+    <!-- <link rel="stylesheet" href="../css/iconfont_tubiao1.css"> -->
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+    <script src="../js/search.js"></script>
+    <style>
+        /* a:hover {
+            text-decoration: none;
+        } */
+        table,
+        table tr th,
+        table tr td {
+            border: 1px solid #e9e9e9;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        .width-40 {
+            width: 40%;
+        }
+
+        .width-25 {
+            width: 25%;
+        }
+
+        .width-15 {
+            width: 15%;
+        }
+
+        .width-10 {
+            width: 10%;
+        }
+
+        .width-20 {
+            width: 20%;
+        }
+
+        .mui-table-view-cell.mui-active {
+            background-color: #ebf0f5;
+        }
+
+        .mui-table-view-cell::after {
+            left: 0;
+            right: 0;
+            background-color: #efeff0;
+        }
+
+        .mui-table-view::after {
+            background-color: #efeff0;
+        }
+
+        .mui-navigate-right::after {
+            color: #007aff;
+        }
+
+        button,
+        .mui-btn {
+            padding: 3px 11px;
+        }
+
+        .tr-1 {
+            height: 40px;
+            line-height: 40px;
+            font-size: 15px;
+            letter-spacing: 2px;
+        }
+
+        .tr-2 {
+            height: 50px;
+            font-size: 14px;
+        }
+
+        .mui-popover {
+            height: 300px;
+        }
+
+        /* 控制弹框 */
+        #popover a {
+            text-align: center;
+        }
+
+        li {
+            list-style: none;
+            background-color: white;
+            text-align: center;
+        }
+
+        .span_size {
+            color: #3abeee;
+            font-size: 26px;
+        }
+
+        .li2 {
+            height: 50px;
+        }
+
+        /* 控制模块的高度 */
+        li {
+            height: 80px;
+        }
+
+        p {
+            color: black;
+            padding-top: 10px;
+            /* font-size: 17px; */
+        }
+
+        .lett-spac-3 {
+            letter-spacing: 3px;
+            font-size: 24px;
+        }
+
+        .number {
+            position: absolute;
+        }
+        .dis{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;margin: 0 auto;">生日提醒</h1>
+        <a href="#popover" style="float: right;line-height: 44px;color: white;" id="menu">选择员工</a>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <div class="mui-row" id="tixing">
+            <!-- 休眠预警 -->
+            <!-- <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell">
+                    <a class="kkk" href="./contribution_degree_memben.html">
+                        <span class="iconfont icon-yujing span_size" style="color:#00ae8f;"><span
+                                class="number mui-badge mui-badge-danger">0</span></span>
+                        <p>休眠预警</p>
+                    </a>
+                </li>
+            </div> -->
+
+        </div><br>
+    </div>
+    <!-- 弹框区域 -->
+    <div id="popover" class="mui-popover" style="background-color: #ffffff;">
+        <div class="mui-popover-arrow"></div>
+        <div class="mui-row" style="padding-top: 5px; text-align: center;">
+            <div class="mui-col-xs-9 mui-col-sm-9 mui-input-row mui-search" style="padding-left: 5px;">
+                <input type="search" class="mui-input-clear" placeholder="搜索" id="searchsss">
+            </div>
+            <div class="mui-col-xs-3 mui-col-sm-3" style="padding-top: 5px;">
+                <button type="button" class="mui-btn mui-btn-primary" id="chanxun">查找</button>
+            </div>
+        </div>
+        <div class="mui-scroll-wrapper" style="top: 40px;">
+            <div class="mui-scroll">
+                <ul class="mui-table-view" id="popover_ul">
+                    <!-- <li class="mui-table-view-cell"><a href="#" ></a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item2</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item3</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item4</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item5</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item6</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item7</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item8</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item9</a>
+                    </li>
+                    <li class="mui-table-view-cell"><a href="#">Item10</a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- 控制弹框 -->
+<script>
+
+    // 禁用点击遮盖层弹出菜单
+    window.addEventListener('tap', function (e) {
+        e.target.className == 'mui-backdrop mui-active' && e.stopPropagation();
+    }, true)
+    var searchsss = document.getElementById("searchsss");
+    document.getElementById("chanxun").onclick = function () {
+        search.searchs(searchsss.value);
+    }
+    //加载动画
+    var load = new Loading();
+    load.init();
+    load.start();
+    // 弹框区域
+    mui('#popover').on('tap', 'a', function (e) {
+        var code = this.getAttribute('code');
+        mui("#menu")[0].innerHTML = this.innerHTML;
+        mui('.mui-popover').popover('toggle', document.getElementById("menu"));
+        men(code);
+    })
+    //滚动区域
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+
+</script>
+<script>
+    //进来加载
+    window.onload = function () {
+        // 隐藏标题
+        hidden_title();
+        select_men();
+    }
+    //进来查询门店
+      function select_men() {
+            mui.post('/index.php/WreHundredStaffSel/', {
+            }, function (data) {
+                if (data.code == 200) {
+                    var popover_ul = document.getElementById("popover_ul");
+                    if (data.data.count < 6) {
+                        document.getElementById("popover").style.height = ((data.data.count+1) * 50) + 'px';
+                    }
+                    for (i = 0; i < data.data.count; i++) {
+                        var li = document.createElement('li');
+                        li.className = 'mui-table-view-cell li2'
+                        li.innerHTML = '<a href="#" code=' + data.data.data[i].code + '>' + data.data.data[i].name + '</a>'
+                        popover_ul.appendChild(li);
+
+                        search.add(data.data.data[i].code, data.data.data[i].name);
+
+                    }
+                    mui('.mui-popover').popover('toggle', document.getElementById("menu"));
+                    load.stop();
+                }
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+        }
+
+
+
+    var remind_bird = document.getElementById("tixing");
+    function men(code) {
+        load.start();
+        mui.post('/index.php/webBirRemind/', {
+            staff: code
+        }, function (data) {
+            if (data.code == 200) {
+                remind_bird.innerHTML = "";
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                console.log(data);
+                for (let i = 0; i < data.data.length; i++) {
+                    var div = document.createElement('div');
+                    div.classList = "mui-col-xs-4 mui-col-sm-4";
+                    div.innerHTML = '<li class="mui-table-view-cell" code="' + code + '" number="' + data.data[i].number + '">'
+                        + ' <a class="kkk">'
+                        + ' <span class="iconfont ' + random_i() + ' span_size" style="color:' + random_c() + ';">'
+                        + ' <span class="number mui-badge mui-badge-danger">' + data.data[i].count + ''
+                        + ' </span>'
+                        + '</span>'
+                        + '<p>' + data.data[i].name + '</p>'
+                        + ' </a>'
+                        + '</li>'
+                    remind_bird.appendChild(div)
+                }
+                load.stop();
+            }
+        }, 'json'
+        );
+
+
+
+    }
+    // 点击模块
+    mui('#tixing').on('tap', '.mui-table-view-cell', function () {
+        location.href = 'birthday_remind_member.html?' + 'id=' + this.getAttribute("number") + 'code*' + this.getAttribute("code");
+    })
+</script>
+<script>
+    // 随机生成图标和颜色
+    var random_icon = ['icon-shengritixing', 'icon-shengritixing1', 'icon-shengritixing2', 'icon-shengritixing3', 'icon-huiyuanshengritixing', 'icon-shengritixing4', 'icon-ziyuan', 'icon-shengritixing5', 'icon-biaotilan_shengritixingrili', 'icon-huiyuanshengritixing1', 'icon-tshengritixing', 'icon-shengritixing6', 'icon-birthday-reminder', 'icon-shengritixing7', 'icon-shengritixing8', 'icon-huiyuantixi_shengritixing', 'icon-shengritixing-', 'icon-shengritixing9', 'icon-benyueshengritixing'];
+    var random_color = ['#00ae8f', '#ff7b94', '#3abeee', '#f88b2a'];
+    function random_i() {
+        let n = Math.floor(Math.random() * random_icon.length + 1) - 1;
+        return random_icon[n]
+    }
+    function random_c() {
+        let b = Math.floor(Math.random() * random_color.length + 1) - 1;
+        return random_color[b]
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/muizhegao.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/vconsole.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+    <title>家属</title>
+    <style>
+        select {
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .mui-collapse-content>.mui-row {
+            border-bottom: 1px solid #efefef;
+            margin-top: 10px;
+            padding-bottom: 10px;
+
+        }
+
+        .mui-collapse-content>.mui-row>:first-child {
+            font-size: 15px;
+            color: #505050;
+            padding-left: 25px;
+        }
+
+        .mui-collapse-content>.mui-row>:last-child {
+            padding-left: 25px;
+            font-size: 15px;
+            color: rgb(139, 139, 139);
+        }
+
+        #card_juan,
+        #select_kajuan {
+            font-size: 15px;
+        }
+
+        .mui-input-group:after {
+            background-color: #ffffff;
+        }
+
+        .mui-input-group .mui-input-row:after,
+        .mui-table-view-cell:after {
+            left: 0;
+            background-color: #e7e6e8;
+        }
+
+        .mui-table-view-cell.mui-collapse .mui-collapse-content {
+            padding: 0;
+        }
+        .mui-popover .mui-popover-arrow:after{
+            width: 0;height: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:#fff;"></a>
+        <h1 class="mui-title" style="color:#fff;">家属</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <div class="mui-row" style="padding-top:15px;text-align: center;">
+            <div class="mui-col-xs-6 mui-col-sm-6">
+                <button type="button" class="mui-btn mui-btn-primary" onclick="Tjia()"><a style="color: white;" >添加家属信息</a></button>
+            </div>
+            <div class="mui-col-xs-6 mui-col-sm-6">
+                <button type="button" class="mui-btn mui-btn-danger" onclick="Tjia1()"><a style="color: white;" >添加纪念日</a></button>
+            </div>
+        </div>
+        <!-- 弹出菜单 -->
+        <nav class="mui-bar mui-bar-tab" style="margin: 0 auto;margin-bottom: 60%;border: #6641E2;width: 0px;height: 0px;" id="ta">
+        </nav>
+        <nav class="mui-bar mui-bar-tab" style="margin: 0 auto;margin-bottom: 60%;border: #6641E2;width: 0px;height: 0px;" id="ta1">
+        </nav>
+        <nav class="mui-bar mui-bar-tab" style="margin: 0 auto;margin-bottom: 60%;border: #6641E2;width: 0px;height: 0px;" id="ta2">
+        </nav>
+        <nav class="mui-bar mui-bar-tab" style="margin: 0 auto;margin-bottom: 60%;border: #6641E2;width: 0px;height: 0px;" id="ta3">
+        </nav>
+        <!-- 添加家属信息菜单 -->
+        <div id="popover" class="mui-popover" style="width: 80%;" data-disable-auto-close="true">
+            <div style="border-radius: 5px 5px 0px 0px; background-color:#007aff;color: white;width: 100%;height:50px;line-height: 50px;text-align: center;">添加家属信息</div>
+            <div>
+                 <div class="mui-input-row" style="border-bottom:rgb(226, 226, 226) 1px solid;">
+                    <label>关系:</label>
+                    <input type="text" class="mui-input-clear" placeholder="请输入关系" id="gx">
+                </div>
+                <div class="mui-input-row" style="border-bottom:rgb(226, 226, 226) 1px solid;">
+                    <label>生日:</label>
+                    <div id='birth' style="height: 40px;line-height: 40px;">选择日期 ...</div>
+                </div>
+                <div class="mui-input-row" style="border-bottom:rgb(226, 226, 226) 1px solid;">
+                    <label>手机号:</label>
+                    <input type="text" class="mui-input-clear" placeholder="请输入手机号" id="phoneo">
+                </div>
+                <div class="" style="border-bottom:rgb(226, 226, 226) 1px solid;padding-left: 5%;margin-top: 5px;">
+                <label>简介:</label>
+                <textarea style="width: 94%;" name=""  rows="6" cols="30" id="textrea"></textarea>
+                </div>
+                <div style="text-align: center;margin-top: 10px;margin-bottom:10px;">
+                    <button type="button" class="mui-btn mui-btn-primary" id="colos">确定添加</button>
+                    <button style="margin-left: 20px;" type="button" class="mui-btn mui-btn-warning" id="colos4">取消添加</button>
+                </div>
+            </div>
+        </div>
+        <!-- 修改家属信息菜单 -->
+        <div id="popover2" class="mui-popover" style="width: 80%;" data-disable-auto-close="true">
+            <div style="border-radius: 5px 5px 0px 0px; background-color:#007aff;color: white;width: 100%;height:50px;line-height: 50px;text-align: center;">编辑家属信息</div>
+            <div>
+                 <div class="mui-input-row" style="border-bottom:rgb(226, 226, 226) 1px solid;">
+                    <label>关系:</label>
+                    <input type="text" class="mui-input-clear" placeholder="请输入关系" id="gx2">
+                </div>
+                <div class="mui-input-row" style="border-bottom:rgb(226, 226, 226) 1px solid;">
+                    <label>生日:</label>
+                    <div id='birth2' style="height: 40px;line-height: 40px;">选择日期 ...</div>
+                </div>
+                <div class="mui-input-row" style="border-bottom:rgb(226, 226, 226) 1px solid;">
+                    <label>手机号:</label>
+                    <input type="text" class="mui-input-clear" placeholder="请输入手机号" id="phoneo2">
+                </div>
+                <div class="" style="border-bottom:rgb(226, 226, 226) 1px solid;padding-left: 5%;margin-top: 5px;">
+                <label>简介:</label>
+                <textarea style="width: 94%;" name=""  rows="6" cols="30" id="textrea2"></textarea>
+                </div>
+                <div style="text-align: center;margin-top: 10px;margin-bottom:10px;">
+                    <button type="button" class="mui-btn mui-btn-primary" id="colos2">确定修改</button>
+                    <button style="margin-left: 20px;" type="button" class="mui-btn mui-btn-warning" id="colos6">取消修改</button>
+
+                </div>
+            </div>
+        </div>
+        <!-- 添加纪念日菜单 -->
+        <div id="popover1" class="mui-popover" style="width: 80%;" data-disable-auto-close="true">
+            <div style="border-radius: 5px 5px 0px 0px; background-color:#dd524d;color: white;width: 100%;height:50px;line-height: 50px;text-align: center;">添加纪念日</div>
+            <div>
+                 <div class="mui-input-row" style="border-bottom:rgb(226, 226, 226) 1px solid;">
+                    <label>纪念日:</label>
+                    <input type="text" class="mui-input-clear" placeholder="请输入纪念日" id="gx1">
+                </div>
+                <div class="mui-input-row" style="border-bottom:rgb(226, 226, 226) 1px solid;">
+                    <label>日期:</label>
+                        <div id='date' style="height: 40px;line-height: 40px;">选择日期 ...</div>
+                </div>
+                <div class="mui-input-row" style="border-bottom:rgb(226, 226, 226) 1px solid;">
+                    <label>手机号:</label>
+                    <div id="phoneo1" style="height: 40px;line-height: 40px;"></div>
+                </div>
+                <div class="" style="border-bottom:rgb(226, 226, 226) 1px solid;padding-left: 5%;margin-top: 5px;">
+                <label>简介:</label>
+                <textarea style="width: 94%;" name="" rows="6" cols="30" id="textarea1"></textarea>
+                </div>
+                <div style="text-align: center;margin-top: 10px;margin-bottom:10px;">
+                    <button type="button" class="mui-btn mui-btn-danger" id="colos1">确定添加</button>
+                    <button style="margin-left: 20px;"type="button" class="mui-btn mui-btn-warning" id="colos5">取消添加</button>
+
+                </div>
+            </div>
+        </div>
+        <!-- 修改纪念日菜单 -->
+        <div id="popover3" class="mui-popover" style="width: 80%;" data-disable-auto-close="true">
+            <div style="border-radius: 5px 5px 0px 0px; background-color:#dd524d;color: white;width: 100%;height:50px;line-height: 50px;text-align: center;">编辑纪念日</div>
+            <div>
+                 <div class="mui-input-row" style="border-bottom:rgb(226, 226, 226) 1px solid;">
+                    <label>纪念日:</label>
+                    <input type="text" class="mui-input-clear" placeholder="请输入纪念日" id="gx3">
+                </div>
+                <div class="mui-input-row" style="border-bottom:rgb(226, 226, 226) 1px solid;">
+                    <label>日期:</label>
+                        <div id='date3' style="height: 40px;line-height: 40px;">选择日期 ...</div>
+                </div>
+                <div class="mui-input-row" style="border-bottom:rgb(226, 226, 226) 1px solid;">
+                    <label>手机号:</label>
+                    <div id="phoneo3" style="height: 40px;line-height: 40px;"></div>
+                </div>
+                <div class="" style="border-bottom:rgb(226, 226, 226) 1px solid;padding-left: 5%;margin-top: 5px;">
+                <label>简介:</label>
+                <textarea style="width: 94%;" name="" rows="6" cols="30" id="textarea3"></textarea>
+                </div>
+                <div style="text-align: center;margin-top: 10px;margin-bottom:10px;">
+                    <button type="button" class="mui-btn mui-btn-danger" id="colos3">确定修改</button>
+                    <button style="margin-left: 20px;"type="button" class="mui-btn mui-btn-warning" id="colos7">取消修改</button>
+
+                </div>
+            </div>
+        </div>
+        <!-- 滚动内容 -->
+        <div class="mui-scroll-wrapper" style="top: 110px;">
+            <div class="mui-scroll">
+                <!--这里放置真实显示的DOM内容-->
+                <ul class="mui-table-view" id="mui_table_view">
+                    <!-- <li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">关系/名称: <span></span></a>
+                            <div class="mui-collapse-content">
+                            <div class="mui-row">
+                            <div class="mui-col-xs-5 mui-col-sm-5">日期:</div>
+                            <div class="mui-col-xs-7 mui-col-sm-7"></div>
+                            </div>
+                            <div class="mui-row">
+                            <div class="mui-col-xs-5 mui-col-sm-5">手机号:</div>
+                            <div class="mui-col-xs-7 mui-col-sm-7"></div>
+                            </div>
+                            <div class="mui-row">
+                            <div class="mui-col-xs-5 mui-col-sm-5">简介:</div>
+                            <textarea readonly style="width: 86%;margin-left: 7%;" name="" id="" rows="6" cols="30" ></textarea>
+                            <div class="mui-row">
+                            <div class="mui-col-xs-12 mui-col-sm-12" style="text-align: center;">
+                            <button type="button" class="mui-btn mui-btn-primary" style="width:100px;"onclick="xiugai0()">修改信息</button>
+                            </div>
+                            </div>
+                            </div>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+<!-- 卡券 -->
+<script>
+    document.getElementById("gx").onclick = function(){
+        dtPicker.hide();
+    }
+    document.getElementById("gx1").onclick = function(){
+        dtPicker.hide();
+    }
+    document.getElementById("gx2").onclick = function(){
+        dtPicker.hide();
+    }
+    document.getElementById("gx3").onclick = function(){
+        dtPicker.hide();
+    }
+    document.getElementById("phoneo").onclick = function(){
+        dtPicker.hide();
+    }
+    document.getElementById("phoneo2").onclick = function(){
+        dtPicker.hide();
+    }
+    document.getElementById("textrea").onclick = function(){
+        dtPicker.hide();
+    }
+    document.getElementById("textrea2").onclick = function(){
+        dtPicker.hide();
+    }
+    document.getElementById("textarea3").onclick = function(){
+        dtPicker.hide();
+    }
+    document.getElementById("textarea1").onclick = function(){
+        dtPicker.hide();
+    }
+    //加载动画
+    var load = new Loading();
+    load.init();
+    // 获取传过来的参数
+    function getQueryVariable(variable) {
+		var query = window.location.search.substring(1);
+		var vars = query.split("&");
+		for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split("=");
+			if (pair[0] == variable) {
+				return pair[1];
+			}
+		}
+		return (false);
+	}
+    console.log(getQueryVariable('family_phone'))
+    console.log( localStorage.getItem("family_username"))
+    console.log(getQueryVariable('code'))
+    var family_phone = getQueryVariable('family_phone');
+    var family_username = localStorage.getItem("family_username");
+    var code = getQueryVariable('code');
+    document.getElementById("phoneo1").innerHTML = family_phone;
+    document.getElementById("phoneo3").innerHTML = family_phone;
+    window.onload = function () {
+        qu();
+    }
+    //家属日期
+            mui.init();
+			var btn = document.querySelector('#date');
+            var but = document.querySelector('#birth');
+            var bnt = document.querySelector('#birth2')
+            var bot = document.querySelector('#date3');
+            
+			var dtPicker = new mui.DtPicker({
+				type:'date',
+                beginDate: new Date(1920, 01),//设置开始日期 
+                endDate: new Date(2190, 01),//设置结束日期 
+			}); 
+			// 监听日期选择点击事件
+			btn.addEventListener('tap', function() {
+				dtPicker.show(function (selectItems) { 
+					btn.innerHTML=selectItems.value;
+				})
+			}, false);
+            but.addEventListener('tap', function() {
+				dtPicker.show(function (selectItems) { 
+					but.innerHTML=selectItems.value;
+				})
+			}, false);
+            bnt.addEventListener('tap', function() {
+				dtPicker.show(function (selectItems) { 
+					bnt.innerHTML=selectItems.value;
+				})
+			}, false);
+            bot.addEventListener('tap', function() {
+				dtPicker.show(function (selectItems) { 
+					bot.innerHTML=selectItems.value;
+				})
+			}, false);
+
+    //点击添加家属信息
+    function Tjia(){
+        mui("#popover").popover('show', document.getElementById("ta")) 
+    }
+    //点击添加纪念日
+    function Tjia1(){
+        mui("#popover1").popover('show', document.getElementById("ta1"))
+    }
+    var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;//手机号正则
+    //点击修改家属信息
+    function xiugai0(e){
+        mui.post('/index.php/VipinfoFamilySel/', {
+            card_number:code
+            }, function (data) {
+                if (data.code == 200) {
+                    for (i = 0; i < data.data.data.length; i++) {
+                            if (data.data.data[i].id==e) {
+                                document.getElementById("gx2").value = data.data.data[i].relation;//关系
+                                document.getElementById("birth2").innerHTML = data.data.data[i].birthday_g;//日期
+                                document.getElementById("phoneo2").value =  data.data.data[i].phone;//电话
+                                document.getElementById("textrea2").value =  data.data.data[i].synopsis;//简介
+                            } 
+                        }
+                }
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+        mui("#popover2").popover('show', document.getElementById("ta2"));
+
+
+        //确定修改家属信息
+        mui("#popover2").on('tap','#colos2',function(){
+
+        if (document.getElementById("phoneo2").value!=""&&!myreg.test(document.getElementById("phoneo2").value)) {
+            mui.alert('手机号格式不正确', '提示', '确定'['div']);
+        } else if(document.getElementById("phoneo2").value==""){
+            mui.post('/index.php/VipinfoFamilyEdit/', {
+            relationship:document.getElementById("gx2").value,
+            birthday:document.getElementById("birth2").innerHTML,
+            cellphone:document.getElementById("phoneo2").value,
+            synopsis:document.getElementById("textrea2").value,
+            id:e
+            }, function (data) {
+                if (data.code == 200) {
+                }
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+             location.reload();//刷新当前页面 
+            mui('#popover2').popover('hide');//show hide toggle
+        } else {
+            //AX
+        mui.post('/index.php/VipinfoFamilyEdit/', {
+            relationship:document.getElementById("gx2").value,
+            birthday:document.getElementById("birth2").innerHTML,
+            cellphone:document.getElementById("phoneo2").value,
+            synopsis:document.getElementById("textrea2").value,
+            id:e
+            }, function (data) {
+                if (data.code == 200) {
+                }
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+             location.reload();//刷新当前页面 
+            mui('#popover2').popover('hide');//show hide toggle
+        }
+        })
+    }
+
+    //取消修改家属信息
+    mui("#popover2").on("tap","#colos6",function(){
+        location.reload();//刷新当前页面 
+        mui('#popover2').popover('hide');//show hide toggle
+    })
+    //点击修改纪念日信息
+    function xiugai1(e){
+        mui.post('/index.php/VipinfoFamilySel/', {
+            card_number:code
+            }, function (data) {
+                if (data.code == 200) {
+                    for (i = 0; i < data.data.data.length; i++) {
+                            if (data.data.data[i].id==e) {
+                                document.getElementById("gx3").value = data.data.data[i].relation;//关系
+                                document.getElementById("date3").innerHTML = data.data.data[i].birthday_g;//日期
+                                document.getElementById("phoneo3").value =  data.data.data[i].phone;//电话
+                                document.getElementById("textarea3").value =  data.data.data[i].synopsis;//简介
+                            } 
+                        }
+                }
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+        mui("#popover3").popover('show', document.getElementById("ta3"))
+        //确定修改纪念日
+        mui("#popover3").on('tap','#colos3',function(){
+        //AX
+        mui.post('/index.php/VipinfoFamilyEdit/', {
+            relationship:document.getElementById("gx3").value,
+            birthday:document.getElementById("date3").innerHTML,
+            cellphone:document.getElementById("phoneo3").innerHTML,
+            synopsis:document.getElementById("textarea3").value,
+            id:e
+            },'json');
+            location.reload();//刷新当前页面
+            mui('#popover3').popover('toggle');//show hide toggle
+        })
+    }
+    //取消修改纪念日
+    mui("#popover3").on("tap","#colos7",function(){
+        location.reload();//刷新当前页面 
+        mui('#popover3').popover('hide');//show hide toggle
+    })
+    //确定添加家属信息
+    mui("#popover").on('tap','#colos',function(){
+        if (document.getElementById("phoneo").value!=""&&!myreg.test(document.getElementById("phoneo").value)) {
+            mui.alert('手机号格式不正确', '提示', '确定'['div']);
+        }else if(document.getElementById("phoneo").value==""){
+            mui.post('/index.php/VipinfoFamilyAdd/', {
+            relationship:document.getElementById("gx").value,
+            birthday:document.getElementById("birth").innerHTML,
+            cellphone:document.getElementById("phoneo").value,
+            synopsis:document.getElementById("textrea").value,
+            status:0,
+            card_number:code,
+            name:family_username
+            }, function (data) {
+                if (data.code == 200) {
+                    console.log(data)
+                }
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+            location.reload();//刷新当前页面 
+            mui('#popover').popover('hide');//show hide toggle
+        } else{
+            //AX
+        mui.post('/index.php/VipinfoFamilyAdd/', {
+            relationship:document.getElementById("gx").value,
+            birthday:document.getElementById("birth").innerHTML,
+            cellphone:document.getElementById("phoneo").value,
+            synopsis:document.getElementById("textrea").value,
+            status:0,
+            card_number:code,
+            name:family_username
+            }, function (data) {
+                if (data.code == 200) {
+                    console.log(data)
+                }
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+            location.reload();//刷新当前页面 
+            mui('#popover').popover('hide');//show hide toggle
+        } 
+    })
+    //取消添加家属信息
+    mui("#popover").on("tap","#colos4",function(){
+        location.reload();//刷新当前页面 
+        mui('#popover').popover('hide');//show hide toggle
+    })
+    //确定添加纪念日
+    mui("#popover1").on('tap','#colos1',function(){
+            //AX
+        mui.post('/index.php/VipinfoFamilyAdd/', {
+            relationship:document.getElementById("gx1").value,
+            birthday:document.getElementById("date").innerHTML,
+            cellphone:document.getElementById("phoneo1").innerHTML,
+            synopsis:document.getElementById("textarea1").value,
+            status:1,
+            card_number:code,
+            name:family_username
+            },'json');
+            location.reload();//刷新当前页面
+            mui('#popover1').popover('toggle');//show hide toggle
+
+        
+    })
+    //取消添加纪念日
+    mui("#popover1").on("tap","#colos5",function(){
+        location.reload();//刷新当前页面 
+        mui('#popover1').popover('hide');//show hide toggle
+    })
+</script>
+<script>
+    var table = document.getElementById("mui_table_view");
+    function qu(){
+        load.start();
+        mui.post('/index.php/VipinfoFamilySel/', {
+            card_number:code,
+            }, function (data) {
+                if (data.code == 200) {
+                    // console.log(data)
+                    if (data.data.data.length == 0) {
+                        table.innerHTML = "<h1 style='text-align:center;padding-top:20px;padding-bottom:20px;'>暂无数据</h1>";
+                    } else {
+                        for (i = 0; i < data.data.data.length; i++) {
+                            if (data.data.data[i].status==0) {
+                                 var li = document.createElement('li');
+                            li.className = "mui-table-view-cell mui-collapse";
+                            li.innerHTML ='<a class="mui-navigate-right" href="#">关系/名称:'+' <span>'+data.data.data[i].relation+'</span></a>'
+                            +'<div class="mui-collapse-content">'
+                            +'<div class="mui-row">'
+                            +'<div class="mui-col-xs-5 mui-col-sm-5">生日:</div>'
+                            +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].birthday_g+'</div>'
+                            +'</div>'
+                            +'<div class="mui-row">'
+                            +'<div class="mui-col-xs-5 mui-col-sm-5">手机号:</div>'
+                            +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].phone+'</div>'
+                            +'</div>'
+                            +'<div class="mui-row">'
+                            +'<div class="mui-col-xs-5 mui-col-sm-5">简介:</div>'
+                            +'<textarea readonly style="width: 86%;margin-left: 7%;" name="" id="" rows="6" cols="30" >'+data.data.data[i].synopsis+'</textarea>'
+                            +'<div class="mui-row">'
+                            +'<div class="mui-col-xs-12 mui-col-sm-12" style="text-align: center;">'
+                            +'<button type="button" class="mui-btn mui-btn-primary" style="width:100px;"onclick="xiugai0('+data.data.data[i].id+')">修改信息</button>'
+                            +'</div>'
+                            +'</div>'
+                            +'</div>'
+                            table.appendChild(li);
+                            
+                            } else {
+                                var li = document.createElement('li');
+                            li.className = "mui-table-view-cell mui-collapse";
+                            li.innerHTML ='<a class="mui-navigate-right" href="#">关系/名称:'+' <span>'+data.data.data[i].relation+'</span></a>'
+                            +'<div class="mui-collapse-content">'
+                            +'<div class="mui-row">'
+                            +'<div class="mui-col-xs-5 mui-col-sm-5">日期:</div>'
+                            +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].birthday_g+'</div>'
+                            +'</div>'
+                            +'<div class="mui-row">'
+                            +'<div class="mui-col-xs-5 mui-col-sm-5">手机号:</div>'
+                            +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].phone+'</div>'
+                            +'</div>'
+                            +'<div class="mui-row">'
+                            +'<div class="mui-col-xs-5 mui-col-sm-5">简介:</div>'
+                            +'<textarea readonly style="width: 86%;margin-left: 7%;" name="" id="" rows="6" cols="30" >'+data.data.data[i].synopsis+'</textarea>'
+                            +'<div class="mui-row">'
+                            +'<div class="mui-col-xs-12 mui-col-sm-12" style="text-align: center;">'
+                            +'<button type="button" class="mui-btn mui-btn-primary" style="width:100px;"onclick="xiugai1('+data.data.data[i].id+')">修改信息</button>'
+                            +'</div>'
+                            +'</div>'
+                            +'</div>'
+                            table.appendChild(li);
+                            }
+                           
+                        }
+                    }
+
+                    
+
+                }
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                load.stop();
+            }, 'json'
+            );
+    }
+
+
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+      // 解决mui滚动条与textarea自身滚动冲突
+     window.addEventListener('touchmove', function (e) {
+            var target = e.target;
+            if (target && target.tagName === 'TEXTAREA') {//textarea阻止冒泡  
+                e.stopPropagation();
+            }
+        }, true);  
+
+
+</script>
+</html>

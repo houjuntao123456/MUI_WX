@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SOCOR</title>
+    <link rel="stylesheet" href="../mui/css/mui.css">
+    <script src="../mui/js/mui.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+    <script src="../js/vconsole.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+    <style>
+        body {
+            background-color: #fff;
+        }
+
+        .mui-input-group:after {
+            height: 0px;
+        }
+
+        .mui-input-group .mui-input-row::after {
+            height: 0px;
+        }
+
+        .mui-input-row label {
+            width: 25%;
+        }
+
+        .mui-content {
+            background: none;
+        }
+
+        .mui-input-group:before {
+            background-color: #fff;
+        }
+
+        .ppppppp {
+            background: url(../../images/ico_checkon.svg) no-repeat right bottom;
+            background-size: 25px 25px;
+            background-color: rgba(212, 229, 246, 0);
+            ;
+            color: #00a4ff
+        }
+    </style>
+</head>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;box-shadow:none;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" id="a_title" style="color:white;"></a>
+        <h1 class="mui-title" id="title_" style="color:white;">注册</h1>
+    </header>
+    <!-- <div style="text-align:center;padding: 60px 50px 20px 50px;background-color:#007aff;">
+        <div style="border-radius: 10px;overflow:hidden;margin: 0 auto;">
+            <img src="../images/suokewhite2.png" alt="" style="width: 100px;">
+        </div>
+    </div> -->
+    <form class="mui-input-group mui-content" style="border:0px;margin-top: 10%;" id="form_css">
+
+        <!-- 姓名 -->
+        <div style="margin-top: 20px;">
+            <div style="width: 80%;margin: 0 auto;"><span style="color: rgb(136, 136, 136);font-size: 16px;"><span
+                        style="color: rgb(204, 137, 60)">* </span>姓名:</span></div>
+            <div class="mui-input-row"
+                style="width: 80%;margin: 0 auto;background-color: white;border-radius: 5px 5px 5px 5px;border: 1px solid rgb(168, 168, 168)">
+                <input type="text" class="mui-input-clear" placeholder="" style="font-size: 15px;float: left;"
+                    id="username">
+            </div>
+        </div>
+        <!-- 手机号 -->
+        <div style="margin-top: 10px;">
+            <div style="width: 80%;margin: 0 auto;"><span style="color: rgb(136, 136, 136);font-size: 16px;"><span
+                        style="color: rgb(204, 137, 60)">* </span>手机号:</span></div>
+            <div class="mui-input-row"
+                style="width: 80%;margin: 0 auto;background-color: white;border-radius: 5px 5px 5px 5px;border: 1px solid rgb(168, 168, 168)">
+                <input type="text" class="mui-input-clear" placeholder="" style="font-size: 15px;float: left;"
+                    id="phone">
+            </div>
+        </div>
+        <!-- 选择门店 -->
+        <div style="margin-top: 10px;">
+            <div style="width: 80%;margin: 0 auto;"><span style="color: rgb(136, 136, 136);font-size: 16px;"><span
+                        style="color: rgb(204, 137, 60)">* </span>选择门店:</span></div>
+            <div class="mui-input-row mui-select"
+                style="width: 80%;margin: 0 auto;background-color: white;border-radius: 5px 5px 5px 5px;border: 1px solid rgb(168, 168, 168)">
+                <select name="" id="choose_stores" style="padding-left: 10px;" onchange="gradeChange_stores()">
+                    <option value="suokeduo_h">请选择门店</option>
+                    <!-- <option value="">上海部门</option> -->
+                </select>
+            </div>
+        </div>
+        <!-- 选择形象顾问 -->
+        <div style="margin-top: 10px;">
+            <div style="width: 80%;margin: 0 auto;"><span style="color: rgb(136, 136, 136);font-size: 16px;">
+                    <span style="color: rgb(204, 137, 60)">* </span>选择形象顾问:</span></div>
+            <div class="mui-input-row mui-select"
+                style="width: 80%;margin: 0 auto;background-color: white;border-radius: 5px 5px 5px 5px;border: 1px solid rgb(168, 168, 168)">
+                <select name="" id="all_shopping" style="padding-left: 10px;">
+                    <option value="">请先选择门店</option>
+                    <!-- <option value="">上海部门</option> -->
+                </select>
+            </div>
+        </div>
+
+
+        <!-- 性别 -->
+        <div style="margin-top: 10px;">
+            <div style="width: 80%;margin: 0 auto;"><span style="color: rgb(136, 136, 136);font-size: 16px;"><span
+                        style="color: rgb(204, 137, 60)">* </span>性别:</span></div>
+            <div class="mui-input-row mui-select"
+                style="width: 80%;margin: 0 auto;background-color: white;border-radius: 5px 5px 5px 5px;border: 1px solid rgb(168, 168, 168)">
+                <select name="" id="select_store" style="padding-left: 10px;">
+                    <option value="M">男</option>
+                    <option value="W">女</option>
+                </select>
+            </div>
+        </div>
+        <!-- 生日 -->
+        <div style="margin-top: 10px;">
+            <div style="width: 80%;margin: 0 auto;"><span style="color: rgb(136, 136, 136);font-size: 16px;"><span
+                        style="color: rgb(204, 137, 60)">* </span>生日:</span></div>
+            <div class="mui-input-row mui-select"
+                style="width: 80%;margin: 0 auto;background-color: white;border-radius: 5px 5px 5px 5px;border: 1px solid rgb(168, 168, 168)">
+                <input readonly data-field="date" type="text" class="mui-input-clear" placeholder="请选择时间"
+                    style="font-size: 15px;float: left;" onclick="start_time();" id="time_">
+            </div>
+        </div>
+
+        <!-- 转介绍人 -->
+        <div style="margin-top: 10px;">
+            <div style="width: 80%;margin: 0 auto;"><span style="color: rgb(136, 136, 136);font-size: 16px;"><span
+                        style="color: rgb(204, 137, 60)"></span>转介绍人:</span></div>
+            <div class="mui-input-row" onclick="show_pelple('introduction_name')"
+                style="width: 80%;margin: 0 auto;background-color: white;border-radius: 5px 5px 5px 5px;border: 1px solid rgb(168, 168, 168)">
+                <input type="text" class="mui-input-clear" placeholder="请输入转介绍人姓名" style="font-size: 15px;float: left;"
+                    disabled id="introduction_name">
+            </div>
+        </div>
+        <!-- 转介绍人手机号/卡号 -->
+        <div style="margin-top: 10px;">
+            <div style="width: 80%;margin: 0 auto;"><span style="color: rgb(136, 136, 136);font-size: 16px;"><span
+                        style="color: rgb(204, 137, 60)"> </span>转介绍人手机号/卡号:</span></div>
+            <div class="mui-input-row " onclick="show_pelple('introduction_phone')"
+                style="width: 80%;margin: 0 auto;background-color: white;border-radius: 5px 5px 5px 5px;border: 1px solid rgb(168, 168, 168)">
+                <input type="text" class="mui-input-clear" placeholder="请输入转介绍人姓名/手机号"
+                    style="font-size: 15px;float: left;" disabled id="introduction_phone">
+            </div>
+        </div>
+        <div style="width: 70%;margin: 10px auto;">
+            <span style="color: rgb(136, 136, 136);font-size: 14px;">亲! 为了您能够享受会员生日福利;会员生日注册提交成功后不可以更改了哦</span>
+        </div>
+        <!-- 提交 -->
+        <div class="mui-button-row" style="margin-top:10px;margin: 0 auto">
+            <button type="button" class="mui-btn mui-btn-primary"
+                style="width: 70%;font-size: 16px;border-radius: 50px;" onclick="submission()">提&nbsp;&nbsp;交</button>
+        </div>
+        <div id="aa"></div>
+    </form>
+
+
+
+    <!-- 确认付款 -->
+    <div id="sheet2" class="mui-popover mui-popover-bottom mui-popover-action ">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell mui-input-row">
+                <div class="mui-input-row">
+                    <input type="text" class="mui-input-clear" placeholder="请输入转介绍人姓名/手机号" style="margin-bottom: 0px;"
+                        id="condition">
+                </div>
+            </li>
+        </ul>
+        <!-- 可选择菜单 -->
+        <div class="mui-table-view" style="height:500px;">
+            <div class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <ul class="mui-table-view" id="shaixuan_people" style="color: #888888;">
+                        <!-- <li class="mui-table-view-cell ppppppp">
+                            <div class="mui-row">
+                                <div class="mui-col-xs-6 mui-col-sm-6">
+                                    <span class="mui-icon mui-icon-contact">&nbsp;</span><span>侯军涛</span>
+                                </div>
+                                <div class="mui-col-xs-6 mui-col-sm-6">
+                                    <span class="mui-icon mui-icon-phone"></span>
+                                    <span>15030579478</span>
+                                </div>
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <!-- 立即添加 -->
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell" onclick="query()">
+                <b>查询</b>
+            </li>
+        </ul>
+    </div>
+
+
+</body>
+<script>
+    // $.cookie("headImgUrl", 'http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEKdKAAZ8rgHcdf2HLeayz1I040XR7GScSzSPtibV9QicViawSYBia4OgLdt6icczaia9icQz2LpeCkAzV2RA/132');
+    // $.cookie("openId", 'o9osQwUghKSMhf1ZGF3oclpiEvtc');
+    var load = new Loading();
+    load.init();
+
+    // var vConsole = new VConsole();
+    //进来加载时间
+    var new_star = "";
+    var myDate = new Date();
+
+    //特殊处理，如果是日或者月小于10，自动补0
+    function if_time(tnum) {
+        if (tnum < 10) {
+            return '0' + tnum;
+        } else {
+            return tnum;
+        }
+    }
+    (function () {
+        var currentTime = myDate.getFullYear() + "-" + if_time(myDate.getMonth() + 1) + "-" + if_time(myDate.getDate());
+        document.getElementById("time_").value = currentTime;
+    })();
+    //获取当前时间
+    var birth = document.getElementById("time_");
+    //选择时间
+    function start_time() {
+        var dtpicker = new mui.DtPicker({
+            type: "date",//设置日历初始视图模式 
+            beginDate: new Date(1970, 01, 01),//设置开始日期 
+            endDate: new Date(2070, 01, 01),//设置结束日期 
+            labels: ['年', '月', '日'],//设置默认标签区域提示语 
+        });
+        dtpicker.show(function (items) {
+            birth.value = items.y.value + '-' + items.m.value + '-' + items.d.value;
+        })
+    }
+
+    //提交进行验证
+    var username = document.getElementById("username");
+    var phone = document.getElementById("phone");
+    var choose_stores = document.getElementById('choose_stores');
+    var all_shopping = document.getElementById("all_shopping");
+    var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+    //进来获取当前门店信息
+    (function () {
+        load.start();
+        mui.post('/index.php/Userlistwsstoree/', {
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                for (i = 0; i < data.data.length; i++) {
+                    var option = document.createElement('option');
+                    option.value = data.data[i].code;
+                    option.innerHTML = data.data[i].name;
+                    choose_stores.appendChild(option);
+                }
+            }
+            load.stop();
+        }, 'json'
+        );
+    })();
+    var introducer_code = "";
+    function submission() {
+        if (username.value == "" && phone.value == "") {
+            mui.alert('姓名和手机号不能为空', '提示', '确定'['div']);
+        } else if (username.value == "") {
+            mui.alert('姓名不能为空', '提示', '确定'['div']);
+        } else if (phone.value == "") {
+            mui.alert('手机号不能为空', '提示', '确定'['div']);
+        } else if (!myreg.test(phone.value)) {
+            mui.alert('手机号格式不正确', '提示', '确定'['div']);
+        } else if (choose_stores.options[choose_stores.selectedIndex].value == "suokeduo_h") {
+            mui.alert('请选择门店', '提示', '确定'['div']);
+        } else if (all_shopping.options[all_shopping.selectedIndex].value == "suokeduo_j") {
+            mui.alert('请选择形象顾问', '提示', '确定'['div']);
+        } else {
+            load.start();
+            mui.ajax('/index.php/Register/', {
+                data: {
+                    openId: $.cookie("openId"),
+                    username: username.value,
+                    phone: phone.value,
+                    sex: document.getElementById("select_store").options[document.getElementById("select_store").selectedIndex].value,
+                    birthday: birth.value,
+                    store_code: choose_stores.options[choose_stores.selectedIndex].value, //选择门店
+                    staff_code: all_shopping.options[all_shopping.selectedIndex].value,
+                    img: $.cookie("headImgUrl"),
+                    introducer_name: mui("#introduction_name")[0].value,
+                    introducer_code: introducer_code
+                },
+                dataType: 'json',//服务器返回json格式数据
+                type: 'post',//HTTP请求类型
+                timeout: 10000,//超时时间设置为10秒；
+                // processData:false,
+                headers: { 'Content-Type': 'application/json' },
+                success: function (data) {
+                    if (data.code == 200) {
+                        mui.toast('注册成功请稍等', {
+                            duration: 'long',
+                            type: 'div'
+                        });
+                        setTimeout(function () {
+                            location.href = "./personal_center.html";
+                        }, 1000);
+                    } else if (data.code == 400) {
+                        mui.alert(data.msg, '提示', '确定'['div']);
+                    }
+                    load.stop();
+                },
+                error: function (xhr, type, errorThrown) {
+                    load.stop();
+                    //异常处理；
+                }
+
+            });
+        }
+    }
+
+
+    // 选择门店 店员下拉发生改变
+    function gradeChange_stores() {
+        if (choose_stores.options[choose_stores.selectedIndex].value == 'suokeduo_h') {
+            document.getElementById("all_shopping").innerHTML = '';
+            var option = document.createElement('option');
+            option.value = 'suokeduo_j';
+            option.innerHTML = '请先选择门店';
+            document.getElementById("all_shopping").appendChild(option);
+        } else {
+            load.start();
+            mui.post('/index.php/UserlistStaff/', {
+                code: choose_stores.options[choose_stores.selectedIndex].value
+            }, function (data) {
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    if (data.data == "") {
+                        document.getElementById("all_shopping").innerHTML = '';
+                        var option = document.createElement('option');
+                        option.value = 'suokeduo_j';
+                        option.innerHTML = '暂无形象顾问';
+                        document.getElementById("all_shopping").appendChild(option);
+                    } else {
+                        document.getElementById("all_shopping").innerHTML = '';
+                        for (i = 0; i < data.data.length; i++) {
+                            var option = document.createElement('option');
+                            option.value = data.data[i].code;
+                            option.innerHTML = data.data[i].name;
+                            document.getElementById("all_shopping").appendChild(option);
+                        }
+                    }
+
+                    load.stop();
+                }
+            }, 'json'
+            );
+        }
+
+    }
+
+
+    //添加转介绍人 
+    function show_pelple(event) {
+        console.log(event)
+        mui('#sheet2').popover('toggle');
+
+    }
+
+    // 点击选择的转介绍人
+    var dome = "";
+    mui(".mui-scroll-wrapper").on('tap', '.mui-table-view-cell', function () {
+        if (dome != "") {
+            dome.classList.remove('ppppppp');
+        }
+        mui("#introduction_name")[0].value = this.getAttribute("name");
+        mui("#introduction_phone")[0].value = this.getAttribute("phone");
+        introducer_code = this.getAttribute("code2");
+        this.classList.add('ppppppp');
+        dome = this;
+        mui('#sheet2').popover('toggle');
+    })
+    // 查询转介绍人
+    var condition = document.getElementById("condition");
+    var shaixuan_people = document.getElementById("shaixuan_people");
+    function query() {
+        if (condition.value == "") {
+            mui.toast('请输入姓名/手机号/卡号', {
+                duration: 'long',
+                type: 'div'
+            })
+        } else {
+            shaixuan_people.innerHTML = "";
+            load.start();
+            // 条件
+            mui.post('/index.php/Introducer/', {
+                like: condition.value
+            }, function (data) {
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    if (data.data.length == 0) {
+                        // 创造节点
+                        var li = document.createElement('li');
+                        li.classList = "mui-table-view-cell";
+                        li.innerHTML = '<div class="mui-row">'
+                            + ' <div class="mui-col-xs-12 mui-col-sm-12">'
+                            + '暂无信息'
+                            + '</div>'
+                            + '</div>'
+                        shaixuan_people.appendChild(li);
+                    }
+                    for (i = 0; i < data.data.length; i++) {
+                        if (data.data[i].username == undefined) {
+                            data.data[i].username = "";
+                        }
+                        if (data.data[i].phone == undefined) {
+                            data.data[i].phone = "";
+                        }
+                        // 创造节点
+                        var li = document.createElement('li');
+                        li.classList = "mui-table-view-cell";
+                        li.setAttribute("name", data.data[i].username);
+                        li.setAttribute("phone", data.data[i].phone);
+                        li.setAttribute("code2", data.data[i].code);
+                        li.innerHTML = '<div class="mui-row">'
+                            + ' <div class="mui-col-xs-6 mui-col-sm-6">'
+                            + '<span class="mui-icon mui-icon-contact"> </span><span>' + data.data[i].username + '</span>'
+                            + '</div>'
+                            + ' <div class="mui-col-xs-6 mui-col-sm-6">'
+                            + '<span class="mui-icon mui-icon-phone"></span>'
+                            + ' <span>' + data.data[i].phone + '</span>'
+                            + '</div>'
+                            + '</div>'
+                        shaixuan_people.appendChild(li);
+                    }
+                }
+                load.stop();
+            }, 'json'
+            );
+        }
+
+    }
+    // 区域滚动
+    mui('.mui-scroll-wrapper').scroll();
+</script>
+
+</html>

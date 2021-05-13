@@ -1,0 +1,805 @@
+---------------------------------------------------------------
+[2020-11-03T09:57:02+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.089429s] [吞吐率：11.18req/s] [内存消耗：2,484.08kb] [文件加载：67]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => 'c382520a-d03a-42b6-81f9-e8ef7884f823',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.5',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.025039s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.009181s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604368622  AND `end_time` >= 1604368622  AND `status` = 0 [ RunTime:0.007543s ]
+[ error ] [2]Illegal offset type[D:\www\wx\application\controller\PayCoupon.php:27]
+---------------------------------------------------------------
+[2020-11-03T09:58:08+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.068158s] [吞吐率：14.67req/s] [内存消耗：2,418.78kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => '4cabe588-1c18-4620-ae8b-b64fc5a1e038',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.5',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.015088s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.015775s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604368688  AND `end_time` >= 1604368688  AND `status` = 0 [ RunTime:0.006064s ]
+---------------------------------------------------------------
+[2020-11-03T10:13:48+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.084927s] [吞吐率：11.77req/s] [内存消耗：2,419.89kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => '5f75338e-f68d-4ef8-9b9e-1e2d33268bd1',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.5',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.030603s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.010741s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604369628  AND `end_time` >= 1604369628  AND `status` = 0 [ RunTime:0.004913s ]
+---------------------------------------------------------------
+[2020-11-03T10:13:49+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.066956s] [吞吐率：14.94req/s] [内存消耗：2,419.89kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => '582021ce-f733-4028-9199-b5ac56cdf186',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.5',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.009348s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.009815s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604369629  AND `end_time` >= 1604369629  AND `status` = 0 [ RunTime:0.008312s ]
+---------------------------------------------------------------
+[2020-11-03T10:14:15+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：3.169927s] [吞吐率：0.32req/s] [内存消耗：2,419.89kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => '7e6d32ee-08f5-4af9-8be8-10f017516450',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.5',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:3.116282s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.011416s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604369652  AND `end_time` >= 1604369652  AND `status` = 0 [ RunTime:0.006336s ]
+---------------------------------------------------------------
+[2020-11-03T10:14:36+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.075715s] [吞吐率：13.21req/s] [内存消耗：2,419.92kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => 'db73885f-1824-4f88-a74f-a0480f7ffd20',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.5',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.018134s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.011716s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604369676  AND `end_time` >= 1604369676  AND `status` = 0 [ RunTime:0.015641s ]
+---------------------------------------------------------------
+[2020-11-03T10:14:38+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.060671s] [吞吐率：16.48req/s] [内存消耗：2,419.92kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => 'a2716b80-7b08-4bc0-abfb-b9e25719a7f2',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.5',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011910s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.008116s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604369678  AND `end_time` >= 1604369678  AND `status` = 0 [ RunTime:0.007845s ]
+---------------------------------------------------------------
+[2020-11-03T10:15:12+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.060256s] [吞吐率：16.60req/s] [内存消耗：2,419.92kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => 'b38d52e4-16a8-40e0-93b8-cb3ee2ab74cf',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.5',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.014894s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.010058s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604369712  AND `end_time` >= 1604369712  AND `status` = 0 [ RunTime:0.004587s ]
+---------------------------------------------------------------
+[2020-11-03T10:15:27+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.069953s] [吞吐率：14.30req/s] [内存消耗：2,416.10kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => 'bf42ebbf-539b-4936-b393-df91fce4278a',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.5',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.015033s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.010462s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604369727  AND `end_time` >= 1604369727  AND `status` = 0 [ RunTime:0.004880s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604369727  AND `end_time` >= 1604369727  AND `status` = 0 LIMIT 1 [ RunTime:0.007999s ]
+---------------------------------------------------------------
+[2020-11-03T10:20:11+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.086495s] [吞吐率：11.56req/s] [内存消耗：2,415.91kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => 'f3795fd7-5233-4c4a-85fd-6f583e319082',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.5',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.016464s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.011094s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604370010  AND `end_time` >= 1604370010  AND `status` = 0 [ RunTime:0.004729s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604370010  AND `end_time` >= 1604370010  AND `status` = 0 LIMIT 1 [ RunTime:0.015497s ]
+---------------------------------------------------------------
+[2020-11-03T14:14:08+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.093927s] [吞吐率：10.65req/s] [内存消耗：2,421.66kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => '58f5a979-e0b2-4061-b4bd-abb4a3bb9ca2',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.026590s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.007903s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time`,`a_hsi`,`b_hsi` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384047  AND `end_time` >= 1604384047  AND `status` = 0 [ RunTime:0.015514s ]
+---------------------------------------------------------------
+[2020-11-03T14:15:55+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.061947s] [吞吐率：16.14req/s] [内存消耗：2,424.17kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => '3d3202c2-c0b1-42d9-9a7d-afc12bba7373',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011720s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.008111s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time`,`a_hsi`,`b_hsi` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384155  AND `end_time` >= 1604384155  AND `status` = 0 [ RunTime:0.008280s ]
+---------------------------------------------------------------
+[2020-11-03T14:16:42+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.082006s] [吞吐率：12.19req/s] [内存消耗：2,428.20kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => 'c3ddf123-a5b2-4458-9c63-1cc0b8eeb55c',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.022014s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.009672s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time`,`a_hsi`,`b_hsi` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384202  AND `end_time` >= 1604384202  AND `status` = 0 [ RunTime:0.006847s ]
+---------------------------------------------------------------
+[2020-11-03T14:17:17+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.085146s] [吞吐率：11.74req/s] [内存消耗：2,428.20kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => '765656c0-8882-43f8-8623-945a02e406f2',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.019416s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.013995s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time`,`a_hsi`,`b_hsi` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384237  AND `end_time` >= 1604384237  AND `status` = 0 [ RunTime:0.017535s ]
+---------------------------------------------------------------
+[2020-11-03T14:17:19+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.077805s] [吞吐率：12.85req/s] [内存消耗：2,428.20kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => 'f4717f06-951a-4c20-bce9-baf5cd24188f',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.022546s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.010145s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time`,`a_hsi`,`b_hsi` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384239  AND `end_time` >= 1604384239  AND `status` = 0 [ RunTime:0.012068s ]
+---------------------------------------------------------------
+[2020-11-03T14:17:36+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.324255s] [吞吐率：3.08req/s] [内存消耗：2,493.02kb] [文件加载：67]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => 'c9c3cd2a-0785-45cc-94ed-16f9c2d85d97',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.014716s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.239220s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time`,`a_hsi`,`b_hsi` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384255  AND `end_time` >= 1604384255  AND `status` = 0 [ RunTime:0.021467s ]
+[ error ] [8]未定义数组索引: week[D:\www\wx\application\controller\PayCoupon.php:37]
+---------------------------------------------------------------
+[2020-11-03T14:18:05+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.072275s] [吞吐率：13.84req/s] [内存消耗：2,429.66kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => '6407d842-1d86-449f-9ea4-d26c65c853b1',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.019481s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.010207s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time`,`a_hsi`,`b_hsi`,`week` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384285  AND `end_time` >= 1604384285  AND `status` = 0 [ RunTime:0.009187s ]
+---------------------------------------------------------------
+[2020-11-03T14:18:11+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.249404s] [吞吐率：4.01req/s] [内存消耗：2,429.39kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => '85253b47-e2eb-4480-9cb5-6fa24a250885',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.008442s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.193069s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time`,`a_hsi`,`b_hsi`,`week` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384291  AND `end_time` >= 1604384291  AND `status` = 0 [ RunTime:0.009125s ]
+---------------------------------------------------------------
+[2020-11-03T14:22:02+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.074237s] [吞吐率：13.47req/s] [内存消耗：2,429.24kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => '9c647089-e2d6-4ab8-9d13-491ca7de6cb3',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.014577s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.013176s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time`,`a_hsi`,`b_hsi`,`week` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384522  AND `end_time` >= 1604384522  AND `status` = 0 [ RunTime:0.006179s ]
+---------------------------------------------------------------
+[2020-11-03T14:23:31+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.067994s] [吞吐率：14.71req/s] [内存消耗：2,428.77kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => 'd518d889-3231-46b5-86d9-a0750808014e',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.014643s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.016869s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time`,`a_hsi`,`b_hsi`,`week` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384611  AND `end_time` >= 1604384611  AND `status` = 0 [ RunTime:0.004556s ]
+---------------------------------------------------------------
+[2020-11-03T14:24:32+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.180156s] [吞吐率：5.55req/s] [内存消耗：2,423.01kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => 'c642069b-44f9-4a6f-b844-43a4d61e8dc3',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.091298s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.032200s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time`,`a_hsi`,`b_hsi`,`week` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384672  AND `end_time` >= 1604384672  AND `status` = 0 [ RunTime:0.005874s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384672  AND `end_time` >= 1604384672  AND `status` = 0 LIMIT 1 [ RunTime:0.006432s ]
+---------------------------------------------------------------
+[2020-11-03T14:24:54+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.309162s] [吞吐率：3.23req/s] [内存消耗：2,422.28kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => 'b511b24f-b2c8-4da9-80b9-04fd4d20a978',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.242432s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.018872s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time`,`a_hsi`,`b_hsi`,`week` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384693  AND `end_time` >= 1604384693  AND `status` = 0 [ RunTime:0.012516s ]
+---------------------------------------------------------------
+[2020-11-03T14:25:25+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.435144s] [吞吐率：2.30req/s] [内存消耗：2,422.28kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => '28c74485-d947-4115-ad99-9b8d1559a18a',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.145671s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.233516s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time`,`a_hsi`,`b_hsi`,`week` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384724  AND `end_time` >= 1604384724  AND `status` = 0 [ RunTime:0.010267s ]
+---------------------------------------------------------------
+[2020-11-03T14:25:44+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.684644s] [吞吐率：1.46req/s] [内存消耗：2,422.30kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => '1520fd02-8db2-409f-b9af-10485bb7cab2',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.355173s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.277533s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time`,`a_hsi`,`b_hsi`,`week` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384743  AND `end_time` >= 1604384743  AND `status` = 0 [ RunTime:0.011169s ]
+---------------------------------------------------------------
+[2020-11-03T14:26:31+08:00] 127.0.0.1 POST wx.com/index.php/webPayCoupon/
+[运行时间：0.288026s] [吞吐率：3.47req/s] [内存消耗：2,422.31kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webPayCoupon/',
+  'route' => 'PayCoupon/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'cookie' => 'PHPSESSID=vs9ubmpj31hkpq3i1442rgpal2',
+  'connection' => 'close',
+  'accept-encoding' => 'gzip, deflate, br',
+  'host' => 'wx.com',
+  'postman-token' => '93e0d39e-96d4-4fa7-aacc-e88f0e17be05',
+  'cache-control' => 'no-cache',
+  'accept' => '*/*',
+  'user-agent' => 'PostmanRuntime/7.26.8',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.129550s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_pay_coupon` [ RunTime:0.015834s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_brief`,`money`,`dis_money`,`card_photo`,`start_time`,`end_time`,`a_hsi`,`b_hsi`,`week` FROM `suoke`.`vip_pay_coupon` WHERE  `start_time` <= 1604384791  AND `end_time` >= 1604384791  AND `status` = 0 [ RunTime:0.100807s ]

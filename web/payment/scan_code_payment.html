@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./mui/css/mui.css">
+    <script src="./mui/js/mui.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="./js/iconfont/iconfont.css">
+    <title>商品-支付</title>
+    <style>
+        .pay:before {
+            content: ' ';
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: url(../payment/images/bg_img.jpg) center 0 no-repeat;
+            background-size: cover;
+        }
+
+        .mui-row {
+            position: fixed;
+            top: 25px;
+            width: 100%;
+        }
+
+        .mui-card {
+            box-shadow: none;
+            border-radius: 10px;
+        }
+
+        .mui-card .module_img {
+            content: ' ';
+            z-index: 1;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: url(../payment/images/module.jpg) center 0 no-repeat;
+            background-size: cover;
+            padding: 10%;
+            text-align: center;
+            font-family: '微软雅黑';
+        }
+
+        .module_img .iconfont {
+            font-size: 40px;
+            color: #22ac38;
+            vertical-align: 0.45em;
+        }
+
+        .discount_module {
+            padding: 15px;
+        }
+
+        .discount_module h4 {
+            font-size: 16px;
+            font-family: '微软雅黑';
+            letter-spacing: 1px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .discount_module h4 span {
+            color: #22ac38;
+            font-weight: normal;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            width: 100%;
+            float: left;
+            padding: 10px;
+            border: 1px solid #eee;
+            margin: 5px;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 5px;
+            color: #E48907;
+            font-family: '微软雅黑';
+        }
+
+        li span {
+            font-size: 14px;
+            line-height: 28px;
+            color: #777;
+        }
+
+        .active {
+            border: 1px solid #22ac38;
+        }
+
+        .but {
+            position: fixed;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            width: 100%;
+            height: 45px;
+            background: #007aff;
+            text-align: center;
+            line-height: 45px;
+            letter-spacing: 1px;
+        }
+
+        .but p {
+            color: #fff;
+            font-family: '微软雅黑';
+            font-size: 16px;
+        }
+
+        .but .iconfont {
+            vertical-align: -0.15em;
+            color: #fff;
+            font-size: 25px;
+        }
+
+        .mui-popup {
+            font-family: '微软雅黑';
+            width: 95%;
+        }
+
+        .mui-popup-title+.mui-popup-text {
+            margin: 10px 0 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 1px solid #EEE;
+            width: 100%;
+            text-align: center;
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        /* table样式 */
+        table tr th:nth-child(1),
+        tr td:nth-child(1) {
+            width: 25%;
+        }
+
+        table tr th:nth-child(2),
+        tr td:nth-child(2) {
+            width: 25%;
+        }
+
+        table tr th:nth-child(3),
+        tr td:nth-child(3) {
+            width: 25%;
+        }
+
+        table tr th:nth-child(4),
+        tr td:nth-child(4) {
+            width: 25%;
+        }
+    </style>
+</head>
+
+<body class="pay">
+    <div class="mui-scroll-wrapper">
+        <div class="mui-row mui-scroll">
+            <div class="mui-card">
+                <div class="mui-card-content module_img">
+                    <span class="iconfont icon-icon1"></span>
+                    <h3>￥<span>1888.88</span></h3>
+                </div>
+            </div>
+            <div class="mui-card" style="margin-bottom: 100px;">
+                <div class="mui-card-content discount_module">
+                    <ul id="pay_list">
+                        <h4>充值活动：<span>(点击查看商品信息)</span></h4>
+                        <li num="20000">充20000元 / <span>得20888元</span></li>
+                        <li num="10000">充10000元 / <span>得15000元</span></li>
+                        <li num="1000">充1000元 / <span>得1285元</span></li>
+                        <li num="150">充150元 / <span>得188元</span></li>
+                        <li num="100">充100元 / <span>得108元</span></li>
+                        <li num="50">充50元 / <span>得58元</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="but"> </div>
+    </div>
+</body>
+
+
+<script>
+    var pNum = '';
+    var pMoney = '';
+    window.onload = function () {
+        pMoney = $('h3').text().substring(1);
+        var payP = document.createElement('p');
+        payP.innerHTML = '<span class="iconfont icon-weixin"></span>微信支付(' + pMoney + '元)';
+        $('.but').append(payP);
+    }
+    mui("#pay_list").on('tap', 'li', function () {
+        if ($(this).hasClass("active")) {
+            $(this).removeClass("active");
+            pNum = '';
+        } else {
+            $(this).addClass("active").siblings().removeClass("active");
+            pNum = this.getAttribute("num"); //获取充值金额
+        }
+
+    })
+
+    mui("h4").on('tap', 'span', function () { //点击查看通用门店
+        let payStore = '<div><table text-align="right" border="1"><tr><th>商品名称</th><th>尺码</th><th>颜色</th><th>价格</th></tr></table><div class="mui-scroll-wrapper" style="top:80px"><div class="mui-scroll" id ="mountains" style="padding-left: 15px;padding-right: 15px;"></div></div> </div>';
+        mui.alert(payStore, '商品信息', function () { });
+        
+        
+        document.getElementsByClassName("mui-popup-text")[0].style.height = '300px';
+        mui('.mui-scroll-wrapper').scroll({
+            deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+        // let pppp = '<table text-align="right" border="1"><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr></table>'
+        // document.getElementById("mountains").innerHTML = pppp;
+         document.getElementById("mountains").appendChild(buildTable(tableData));
+    })
+    let tableData = [
+        {
+            '商品名称': "女士皮衣",
+            '尺码': "M",
+            '颜色': "红色",
+            '价格': 89
+        },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 }
+    ];
+    // 创建表格
+    function buildTable(data) {
+        let table = document.createElement("table");
+        let tr = document.createElement("tr");
+        // 通过 for in 循环遍历对象,得到对象的属性,为表头添加内容
+        // for (let i in data[0]) {
+        //     // let th = document.createElement("th");
+        //     // th.innerText = i;
+        //     // tr.appendChild(th);
+        // }
+        // table.appendChild(tr);
+        // 通过 forEach 循环遍历对象数组,为表格添加行
+        data.forEach((value, index) => {
+            let tr = document.createElement("tr");
+            // 通过 for in 循环遍历对象,得到对象的属性,给每行添加内容
+            for (let index1 in data[index]) {
+                let td = document.createElement("td");
+                td.innerText = data[index][index1];
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        });
+        //设置表格的对齐属性,和边框属性
+        table.setAttribute("text-align", "right");
+        table.setAttribute("border", "1");
+        console.log(table);
+        return table;
+    }
+
+
+    //提交
+    mui(".but").on('tap', 'p', function () {
+        console.log(pNum);
+        console.log(pMoney);
+        // mui.post('/index.php/../', {
+        //     payNum: pNum,
+        //     payMoney: pMoney
+        // },function(data){
+        //     //服务器返回响应，根据响应结果，分析是否登录成功；
+        // },'json');
+    })
+    // function payUpload(){ }
+
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+</script>
+
+</html>

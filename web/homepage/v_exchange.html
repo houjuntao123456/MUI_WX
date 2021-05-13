@@ -1,0 +1,490 @@
+<html>
+
+<head>
+    <title>v票兑换</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jweixin-1.4.0.js"></script>
+    <script src="../js/vconsole.js"></script>
+
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/loading.js"></script>
+    <link rel="stylesheet" href="../mui/css/icons-extra.css">
+    <link rel="stylesheet" href="../mui/fonts/mui-icons-extra.ttf">
+    <style>
+        body,
+        .mui-content {
+            background-color: #fff;
+        }
+
+        .div_kjzs {
+            text-align: center;
+            height: 45px;
+            line-height: 45px;
+            background-color: #efeff4;
+            color: #607D8B;
+
+        }
+
+        .active {
+            border-bottom: 2px solid rgb(65, 148, 242);
+        }
+
+        .dis_none {
+            display: none;
+        }
+
+
+        .mui-collapse-content>.mui-row {
+            border-bottom: 1px solid #efefef;
+            margin-top: 10px;
+            padding-bottom: 10px;
+
+        }
+
+        .mui-collapse-content>.mui-row>:first-child {
+            font-size: 15px;
+            color: #505050;
+            padding-left: 25px;
+        }
+
+        .mui-collapse-content>.mui-row>:last-child {
+            padding-left: 25px;
+            font-size: 15px;
+            color: rgb(139, 139, 139);
+        }
+
+
+
+        .mui-table-view-cell.mui-collapse .mui-collapse-content {
+            padding: 0;
+        }
+
+        .ppppppp {
+            background: url(../../images/ico_checkon.svg) no-repeat right bottom;
+            background-size: 25px 25px;
+            background-color: rgba(212, 229, 246, 0);
+            color: #00a4ff
+        }
+
+        /* ------- */
+        .mui-input-group .mui-input-row:after {
+            left: 0;
+        }
+
+        .mui-input-row label,
+        input,
+        select,
+        textarea,
+        legend,
+        .mui-table-view-cell>a:not(.mui-btn) {
+            font-family: '微软雅黑', 'Helvetica Neue', Helvetica, sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .mui-input-row label {
+            font-size: 16px;
+            color: #333;
+        }
+
+        input,
+        select,
+        textarea {
+            font-size: 15px;
+            padding: 0px 7px;
+        }
+
+        legend {
+            padding: 5px;
+            border: 0;
+            color: #333;
+            font-size: 16px;
+        }
+
+        fieldset {
+            margin: 5px 2px;
+            border: 1px solid #eee;
+        }
+
+        .mui-input-row .mui-numbox {
+            margin: 3px 8px 3px 0;
+        }
+
+        .mui-numbox {
+            height: 32px;
+        }
+
+        .mui-table-view-cell>a:not(.mui-btn) {
+            color: #333;
+            font-size: 16px;
+        }
+
+        .not-li {
+            text-align: center;
+            line-height: 35px;
+            font-size: 18px;
+            font-family: '微软雅黑';
+            letter-spacing: 2px;
+            color: #333;
+        }
+
+        .mui-table-view-cell:after {
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;" id="back_kjWrite"></a>
+        <h1 class="mui-title" style="color:white;">v票兑换</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <div class="mui-row">
+            <div class="mui-col-xs-6 mui-col-sm-6 div_kjzs active" name="jiangli">
+                <span>兑换</span>
+            </div>
+            <div class="mui-col-xs-6 mui-col-sm-6 div_kjzs" name="jilu">
+                <span>兑换记录</span>
+            </div>
+        </div>
+        <!-- v票奖励 -->
+        <div>
+            <div id="jiangli">
+                <form action="" class="mui-input-group">
+                    <div class="mui-input-row" onclick="show_pelple()">
+                        <label>姓名:</label>
+                        <input type="text" id="j_name" value="" placeholder="请输入姓名" disabled="disabled">
+                    </div>
+                    <div class="mui-input-row" onclick="show_pelple()">
+                        <label>工号:</label>
+                        <input type="text" value="" id="j_code" placeholder="请输入工号" disabled="disabled">
+                    </div>
+                    <div class="mui-input-row">
+                        <label>兑换数量:</label>
+                        <div class="mui-numbox" data-numbox-step='1' data-numbox-min='1' data-numbox-max='100000'
+                            style="float: left;">
+                            <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+                            <input class="mui-numbox-input" type="number" />
+                            <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+                        </div>
+                    </div>
+                    <div>
+                        <fieldset style="margin-top:15px;width: 95%;margin-left: auto;margin-right: auto;">
+                            <legend>兑换详情</legend>
+                            <textarea rows="5" cols="10" id="text_area" placeholder="输入详情"></textarea>
+                        </fieldset>
+                    </div>
+                    <br>
+                </form>
+                <!-- 按钮 -->
+                <div style="text-align: center;"><button type="button" class="mui-btn mui-btn-primary"
+                        style="width: 70%;" onclick="queren()">确认</button></div>
+
+            </div>
+
+            <!-- v票奖励记录 -->
+            <div id="jilu" class="dis_none">
+                <div id="pullrefresh" class="mui-scroll-wrapper" style="top: 93px;">
+                    <div class="mui-scroll">
+                        <!--这里放置真实显示的DOM内容-->
+                        <ul class="mui-table-view" id="mui_table_view">
+                            <!-- <li class="mui-table-view-cell mui-collapse">
+                                <a class="mui-navigate-right" href="#">金猪呱呱奖</a>
+                                <div class="mui-collapse-content">
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-5 mui-col-sm-5">姓名:</div>
+                                        <div class="mui-col-xs-7 mui-col-sm-7">金猪呱呱将</div>
+                                    </div>
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-5 mui-col-sm-5">工号:</div>
+                                        <div class="mui-col-xs-7 mui-col-sm-7">2789811</div>
+                                    </div>
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-5 mui-col-sm-5">奖励时间:</div>
+                                        <div class="mui-col-xs-7 mui-col-sm-7">2012-13-19</div>
+                                    </div>
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-5 mui-col-sm-5">奖励标准:</div>
+                                        <div class="mui-col-xs-7 mui-col-sm-7">300的萨法三</div>
+                                    </div>
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-5 mui-col-sm-5">操作员:</div>
+                                        <div class="mui-col-xs-7 mui-col-sm-7">二狗子</div>
+                                    </div>
+                                </div>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 会员 -->
+
+    <!-- 查询 -->
+    <div id="sheet2" class="mui-popover mui-popover-bottom mui-popover-action ">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell mui-input-row">
+                <div class="mui-input-row">
+                    <input type="text" class="mui-input-clear" placeholder="请输入姓名/工号" style="margin-bottom: 0px;"
+                        id="condition">
+                </div>
+            </li>
+        </ul>
+        <!-- 可选择菜单 -->
+        <div class="mui-table-view" style="height:200px;">
+            <div class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <ul class="mui-table-view" id="shaixuan_people" style="color: #888888;">
+                        <!-- <li class="mui-table-view-cell ppppppp" name="二狗子" code='1223131'>
+                            <div class="mui-row">
+                                <div class="mui-col-xs-6 mui-col-sm-6">
+                                    <span class="mui-icon mui-icon-contact"></span><span>二狗子</span>
+                                </div>
+                                <div class="mui-col-xs-6 mui-col-sm-6">
+                                    <span class="mui-icon-extra mui-icon-extra-card"></span>
+                                    <span>74745454534</span>
+                                </div>
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <!-- 立即添加 -->
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell" onclick="query()">
+                <b>查询</b>
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    var load = new Loading();
+    load.init();
+    $('.div_kjzs').click(function () {
+        let id = $(this).attr("name");
+        $(this).addClass('active').siblings().removeClass('active');  //当前元素添加样式同胞元素移除样式
+        $('#' + id).removeClass('dis_none').siblings().addClass('dis_none')
+        if (id == "jilu") {
+            document.getElementById("mui_table_view").innerHTML = "";
+            mui('#pullrefresh').pullRefresh().refresh(true);
+            count = 0;
+            pullupRefresh();
+        }
+    })
+
+
+
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+
+    //姓名/工号 
+    function show_pelple() {
+        mui('#sheet2').popover('toggle');
+
+    }
+
+    // 点击选择的转介绍人
+    var dome = "";
+    mui("#shaixuan_people").on('tap', '.mui-table-view-cell', function () {
+        if ((this.getAttribute("name") == "") && (this.getAttribute("code") == "")) {
+            console.log('空')
+        } else {
+            if (dome != "") {
+                dome.classList.remove('ppppppp');
+            }
+            $("#j_name").val(this.getAttribute("name"));
+            $("#j_code").val(this.getAttribute("code"));
+            this.classList.add('ppppppp');
+            dome = this;
+            mui('#sheet2').popover('toggle');
+        }
+
+
+    })
+    // 查询转介绍人
+    var condition = document.getElementById("condition");
+    var shaixuan_people = document.getElementById("shaixuan_people");
+    function query() {
+        if (condition.value == "") {
+            mui.toast('请输入姓名/工号', {
+                duration: 'long',
+                type: 'div'
+            })
+        } else {
+            shaixuan_people.innerHTML = "";
+            load.start();
+            // 条件
+            mui.post('/index.php/webVstaff/', {
+                like: condition.value
+            }, function (data) {
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    if (data.data.length == 0) {
+                        // 创造节点
+                        var li = document.createElement('li');
+                        li.classList = "mui-table-view-cell";
+                        li.setAttribute("name", '');
+                        li.setAttribute("code", '');
+                        li.innerHTML = '<div class="mui-row">'
+                            + ' <div class="mui-col-xs-12 mui-col-sm-12">'
+                            + '暂无信息'
+                            + '</div>'
+                            + '</div>'
+                        shaixuan_people.appendChild(li);
+                    } else {
+                        for (i = 0; i < data.data.length; i++) {
+                            if (data.data[i].name == undefined) {
+                                data.data[i].name = "";
+                            }
+                            if (data.data[i].code == undefined) {
+                                data.data[i].code = "";
+                            }
+                            // 创造节点
+                            var li = document.createElement('li');
+                            li.classList = "mui-table-view-cell";
+                            li.setAttribute("name", data.data[i].name);
+                            li.setAttribute("code", data.data[i].code);
+                            li.innerHTML = '<div class="mui-row">'
+                                + ' <div class="mui-col-xs-6 mui-col-sm-6">'
+                                + '<span class="mui-icon mui-icon-contact"> </span><span>' + data.data[i].name + '</span>'
+                                + '</div>'
+                                + ' <div class="mui-col-xs-6 mui-col-sm-6">'
+                                + '<span class="mui-icon-extra mui-icon-extra-card"></span>'
+                                + ' <span>' + data.data[i].code + '</span>'
+                                + '</div>'
+                                + '</div>'
+                            shaixuan_people.appendChild(li);
+                        }
+                    }
+
+                }
+                load.stop();
+            }, 'json'
+            );
+        }
+
+    }
+
+
+    // 确认
+    function queren() {
+        load.start();
+        mui.post('/index.php/webVticket_exchange/', {
+            code: $("#j_code").val(),
+            name: $("#j_name").val(),
+            number: mui(".mui-numbox").numbox().getValue(),//数量
+            remarks: $("#text_area").val() //标准
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                mui.toast(data.msg, {
+                    duration: 'long',
+                    type: 'div'
+                })
+                setTimeout(function(){
+                    location.reload();
+                },1000)
+
+            } else {
+                mui.toast(data.msg, {
+                    duration: 'long',
+                    type: 'div'
+                })
+                load.start();
+            }
+        }, 'json'
+        );
+    }
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            //       down: {
+            //         callback: pulldownRefresh
+            //       },
+            up: {
+                contentrefresh: '正在加载...',
+                auto: false,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+
+    // 记录
+
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+
+    function pullupRefresh() {
+        load.start();
+        mui.post('/index.php/webExchange_record/', {
+            page: ++count,
+            limit: limit_num
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                    if (data.data.data.length == 0) {
+                        var li = document.createElement('li');
+                        li.classList = "not-li";
+                        li.innerHTML = "暂无记录";
+                        document.getElementById("mui_table_view").appendChild(li);
+                    } else {
+                        for (let i = 0; i < data.data.data.length; i++) {
+                            var li = document.createElement('li');
+                            li.classList = "mui-table-view-cell mui-collapse";
+                            li.innerHTML = '<a class="mui-navigate-right" href="#">' + data.data.data[i].name + '</a>'
+                                + '<div class="mui-collapse-content">'
+                                + '<div class="mui-row">'
+                                + ' <div class="mui-col-xs-5 mui-col-sm-5">姓名:</div>'
+                                + ' <div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].name + '</div>'
+                                + ' </div>'
+                                + '<div class="mui-row">'
+                                + ' <div class="mui-col-xs-5 mui-col-sm-5">工号:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].code + '</div>'
+                                + ' </div>'
+                                + ' <div class="mui-row">'
+                                + ' <div class="mui-col-xs-5 mui-col-sm-5">兑换时间:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].time + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">兑换详情:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].remarks + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">操作员:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].operator_name + '</div>'
+                                + ' </div>'
+                                + ' </div>'
+                            document.getElementById("mui_table_view").appendChild(li);
+                        }
+                    }
+                    load.stop();
+                }, 1000);
+            } else {
+                load.stop();
+            }
+        }, 'json'
+        );
+    }
+</script>
+
+</html>

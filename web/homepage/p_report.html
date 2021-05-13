@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>P高客单分析</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <script src="../js/echarts.min.js"></script>
+        <script src="../js/rfm_FX.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <script src="../mui/js/mui.picker.min.js"></script>
+
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+    <style>
+        .border_color {
+            border-bottom: 1px solid #007aff;
+            height: 10px;
+        }
+
+        .bg_style {
+            background-color: white;
+            line-height: 30px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .table_td {
+            width: 20%;
+            text-align: center;
+            /*   border-bottom: 1px solid #cccccc;
+      border-top: 1px solid #cccccc;
+      border-left: 1px solid #cccccc; */
+            line-height: 40px;
+        }
+        .mui-table-view-cell::after{
+            right: 15px;
+            background-color: #e8e8e8;
+        }
+        .module1 {
+            text-align: center;
+            line-height: 35px;
+            height: 35px;
+            margin: 3px 10px 10px 10px;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        .module-echarts {
+            background-color: white;
+            /* margin: 0 10px; */
+        }
+
+        .module-echarts h4 {
+            line-height: 35px;
+            margin-left: 10px;
+        }
+
+        .module2 table {
+            width: 100%;
+        }
+
+        .module2 table tr:nth-child(1) {
+            line-height: 35px;
+            background: rgb(0, 122, 255, .2);
+        }
+
+        .module2 table tr th {
+            font-weight: normal;
+            font-size: 16px;
+        }
+
+        .module3 {
+            height: 40px;
+            line-height: 30px;
+            color: #7a7878;
+            font-size: 15px;
+            padding-left: 20px;
+        }
+
+        .module4 {
+            background: rgb(0, 122, 255, .1);
+        }
+
+        /* 控制弹框 */
+        .mui-popover {
+            height: 300px;
+        }
+
+        #popover a {
+            text-align: center;
+        }
+            .ellipsiss{
+            width: 80px;
+            overflow: hidden;
+			/*自动隐藏文字*/
+			text-overflow: ellipsis;
+			/*文字隐藏后添加省略号*/
+			white-space: nowrap;
+			-webkit-line-clamp: 1;
+			/*想要显示的行数*/
+			-webkit-box-orient: vertical;
+        }
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;width: 50%;margin: 0 auto;" id="ttt">P高客单分析</h1>
+        <a href="#popover" class="ellipsiss" style="float: right;line-height: 44px;color: white;" id="menu">选择门店</a>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <div id="main" style="height:500px;width:100%;margin-top:20px;"></div>
+    </div>
+    <!-- 弹框区域 -->
+    <div id="popover" class="mui-popover">
+        <div class="mui-popover-arrow"></div>
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <ul class="mui-table-view" id="popover_ul">
+                    <!-- <li class="mui-table-view-cell"><a href="#" ></a>
+                        </li>
+                        <li class="mui-table-view-cell"><a href="#">Item2</a>
+                        </li>
+                        <li class="mui-table-view-cell"><a href="#">Item3</a>
+                        </li>
+                        <li class="mui-table-view-cell"><a href="#">Item4</a>
+                        </li>
+                        <li class="mui-table-view-cell"><a href="#">Item5</a>
+                        </li>
+                        <li class="mui-table-view-cell"><a href="#">Item6</a>
+                        </li>
+                        <li class="mui-table-view-cell"><a href="#">Item7</a>
+                        </li>
+                        <li class="mui-table-view-cell"><a href="#">Item8</a>
+                        </li>
+                        <li class="mui-table-view-cell"><a href="#">Item9</a>
+                        </li>
+                        <li class="mui-table-view-cell"><a href="#">Item10</a>
+                        </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../js/rfm_xingxiang_g.js"></script>
+<script>
+       var load = new Loading();
+        load.init();
+        load.start();
+  
+    //进来加载
+    window.onload = function () {
+        // 隐藏标题
+        hidden_title();
+        select_men();
+    }
+    var ttt = document.getElementById("ttt");
+    var myChart = echarts.init(document.getElementById('main'), 'light');
+    // 基于准备好的dom，初始化echarts实例
+    //根据传递参数查询数据
+    function men(code,staff) {
+        load.start();
+        mui.post('/index.php/ModelanalysisP/', {
+            store: code,
+            staff_code: staff
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                if ((data.data == "") || (data.data == null) || (data.data == undefined) || (data.data == " ")) {
+                    mui.toast('暂无数据!', { duration: 'long', type: 'div' })
+                    load.stop();
+                } else {
+                    outPutData = data.data.y;
+                    dateTime = data.data.x
+                    // 报表数据
+                    rfm_echarts();
+                    men_seach(code,staff);
+                    load.stop();
+                }
+            }
+        }, 'json'
+        );
+    }
+    // 弹框区域
+    mui('#popover').on('tap', 'a', function (e) {
+        var code = this.getAttribute('code');
+        mui("#menu")[0].innerHTML = this.innerHTML;
+        mui('.mui-popover').popover('toggle', document.getElementById("menu"));
+        men(code,"");
+        rfm_staff_code(code);
+    })
+    //滚动区域
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+    //进来查询门店
+    function select_men() {
+        mui.post('/index.php/RfmActiveStore/', {
+        }, function (data) {
+            if (data.code == 200) {
+                var popover_ul = document.getElementById("popover_ul");
+                 if (data.data.count < 6) {
+                    document.getElementById("popover").style.height = (data.data.count * 50) + 'px';
+                }
+                for (i = 0; i < data.data.count; i++) {
+                    var li = document.createElement('li');
+                    li.className = 'mui-table-view-cell'
+                    li.innerHTML = '<a href="#" code=' + data.data.data[i].code + '>' + data.data.data[i].name + '</a>'
+                    popover_ul.appendChild(li);
+                }
+                mui('.mui-popover').popover('toggle', document.getElementById("menu"));
+                load.stop();
+            }
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+</script>
+
+</html>

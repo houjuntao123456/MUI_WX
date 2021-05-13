@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <link rel="stylesheet" href="../css/iconfont_fx.css">
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <link rel="stylesheet" href="../mui/css/mui.poppicker.css">
+    <link rel="stylesheet" href="../css/app.css">
+
+    <!-- <script src="../mui/js/mui.min.js"></script> -->
+    <script src="../mui/js/muiR.js"></script>
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <script src="../mui/js/city.data-3.js"></script>
+    <script src="../mui/js/mui.poppicker.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/vconsole.js"></script>
+    <script src="../mui/js/mui.pulltorefresh2.js"></script>
+
+    <script src="../js/loading.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <title>会员资料</title>
+    <style>
+        .bg-w {
+            background-color: white;
+        }
+
+        .files {
+            width: 20%;
+            margin-top: 8px;
+            background: #D0EEFF;
+            border: 1px solid #99D3F5;
+            color: #1E88C7;
+            /*#6c6c6f;*/
+            border-radius: 4px;
+            float: left;
+            margin-right: 10px;
+            line-height: 30px;
+            position: relative;
+            z-index: 1;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .bq_display {
+            display: none;
+        }
+
+        /* 画像 */
+        .mui-card {
+            margin: 0;
+            box-shadow: none;
+            padding: 8px 10px;
+        }
+
+        .mui-card li {
+            list-style: none;
+        }
+
+        fieldset {
+            border: 1px solid #ececed;
+        }
+
+        legend {
+            padding: 8px;
+        }
+
+        legend a {
+            font-size: 16px;
+            color: #535050;
+            letter-spacing: 2px;
+        }
+
+        .Block div {
+            margin-bottom: 10px;
+            margin-right: 5px;
+        }
+
+        .bg-white {
+            background: white;
+        }
+
+        .m-b-15 {
+            margin-bottom: 15px;
+        }
+
+        .style_child li:nth-child(odd) {
+            background: #F3F3F3;
+        }
+
+        .bor-bt {
+            border-bottom: 1px solid #ececed;
+        }
+
+        .div_lin {
+            width: 74px;
+            height: 74px;
+            border: 15px rgb(226, 247, 136) solid;
+            text-align: center;
+            transform: rotate(45deg);
+            position: relative;
+            border-radius: 10px;
+        }
+
+        .div_lin2 {
+            width: 74px;
+            height: 74px;
+            border: 15px rgb(226, 247, 136) solid;
+            text-align: center;
+            transform: rotate(-45deg);
+            line-height: 44px;
+            position: absolute;
+            font-size: 17px;
+            top: -15px;
+            left: -15px;
+            border-radius: 10px;
+
+        }
+
+        .divda {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(0, 174, 255);
+            position: relative;
+            color: white;
+            /* text-align: center;
+            line-height: 100px; */
+        }
+
+        .divxiao {
+            width: 50px;
+            height: 50px;
+            border: 10px;
+            position: absolute;
+            margin-top: 13px;
+            left: 13px;
+        }
+
+        .dis_yin {
+            display: none;
+        }
+
+        /* 超出的省略 */
+        .shenglue {
+            overflow: hidden;
+            /*自动隐藏文字*/
+            text-overflow: ellipsis;
+            /*文字隐藏后添加省略号*/
+            white-space: nowrap;
+            -webkit-line-clamp: 1;
+            /*想要显示的行数*/
+            -webkit-box-orient: vertical;
+        }
+
+        .display {
+            display: none;
+        }
+
+        .hkstyle {
+            height: 50px;
+            width: 50%;
+            background-color: rgba(12, 76, 128, 0.7);
+            position: absolute;
+            border-radius: 10px;
+        }
+
+        .hkstyle span {
+            font-size: 22px;
+            color: #fff;
+            margin: 0px;
+            padding: 3px 10px;
+            float: right;
+        }
+
+        .hkstyle p {
+            color: #fff;
+            font-size: 14px;
+            padding: 14px;
+        }
+
+        .hkstyle,
+        .hkstyle p {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        /* .style_child li{line-height: 45px;} */
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:#fff;"></a>
+        <h1 class="mui-title" style="color:#fff;">会员资料</h1>
+        <span style="float:right;line-height:44px;color:white;" onclick="add_fandan()">搭配</span>
+        <div class="hkstyle display" id="zou">
+            <span class="mui-icon mui-icon-close"></span>
+            <p id="zou_text"></p>
+            <!-- <h6 style="color: #fff;font-size: 14px;padding: 14px;" id="zou_text"></h6> -->
+        </div>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <!-- 资料 -->
+        <div id="data" style="position:relative;">
+            <div class="data_style1">
+                <div class="mui-row" style="width: 100%;">
+                    <div class="mui-col-sm-4 mui-col-xs-4" style="height:130px;position:relative;">
+                        <div class="photo_top" style="right:70px;" onclick="photo123();">
+                            <a href="###" id="Phone_tel">
+                                <span style="font-size: 30px;color: white;font-weight: bold;margin: 2px;"
+                                    class="mui-icon mui-icon-phone"></span>
+                            </a>
+                            <br>
+                        </div>
+                        <div class="photo_bottom" style="right:8px;line-height: 30px">
+                            <!-- 富信 -->
+                            <a href="JavaScript:void(0)" id="" onclick="fuxin_()">
+                                <span style="font-size: 19px;color: white;font-weight: bold;margin:3px;"
+                                    class="iconfont icon-fengfu"></span>
+                            </a>
+                            <br>
+                        </div>
+                    </div>
+
+                    <div class="mui-col-sm-4 mui-col-xs-4" style="text-align: center;">
+                        <div class="data_head">
+
+                            <img src="../images/xt.jpg" alt="" id="data_photo">
+                        </div>
+                        <p style="margin-top:10px;color: #ffffff;margin-bottom: 0;">
+                            <span class="mui-icon mui-icon-star"></span>
+                            <span style="font-size:20px;" id="data_username"></span>
+                            <span id="data_gender"></span>
+                        </p>
+                    </div>
+
+                    <div class="mui-col-sm-4 mui-col-xs-4" style="height:130px;position:relative;">
+                        <div class="photo_top" style="left:70px;">
+                            <!-- 短信 href="#over1" -->
+                            <a onclick="javascript:location.href='./short_message.html?type=false'">
+                                <span style="font-size: 25px;color: white;margin: 5px;"
+                                    class="mui-icon mui-icon-chat"></span>
+                            </a>
+                        </div>
+
+                        <div class="photo_bottom" style="left:8px;">
+                            <!-- 微信聊天 -->
+                            <a onclick="javascript:location.href='./wx_chat2.html?code='+idd">
+                                <span style=" font-size: 25px;color: white;margin: 5px;"
+                                    class="mui-icon mui-icon-weixin"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 导航画像 -->
+                <ul class="ul_nav" style="margin:0 0 0 0" id="ul_nav">
+                    <li class="label kk">
+                        <p class="lable_p" onclick="qiehuan(0)">资料</p>
+                    </li>
+                    <li class="label">
+                        <p class="lable_p" onclick="qiehuan(1)">画像</p>
+                    </li>
+                    <li class="label">
+                        <p class="lable_p" onclick="qiehuan(2)" style="border-right:0px;">快照</p>
+                    </li>
+                    <li class="label">
+                        <p class="lable_p" onclick="qiehuan(3)">足迹</p>
+                    </li>
+                    <li class="label">
+                        <p class="lable_p" onclick="qiehuan(4)">报表</p>
+                    </li>
+                    <li class="label">
+                        <p class="lable_p" onclick="qiehuan(5)">卡券</p>
+                    </li>
+                    <li class="label">
+                        <p class="lable_p" onclick="qiehuan(6)">专属</p>
+                    </li>
+                    <li class="label">
+                        <p class="lable_p" onclick="qiehuan(7)">家属</p>
+                    </li>
+                    <li class="label">
+                        <p class="lable_p" onclick="qiehuan(8)">介绍</p>
+                    </li>
+                </ul>
+
+                <!-- 基本消费 -->
+                <div class="mui-row" id="jibe_member_data"
+                    style="color: #626568;background: #fff;padding: 10px 0;border-bottom:1px solid #e6e4e4;">
+                    <div class="mui-col-sm-4 mui-col-xs-4" style="text-align:center;">
+                        <div style="font-size: 14px;">消费金额</div>
+                        <div id="data_money" class="shenglue" num="0"></div>
+                    </div>
+                    <div class="mui-col-sm-4 mui-col-xs-4" style="text-align:center;">
+                        <div style="font-size: 14px;">未消费天数</div>
+                        <div id="data_day" class="shenglue" num="0"></div>
+                    </div>
+                    <div class="mui-col-sm-4 mui-col-xs-4" style="text-align:center;">
+                        <div style="font-size: 14px;">消费次数</div>
+                        <div id="data_time" class="shenglue" num="0"></div>
+                    </div>
+
+                    <!-- <div class="mui-col-sm-3 mui-col-xs-3" style="text-align:center;">
+                        <div style="font-size: 14px;">余额</div>
+                        <div id="money_balance" class="shenglue" num="0">789</div>
+                    </div> -->
+                </div>
+            </div>
+
+
+            <!-- 基础资料 -->
+            <div id="basic_data" class="data_style2">
+                <!-- 上传顾客照片 -->
+                <div class="mui-row">
+                    <!-- <div class="mui-input-row data_module_title" style="border-left: 3px solid rgb(62, 210, 247);">
+                        <label for="">顾客照片</label>
+                    </div> -->
+                    <div id="people_updown">
+                        <input type="file" accept="image/*" multiple id="upload_picture" style="display: none;"
+                            onchange="uploadImageHandle(this,0.5)">
+                        <div id="updown" style="border: 1px dotted #cccccc;text-align: center; ">
+
+                            <h5 style="font-size: 30px;padding: 20px 0 20px 0;" id="updown_text">上传图片</h5>
+                            <img id="updown_picture" src="" alt="" width="90%" style="border-radius: 10px;">
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 基本资料 -->
+                <div class="mui-row">
+                    <div class="mui-input-row data_module_title" style="border-left: 3px solid rgb(240, 190, 69);">
+                        <label for="">基本资料</label>
+                        <label for="" class="label_s" id="modify">修改<span
+                                class="mui-icon mui-icon-compose"></span></label>
+                    </div>
+                    <ul class="mui-table-view data_module_content">
+                        <!-- 昵称 -->
+                        <!-- <li class="mui-table-view-cell">昵称
+                            <span class="" style="float:right;" id="data_nickname">懒小孩</span>
+                        </li> -->
+                        <!-- 关注状态 -->
+                        <!-- <li class="mui-table-view-cell">关注状态
+                            <span class="" style="float:right;" id="data_follow">已关注</span>
+                        </li> -->
+                        <!-- 手机号码 -->
+                        <li class="mui-table-view-cell bor-bt">手机号码
+                            <span class="" style="float:right;" id="data_phone"></span>
+                        </li>
+                        <!-- 生日 -->
+                        <li class="mui-table-view-cell bor-bt">生日
+                            <span class="" style="float:right;" id="data_birthday"></span>
+                        </li>
+                        <!-- 所在城市 -->
+                        <li class="mui-table-view-cell bor-bt">所在城市
+                            <span class="" style="float:right;" id="data_city"></span>
+                        </li>
+                        <!-- 详细地址 -->
+                        <li class="mui-table-view-cell">详细地址
+                            <span class="" style="float:right;" id="data_address"></span>
+                        </li>
+                    </ul>
+                    <!--会员卡信息 -->
+                    <div class="mui-input-row data_module_title" style="border-left: 3px solid rgb(99, 201, 97);">
+                        <label for="" style="width:40%;">会员卡信息</label>
+                    </div>
+                    <ul class="mui-table-view data_module_content">
+                        <!-- 昵称 -->
+                        <li class="mui-table-view-cell bor-bt">会员卡类型
+                            <span class="" style="float:right;" id="data_vip_type"></span>
+                        </li>
+                        <!-- 关注状态 -->
+                        <li class="mui-table-view-cell bor-bt">会员卡号
+                            <span class="" style="float:right;" id="data_vip_number"></span>
+                        </li>
+                        <!-- 手机号码 -->
+                        <li class="mui-table-view-cell bor-bt">开卡时间
+                            <span class="" style="float:right;" id="data_vip_time"></span>
+                        </li>
+                        <!-- 生日 -->
+                        <li class="mui-table-view-cell bor-bt">可用积分
+                            <span class="" style="float:right;" id="data_vip_integral"></span>
+                        </li>
+                        <!-- 所在城市 -->
+                        <li class="mui-table-view-cell bor-bt">可用余额
+                            <span class="" style="float:right;" id="data_vip_balance"></span>
+                        </li>
+                        <!-- 详细地址 -->
+                        <li class="mui-table-view-cell">总消费金额
+                            <span class="" style="float:right;" id="data_vip_money"></span>
+                        </li>
+                    </ul>
+                    <!-- 会员归属 style="margin-top:1px;"-->
+                    <div class="mui-input-row data_module_title" style="border-left:3px solid rgb(139, 147, 239);">
+                        <label for="">会员归属</label>
+                    </div>
+                    <div class="mui-table-view data_module_content">
+                        <div class="mui-row huiy_title">
+                            <div class="mui-col-sm-4 mui-col-xs-4 txt1">门店名称</div>
+                            <div class="mui-col-sm-3 mui-col-xs-3 txt1">归属用户</div>
+                            <div class="mui-col-sm-4 mui-col-xs-4 txt1">创建时间</div>
+                        </div>
+                        <!-- 显示会员归属信息 -->
+                        <div id="information">
+                            <!-- <div class="mui-row" style="text-align:center;border-top: 1px solid #ccc;font-size:16px;">
+                                <div class="mui-col-sm-4 mui-col-xs-4" style="line-height:40px;">左颜右色</div>
+                                <div class="mui-col-sm-4 mui-col-xs-4" style="line-height:40px;">大公无私</div>
+                                <div class="mui-col-sm-4 mui-col-xs-4">
+                                    <p style="margin:0;padding:0;color: black;">2018-12-09</p>
+                                    <p style="margin:0;padding:0;color: black;">20:48:41</p>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div style="margin-bottom:10%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 修改资料 -->
+        <div id="modify_data" class="hide data_hide_style">
+            <div class="mui-input-row xgzl_title" style="overflow: hidden;">
+                <label style="width:100%;"><span>会员基本资料修改</span>
+                    <span onclick="qiehuan(0)" class="mui-icon mui-icon-close" style="float: right;"></span>
+                </label>
+
+            </div>
+            <form class="mui-input-group bg-w" style="border-top: none;">
+                <!-- 真实姓名 -->
+                <div class="mui-input-row">
+                    <label for="">真实姓名</label>
+                    <input type="text" placeholder="请输入姓名" οnfοcus="this.placeholder=''"
+                        οnblur="this.placeholder='请输入姓名'" id="xg_username">
+                </div>
+                <!-- 会员性别 -->
+                <div class="mui-input-row">
+                    <label>会员性别</label>
+                    <div class="RadioStyle">
+                        <div class="Block PaddingL mui-row">
+                            <div class="mui-col-sm-3 mui-col-xs-3">
+                                <input type="radio" id="model1" name="Storage" value="m" checked />
+                                <label for="model1">男</label>
+                            </div>
+                            <div class="mui-col-sm-3 mui-col-xs-3">
+                                <input type="radio" id="model2" name="Storage" value="w" />
+                                <label for="model2">女</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 会员归属 -->
+                <div class="mui-input-row">
+                    <label>会员归属</label>
+                    <select name="" style="color:rgb(144, 140, 140);" id="Membership">
+                        <option value="">形象顾问</option>
+                    </select>
+                </div>
+                <!-- 顾客照片 -->
+                <!-- <div class="mui-input-row">
+                    <label for="">顾客照片</label>
+                    <div class="files">
+                        上传图片<input type="file" id="file_file" onchange="showImg(this)"
+                            style="position: absolute;top: 0;z-index: 2;width: 100%;left: 0;opacity: 0;">
+                    </div>
+                    <img id="showimg" src="../images/zw.jpg" width="35px;" height="35px;" style="margin-top:6px;" />
+                </div> -->
+
+                <!-- 会员手机号 -->
+                <div class="mui-input-row">
+                    <label>手机号码</label>
+                    <input type="text" class="mui-input-clear" placeholder="请输入手机号" οnfοcus="this.placeholder=''"
+                        οnblur="this.placeholder='请输入手机号'" id="phone">
+                </div>
+                <!-- 身份证号码 -->
+                <!-- <div class="mui-input-row">
+                    <label>身份证号</label>
+                    <input type="text" class="mui-input-clear" placeholder="请输入身份证号" id="ID_number">
+                </div> -->
+                <!-- 生日 -->
+                <div class="mui-input-row">
+                    <label>会员生日</label>
+                    <input type="text" class="" placeholder="请选择会员生日" id="member_birthday">
+                </div>
+                <!-- 年龄 -->
+                <!-- <div class="mui-input-row">
+                    <label>年龄</label>
+                    <input type="text" class="" placeholder="33" id="">
+                </div> -->
+                <!-- 纪念日 -->
+                <!-- <div class="mui-input-row mui-select" style="margin:0px;padding:0px;">
+                    <label for="">纪念日</label>
+                    <select name="" style=" color:rgb(0, 110, 255);margin-bottom: 4px; ">
+                        <option value="">请选择纪念日</option>
+                        <option value="">结婚纪念日</option>
+                        <option value="">配偶纪念日</option>
+                        <option value="">子女纪念日</option>
+                    </select>
+                </div> -->
+                <!-- 纪念日日期 -->
+                <!-- <div class="mui-input-row">
+                    <label>纪念日日期</label>
+                    <input type="text" class="" placeholder="请选择纪念日日期" id="birthday_date">
+                </div> -->
+                <!-- 所在地区 -->
+                <div class="mui-input-row">
+                    <label for="">所在城市</label>
+                    <input type="text" class="" placeholder="请选择所在地区" id="region">
+                </div>
+                <!-- 客户详细地址 -->
+                <div class="mui-input-row">
+                    <label>详细地址</label>
+                    <input type="text" class="mui-input-clear" placeholder="请输入详细地址" οnfοcus="this.placeholder=''"
+                        οnblur="this.placeholder='请输入详细地址'" id="detailed_address">
+                </div>
+                <!-- 按钮 -->
+                <div class="mui-row" style="text-align:center;padding-top:10px;padding-bottom: 20px;">
+                    <button type="button" class="mui-btn mui-btn-danger" style="width:60%;" id="confirm">确 认</button>
+                </div>
+            </form>
+        </div>
+        <!-- 画像 -->
+        <div style="width:100%;margin:0 auto;margin-top: 352px;" id="member_label" class="hide">
+            <div class="mui-row">
+                <div class="mui-input-row data_module_title"
+                    style="background-color: #fff; border-left: 3px solid #7FBCFF;">
+                    <label for="">会员画像</label>
+                </div>
+            </div>
+            <div class="mui-row bg-white">
+                <ul class="mui-card" id="BQ_labels" style="color:#77797b;">
+                    <!-- <li class="mui-card-content">
+						<form>
+						 <fieldset>
+						  <legend><a href="#">自我评价:</a></legend>
+						  <div class="mui-collapse-content">
+						      <div class="checkboxStyle">
+						          <div class="Block PaddingL mui-row">
+						              <div class="mui-col-sm-3 mui-col-xs-3">
+						                  <input type="checkbox" id="love1" name="chexkbox_test" value="阳光开朗" />
+						                  <label for="love1">阳光开朗</label>
+						              </div>
+						              <div class="mui-col-sm-3 mui-col-xs-3">
+						                  <input type="checkbox" id="love2" name="chexkbox_test" value="成熟稳重" />
+						                  <label for="love2">成熟稳重</label>
+						              </div>
+						              <div class="mui-col-sm-3 mui-col-xs-3">
+						                  <input type="checkbox" id="love3" name="chexkbox_test" value="雷厉风行" />
+						                  <label for="love3">雷厉风行</label>
+						              </div>
+						              <div class="mui-col-sm-3 mui-col-xs-3">
+						                  <input type="checkbox" id="love4" name="chexkbox_test" value="执行力强" onclick="checkboxOnclick(this)" />
+						                  <label for="love4">执行力强</label>
+						              </div>
+						          </div>
+						  
+						      </div>
+						  </div>
+						 </fieldset>
+						</form>
+                    </li> -->
+
+                </ul>
+                <p style="text-align: center;margin-top: 20px;">
+                    <button id="ba_hide" onclick="funbiaoqian(this)" data-loading-icon="mui-spinner mui-spinner-white"
+                        data-loading-text="修改中" class="mui-btn mui-btn-primary bq_display"
+                        style="width: 93%;">确认修改</button>
+                </p>
+            </div>
+        </div>
+
+        <!-- 足迹 -->
+        <div id="zujj" class="hide" style="margin-top: 320px;">
+            <div id="pullrefresh1" class=" mui-scroll-wrapper " style="overflow:hidden;">
+                <div class="mui-scroll">
+                    <!--数据列表-->
+                    <ul class="mui-table-view" id="member_data">
+                        <!-- mui-table-view-chevron-->
+                        <!-- 里面详细内容 -->
+                        <li class="mui-table-view-cell mui-collapse">
+                            <div class="mui-row" style="background-color: white;margin-top: 10px;">
+                                <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center">
+                                    <p>2019-09-14</p>
+                                    <p> 星期六</p>
+                                </div>
+                                <div class="mui-col-sm-9 mui-col-xs-9">
+                                    <p style="color: black;font-size: 16px;"><span>【店员群发回访】</span>
+                                        <span>【2019-12-11】</span></p>
+                                    <div style="font-size: 14px;">
+                                        爱上看见的哈酒的哈涉及到哈客户达科技和大海的骄傲好看的黄金卡三等奖
+                                    </div>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+                <!--数据列表-->
+            </div>
+            <div style="width: 100%;" id="div_huifang">
+                <div
+                    style="margin: 0 auto; text-align: center;line-height:50px;font-size: 25px; width: 60%;border-radius:10px; height:50px;color: white;background-color:#007aff;">
+                    添加回访记录</div>
+            </div>
+        </div>
+        <!-- 报表 -->
+        <div id="bbiao" class="hide" style="margin-top: 352px;">
+            <!-- 总价值 -->
+            <div class="mui-row" style="background-color: white;height:100px;margin-top:10px;">
+                <div class="mui-col-sm-3 mui-col-xs-3">
+                    <div class="divda">
+                        <div class="divxiao">
+                            <div class="div_lin">
+                                <div class="div_lin2">
+                                    贡献
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mui-col-sm-3 mui-col-xs-3">
+                    <p style="padding-left:10px;color: black;margin-top: 5px;"><span>客单价</span> </p>
+                    <p style="padding-left:10px;color: black"><span>消费总金额</span> </p>
+                    <p style="padding-left:10px;color: black"><span>消费次数</span> </p>
+                </div>
+                <div class="mui-col-sm-6 mui-col-xs-6">
+                    <p style="text-align:right;padding-right: 2%;color: black; margin-top: 5px;"><span
+                            style="color: chocolate" id="p1"></span></p>
+                    <p style="text-align:right;padding-right: 2%;color: black;"><span style="color: chocolate"
+                            id="p2"></span>
+                    </p>
+                    <p style="text-align:right;padding-right: 2%;color: black;"><span style="color: chocolate"
+                            id="p3"></span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 频率 -->
+            <div class="mui-row" style="background-color: white;height:100px;margin-top:10px;">
+                <div class="mui-col-sm-3 mui-col-xs-3">
+                    <div class="divda" style="background-color: rgb(113, 41, 248)">
+                        <div class="divxiao">
+                            <div class="div_lin" style="border-color: rgb(174, 236, 123)">
+                                <div class="div_lin2" style="border-color: rgb(174, 236, 123)">
+                                    频率
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mui-col-sm-4 mui-col-xs-4">
+                    <p style="padding-left:10px;color: black;margin-top: 5px;"><span></span> </p>
+                    <p style="padding-left:10px;color: black"><span>最后消费时间</span> </p>
+                    <p style="padding-left:10px;color: black"><span>未消费天数</span></p>
+                </div>
+                <div class="mui-col-sm-5 mui-col-xs-5">
+                    <p style="text-align:right;padding-right: 2%;color: black; margin-top: 5px;"><span
+                            style="color: chocolate"></span></p>
+                    <p style="text-align:right;padding-right: 2%;color: black;"><span style="color: chocolate"
+                            id="p4"></span></p>
+                    <p style="text-align:right;padding-right: 2%;color: black;"><span style="color: chocolate"
+                            id="p5"></span></p>
+                </div>
+            </div>
+            <!-- 回访 -->
+            <div class="mui-row" style="background-color: white;height:100px;margin-top:10px;">
+                <div class="mui-col-sm-3 mui-col-xs-3">
+                    <div class="divda" style="background-color: teal">
+                        <div class="divxiao">
+                            <div class="div_lin">
+                                <div class="div_lin2">
+                                    维护
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mui-col-sm-4 mui-col-xs-4">
+                    <!-- <p style="padding-left:10px;color: black;margin-top: 5px;"><span>回访次数</span> </p> -->
+                    <p style="padding-left:10px;color: black"><span>未回访天数</span> </p>
+                    <p style="padding-left:10px;color: black"><span>最后一次回访</span> </p>
+                </div>
+                <div class="mui-col-sm-5 mui-col-xs-5">
+                    <!-- <p style="text-align:right;padding-right: 2%;color: black; margin-top: 5px;"><span
+                            style="color: chocolate" id="p6">4</span>次</p> -->
+                    <p style="text-align:right;padding-right: 2%;color: black;"><span style="color: chocolate"
+                            id="p7"></span>
+                    </p>
+                    <p style="text-align:right;padding-right: 2%;color: black;"><span style="color: chocolate"
+                            id="p8"></span></p>
+                </div>
+            </div>
+
+            <!-- 总价值 -->
+            <div class="mui-row" style="background-color: white;height:100px;margin-top:10px;">
+                <div class="mui-col-sm-3 mui-col-xs-3">
+                    <div class="divda" style="background-color:#007aff;">
+                        <div class="divxiao">
+                            <div class="div_lin">
+                                <div class="div_lin2">
+                                    RFM
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mui-col-sm-3 mui-col-xs-3">
+                    <p style="padding-left:10px;color: black;margin-top: 5px;"><span>R分值</span> </p>
+                    <p style="padding-left:10px;color: black"><span>F分值</span> </p>
+                    <p style="padding-left:10px;color: black"><span>M分值</span> </p>
+                </div>
+                <div class="mui-col-sm-6 mui-col-xs-6">
+                    <p style="text-align:right;padding-right: 2%;color: black; margin-top: 5px;"><span
+                            style="color: chocolate" id="p9">0</span></p>
+                    <p style="text-align:right;padding-right: 2%;color: black;"><span style="color: chocolate"
+                            id="p10"></span>
+                    </p>
+                    <p style="text-align:right;padding-right: 2%;color: black;"><span style="color: chocolate"
+                            id="p11"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <br><br>
+</body>
+<!-- + '<p style="margin:0;padding:0;color: black;">20:48:41</p>' -->
+<!--上传照片 -->
+<script>
+    var load = new Loading();
+    load.init();
+    // load.start();
+    // load.stop();
+    // 图片上传
+    mui("#updown")[0].addEventListener("tap", function () {
+        $('#upload_picture').click();
+
+        // 清空图片储存
+        base64_YS = "";
+        // 清空文件储存
+        file_File = "";
+        // // 清除图片路径
+        // picture_src = "";
+    });
+    function shangchuan_picture() {
+        load.start();
+        var data = new FormData();
+        data.append('file', file_File);
+        data.append('model', 'vips');
+        data.append('code', idd);
+        $.ajax({
+            data: data,
+            type: "POST",
+            url: '/index.php/UserlistUploadImg/',
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (JSON.parse(data).code == 200) {
+                    document.getElementById("updown_text").classList.add("dis_yin"); //上传文件字体隐藏
+                    document.getElementById("updown_picture").classList.remove("dis_yin"); //照片显示区域显示
+                    document.getElementById("updown_picture").setAttribute("src", base64_YS); //更改图片路径
+                    load.stop();
+                } else if (JSON.parse(data).code == 400) {
+                    mui.toast(JSON.parse(data).msg, {
+                        duration: 'long',
+                        type: 'div'
+                    });
+                    load.stop();
+                }
+            },
+            error: function (xhr) {
+                mui.toast('照片上传失败,请重新选择!', {
+                    duration: 'long',
+                    type: 'div'
+                });
+                load.stop();
+            }
+        }, 'JSON');
+    }
+    // 图片压缩
+    var file_File = ""; //接收file变量
+    var base64_YS = "";//接收压缩的base64编码
+    function uploadImageHandle(File_domain, Multiple) {
+        // 创建实例
+        var reader = new FileReader();
+        var img = document.createElement('img');
+        // 读取上传的图片的信息(lastModified, lastModifiedDate, name, size, type等)
+        var file = File_domain.files[0];
+        // 记下上传的图片的name, 后面会用到
+        var flieName = File_domain.files[0].name;
+        // 记下上传的图片的类型, 后面会用到
+        var fileType = file.type;
+        // 生成canvas画布
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
+        // MDN: 该方法会读取指定的 Blob 或 File 对象。读取操作完成的时候，
+        // readyState 会变成已完成（DONE），并触发 loadend 事件，
+        // 同时 result 属性将包含一个data:URL格式的字符串（base64编码）以表示所读取文件的内容。
+        // 也就是说, 将File对象转化为base64位字符串
+        reader.readAsDataURL(file);
+        // 上一步是异步操作, 读取完成后会执行onload事件, 而base64的字符串在e.target.rusult中
+        reader.onload = function (e) {
+            // 获得图片dom
+            var base64 = e.target.result
+            img.src = base64;
+            //  console.log(base64.length+ base64);
+            //   create_content(789, '的暑假', base64);
+        };
+
+        img.onload = function () {
+            // 图片原始尺寸
+            var originWidth = this.width;
+            var originHeight = this.height;
+
+            // 最大尺寸限制
+            var maxWidth = this.width * Multiple,
+                maxHeight = this.height * Multiple;
+            // 目标尺寸
+            var targetWidth = originWidth,
+                targetHeight = originHeight;
+            // 图片尺寸超过800x800的限制
+            if (originWidth > maxWidth || originHeight > maxHeight) {
+                if (originWidth / originHeight > maxWidth / maxHeight) {
+                    // 更宽，按照宽度限定尺寸
+                    targetWidth = maxWidth;
+                    targetHeight = Math.round(
+                        maxWidth * (originHeight / originWidth)
+                    );
+                } else {
+                    targetHeight = maxHeight;
+                    targetWidth = Math.round(
+                        maxHeight * (originWidth / originHeight)
+                    );
+                }
+            }
+            // canvas对图片进行缩放
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+            // 清除画布
+            context.clearRect(0, 0, targetWidth, targetHeight);
+            // 将图片划到canvas上
+            context.drawImage(img, 0, 0, targetWidth, targetHeight);
+            // 把canvas转成base64格式并去除头
+            var base64 = canvas
+                .toDataURL(fileType)
+            // .replace(/^data:image\/(jpeg|jpg|png|gif);base64,/, '');
+            base64_YS = base64;
+            file_File = base_flie(base64, flieName);
+
+            // });
+            shangchuan_picture();
+        };
+
+
+    }
+
+
+    function base_flie(dataurl, filename) {//将base64转换为文件
+        var arr = dataurl.split(',');
+        var mime = arr[0].match(/:(.*?);/)[1];
+        var bstr = atob(arr[1]);
+        var n = bstr.length;
+        var u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, { type: mime });
+    }
+
+</script>
+<script>
+    var load = new Loading();
+    load.init();
+    load.start();
+    var nav = window.parent.document.getElementById("nav");
+    nav.style.display = "";
+    hh[0].style.bottom = "50px";
+    // var vConsole = new VConsole();
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+    function photo123() {
+        mui.post('/index.php/UserlistVisit/', {
+            code: idd,
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+    var information = document.getElementById("information");
+    window.onload = function () {
+        fang();
+        chuandi();
+        lable_UP();
+        hidden_title();
+    }
+    var shuzu = [];
+    var label = document.getElementsByClassName("label");
+    var lable_p = document.getElementsByClassName("lable_p");
+    // 获取资料id
+    var data = document.getElementById("data");
+    // 获取修改按钮id
+    var modify = document.getElementById("modify");
+    //获取修改资料id
+    var modify_data = document.getElementById("modify_data");
+    // 获取基础资料id
+    var basic_data = document.getElementById("basic_data");
+    //获取足迹id
+    var zujj = document.getElementById("zujj");
+    //获取报表id
+    var bbiao = document.getElementById("bbiao");
+    //获取卡券id
+    // 获取会员画像
+    var member_label = document.getElementById("member_label");
+    //   点击上导航切换
+    function qiehuan(e) {
+
+        for (i = 0; i < 6; i++) {
+            if (e == i) {
+                label[e].classList.add("kk");
+            } else {
+                label[i].classList.remove("kk");
+            }
+        }
+        if (e == 0) {
+            // 当点击资料(0)时,基础资料显示
+            basic_data.classList.remove("hide");
+            // 修改资料隐藏
+            modify_data.classList.add("hide");
+
+            // 画像隐藏
+            member_label.classList.add("hide");
+            //足迹隐藏
+            zujj.classList.add("hide");
+            // 报表隐藏
+            bbiao.classList.add("hide");
+
+        } else if (e == 1) {
+            // 点击会员画像(1)时,画像显示
+            member_label.classList.remove("hide");
+            // 基础资料
+            basic_data.classList.add("hide");
+            // 修改资料隐藏
+            modify_data.classList.add("hide");
+            //足迹隐藏
+            zujj.classList.add("hide");
+
+            bbiao.classList.add("hide");
+
+        } else if (e == 2) {
+            location.href = './member_snapshot_layui.html?' + 'code=' + idd;
+        } else if (e == 3) {
+            location.href = './member_footer.html?' + 'code=' + idd;
+        } else if (e == 4) {
+            // 点击报表时
+            bbiao.classList.remove("hide");
+            //画像
+            member_label.classList.add("hide");
+            // 基础资料
+            basic_data.classList.add("hide");
+            // 修改资料隐藏
+            modify_data.classList.add("hide");
+            //足迹隐藏
+            zujj.classList.add("hide");
+        } else if (e == 5) {
+            //我的卡券
+            location.href = './member_mycard.html?' + 'code=' + idd;
+        } else if (e == 6) {
+            // 专属
+            location.href = './member_exclusive.html?' + 'code=' + idd;
+        } else if (e == 7) {
+            // 家属
+            location.href = './member_family.html?' + 'code=' + idd + '&family_phone=' + family_phone;
+
+        } else if (e == 8) {
+            // 介绍
+            location.href = './member_introduce.html?' + 'code=' + idd;
+        }
+
+
+    }
+
+
+    // alert(window.screen.availHeight)
+    var ul_nav = document.getElementById("ul_nav");
+    var pullrefresh = document.getElementById("pullrefresh");
+    var pullRefresh1 = document.getElementById("pullRefresh1");
+    var pullRefresh2 = document.getElementById("pullRefresh2");
+    //获取添加回访
+    var div_huifang = document.getElementById("div_huifang");
+    function fang() {
+        div_huifang.style.marginTop = (window.screen.availHeight - 250) + "px";
+    }
+    /*修改资料*/
+    //生日
+    var birthday = document.getElementById("member_birthday");
+    birthday.onfocus = function () {
+        // 禁止唤醒手机键盘
+        document.activeElement.blur();
+        var dtpicker = new mui.DtPicker({
+            type: "date",//设置日历初始视图模式 
+            beginDate: new Date(1970, 01, 01),//设置开始日期 
+            endDate: new Date(2070, 01, 01),//设置结束日期 
+            labels: ['年', '月', '日'],//设置默认画像区域提示语 
+        });
+        //将时间显示
+        dtpicker.show(function (items) {
+            // sj[0].innerHTML = items.y.value;
+            // sj[1].innerHTML = items.m.value;
+            // sj[2].innerHTML = items.d.value;
+            birthday.value = items.y.value + "-" + items.m.value + "-" + items.d.value;
+        })
+    }
+    // 纪念日日期
+    // var birthday_date = document.getElementById("birthday_date");
+    // birthday_date.onfocus = function () {
+    //     // 禁止唤醒手机键盘
+    //     document.activeElement.blur();
+    //     var dtpicker = new mui.DtPicker({
+    //         type: "date",//设置日历初始视图模式 
+    //         beginDate: new Date(1970, 01, 01),//设置开始日期 
+    //         endDate: new Date(2070, 01, 01),//设置结束日期 
+    //         labels: ['年', '月', '日'],//设置默认画像区域提示语 
+    //     });
+    //     //将时间显示
+    //     dtpicker.show(function (items) {
+    //         // sj[0].innerHTML = items.y.value;
+    //         // sj[1].innerHTML = items.m.value;
+    //         // sj[2].innerHTML = items.d.value;
+    //         birthday_date.value = items.y.value + "-" + items.m.value + "-" + items.d.value;
+    //     })
+    // }
+    //验证姓名
+    var username = document.getElementById("xg_username");
+    username.onfocus = function () {
+        username.placeholder = "";
+    }
+
+    //验证手机号
+    var phone = document.getElementById("phone");
+    phone.onfocus = function () {
+        phone.placeholder = "";
+    }
+    //验证方法
+    function isPoneAvailable($poneInput) {
+        var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+        if (!myreg.test($poneInput)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    //详细地址
+    var deaddress = document.getElementById("detailed_address")
+    deaddress.onfocus = function () {
+        deaddress.placeholder = "";
+    }
+    //验证身份证号
+    // var IDnumber = document.getElementById("ID_number");
+    // IDnumber.onblur = function () {
+    //     var IDnum = IDnumber.value;
+    //     if (IDnum == "") {
+    //         mui.alert('身份证号不能为空', '提示', '确定'['div']);
+    //     } else {
+    //         if (!isIdentity(IDnum)) {
+    //             mui.alert('身份证号码格式不正确', '提示', '确定'['div']);
+    //         }
+    //     }
+    // }
+    //验证方法 identity
+    function isIdentity($identity) {
+        var myre = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if (!myre.test($identity)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //选择所在地区
+    var region = document.getElementById("region");
+    region.onfocus = function () {
+        // 禁止唤醒手机键盘
+        document.activeElement.blur();
+        var cityPicker = new mui.PopPicker({
+            layer: 3
+        });
+        cityPicker.setData(cityData3);
+        //设置默认选择地址
+        cityPicker.pickers[0].setSelectedIndex(0);
+        cityPicker.pickers[1].setSelectedIndex(0);
+        cityPicker.pickers[2].setSelectedIndex(0);
+        //将内容显示在桌面
+        cityPicker.show(function (SelectedItem) {
+            var kk = SelectedItem[0].text + "/" + SelectedItem[1].text + "/" + SelectedItem[2].text;
+            region.value = SelectedItem[0].text + "-" + SelectedItem[1].text + "-" + SelectedItem[2].text;
+        })
+    }
+    //控制点击修改次数
+    var oooppp = true;
+    // 点击修改,基础资料隐藏,修改资料显示
+    modify.onclick = function () {
+        // 隐藏基础资料
+        basic_data.classList.add("hide");
+        // 显示修改资料
+        modify_data.classList.remove("hide");
+        // 点击修改调用的门店专属
+        if (oooppp) {
+            modify_Membership()
+        }
+    }
+
+    // 点击修改调用门店专属的接口
+    function modify_Membership() {
+        mui.post('/index.php/ViplistEditConsultant/', {
+            store_code: store_code
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            var Membership = document.getElementById('Membership');
+            if (data.code == 200) {
+                // <option value="2">所有门店1</option>
+                for (i = 0; i < data.data.length; i++) {
+                    if (data.data[i].code == consultant_code) {
+                        var option = document.createElement('option');
+                        option.selected = "true";
+                        option.value = data.data[i].code;
+                        option.innerHTML = data.data[i].name;
+                        Membership.appendChild(option);
+                    } else {
+                        var option = document.createElement('option');
+                        option.value = data.data[i].code;
+                        option.innerHTML = data.data[i].name;
+                        Membership.appendChild(option);
+                    }
+
+                }
+                oooppp = false;
+            }
+        }, 'json'
+        );
+    }
+
+</script>
+
+<script>
+    //传递的门店code
+    var store_code = "";
+    // 会员专属的code
+    var consultant_code = ""
+    // 获取传过来的参数
+    var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('=');
+    var idd = decodeURI(loc.substr(n2 + 1, n1 - n2));
+
+    var family_phone = '';
+
+    // var idd = '123';
+    function chuandi() {
+        // 获取传过来的参数
+        mui.post('/index.php/UserlistMemberdata/', {
+            // 1021010
+            code: idd
+        }, function (data) {
+            //将门店卡号保存
+            store_code = data.data.data[0].store_code;
+            //会员专属的code
+            consultant_code = data.data.data[0].consultant_code;
+            if (data.code == 200) {
+                // 顾客照片
+                if ((data.data.data[0].vimg == "") || (data.data.data[0].vimg == " ") || (data.data.data[0].vimg == null) || (data.data.data[0].vimg == undefined)) {
+                    document.getElementById("updown_text").classList.remove("dis_yin");
+                    document.getElementById("updown_picture").classList.add("dis_yin");
+                } else {
+                    document.getElementById("updown_text").classList.add("dis_yin");
+                    document.getElementById("updown_picture").classList.remove("dis_yin");
+                    document.getElementById("updown_picture").setAttribute("src", data.data.data[0].vimg);
+                    document.getElementById("updown_picture").setAttribute("alt", '上传图片');
+                }
+
+
+                if (data.data.data[0].username == "" || data.data.data[0].username == null) {
+                    data.data.data[0].username = "";
+                }
+                document.getElementById("data_username").innerHTML = data.data.data[0].username; //姓名
+
+                //将会员姓名存入localStorage
+               
+                localStorage.setItem("username", data.data.data[0].username);
+
+                localStorage.setItem("add_fandan_ziliao", data.data.data[0].username + ',' + data.data.data[0].vgname);
+                localStorage.setItem("add_fandan_ziliao2", idd + ',' + data.data.data[0].consultant_code);
+                if (data.data.data[0].phone != " ") {
+                    document.getElementById("Phone_tel").href = "tel:" + data.data.data[0].phone;
+                    shuzu.push(data.data.data[0].phone);
+                }
+                family_phone = data.data.data[0].phone;
+                localStorage.setItem("family_username", data.data.data[0].username);
+
+                if (data.data.data[0].sex == "w" || data.data.data[0].sex == "W") {
+                    document.getElementById("data_gender").innerHTML = "女";   //性别
+
+                } else if (data.data.data[0].sex == "m" || data.data.data[0].sex == "M") {
+                    document.getElementById("data_gender").innerHTML = "男";   //性别
+
+                }
+                document.getElementById("data_money").innerHTML = data.data.data[0].total_consumption   //消费金额
+                document.getElementById("data_money").setAttribute('num', data.data.data[0].total_consumption);
+                document.getElementById("data_time").innerHTML = data.data.data[0].consumption_times    //消费次数
+                document.getElementById("data_time").setAttribute('num', data.data.data[0].consumption_times);
+                if (data.data.data[0].img == " " || data.data.data[0].img == "" || data.data.data[0].img == null) {
+                    // 空照片
+                    document.getElementById("data_photo").src = '../images/suoke.jpg';  //照片
+                    //将会员照片存入localStorage
+                    localStorage.setItem("data_photo", '../images/suoke.jpg');
+                } else {
+                    //    照片;
+                    document.getElementById("data_photo").src = data.data.data[0].img   //照片
+                    //将会员照片存入localStorage
+                    localStorage.setItem("data_photo", data.data.data[0].img);
+                }
+
+
+                if (data.data.data[0].r_days == "" || data.data.data[0].r_days == null || data.data.data[0].r_days == "未消费") {
+                    data.data.data[0].r_days = 0;
+                }
+                document.getElementById("data_day").innerHTML = data.data.data[0].r_days       //未消费的天数
+                document.getElementById("data_day").setAttribute('num', data.data.data[0].r_days);
+
+
+                // document.getElementById("money_balance").innerHTML = data.data.data[0].r_days       //余额
+                // document.getElementById("money_balance").setAttribute('num', data.data.data[0].r_days);
+
+                // 基础资料
+                // document.getElementById("data_nickname") = data.data.data[0].  //昵称
+                // document.getElementById("data_follow") = data.data.data[0].    //关注状态
+                document.getElementById("data_phone").innerHTML = data.data.data[0].phone_g    //手机号
+                // 将手机号保存到localStorage上,供短信使用
+                localStorage.setItem("member_code", data.data.data[0].phone);
+
+                document.getElementById("data_birthday").innerHTML = data.data.data[0].birthday//生日
+                if (data.data.data[0].area == "" || data.data.data[0].area == null || data.data.data[0].area == " ") {
+                    data.data.data[0].area = "";
+                }
+                document.getElementById("data_city").innerHTML = data.data.data[0].area//所住城市
+                if (data.data.data[0].address == "" || data.data.data[0].address == null || data.data.data[0].address == " ") {
+                    data.data.data[0].address = "";
+                }
+                document.getElementById("data_address").innerHTML = data.data.data[0].address  //所住地址
+                //修改资料
+                //修改姓名
+                username.placeholder = data.data.data[0].username;
+                username.onblur = function () {
+                    if (username.value == "" && data.data.data[0].username != "") {
+                        username.placeholder = data.data.data[0].username;
+                        // mui.alert('姓名不能为空', '提示', '确定'['div']);
+                    } else {
+                        username.placeholder = "请输入姓名"
+                    }
+                }
+
+                // if (data.data.data[0].img != "") {
+                //     document.getElementById("showimg").scr = data.data.data[0].img;
+                // }
+                // document.getElementById("ID_number").placeholder = data.data.data[0] //身份证号
+
+                //默认手机号
+                if (data.data.data[0].phone == " " || data.data.data[0].phone == null || data.data.data[0].phone == "") {
+                    deaddress.placeholder = '请输入详细地址';
+                } else {
+                    phone.placeholder = data.data.data[0].phone;
+                }
+                phone.onblur = function () {
+                    // var num = phone.value;
+                    if (phone.value == "") {
+                        phone.placeholder = data.data.data[0].phone;
+                        // mui.alert('手机号不能为空', '提示', '确定'['div']);
+                    } else {
+                        if (!isPoneAvailable(phone.value)) {
+                            mui.alert('手机号格式不正确', '提示', '确定'['div']);
+                        }
+                    }
+                }
+
+                //会员生日
+                if (data.data.data[0].birthday == " " || data.data.data[0].birthday == null || data.data.data[0].birthday == "") {
+
+                } else {
+                    document.getElementById("member_birthday").placeholder = data.data.data[0].birthday; //会员生日
+                }
+
+                //所在城市
+                if (data.data.data[0].area == " " || data.data.data[0].area == null || data.data.data[0].area == "") {
+
+                } else {
+                    document.getElementById("region").placeholder = data.data.data[0].area; //所在城市
+                }
+
+                //详细地址
+                if (data.data.data[0].address == " " || data.data.data[0].address == null || data.data.data[0].address == "") {
+                    deaddress.placeholder = '请输入详细地址';
+                } else {
+                    deaddress.placeholder = data.data.data[0].address; //详细地址
+                }
+                deaddress.onblur = function () {
+                    if (deaddress.value == "") {
+                        deaddress.placeholder = data.data.data[0].address;
+                    }
+                }
+
+                //男女显示
+                if (data.data.data[0].sex == "m" || data.data.data[0].sex == "M") {
+                    document.getElementsByName("Storage")[0].checked = "true";
+                } else {
+                    document.getElementsByName("Storage")[1].checked = "true";
+                }
+                // 会员卡信息
+                document.getElementById("data_vip_type").innerHTML = data.data.data[0].vlname //会员卡类型
+                document.getElementById("data_vip_number").innerHTML = data.data.data[0].code  //会员卡号
+                document.getElementById("data_vip_time").innerHTML = data.data.data[0].date_registration //开卡时间
+                document.getElementById("data_vip_integral").innerHTML = data.data.data[0].residual_integral //可用积分
+
+                if (data.data.data[0].residual_value == "" || data.data.data[0].residual_value == null) {
+                    data.data.data[0].residual_value = 0;
+                }
+                document.getElementById("data_vip_balance").innerHTML = data.data.data[0].residual_value   //可用余额
+                document.getElementById("data_vip_money").innerHTML = data.data.data[0].total_consumption     //总消费金额
+                // // 会员归属
+                //循环遍历
+                if (data.data.data[0].vsname == "" || data.data.data[0].vsname == null) {
+                    data.data.data[0].vsname = ""
+                }
+                if (data.data.data[0].vgname == "" || data.data.data[0].vgname == null) {
+                    data.data.data[0].vgname = ""
+                }
+                if (data.data.data[0].date_registration == "" || data.data.data[0].date_registration == null) {
+                    data.data.data[0].date_registration = ""
+                }
+                document.getElementById("information").innerHTML = '<div class="mui-row" style="text-align:center;font-size:15px;border-bottom: 1px solid #eaebed;">'
+                    + '<div class="mui-col-sm-4 mui-col-xs-4" style="line-height:40px;">' + data.data.data[0].vsname + '</div>'
+                    + '<div class="mui-col-sm-3 mui-col-xs-3" style="line-height:40px;">' + data.data.data[0].vgname + '</div>'
+                    + '<div class="mui-col-sm-5 mui-col-xs-5">'
+                    + '<p style="margin:0;padding:0;color: black;line-height:40px;">' + data.data.data[0].date_registration + '</p>'
+                    + '</div>'
+                    + '</div>'
+                load.stop();
+
+            }
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+    // 修改资料
+    var confirm = document.getElementById("confirm");
+    var Storage = document.getElementsByName("Storage");
+    var Storage_value = "";
+
+    confirm.onclick = function () {
+        //获取
+        for (var i = 0; i < Storage.length; i++) {
+            if (Storage[i].checked) {
+                Storage_value = Storage[i].value;
+                break;
+            }
+        }
+        //姓名
+        var username = document.getElementById("xg_username").value != "" ? document.getElementById("xg_username").value : document.getElementById("xg_username").placeholder;
+        //手机号 
+        var contact = document.getElementById("phone").value != "" ? document.getElementById("phone").value : document.getElementById("phone").placeholder;
+        if (contact == "请输入手机号") {
+            contact = "";
+        }
+        //身份证号码
+        // var identity = document.getElementById("ID_number").value != "" ? document.getElementById("ID_number").value : document.getElementById("ID_number").placeholder;
+        // if (identity == "请输入身份证号") {
+        //     identity = "";
+        // }
+        //生日
+        var birthday_xg = document.getElementById("member_birthday").value != "" ? document.getElementById("member_birthday").value : document.getElementById("member_birthday").placeholder;
+        if (birthday_xg == "请选择会员生日") {
+            birthday_xg = "";
+        }
+        //所在城市
+        var area = document.getElementById("region").value != "" ? document.getElementById("region").value : document.getElementById("region").placeholder;
+        if (area == "请选择所在地区") {
+            area = "";
+        }
+        //详细地址
+        var address = document.getElementById("detailed_address").value != "" ? document.getElementById("detailed_address").value : document.getElementById("detailed_address").placeholder;
+        if (address == "请输入详细地址") {
+            address = "";
+        }
+        mui.post('/index.php/ViplistEdit/', {
+            card: idd,
+            username: username,//姓名
+            sex: Storage_value,//性别
+            staff_code: document.getElementById("Membership").options[document.getElementById("Membership").selectedIndex].value, //all_stores.options[all_stores.selectedIndex].value
+            // "img": document.getElementById("file_file").files[0],
+            contact: contact,//手机号
+            // identity: identity,//身份证号
+            birthday: birthday_xg,//生日
+            area: area, //所在城市
+            address: address//详细地址
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                mui.toast(data.msg, { duration: 'short', type: 'div' });
+            } else {
+                mui.toast(data.msg, { duration: 'short', type: 'div' });
+            }
+        }, 'json'
+        );
+    }
+    // 回显照片
+    function showImg(thisimg) {
+        var file = thisimg.files[0];
+        if (window.FileReader) {
+            var fr = new FileReader();
+            var showimg = document.getElementById('showimg');
+            fr.onloadend = function (e) {
+                showimg.src = e.target.result;
+            };
+            fr.readAsDataURL(file);
+            showimg.style.display = 'block';
+        }
+    }
+</script>
+<!-- 画像 -->
+<script>
+    var BQ_labels = document.getElementById('BQ_labels');
+    // 修改画像
+    function funbiaoqian(e) {
+        mui(e).button('loading');
+        mui.post('/index.php/UserlisteditLabel/', {
+            code: idd
+        }, function (data) {
+            if (data.code == 200) {
+                setTimeout(function () {
+                    mui.toast('修改成功', { duration: 'long', type: 'div' })
+                    mui(e).button('reset');
+                }.bind(e), 1000);
+
+            } else if (data.code == 400) {
+                setTimeout(function () {
+                    mui.toast('暂未修改画像', { duration: 'long', type: 'div' })
+                    mui(e).button('reset');
+                }.bind(e), 1000);
+            }
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+
+    //进来加载画像
+    function lable_UP() {
+        mui.post('/index.php/Userlistlabel/', {
+
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                for (i = 0; i < data.data.length; i++) {
+                    var li = document.createElement("li");
+                    li.className = 'mui-card-content m-b-15';
+                    li.innerHTML = '<form><fieldset><legend><a href="#">' + data.data[i].name + '</a></legend>'
+                        + ' <div class="mui-collapse-content">'
+                        + ' <div class="checkboxStyle">'
+                        + ' <div class="Block PaddingL mui-row" id="BQ' + data.data[i].code + '">'
+                        + ' </div >'
+                        + ' </div >'
+                        + ' </div >'
+                        + '</fieldset></form>'
+                    BQ_labels.appendChild(li);
+                    lable_XH('BQ' + data.data[i].code, data.data[i].code);
+                }
+                //加载完毕显示按钮
+                mui('#ba_hide')[0].classList.remove("bq_display");
+            }
+        }, 'json'
+        );
+    }
+
+    // 根据id往里面循环加载画像
+    // idd
+    function lable_XH(id, code) {
+        var XH_id = document.getElementById(id);
+        mui.post('/index.php/Userlistlabelinfo/', {
+            code: idd,//123传入的会员卡号
+            id: code  //传入的name
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                for (i = 0; i < data.data.length; i++) {
+                    if (data.data[i].on) {
+                        var div = document.createElement("div");
+                        div.className = 'mui-col-sm-3 mui-col-xs-3';
+                        div.innerHTML = '<input type="checkbox" checked  id="' + id + i + '" code2="' + code + '" value="' + data.data[i].info + '" iddd="' + data.data[i].id + '" onclick="checkboxOnclick(this)"/>'
+                            + '<label for="' + id + i + '">' + data.data[i].info + '</label>'
+                        XH_id.appendChild(div);
+                    } else {
+                        var div = document.createElement("div");
+                        div.className = 'mui-col-sm-3 mui-col-xs-3';
+                        div.innerHTML = '<input type="checkbox"  id="' + id + i + '" code2="' + code + '" value="' + data.data[i].info + '" iddd="' + data.data[i].id + '" onclick="checkboxOnclick(this)"/>'
+                            + '<label for="' + id + i + '">' + data.data[i].info + '</label>'
+                        XH_id.appendChild(div);
+                    }
+
+                }
+            }
+        }, 'json'
+        );
+    }
+    //check box 选中触发的事件 UserlistclickLabel
+    function checkboxOnclick(check) {
+        // 卡号,小的id,小的name,大的code:ladel_code
+        mui.post('/index.php/UserlistclickLabel/', {
+            code: idd,
+            id: check.getAttribute('iddd'),
+            name: check.getAttribute('value'),
+            label_code: check.getAttribute('code2')
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+
+    // 报表
+    basobiao()
+    function basobiao() {
+        mui.post('/index.php/VipinfoSelRFM/', {
+            card_number: idd,
+        }, function (data) {
+            if (data.code == 200) {
+                // 贡献
+                data.data.p_univalent = (data.data.p_univalent == "" || data.data.p_univalent == 'undefined' || data.data.p_univalent == null) ? data.data.p_univalent = "0元" : data.data.p_univalent + "元";
+                document.getElementById("p1").innerHTML = data.data.p_univalent;
+
+                data.data.total_consumption = (data.data.total_consumption == "" || data.data.total_consumption == 'undefined' || data.data.total_consumption == null) ? data.data.total_consumption = "0元" : data.data.total_consumption + '元';
+                document.getElementById("p2").innerHTML = data.data.total_consumption;
+
+                data.data.consumption_times = (data.data.consumption_times == "" || data.data.consumption_times == 'undefined' || data.data.consumption_times == null) ? data.data.consumption_times = "0次" : data.data.consumption_times + '次';
+                document.getElementById("p3").innerHTML = data.data.consumption_times;
+
+                // 频率
+                data.data.ftime_g = (data.data.ftime_g == "" || data.data.ftime_g == 'undefined' || data.data.ftime_g == null) ? data.data.ftime_g = "" : data.data.ftime_g;
+                document.getElementById("p4").innerHTML = data.data.ftime_g;
+
+                data.data.rfm_days = (data.data.rfm_days == "" || data.data.rfm_days == 'undefined' || data.data.rfm_days == null) ? data.data.rfm_days = "0天" : data.data.rfm_days + '天';
+                document.getElementById("p5").innerHTML = data.data.rfm_days;
+
+                // 维护
+                data.data.visit_g = (data.data.visit_g == "" || data.data.visit_g == 'undefined' || data.data.visit_g == null || data.data.visit_g == '未回访') ? data.data.visit_g = "未回访" : data.data.visit_g + '天';
+                document.getElementById("p7").innerHTML = data.data.visit_g;
+
+                data.data.vtime_g = (data.data.vtime_g == "" || data.data.vtime_g == 'undefined' || data.data.vtime_g == null) ? data.data.vtime_g = "未回访" : data.data.vtime_g;
+                document.getElementById("p8").innerHTML = data.data.vtime_g;
+
+                // RFM
+                data.data.r_score = (data.data.r_score == "" || data.data.r_score == 'undefined' || data.data.r_score == null) ? data.data.r_score = "0" : data.data.r_score;
+                document.getElementById("p9").innerHTML = data.data.r_score;
+
+                data.data.f_score = (data.data.f_score == "" || data.data.f_score == 'undefined' || data.data.f_score == null) ? data.data.f_score = "0" : data.data.f_score;
+                document.getElementById("p10").innerHTML = data.data.f_score;
+
+                data.data.m_score = (data.data.m_score == "" || data.data.m_score == 'undefined' || data.data.m_score == null) ? data.data.m_score = "0" : data.data.m_score;
+                document.getElementById("p11").innerHTML = data.data.m_score;
+
+            }
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+
+    function fuxin_() {
+        localStorage.setItem("array_shuzu_control", 'false');
+        if (shuzu.length != 0) {
+            localStorage.setItem("array_shuzu", shuzu);
+            location.href = '../homepage/rich_letter_view.html';
+        } else {
+            mui.toast('该会员没有手机号!!', {
+                duration: 'long',
+                type: 'div'
+            })
+        }
+    }
+</script>
+<script>
+
+    mui("#jibe_member_data").on('tap', '.shenglue', function (event) {
+        event.stopImmediatePropagation();
+        event.stopPropagation();
+        document.getElementById("zou").classList.remove("display");
+        //获取id
+        var e = event || window.event;
+        var x = event.detail.center.x;
+        var y = event.detail.center.y;
+        let z_width = document.getElementById("zou").clientWidth;
+        let scrollWidth = document.body.scrollWidth;
+        if ((z_width - x) > 0) {
+            document.getElementById("zou").style.left = (x) + 'px';
+            document.getElementById("zou").style.top = (y - 80) + 'px';
+            document.getElementById("zou_text").innerHTML = this.getAttribute("num");
+        } else {
+            document.getElementById("zou").style.left = 'initial';
+            document.getElementById("zou").style.right = (scrollWidth - x) + 'px';
+            document.getElementById("zou").style.top = (y - 80) + 'px';
+            document.getElementById("zou_text").innerHTML = this.getAttribute("num");
+        }
+
+
+
+    })
+
+    //点击其余区域 隐藏 
+    mui(".mui-content")[0].addEventListener("tap", function () {
+        document.getElementById("zou").classList.add("display");
+
+    });
+    // 点击x号 隐藏
+    mui("#zou").on('tap', '.mui-icon-close', function (event) {
+        document.getElementById("zou").classList.add("display");
+    })
+
+    // 返单
+    function add_fandan() {
+        // let add_fandan_ziliao= localStorage.getItem("add_fandan_ziliao");
+        // // 姓名
+        // let user_name= ppp.substring(0, ppp.indexOf(','));
+        // // 形象顾问
+        // let consultant= ppp.substring(ppp.indexOf(',') + 1, ppp.length)
+        location.href = '../homepage/create_return_order_copy.html';
+
+    }
+</script>
+
+</html>

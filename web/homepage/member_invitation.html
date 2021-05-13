@@ -1,0 +1,62 @@
+<html>
+
+<head>
+    <title>会员邀请码</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://static.runoob.com/assets/qrcode/qrcode.min.js"></script>
+    <style>
+        #erweima {
+
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color: #007aff">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white"></a>
+        <h1 class="mui-title" style="color:white">推广二维码</h1>
+    </header>
+    <!--内容 -->
+    <div class="mui-content"><br>
+        <!-- 二维码 -->
+        <div class="mui-row" style="text-align: center;">
+            <div class="mui-col-xs-2 mui-col-sm-2"></div>
+            <div class="mui-col-xs-8 mui-col-sm-8">
+                <div id="erweima"></div><br>
+                <span class="iconfont icon-pullup" style="color: orange;"></span>
+            </div>
+            <div class="mui-col-xs-2 mui-col-sm-2"></div>
+        </div><br>
+        <p style="text-align:center;">长按上面图标识别二维码可加入锁客多</p>
+    </div>
+</body>
+<script>
+    var hd = window.parent.document.getElementById("hd");
+    //页面的margin-top
+    var hh = window.parent.document.getElementsByClassName("mui-iframe-wrapper");
+    var qrcode = new QRCode(document.getElementById("erweima"), {
+        width: 100,
+        height: 100
+    });
+    function makeCode() {
+        qrcode.makeCode("我是戈壁的泰山");
+    }
+    makeCode();
+    window.onload = function () {
+        hd.style.display = "none";
+        hh[0].style.top = "0px";
+    }
+</script>
+
+</html>

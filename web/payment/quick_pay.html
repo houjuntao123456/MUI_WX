@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./mui/css/icons-extra.css">
+    <link rel="stylesheet" href="./mui/fonts/mui-icons-extra.ttf">
+    <link rel="stylesheet" href="./mui/css/mui.min.css">
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <!-- <script src="../mui/js/mui.min.js"></script> -->
+    <script src="./mui/js/mui.js"></script>
+    <script src="./js/jquery.min.js"></script>
+
+    <script src="./js/vconsole.js"></script>
+    <link rel="stylesheet" href="./css/loading.css">
+    <script src="./js/loading.js"></script>
+
+
+    <title>快速买单</title>
+    <style>
+        .mui-off-canvas-left,
+        .mui-off-canvas-right {
+            width: 100%;
+        }
+
+        .size_lue {
+            overflow: hidden;
+            /*自动隐藏文字*/
+            text-overflow: ellipsis;
+            /*文字隐藏后添加省略号*/
+            white-space: nowrap;
+            -webkit-line-clamp: 1;
+            /*想要显示的行数*/
+            -webkit-box-orient: vertical;
+        }
+
+        .kk::after {
+            height: 0px !important;
+
+        }
+
+        .mui-input-group .mui-input-row:after {
+            right: 15px;
+        }
+
+        .Recharge_name_div {
+            /* border: 1px solid blue; */
+            line-height: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+            overflow: hidden !important;
+            position: relative;
+         
+        }
+
+        .Recharge_name_p {
+            height: 60px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid #ccc;
+            margin: 0 auto;
+            font-size: 16px;
+            color: black;
+            /* font-weight: bolder; */
+            line-height: 48px;
+            border-radius: 5px;
+        }
+
+        .line_height{
+            line-height: 68px !important;
+        }
+        .discount {
+            background-color: #F93E41;
+            color: white;
+            width: 60px !important;
+            height: 20px !important;
+            position: absolute !important;
+            right: -15px;
+            top: 4px;
+            font-size: 10px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            line-height: 20px !important;
+            transform: rotate(45deg);
+
+        }
+
+        .pp_Recharge_color {
+            border: 1px solid #00a4ff !important;
+            /* color: #FF9557 !important; */
+            border-radius: 5px;
+                background: url(./images/ico_checkon.svg) no-repeat right bottom;
+            background-size: 30px 30px;
+        }
+
+        .send {
+            position: absolute;
+            /* top: 0px; */
+            font-size: 13px;
+            bottom: 0px;
+            height: 20px;
+            line-height: 20px;
+            width: 100%;
+            /* margin: 0 auto; */
+            /* left: 60%; */
+            /* margin-left: -30%; */
+        }
+
+        .card {
+            margin-left: auto;
+            margin-right: auto;
+            /* border: 1px solid red; */
+            width: 90%;
+            background-color: #fff;
+            margin-top: 10px;
+            padding: 15px;
+            border-radius: 5px;
+
+        }
+
+        .fenge {
+            border-top: 1px solid #c8c7cc;
+            border-bottom: 1px solid #c8c7cc;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 15px;
+            margin-bottom: 5px;
+            /* background-color: #c8c7cc; */
+        }
+
+        .card_style1 {
+            line-height: 40px;
+            text-align: center;
+        }
+
+        .card_style2 {
+            color: #3292F3;
+            font-size: 30px;
+        }
+
+        .card_style3 {
+            color: black;
+            font-size: 20px;
+        }
+
+        .card_ui {
+            margin: 0px;
+            font-size: 13px;
+            color: #8f8f94;
+        }
+
+        .xuanze {
+            background: url(./images/ico_checkon.svg) no-repeat right bottom;
+            background-size: 30px 30px;
+            background-color: rgb(255, 255, 255);
+            /* color: #00a4ff; */
+            border: 1px solid #00a4ff;
+        }
+
+        #button_div {
+            width: 100%;
+            position: absolute;
+            bottom: 5px;
+            z-index: 2;
+            text-align: center;
+        }
+
+        #button_buttom {
+            width: 90%;
+        }
+
+        .display_none {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 侧滑导航根容器 -->
+    <div class="mui-off-canvas-wrap">
+        <!-- 菜单容器 -->
+        <aside class="mui-off-canvas-right">
+            <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff">
+                <a class="mui-icon mui-icon-back" style="color:#fff;"></a>
+                <h1 class="mui-title" style="color:#fff;">优惠券</h1>
+            </header>
+            <div class="mui-scroll-wrapper" style="top: 40px;background-color: #EFEFF4;padding-bottom: 50px">
+                <div class="mui-scroll" id="youhuijuan">
+                    <!-- 卡劵 -->
+                    <div class="card" value="card_radio">
+                        <div class="mui-row">
+                            <div class="mui-col-sm-4 mui-col-xs-4 card_style1">
+                                <p class="card_style2"><span>8</span><span style="font-size:20px;">折</span></p>
+                            </div>
+                            <div class="mui-col-sm-4 mui-col-xs-4">
+                                <p class="card_style3">折扣劵</p>
+                                <p>折扣劵</p>
+                            </div>
+                            <!-- 多选框,单选框 -->
+                            <div class="mui-col-sm-4 mui-col-xs-4"></div>
+                        </div>
+                        <!-- 分割线 -->
+                        <p class="fenge">
+                            2015/02/89-2019-03-09
+                        </p>
+                        <p style="margin-bottom: 0px;">详情</p>
+                        <ul class="card_ui">
+                            <li>不可叠加</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" value="card_radio">
+                        <div class="mui-row">
+                            <div class="mui-col-sm-4 mui-col-xs-4 card_style1">
+                                <p class="card_style2"><span>8</span><span style="font-size:20px;">折</span></p>
+                            </div>
+                            <div class="mui-col-sm-4 mui-col-xs-4">
+                                <p class="card_style3">折扣劵</p>
+                                <p>折扣劵</p>
+                            </div>
+                            <!-- 多选框,单选框 -->
+                            <div class="mui-col-sm-4 mui-col-xs-4"></div>
+                        </div>
+                        <!-- 分割线 -->
+                        <p class="fenge">
+                            2015/02/89-2019-03-09
+                        </p>
+                        <p style="margin-bottom: 0px;">详情</p>
+                        <ul class="card_ui">
+                            <li>不可叠加</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" value="card_radio">
+                        <div class="mui-row">
+                            <div class="mui-col-sm-4 mui-col-xs-4 card_style1">
+                                <p class="card_style2"><span>8</span><span style="font-size:20px;">折</span></p>
+                            </div>
+                            <div class="mui-col-sm-4 mui-col-xs-4">
+                                <p class="card_style3">折扣劵</p>
+                                <p>折扣劵</p>
+                            </div>
+                            <!-- 多选框,单选框 -->
+                            <div class="mui-col-sm-4 mui-col-xs-4"></div>
+                        </div>
+                        <!-- 分割线 -->
+                        <p class="fenge">
+                            2015/02/89-2019-03-09
+                        </p>
+                        <p style="margin-bottom: 0px;">详情</p>
+                        <ul class="card_ui">
+                            <li>不可叠加</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" value="card_check">
+                        <div class="mui-row">
+                            <div class="mui-col-sm-4 mui-col-xs-4 card_style1">
+                                <p class="card_style2"><span>8</span><span style="font-size:20px;">折</span></p>
+                            </div>
+                            <div class="mui-col-sm-4 mui-col-xs-4">
+                                <p class="card_style3">多选劵</p>
+                                <p>多选劵</p>
+                            </div>
+                            <!-- 多选框,单选框 -->
+                            <div class="mui-col-sm-4 mui-col-xs-4"></div>
+                        </div>
+                        <!-- 分割线 -->
+                        <p class="fenge">
+                            2015/02/89-2019-03-09
+                        </p>
+                        <p style="margin-bottom: 0px;">详情</p>
+                        <ul class="card_ui">
+                            <li>不可叠加</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" value="card_check">
+                        <div class="mui-row">
+                            <div class="mui-col-sm-4 mui-col-xs-4 card_style1">
+                                <p class="card_style2"><span>8</span><span style="font-size:20px;">折</span></p>
+                            </div>
+                            <div class="mui-col-sm-4 mui-col-xs-4">
+                                <p class="card_style3">多选劵</p>
+                                <p>多选劵</p>
+                            </div>
+                            <!-- 多选框,单选框 -->
+                            <div class="mui-col-sm-4 mui-col-xs-4"></div>
+                        </div>
+                        <!-- 分割线 -->
+                        <p class="fenge">
+                            2015/02/89-2019-03-09
+                        </p>
+                        <p style="margin-bottom: 0px;">详情</p>
+                        <ul class="card_ui">
+                            <li>不可叠加</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" value="card_overdue">
+                        <div class="mui-row">
+                            <div class="mui-col-sm-4 mui-col-xs-4 card_style1">
+                                <p class="card_style2" style="color: #ccc;"><span>8</span><span
+                                        style="font-size:20px;">折</span></p>
+                            </div>
+                            <div class="mui-col-sm-4 mui-col-xs-4">
+                                <p class="card_style3">过期</p>
+                                <p>过期</p>
+                            </div>
+                            <!-- 多选框,单选框 -->
+                            <div class="mui-col-sm-4 mui-col-xs-4">
+                                <p style="font-size: 28px;line-height: 50px;">不可用</p>
+                            </div>
+                        </div>
+                        <!-- 分割线 -->
+                        <p class="fenge">
+                            2015/02/89-2019-03-09
+                        </p>
+                        <p style="margin-bottom: 0px;">详情</p>
+                        <ul class="card_ui">
+                            <li>不可叠加</li>
+                        </ul>
+                    </div>
+
+
+                </div>
+                <div id="button_div">
+                    <button type="button" class="mui-btn mui-btn-primary" id="button_buttom">确定</button>
+                </div>
+
+            </div>
+
+        </aside>
+        <!-- 主页面容器 -->
+        <div class="mui-inner-wrap">
+            <!-- 主页面标题 -->
+            <!-- <header class="mui-bar mui-bar-nav">
+                <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+                <h1 class="mui-title">标题</h1>
+            </header> -->
+            <div class="mui-content mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <!-- 主界面具体展示内容 -->
+                    <form class="mui-input-group"
+                        style="margin-top: 20px;margin-left: auto;margin-right: auto;width:90%;padding-bottom: 10px;">
+                        <div class="mui-input-row" style="height: 50px;">
+                            <label style="width: 90%;margin-left: 10px;">
+                                <span class="mui-icon mui-icon-home" style="color: #3794F1;"></span>
+                                <span>韵存服饰</span>
+                            </label>
+                        </div>
+                        <div class="mui-input-row">
+                            <label style="width: 40%;">&nbsp;消费金额</label>
+                            <input type="number" id="sesame" style="text-align: right;font-size: 22px;width: 60%;"
+                                maxlength="5" placeholder="输入金额">
+                        </div>
+                        <div class="mui-input-row">
+                            <label>&nbsp;会员折扣</label>
+                            <input type="text" style="text-align: right;" readonly="readonly">
+                        </div>
+                        <div class="mui-input-row" onclick="coupon()">
+                            <label style="width: 40%;">&nbsp;优惠券</label>
+                            <label style="width: 60%;">
+                                <p style="float: right;"><span style="color: red;">10张可用</span><span
+                                        class="mui-icon mui-icon-forward" style="font-size: 22px;"></span></p>
+
+                            </label>
+                        </div>
+                        <div class="mui-input-row mui-radio mui-left">
+
+                            <input name="radio1" type="radio" id="wx_radio1" checked onclick="radio_xz('wx_radio2')">
+                            <label>微信支付</label>
+
+                        </div>
+
+                        <div class="mui-input-row mui-radio mui-left" style="height: auto;">
+                            <input name="radio1" type="radio" id="money_radio1" onclick="radio_xz('money_radio2')"
+                                style="top:12px">
+                            <label style="width: 80%;white-space:normal;">会员钱包 <br><span
+                                    style="font-size: 15px;">(余额¥0.00)</span> </label>
+                            <div id="chongzhi"
+                                style="display: -webkit-inline-box; border: 1px solid #007AFF;padding: 5px 8px 5px 8px;border-radius: 5px; display:none;">
+                                充值</div>
+                        </div>
+
+                        <div class="mui-input-row">
+                            <input type="text" style="font-size: 28px; text-align: center" readonly="readonly"
+                                id="money_show">
+                        </div>
+
+                        <div class="mui-button-row">
+                            <button type="button" class="mui-btn mui-btn-primary"
+                                style="width: 80%;height: 40px;font-size: 17px;" onclick="queren()">确认付款</button>
+                        </div>
+
+                        <div id="Remarks" class="mui-input-row kk"
+                            style="font-size: 16px;margin-top: 10px;text-align: center; ">
+                            <label style="width: 100%;text-align: center;" class="size_lue"><span
+                                    class="mui-icon mui-icon-plus" style="font-size: 20px;"></span> <span
+                                    id="beizhu">添加付款备注
+                                </span></label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 确认付款 -->
+    <div id="sheet2" class="mui-popover mui-popover-bottom mui-popover-action">
+        <!-- 说明 -->
+        <ul class="mui-table-view display_none" style="height: 150px;" id="explain">
+            <li class="mui-table-view-cell shuoming"
+                style="padding-bottom: 0px; padding-left: 8px; padding-right: 8px;">
+                <span style="float: left;">说明:</span>
+                <span class="mui-icon mui-icon-close" style="float: right;"></span>
+            </li>
+            <div class="mui-scroll-wrapper" style="top: 29px;">
+                <div class="mui-scroll">
+                    <div style="text-align: left;padding-left: 40px;" id="xinagqing_explain">
+                        <p>
+                            回答数据咖啡
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </ul>
+        <ul class="mui-table-view display_none">
+            <li class="mui-table-view-cell">
+                <a href="#sheet2" style="color: black; font-size: 18px;">确认支付
+                    <span class="mui-icon mui-icon-closeempty" style=" float: right;"></span></a>
+            </li>
+        </ul>
+        <!-- 可选择菜单 -->
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell" style="padding-top: 5px; padding-bottom: 5px;">
+                <div class="mui-input-row mui-radio mui-right">
+                    <input name="radio2" type="radio" id="money_radio2" onclick="radio_xz('money_radio1')">
+                    <label style="text-align: left;"> <span class="iconfont icon-wallet"
+                            style="font-size:20px;   font-weight: bold; color: #FC8308;"></span> 会员钱包</label>
+                </div>
+            </li>
+            <li class="mui-table-view-cell" style="padding-top: 5px; padding-bottom: 5px;">
+                <div class="mui-input-row mui-radio mui-right">
+                    <input name="radio2" type="radio" id="wx_radio2" checked onclick="radio_xz('wx_radio1')">
+                    <label style="text-align: left;">
+                        <span class="iconfont icon-weixinzhifu2" style="font-size:20px;color:#09BB07;"></span>
+                        微信支付 <br>
+                        <span style="font-size: 14px; color: #ccc;">推荐充值并支付,立享更多优惠</span>
+                    </label>
+                </div>
+            </li>
+        </ul>
+        <ul class="mui-table-view" style="height: 217px;">
+            <div class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <!-- 支付锁客 -->
+                    <li class="mui-table-view-cell">
+                        <div class="mui-row Recharge_name" id="intelligence_suoke">
+
+
+                            <!-- <div class="mui-col-xs-6 mui-col-sm-6">
+                                <div style="width: 80%;margin: 0 auto;">
+                                    <div class="Recharge_name_div">
+                                        <p class="Recharge_name_p" price="1">充一的双打送一</p>
+                                       <div class="discount">2.5折</div>
+                                        <div class="send">智能锁客</div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+
+                        </div>
+                    </li>
+                    <!-- 智能储值 -->
+                    <li class="mui-table-view-cell">
+                        <div class="mui-row Recharge_name" id="intelligence_stored">
+                            <!-- <div class="mui-col-xs-6 mui-col-sm-6">
+                                <div style="width: 80%;margin: 0 auto;">
+                                    <div class="Recharge_name_div">
+                                        <p class="Recharge_name_p" price="1">充一送一</p>
+                                        <div class="discount">2.5折</div>
+                                        <div class="send">智能锁客</div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </li>
+                </div>
+            </div>
+
+        </ul>
+        <!-- 立即添加 -->
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+                <b id="immediately" onclick="alert(Total_payment)">立即支付</b>
+            </li>
+        </ul>
+    </div>
+
+
+    <!-- 添加备注 -->
+    <div id="sheet3" class="mui-popover mui-popover-bottom mui-popover-action">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+                <a href="#sheet3" style="color: black; font-size: 18px;">添加备注
+                    <span class="mui-icon mui-icon-closeempty" style=" float: right;"></span></a>
+            </li>
+        </ul>
+        <!-- 可选择菜单 -->
+        <ul class="mui-table-view">
+            <li>
+                <div class="mui-row" style="width: 90%;margin:30px auto; text-align: center;">
+                    <textarea name="" id="ch_textarea" cols="30" rows="8"></textarea>
+                </div>
+            </li>
+
+        </ul>
+        <!-- 立即添加 -->
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell" onclick="button_Remarks()">
+                <b>添加备注</b>
+            </li>
+        </ul>
+    </div>
+
+</body>
+<script>
+    // var vConsole = new VConsole();
+    var load = new Loading();
+    load.init();
+    // load.start();
+    // load.stop();
+    // 总支付金额
+    var Total_payment = 0;
+
+    function queren() {
+        if (($('#sesame').val() == "") || ($('#sesame').val() == 0)) {
+            mui.toast('输入金额不能为空或0', {
+                duration: 'long',
+                type: 'div'
+            })
+        } else {
+            mui('#sheet2').popover('toggle');
+            pay($('#sesame').val());
+            // 立即支付的价钱
+            Total_payment = $('#sesame').val();
+            document.getElementById("immediately").innerHTML = '立即支付' + $('#sesame').val() + '元';
+        }
+
+
+    }
+    mui(".Recharge_name").on('tap', '.Recharge_name_div', function (e) {
+        // 添加颜色
+        var pp_Recharge = document.getElementsByClassName("Recharge_name_div");
+        for (i = 0; i < pp_Recharge.length; i++) {
+            pp_Recharge[i].children[0].classList.remove("pp_Recharge_color");
+        }
+        this.children[0].classList.add('pp_Recharge_color');
+
+        document.getElementById("explain").classList.remove("display_none")
+
+
+        // 说明 
+        Total_payment = this.getAttribute("money");
+        if (this.getAttribute("juan_type") == 0) {
+            document.getElementById("xinagqing_explain").innerHTML =
+                '<p>积分:' + this.getAttribute("integral") + '</p>'
+                + '<p>优惠券:' + this.getAttribute("coupon_name") + '</p>'
+                + '<p>备注:' + this.getAttribute("remark") + '</p>'
+
+        } else if (this.getAttribute("juan_type") == 1) {
+            document.getElementById("xinagqing_explain").innerHTML =
+                '<p>积分:' + this.getAttribute("integral") + '</p>'
+                + '<p>优惠券:' + this.getAttribute("coupon_name") + '</p>'
+                //  + '<p>数量:' + '20' + ' 张</p>'
+                + '<p>备注:' + this.getAttribute("remark") + '</p>'
+
+
+        }
+
+        document.getElementById("immediately").innerHTML = '立即支付' + this.getAttribute("money") + '元';
+
+    })
+
+    // 说明显隐
+    mui("#sheet2").on('tap', '.shuoming', function (e) {
+        console.log("控制shu8om")
+        document.getElementById("explain").classList.add("display_none")
+    })
+</script>
+<script>
+    // 光标进入
+    $('#sesame').focus();
+    // 搜索框
+    $(function () {
+
+        $('#sesame').bind('input propertychange', function () {
+
+
+            mui("#money_show")[0].value = '¥' + this.value;
+        });
+    })
+
+    var btn = document.getElementById("chongzhi");
+    //监听点击事件
+    btn.addEventListener("tap", function () {
+        console.log("tap event trigger");
+        location.href = "./recharge.html";
+    });
+    //添加备注
+    var Remarks = document.getElementById("Remarks");
+    Remarks.addEventListener("tap", function () {
+        mui('#sheet3').popover('toggle');
+    });
+    var ch_textarea = document.getElementById("ch_textarea");
+    var beizhu = document.getElementById("beizhu");
+    //按钮备注
+    function button_Remarks() {
+        mui('#sheet3').popover('toggle');
+        if (ch_textarea.value.length == 0) {
+            beizhu.innerHTML = '添加付款备注';
+
+        } else {
+            beizhu.innerHTML = '备注:' + ch_textarea.value;
+        }
+    }
+    //返回图标
+    var back = document.getElementsByClassName("mui-icon-back")[0];
+    back.addEventListener("tap", function () {
+        mui('.mui-off-canvas-wrap').offCanvas().close();
+    });
+
+    function radio_xz(event) {
+        // console.log(event);
+        document.getElementById(event).checked = "true";
+        if (event == "money_radio1" || event == "money_radio2") {
+            console.log('会员钱包支付');
+        } else {
+            console.log('微信支付');
+        }
+    }
+    // 区域滚动
+    mui('.mui-scroll-wrapper').scroll();
+
+
+    // 点击优惠券
+    function coupon() {
+        mui('.mui-off-canvas-wrap').offCanvas().show();
+
+    }
+</script>
+
+
+<!-- 优惠券 -->
+<script>
+    // 单选储值
+    var radio_Storage = '';
+    // 多选储值
+    var check_Storage = [];
+    mui("#youhuijuan").on('tap', '.card', function (e) {
+        var value = this.getAttribute("value");
+        // 添加颜色
+        if (this.getAttribute("value") == "card_radio") {
+            // 单选操作
+            // 1_1.清除前端单选样式并给单选赋值
+            if (radio_Storage != "") {
+                radio_Storage.classList.remove('xuanze');
+            }
+            this.classList.add("xuanze");
+            radio_Storage = this;
+            // 1_2.清空多选储值数组前端样式再清除数据
+            if (check_Storage.length != 0) {
+                for (let i = 0; i < check_Storage.length; i++) {
+                    check_Storage[i].classList.remove("xuanze");
+                }
+                check_Storage = [];
+            }
+ 
+
+        } else if (this.getAttribute("value") == "card_check") {
+            // 多选操作
+            // 1. 清除单选样式和数据
+            if (radio_Storage != "") {
+                radio_Storage.classList.remove('xuanze');
+            }
+            radio_Storage = '';
+
+            //2. 根据选择和取消选择进行操作
+            if (this.classList.contains("xuanze")) {
+                // 取消选择
+                // 2_1 取消当前选择并清除储存数组中当前数据
+                this.classList.remove("xuanze");
+                for (let i = 0; i < check_Storage.length; i++) {
+                    if (check_Storage[i] == this) {
+                        check_Storage.splice(i, 1);
+                    }
+                }
+            } else {
+                // 选择
+                // 2_2 选择并将数据添加到储存数组
+                this.classList.add("xuanze");
+                check_Storage.push(this);
+            }
+
+        } else {
+            // 过期操作
+            console.log('过期');
+        }
+
+    })
+
+    // 点击确定
+    document.getElementById("button_buttom").onclick = function () {
+        // console.log(radio_Storage);
+        // console.log(check_Storage);
+        if ((radio_Storage == "") && (check_Storage.length != 0)) {
+            console.log('多选');
+        } else if ((radio_Storage != "") && (check_Storage.length == 0)) {
+            console.log('单选');
+        } else {
+            console.log('不明选择');
+        }
+    }
+
+
+
+</script>
+<!-- 立即支付 -->
+<script>
+    // 支付锁客
+    var intelligence_suoke = document.getElementById("intelligence_suoke");
+    // 智能储值
+    var intelligence_stored = document.getElementById("intelligence_stored");
+
+    function pay(pay) {
+
+        //  load.start();
+        // 支付锁客
+        mui.post('/index.php/SuoActivitySel/', {
+            money: pay,
+            company: decodeURIComponent(getQueryVariable("company"))
+        }, function (data) {
+            console.log(data);
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                intelligence_suoke.innerHTML = "";
+                for (let i = 0; i < data.data.length; i++) {
+                    data.data[i].integral = (data.data[i].integral == "") || (data.data[i].integral == undefined) || (data.data[i].integral == null) ? "" : data.data[i].integral;
+                    data.data[i].coupon_name = (data.data[i].coupon_name == "") || (data.data[i].coupon_name == undefined) || (data.data[i].coupon_name == null) ? "" : data.data[i].coupon_name;
+                    data.data[i].remark = (data.data[i].remark == "") || (data.data[i].remark == undefined) || (data.data[i].remark == null) ? "" : data.data[i].remark;
+
+                    var div = document.createElement('div');
+                    div.className = 'mui-col-xs-12 mui-col-sm-12';
+                    div.innerHTML = '<div style="width: 80%;margin: 0 auto;">'
+                        + '<div class="Recharge_name_div" juan_type="1" money="' + data.data[i].money_g + '" integral=" ' + data.data[i].give_integral + ' " coupon_name="' + data.data[i].coupon_name + '" remark="' + data.data[i].remark + '">'
+                        + '  <p class="Recharge_name_p" price="1"> 充' + data.data[i].money_g + '元<span style="font-size:22px;">送</span><span style="color:red;font-size: 22px;">' + data.data[i].stored_value + '</span>元</p>'
+                        // + ' <!-- <div class="discount">2.5折</div> -->'
+                         + ' <div class="send">' + data.data[i].give_reward + '</div>'
+                        + ' </div>'
+                        + '  </div>'
+                    intelligence_suoke.appendChild(div);
+                }
+                //  load.stop();
+            }
+        }, 'json'
+        );
+
+        // 智能储值
+        mui.post('/index.php/SuoActivityStoredSel/', {
+            money: pay,
+            company: decodeURIComponent(getQueryVariable("company"))
+        }, function (data) {
+            console.log(data);
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                intelligence_stored.innerHTML = "";
+                for (let i = 0; i < data.data.length; i++) {
+                    data.data[i].integral = (data.data[i].integral == "") || (data.data[i].integral == undefined) || (data.data[i].integral == null) ? "" : data.data[i].integral;
+                    data.data[i].coupon_name = (data.data[i].coupon_name == "") || (data.data[i].coupon_name == undefined) || (data.data[i].coupon_name == null) ? "" : data.data[i].coupon_name;
+                    data.data[i].remark = (data.data[i].remark == "") || (data.data[i].remark == undefined) || (data.data[i].remark == null) ? "" : data.data[i].remark;
+
+                    if (data.data[i].intelligence_type == 0) {
+                        //    0智能储值
+                        var div = document.createElement('div');
+                        div.className = 'mui-col-xs-6 mui-col-sm-6';
+                        div.innerHTML = '<div style="width: 80%;margin: 0 auto;">'
+                            + '<div class="Recharge_name_div" juan_type="0" money="' + data.data[i].money_g + '" integral="' + data.data[i].give_integral + '" coupon_name="' + data.data[i].coupon_name + '" remark="' + data.data[i].remark + '">'
+                            + '  <p class="Recharge_name_p line_height" price="1">充' + data.data[i].money_g + '送 <span style="color:red;font-size: 22px;">' + data.data[i].give_reward + '</span></p>'
+                            + ' <div class="discount">' + data.data[i].give_stored + '</div>'
+                            // + ' <div class="send">充' + data.data[i].money_g + '送' + data.data[i].give_reward + '</div>'
+                            + ' </div>'
+                            + '  </div>'
+                        intelligence_stored.appendChild(div);
+
+                    } else if (data.data[i].intelligence_type == 1) {
+                        //    1充值免单
+                        var div = document.createElement('div');
+                        div.className = 'mui-col-xs-6 mui-col-sm-6';
+                        div.innerHTML = '<div style="width: 80%;margin: 0 auto;">'
+                            + '<div class="Recharge_name_div" juan_type="0" money="' + data.data[i].money_g + '" integral="' + data.data[i].give_integral + '" coupon_name="' + data.data[i].coupon_name + '" remark="' + data.data[i].remark + '">'
+                            + '  <p class="Recharge_name_p" price="1">充 <span style="color:red;font-size: 22px;">' + data.data[i].money_g + '</span>元</p>'
+                            // + ' <div class="discount">' + data.data[i].give_stored + '</div>'
+                            + ' <div class="send">' + data.data[i].give_reward + '</div>'
+                            + ' </div>'
+                            + '  </div>'
+                        intelligence_stored.appendChild(div);
+
+                    } else if (data.data[i].intelligence_type == 2) {
+                        //    2自定义充值赠送比例
+                        var div = document.createElement('div');
+                        div.className = 'mui-col-xs-6 mui-col-sm-6';
+                        div.innerHTML = '<div style="width: 80%;margin: 0 auto;">'
+                            + '<div class="Recharge_name_div" juan_type="0" money="' + data.data[i].money_g + '" integral="' + data.data[i].give_integral + '" coupon_name="' + data.data[i].coupon_name + '" remark="' + data.data[i].remark + '">'
+                            + '  <p class="Recharge_name_p" price="1" style="line-height:40px;">充' + data.data[i].money_g + '元</p>'
+                            // + ' <div class="discount">' + data.data[i].give_stored + '</div>'
+                            + ' <div class="send">赠送<span style="font-size: 20px;color:red;">' + data.data[i].give_reward + '</span>元</div>'
+                            + ' </div>'
+                            + '  </div>'
+                        intelligence_stored.appendChild(div);
+                    }
+
+
+
+                }
+            }
+            //  load.stop();
+        }, 'json'
+        );
+    }
+
+
+    // decodeURIComponent(getQueryVariable("company"))
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) {
+                return pair[1];
+            }
+        }
+        return (false);
+    }
+</script>
+
+</html>

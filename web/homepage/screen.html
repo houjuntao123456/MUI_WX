@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>筛选会员</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <!-- <script src="../mui/js/mui.min.js"></script> -->
+    <script src="../mui/js/muiR.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+    <style>
+        .mui-off-canvas-left,
+        .mui-off-canvas-right {
+            width: 90%;
+        }
+
+        .oa-contact-cell.mui-table .mui-table-cell {
+            padding: 0;
+            vertical-align: middle;
+        }
+
+        .oa-contact-cell {
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .oa-contact-content {
+            width: 100%;
+
+        }
+
+        .oa-contact-name,
+        oa-contact-position {
+            float: left;
+        }
+
+        li {
+            border: none;
+            list-style: none;
+        }
+
+
+        .mui-table-view-chevron .mui-table-view-cell {
+            padding-right: 10px;
+        }
+
+        .session_style {
+            width: 90%;
+            margin-top: 4px;
+            margin: 0 auto;
+            margin-bottom: 4px;
+            background: #D0EEFF;
+            border: 1px solid #99D3F5;
+            color: #6c6c6f;
+            /*#6c6c6f;*/
+            border-radius: 8px;
+            line-height: 35px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .mui-bar-nav~.mui-content .mui-pull-top-pocket {
+            top: 0;
+        }
+
+        .xuanzhong {
+            background: url(../images/ico_checkon.svg) no-repeat right bottom;
+            background-size: 25px 25px;
+            background-color: rgba(212, 229, 246, 0);
+            color: #00a4ff;
+        }
+
+        .title-but {
+            position: absolute;
+            z-index: 2;
+            right: 0;
+            top: 0;
+            width: 40%;
+        }
+
+        .title-but span {
+            float: right;
+            line-height: 44px;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .dis {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;">会员筛选<span id="nums" class="mui-badge  mui-badge-primary dis">0</span>
+        </h1>
+        <div class="title-but">
+            <span class="dis" id="menu" onclick="cluste_hai()">发送</span>
+            <span id="menu_query">筛选</span>
+
+        </div>
+    </header>
+    <!-- 侧滑导航根容器 -->
+    <!-- 手势动作 mui-draggable -->
+    <div class="mui-off-canvas-wrap   mui-slide-in mui-content">
+        <!-- 主页面容器 -->
+        <div class="mui-inner-wrap ">
+            <!-- 菜单容器 -->
+            <aside class="mui-off-canvas-left">
+                <div class="mui-scroll-wrapper" style="background-color: #e4eaf5">
+                    <div class="mui-scroll" style="padding-left:20px;">
+                        <!-- 筛选模板 -->
+                        <div class="mui-row" style="text-align:center;margin-top:15px;" id="screen_template">
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </aside>
+            <!-- 主页面标题 -->
+
+            <!-- 主页面内容容器 -->
+            <div class="mui-scroll-wrapper" id="pullrefresh">
+                <div class="mui-scroll">
+                    <!-- 主界面具体展示内容 -->
+                    <div class="mui-row" style="margin-bottom:3px;">
+                        <ul class="mui-table-view li-style" id="ul_come">
+
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+<script src="../js/members.js"></script>
+<script>
+    var load = new Loading();
+    load.init();
+    load.start();
+
+    //筛选模板ID
+    var screen_template = document.getElementById('screen_template');
+    // 主界面容器的ID
+    var ul_content = document.getElementById("ul_come");
+    // 控制初始化分页插件
+    var kk = true;
+    // 往分页中传数据
+    var session_id = "";
+    // 页面初始化的方法
+    window.onload = function () {
+        hidden_title();
+        window_screen();
+    }
+    // 页面初始化筛选的内容
+    function window_screen() {
+        mui.post('/index.php/UserlistwapFilterlist/', {
+        }, function (data) {
+            if (data.code == 200) {
+                for (i = 0; i < data.data.length; i++) {
+                    var div = document.createElement('div');
+                    div.className = 'mui-col-sm-4 mui-col-xs-4';
+                    div.innerHTML = '<div class="session_style" id="' + data.data[i].id + '" onclick="screen(this)">'
+                        + data.data[i].filtertitle
+                        + '</div>'
+                    // 将节点添加入
+                    screen_template.appendChild(div);
+                }
+                mui('.mui-off-canvas-wrap').offCanvas().toggle();
+                load.stop();
+            }
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+    // 筛选方法
+    function screen(e) {
+       shuzu = [];
+        shuzu_code = [];
+      document.getElementById("nums").classList.add("dis");
+        session_id = e.getAttribute("id");
+        for (let i = 0; i < document.getElementsByClassName("session_style").length; i++) {
+            document.getElementsByClassName("session_style")[i].style.color = "#6c6c6f";
+        }
+        e.style.color = "#1E88C7";
+
+        if (kk) {
+            //alert("执行一次");
+            mui.init({
+                pullRefresh: {
+                    container: '#pullrefresh',
+                    // down: {
+                    //     contentdown : "正在刷新...",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+                    //     callback: pulldownRefresh
+                    // },
+                    up: {
+                        contentrefresh: '正在加载...',
+                        auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                        callback: pullupRefresh
+                    }
+                }
+            });
+
+            kk = false;
+        } else {
+            count = 0;
+            mui('#pullrefresh').pullRefresh().refresh(true);
+            document.getElementById('ul_come').innerHTML = "";
+            pullupRefresh();
+        }
+        mui('.mui-off-canvas-wrap').offCanvas().toggle();
+    }
+</script>
+<script>
+    // mui('.mui-off-canvas-wrap').offCanvas().toggle();
+    /**
+       * 下拉刷新具体业务实现
+       */
+    // function pulldownRefresh() {
+    //     setTimeout(function() {
+    // 		mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+    // 	}, 1500);
+    // }
+    /**
+     * 上拉加载具体业务实现
+     */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+    function pullupRefresh() {
+        load.start();
+        mui.post('/index.php/UserlistwapFilter/', {
+            id: session_id,
+            page: ++count,
+            limit: limit_num
+        }, function (data) {
+            if (data.code == 200) {
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                    var ul_come = document.getElementById('ul_come');
+
+                    if (data.data.count == 0) {
+                        document.getElementById("menu").classList.add("dis");
+                        
+                    } else {
+                        document.getElementById("menu").classList.remove("dis");
+                        for (i = 0; i < data.data.data.length; i++) {
+                            if (data.data.data[i].img == "") {
+                                data.data.data[i].img = '../images/suoke.jpg';
+                            }
+                            if (data.data.data[i].username == "" || data.data.data[i].username == undefined) {
+                                data.data.data[i].username = "";
+                            }
+                            if (data.data.data[i].birthday == "" || data.data.data[i].birthday == undefined) {
+                                data.data.data[i].birthday = "";
+                            }
+                            if (data.data.data[i].total_consumption == "" || data.data.data[i].total_consumption == undefined) {
+                                data.data.data[i].total_consumption = 0;
+                            }
+                            if (data.data.data[i].consumption_times == "" || data.data.data[i].consumption_times == undefined) {
+                                data.data.data[i].consumption_times = 0;
+                            }
+                            if (data.data.data[i].consumption_number == "" || data.data.data[i].consumption_number == undefined || data.data.data[i].consumption_number == null) {
+                                data.data.data[i].consumption_number = 0;
+                            }
+                            if (data.data.data[i].r_days == null || data.data.data[i].r_days == undefined || data.data.data[i].r_days == "") {
+                                data.data.data[i].r_days = "未消费";
+                            } else if (data.data.data[i].r_days != "未消费") {
+                                data.data.data[i].r_days = "未消费" + data.data.data[i].r_days + "天";
+                            }
+                            var li = document.createElement('li');
+                            li.className = 'mui-table-view-cell';
+                            li.style = 'padding:0px;';
+                            li.innerHTML = '<div class="mui-slider-cell">'
+                                + '<div class="oa-contact-cell mui-table">'
+                                + '<div class="mui-table-cell xuanze" style="width:80px;" code="' + data.data.data[i].code + '" phone="' + data.data.data[i].phone + '">'
+                                + '<img src="' + data.data.data[i].img + '" alt="暂无图片"style="width:100%;border: 1px solid #efeff4;border-radius:50%;" />'
+                                + '</div>'
+                                + '<div class="oa-contact-content mui-table-cell"style="padding-top:5px;padding-left: 5px;">'
+                                + '<div class="mui-clearfix" style="text-align:left;line-height: 28px;width: 100%;">'
+                                + '<h4 class="oa-contact-name">' + data.data.data[i].username + '</h4>&nbsp;&nbsp;<span style="font-size:12px;color:#757171;">' + data.data.data[i].birthday + '</span>'
+                                + '<button style="float: right;padding: 7px 10px;color: #77a1f8;border: 1px solid #77a1f8;margin-top:8%;margin-right:3%;"name="' + data.data.data[i].code + '"onclick="member(this)">会员资料</button>'
+                                + '<p class="mui-h6" style="text-align:left;width: 80%;margin-bottom: 0px;">'
+                                + '<span style="font-weight:bold;font-size:15px;">¥</span>'
+                                + '<span> ' + data.data.data[i].total_consumption + '</span>'
+                                + '<span>&nbsp;/</span>'
+                                + '<span> ' + data.data.data[i].consumption_times + '</span>'
+                                + '<span>次 / ' + data.data.data[i].consumption_number + '件</span>'
+                                + '</p>'
+                                + '<p style="font-size:15px;color: #757171;"> '
+                                + '<span class="oa-contact-position mui-h5" style="color:#97989c;">' + data.data.data[i].r_days + '</span>'
+                                + '</p>'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>'
+                            ul_come.appendChild(li);
+                        }
+                    }
+
+
+                    load.stop();
+                }, 1000);
+
+
+            }
+        }, 'json'
+        );
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+    // 点击筛选
+    document.getElementById('menu_query').addEventListener('tap', function () {
+        mui('.mui-off-canvas-wrap').offCanvas().toggle();
+    });
+    // 滚动的系数
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+
+    // 点击按钮,将参数传递到另一个页面
+    function member(e) {
+        location.href = '../homepage/member_data.html?' + 'code=' + e.getAttribute("name");
+    }
+</script>
+
+</html>

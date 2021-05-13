@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="../mui/css/mui.css">
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <script src="../mui/js/muiR.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>女神卡</title>
+    <style>
+        .oa-contact-cell.mui-table .mui-table-cell {
+            padding: 11px 0;
+            vertical-align: middle;
+        }
+
+        .oa-contact-cell {
+            position: relative;
+            margin: 4px 0;
+        }
+
+        .oa-contact-content {
+            width: 100%;
+
+        }
+
+        .oa-contact-name,
+        oa-contact-position {
+            float: left;
+        }
+
+        li {
+            border: none;
+            list-style: none;
+        }
+        .mui-table-view-chevron .mui-table-view-cell {padding-right: 10px;}
+        .mui-table-view-cell::after{left: 0;}
+        .mui-search .mui-placeholder{font-size: 15px;}
+        .mui-search:before{top: 62%;}
+        .mui-search.mui-active:before{left: 8px;}
+        .mui-bar-nav ~ .mui-content .mui-pull-top-pocket {
+            top: 0px;
+        }
+        input[type='search'] {font-size: 15px;}
+    </style>
+</head>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color: #007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:#fff;"></a>
+        <h1 class="mui-title" style="color:#fff" id="h1_title"></h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content" id="mui-content" style="text-align: center;">
+        <div class="mui-input-row mui-search" style="height:10px;"></div>
+        <!-- 搜索 -->
+        <div class="mui-input-row mui-search" style="height:40px;">
+            <input type="search" class="mui-input-clear" placeholder="请输入会员卡号/手机号/会员姓名"
+                style="background-color:white;width: 98%;" id="search_results">
+        </div>
+        <div class="mui-input-row mui-search" style="height: 40px;line-height: 40px;"> <!-- border-bottom: 1px solid  #cccccc; -->
+            <p style="color: chocolate;font-size: 16px;line-height: 30px;">筛选结果:
+                <span style="color: rgb(204, 145, 103)" id="screening_results"> </span><span>人</span>
+            </p>
+        </div>
+        <!-- 分页加载的数据 -->
+        <div id="pullrefresh" class="mui-scroll-wrapper" style="height: 80%;margin-top:38%;">
+            <div class="mui-scroll">
+                <div id="page_id" style="background: #fff;">
+                    <!-- 数据展示 -->
+                    <!-- <li class="mui-table-view-cell">
+                            <div class="mui-slider-cell">
+                                <div class="oa-contact-cell mui-table">
+                                    <div class="mui-table-cell" style="width:100px;height:100px;">
+                                        <img src="../images/bj2.jpg" alt="暂无图片"
+                                            style="width:79%;height:100%;border: 1px solid black;border-radius:50%;" />
+                                    </div>
+                                    <div class="oa-contact-content mui-table-cell"
+                                        style="padding-top:10px;padding-left: 12px;">
+                                        <div class="mui-clearfix" style="text-align:left;line-height: 28px;width: 100%;">
+                                            <h4 class="oa-contact-name">侯军涛</h4>&nbsp;&nbsp;<span
+                                                style="font-size:12px;color:#757171;">2018-07-01</span>
+                                            <button
+                                                style="float: right;padding: 7px 10px;color: #77a1f8;border: 1px solid #77a1f8;margin-top:10%;margin-right:5%;"
+                                                name="  data.count.data[i].card  " onclick="member(this)">订单详情
+                                            </button>
+                                            <p class="mui-h6" style="text-align:left;width: 80%;margin-bottom: 0px;">
+                                                <span style="font-weight:bold;font-size:15px;">¥</span>
+                                                <span> 0.12</span>
+                                                <span>&nbsp;/</span>
+                                                <span> 56</span>
+                                                <span>次</span>
+                                            </p>
+                                            <p style="font-size:15px;color: #757171;">未消费天数 <span
+                                                    class="oa-contact-position mui-h5" style="color:#97989c;">
+                                                    17</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../mui/js/mui.min.js"></script>
+<script>
+    var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('=');
+    var n3 = loc.indexOf('*');
+    // 会员卡名称
+    var rue = decodeURI(loc.substr(n2 + 1, n3 - n2 - 5));
+    // 会员卡级别号
+    var code = decodeURI(loc.substr(n3 + 2, n1 - n3));
+    window.onload = function () {
+        document.getElementById('h1_title').innerHTML = rue;
+    }
+    // 搜索ID
+    var search_results = document.getElementById("search_results");
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+                contentdown : "正在刷新...",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+                callback: pulldownRefresh
+            },
+            up: {
+                contentrefresh: '正在加载...',
+                auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+
+    /**
+   * 下拉刷新具体业务实现
+   */
+    function pulldownRefresh() {
+        setTimeout(function() {
+			mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+		}, 1500);
+    }
+    /**
+     * 上拉加载具体业务实现
+     */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+    var kk = true;
+    function pullupRefresh() {
+        if (kk == true) {
+            mui.post('/index.php/UserlistLevellist/', {
+                code: code,
+                page: ++count,
+                limit: limit_num
+            }, function (data) {
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    document.getElementById("screening_results").innerHTML = data.data.count;
+                    setTimeout(function () {
+                        mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                        var table = document.getElementById("page_id");
+                        for (i = 0; i < data.data.data.length; i++) {
+                            // alert(data.count.list.data.length)
+                            // 进行判断,如果为空执行默认路径的图片
+                            if (data.data.data[i].img == "") {
+                                data.data.data[i].img = "../images/suoke.jpg";
+                            }
+                            if (data.data.data[i].username == "" || data.data.data[i].username == null || data.data.data[i].username == undefined) {
+                                data.data.data[i].username = '&nbsp;';
+                            }
+                            if (data.data.data[i].birthday == "" || data.data.data[i].birthday == null || data.data.data[i].birthday == undefined) {
+                                data.data.data[i].birthday = "";
+                            }
+                            //金额
+                            if (data.data.data[i].total_consumption == "" || data.data.data[i].total_consumption == null || data.data.data[i].total_consumption == undefined) {
+                                data.data.data[i].total_consumption = 0;
+                            }
+                            //次数
+                            if (data.data.data[i].consumption_times == "" || data.data.data[i].consumption_times == null || data.data.data[i].consumption_times == undefined) {
+                                data.data.data[i].consumption_times = 0;
+                            }
+                            //件数
+                            if (data.data.data[i].consumption_number == "" || data.data.data[i].consumption_number == undefined || data.data.data[i].consumption_number == null) {
+                                data.data.data[i].consumption_number = 0;
+                            }
+                            //未消费天数
+                            if (data.data.data[i].r_days == null || data.data.data[i].r_days == undefined || data.data.data[i].r_days == "") {
+                                data.data.data[i].r_days = "未消费";
+                            } else if (data.data.data[i].r_days != "未消费") {
+                                data.data.data[i].r_days = "未消费" + data.data.data[i].r_days + "天";
+                            } 
+                            //return_visit: "未回访"
+                            var li = document.createElement('li');
+                            li.className = 'mui-table-view-cell';
+                            li.style = 'padding: 0px 10px;margin-top:10px;';
+                            li.innerHTML = '<div class="mui-slider-cell">'
+                                + '<div class="oa-contact-cell mui-table">'
+                                + '<div class="mui-table-cell" style="width:80px;">'
+                                + '<img src="' + data.data.data[i].img + '" alt="暂无图片"style="width:100%;border: 1px solid #eee;border-radius:50%;" />'
+                                + '</div>'
+                                + '<div class="oa-contact-content mui-table-cell"style="padding-top:10px;padding-left: 8px;">'
+                                + '<div class="mui-clearfix" style="text-align:left;line-height: 28px;width: 100%;">'
+                                + '<h4 class="oa-contact-name">' + data.data.data[i].username + '</h4>&nbsp;&nbsp;<span style="font-size:12px;color:#757171;">' + data.data.data[i].birthday + '</span>'
+                                + '<button style="float: right;padding: 7px 10px;color: #77a1f8;border: 1px solid #77a1f8;margin-top:8%;margin-right:3%;"name="' + data.data.data[i].code + '"onclick="member(this)">会员资料</button>'
+                                + '<p class="mui-h6" style="text-align:left;width: 80%;margin-bottom: 0px;line-height: 22px;">'
+                                + '<span style="font-size:12px;">¥ ' + data.data.data[i].total_consumption + ' / ' + data.data.data[i].consumption_times + '次 / '+ data.data.data[i].consumption_number +'件</span>'
+                                + '</p>'
+                                + '<p style="font-size:12px;color: #757171;line-height: 22px;">'
+                                + '<span class="oa-contact-position mui-h5" style="color:#97989c;font-size:12px;">' + data.data.data[i].r_days + '</span>'
+                                + '</p>'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>'
+                            table.appendChild(li);
+                        }
+                    }, 1000);
+                }
+            }, 'json'
+            );
+        } else {
+            mui.post('/index.php/UserlistLevellist/', {
+                code: code,
+                vague: search_results.value,
+                page: ++count,
+                limit: limit_num
+            }, function (data) {
+                if (data.code == 200) {
+                    document.getElementById("screening_results").innerHTML = data.data.count;
+                    //服务器返回响应，根据响应结果，分析是否登录成功；
+                    setTimeout(function () {
+                        mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                        var table = document.getElementById("page_id");
+                        for (f = 0; f < data.data.data.length; f++) {
+                            if (data.data.data[f].img == "") {
+                                data.data.data[f].img = "../images/suoke.jpg";
+                            }
+                            if (data.data.data[f].username == "" || data.data.data[f].username == null || data.data.data[f].username == undefined) {
+                                data.data.data[f].username = '&nbsp;';
+                            }
+                            if (data.data.data[f].birthday == "" || data.data.data[f].birthday == null || data.data.data[f].birthday == undefined) {
+                                data.data.data[f].birthday = "";
+                            }
+                            if (data.data.data[f].total_consumption == "" || data.data.data[f].total_consumption == null || data.data.data[f].total_consumption == undefined) {
+                                data.data.data[f].total_consumption = 0;
+                            }
+                            if (data.data.data[f].consumption_times == "" || data.data.data[f].consumption_times == null || data.data.data[f].consumption_times == undefined) {
+                                data.data.data[f].consumption_times = 0;
+                            }
+                            if (data.data.data[f].consumption_number == "" || data.data.data[f].consumption_number == undefined || data.data.data[f].consumption_number == null) {
+                                data.data.data[f].consumption_number = 0;
+                            }
+                            if (data.data.data[f].r_days == null || data.data.data[f].r_days == undefined || data.data.data[f].r_days == "") {
+                                data.data.data[f].r_days = "未消费";
+                            } else if (data.data.data[f].r_days != "未消费") {
+                                data.data.data[f].r_days = "未消费" + data.data.data[f].r_days + "天";
+                            }   
+                            var li = document.createElement('li');
+                            li.className = 'mui-table-view-cell';
+                            li.style = 'padding-left:5px;padding-right: 11px;padding-top:20px;margin-top:1px;';
+                            li.innerHTML = '<div class="mui-slider-cell">'
+                                + '<div class="oa-contact-cell mui-table">'
+                                + '<div class="mui-table-cell" style="width:80px;">'
+                                + '<img src="' + data.data.data[f].img + '" alt="暂无图片"style="width:100%;border: 1px solid #eee;border-radius:50%;" />'
+                                + '</div>'
+                                + '<div class="oa-contact-content mui-table-cell"style="padding-top:10px;padding-left: 8px;">'
+                                + '<div class="mui-clearfix" style="text-align:left;line-height: 28px;width: 100%;">'
+                                + '<h4 class="oa-contact-name">' + data.data.data[f].username + '</h4>&nbsp;&nbsp;<span style="font-size:12px;color:#757171;">' + data.data.data[f].birthday + '</span>'
+                                + '<button style="float: right;padding: 7px 10px;color: #77a1f8;border: 1px solid #77a1f8;margin-top:8%;margin-right:3%;"name="' + data.data.data[f].code + '"onclick="member(this)">会员资料</button>'
+                                + '<p class="mui-h6" style="text-align:left;width: 80%;margin-bottom: 0px;line-height: 22px;">'
+                                + '<span style="font-size:12px;">¥ ' + data.data.data[f].total_consumption + ' / ' + data.data.data[f].consumption_times + '次 / '+ data.data.data[f].consumption_number +'件</span>'
+                                + '</p>'
+                                + '<p style="font-size:12px;color: #757171;line-height: 22px;">'
+                                + '<span class="oa-contact-position mui-h5" style="color:#97989c;font-size:12px;">' + data.data.data[f].r_days + '</span>'
+                                + '</p>'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>'
+                            table.appendChild(li);
+                        }
+                    }, 1000);
+                }
+            }, 'json'  
+            );
+        }
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+
+
+    // 点击按钮,将参数传递到另一个页面
+    function member(e) {
+        location.href = '../homepage/member_data.html?' + 'code=' + e.getAttribute("name");
+    }
+
+
+
+    // Andeoid手机样式
+    if (/android/i.test(navigator.userAgent)) {
+        // alert("安卓"+window.innerHeight);
+        document.getElementById("pullrefresh").style.marginTop = "38%";
+        document.getElementById("pullrefresh").style.height = "80%";
+
+        // 控制键盘按键
+        document.getElementById("search_results").addEventListener("keypress", function (event) {
+            if (event.keyCode == "13") {
+                // alert("按下键盘");
+                document.activeElement.blur();
+                //收起虚拟键盘 
+                toSearch();
+                //TODO 完成搜索事件
+                event.preventDefault();
+                // 阻止默认事件---阻止页面刷新 
+            }
+        });
+
+    }
+    // 苹果手机样式
+    if (/iphone/i.test(navigator.userAgent)) {
+        //  alert("苹果" +  document.getElementById("pullrefresh").clientTop);
+        document.getElementById("pullrefresh").style.marginTop = "32%";
+        document.getElementById("pullrefresh").style.height = "77%";
+    }
+
+    // 筛选结果
+    search_results.onblur = function () {
+        count = 0;
+        mui('#pullrefresh').pullRefresh().refresh(true);
+        document.getElementById("page_id").innerHTML = "";
+        kk = false;
+        pullupRefresh();
+    }
+
+</script>
+
+</html>

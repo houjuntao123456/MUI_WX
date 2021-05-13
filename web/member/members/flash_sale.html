@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>限时抢购</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="stylesheet" href="../../mui/css/mui.min.css">
+  <script src="../../mui/js/mui.min.js"></script>
+  <link rel="stylesheet" href="../../mui/css/mui.dtpicker.css">
+  <link rel="stylesheet" href="../../mui/css/mui.picker.min.css">
+  <link rel="stylesheet" href="../../css/loading.css">
+  <script src="../../mui/js/mui.dtpicker.js"></script>
+  <script src="../../mui/js/mui.picker.min.js"></script>
+  <script src="../../js/hidden-titile.js"></script>
+  <!-- <script src="../js/chart_Own.js"></script> -->
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/loading.js"></script>
+  <style>
+    .mui-off-canvas-left,
+    .mui-off-canvas-right {
+      width: 100%;
+      background-color: white;
+    }
+
+    .mui-card-header>img:first-child {
+      width: 100px;
+      height: 100px;
+    }
+    .sp{
+      max-width: 20em;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 侧滑导航根容器 -->
+
+  <!-- 主页面标题 -->
+  <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+    <a href="javascript:history.go(-1);" class="mui-icon mui-icon-back" style="color:white;"></a>
+    <h1 class="mui-title" id="title_" style="color:white;">限时抢购</h1>
+  </header>
+  <div class="mui-content">
+    <div id="switch_store" class="mui-row" style="height: 40px;line-height: 40px;">
+      &nbsp;<span style="padding-left: 2px; background-color: #007aff;"></span>&nbsp; <span id="member_txt">形象顾问</span>
+      <span class="mui-icon mui-icon-arrowdown" style="float: right;line-height: 38px;margin-right: 5px;"></span>
+    </div>
+    <!--数据列表-->
+    <div id="qqq" style="width: 100%;">
+      <!-- <div style="background-color: white;height:125px;">
+        <div style="width: 100%;" class="a">
+          <div class="mui-card-header mui-card-media">
+            <img src="../images/2.jpg" />
+            <div class="mui-media-body">
+              <p style="color: black;font-size: 15px;"> <span style="margin-left: 2%;"> 好一只大闸蟹</span> </p>
+              <p>&nbsp;</p>
+              <p style="color: black;font-size: 15px;"> 
+                <div class="sp" style="padding-left:2%;font-size: 13px;color:rgb(148, 148, 148);">阿达飒飒十大啊啊大啊啊啊啊啊啊啊啊啊啊啊</div> </p>
+              <br>
+              <p style="margin-top: -10px; color: black;font-size: 15px;"> <span style="margin-left: 2%;"> 剩余时间:
+                  <span>22</span>天 </span> </p>
+              <p style="margin-top: 10px;color: black;font-size: 15px;">
+                <span style="font-size: 18px;margin-left: 2%;color: coral;">
+                  ￥<span>11.00</span>
+                </span>
+                <span style="text-decoration:line-through;color: rgb(114, 114, 114);">￥1088.00</span>
+                <span style="float: right;font-size: 10px;color: rgb(107, 107, 107);">已购10</span>
+              </p>
+            </div>
+            <button style=" float: right; margin-top:-70px;" type="button" class="mui-btn mui-btn-warning">抢购</button>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</body>
+<script>
+    
+    function spp(e){
+
+      mui.alert(e.innerHTML,'内容')
+    }
+  //加载动画
+  var load = new Loading();
+  load.init();
+  // load.start();
+  // load.stop();
+  (function () {
+    mui.post('/index.php/webPayCoupon/', {
+
+    }, function (data) {
+      //服务器返回响应，根据响应结果，分析是否登录成功；
+      if (data.code == 200) {
+        console.log(data);
+        let data2 = data.data;
+        for (const key in data2) {
+          console.log(key, data2[key].card_brief);
+          let div = document.createElement("div");
+          div.style = 'background-color: white;height:133px;'
+          div.innerHTML =
+            '<div style="width: 100%;">'
+            + '<div class="mui-card-header mui-card-media">'
+            + '<img src="'+ data2[key].card_photo+'/>'
+            + '<div class="mui-media-body">'
+            + ' <p style="color: black;font-size: 15px;"> <span style="margin-left: 2%;"> '+ data2[key].card_name+'</span> </p>'
+            // + ' <p>&nbsp;</p>'
+            + ' <p style="color: black;font-size: 15px;"> <div'
+            + ' class="sp" onclick="spp(this)" style="padding-left: 2%;font-size: 13px;color:rgb(148, 148, 148);">'+ data2[key].card_brief+'</div> </p>'
+            // + '  <br>'
+            + ' <p style="margin-top: -10px; color: black;font-size: 15px;"> <span style="margin-left: 2%;"> 剩余时间:'
+            + '<span>'+ data2[key].inverted_time+'</span>天 </span> </p>'
+            + ' <p style="margin-top: 10px;color: black;font-size: 15px;">'
+            + '<span style="font-size: 18px;margin-left: 2%;color: coral;">'
+            + '￥<span>'+ data2[key].dis_money+'</span>'
+            + ' </span>'
+            + ' <span style="text-decoration:line-through;color: rgb(114, 114, 114);">￥'+ data2[key].money+'</span>'
+            + ' <span style="margin-right:2%; float: right;font-size: 10px;color: rgb(107, 107, 107);">已购10</span>'
+            + ' </p>'
+            + ' </div>'
+            + '<button style="margin-right:2%; float: right; margin-top:-70px;" type="button" class="mui-btn mui-btn-warning">抢购</button>'
+            + '</div>'
+            + ' </div>'
+          document.getElementById("qqq").appendChild(div);
+        }
+
+
+        
+
+
+      } else if (data.code == 300) {
+
+        // mui.toast(data.msg, {
+        //   duration: 'long',
+        //   type: 'div'
+        // })
+      }
+      // load.stop();
+    }, 'json'
+    );
+  })()
+  mui('.mui-scroll-wrapper').scroll({
+    indicators: false, //是否显示滚动条
+  });
+</script>
+
+</html>

@@ -1,0 +1,130 @@
+@charset "utf-8";
+/* DaTouWang URL: www.datouwang.com */
+ul,li{
+	list-style: none;
+}
+body{
+	font-family: "microsoft yahei";
+	margin:0;
+	padding:0;
+}
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+	clear: both;
+}
+.cont{
+	/* width:1000px; */
+	margin:0 auto;
+	/* padding:20px 0 50px; */
+}
+.biz-timeline-box{
+	/* width:785px; */
+	margin: 0 auto -27px;
+}
+/*奇数 odd*/
+.biz-timeline-box:nth-child(even) .biz_timeline-eventbox{
+	-webkit-border-radius:  0 40px 40px 0;
+	-moz-border-radius:  0 40px 40px 0;
+	border-radius: 0 40px 40px 0;
+	float:right;
+}
+/*偶数 even*/
+.biz-timeline-box:nth-child(odd) .biz_timeline-eventbox{
+	-webkit-border-radius:  40px 0 0 40px;
+	-moz-border-radius: 40px 0 0 40px;
+	border-radius: 40px 0 0 40px;
+	float:left;
+}
+/*奇数 odd*/
+.biz-timeline-box:nth-child(even) .biz_timeline-event{
+	-webkit-border-radius:0 30px 30px 0;
+	-moz-border-radius:0 30px 30px 0;
+	border-radius:0 30px 30px 0;
+}
+/*偶数 even*/
+.biz-timeline-box:nth-child(odd) .biz_timeline-event{
+	-webkit-border-radius:  30px 0 0 30px;
+	-moz-border-radius: 30px 0 0 30px;
+	border-radius: 30px 0 0 30px;
+}
+
+
+.biz-timeline-box:nth-child(odd) .biz_timeline-time{
+	float:left;
+	width:344px;
+	text-align: right;
+}
+.biz-timeline-box:nth-child(even) .biz_timeline-time{
+	float:right;
+	width:344px;
+	text-align: left;
+}
+.biz-timeline-box:nth-child(even) .biz_timeline-node{
+	float:right;
+}
+.biz-timeline-box:nth-child(odd) .biz_timeline-node{
+	float:left;
+}
+.biz_timeline-time{
+	font-size:16px;
+	color:#d81919;
+	font-weight: 600;
+	line-height:73px;
+}
+.biz_timeline-eventbox{
+	width:50%;
+	height: 69px;
+	border: 4px solid #007aff;
+	text-align: center;
+}
+.biz_timeline-event{
+	/* width:323px; */
+	height:57px;
+	margin:2px;
+	color:#fff;
+	background:rgba(0, 135, 255, 0.86);
+	text-align: center;
+	font-size:14px;
+	line-height:57px;
+}
+.biz_timeline-node{
+	width:8px;
+	height:8px;
+	border-radius: 50%;
+	background: #fff;
+	border:4px solid #b22b2b;
+	margin:29px 40px;
+}
+.biz_longString{
+	position:absolute;
+	left:50%;
+	width:8px;
+	height:200px;
+	background: #e0dede;
+	top:-57px;
+	z-index:10;
+	margin-left:-4px;
+}
+.biz_timtline-box{
+	position: relative;
+	margin-top:22px;
+}
+.biz_timeline{
+	z-index:20;
+	position:relative;
+}
+.biz_title{
+	text-align: center;
+	margin:0 auto 35px;
+}
+.biz_title h2{
+	font-size:28px;
+	color:#d81919;
+}
+.biz_title p{
+	color:#eca7a7;
+	margin-top:15px;
+}

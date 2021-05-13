@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>目标达成</title>
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <!-- <link rel="stylesheet" href="../css/iconfont.css"> -->
+    <!-- <script src="../mui/js/mui.min.js"></script> -->
+    <script src="../mui/js/muiR.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/loading.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+</head>
+<style>
+     /*支持IE9及以上*/
+     .circle-bar {margin: 20px; font-size:59px; width: 1em; height: 1em; position: relative;  background-color: #007aff; }
+    .circle-bar-left,.circle-bar-right { width: 1em; height: 1em;  }
+    /*
+        这里采用clip剪切了圆，实现左右两个半圆，右半圆在后面，因此在更上一层，
+        
+     */
+    .circle-bar-right { clip:rect(0,auto,auto,.5em);background-color: rgb(109, 218, 252); }
+    .circle-bar-left { clip:rect(0,.5em,auto,0); background-color: rgb(109, 218, 252);}
+
+    .mask { width: 0.8em; height: 0.8em;  background-color: #fff;text-align: center;line-height: 0.2em; color:rgba(0,0,0,0.5); }
+    .mask :first-child { font-size: 0.3em; height: 0.8em; line-height: 0.8em; display: block;  }
+    /*所有的后代都水平垂直居中，这样就是同心圆了*/
+    .circle-bar * {  position: absolute; top:0; right:0; bottom:0; left:0; margin:auto; }
+    /*自身以及子元素都是圆*/
+    .circle-bar, .circle-bar > * { border-radius: 50%; }
+    p {
+        margin-bottom: 5px;
+    }
+
+    a {
+        color: black;
+    }
+    .mui-input-row select{ font-size: 15px;}
+</style>
+
+<body>
+    <!-- 原回购人数链接D:\www\wx\web\homepage\wepurchase_number.html-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" id="a_title" style="color:white;"></a>
+        <h1 class="mui-title" id="title_" style="color:white;">目标达成</h1>
+        <div id="divid" style="float: right;margin-right:-7px;">
+          <div id="over_time" style="height: 45px;">&nbsp;
+            <span class="time_" style="color: white;line-height:45px;"></span>
+        </div>
+        </div>
+    </header>
+    <!-- 头部选择器 -->
+    <div id="da" class="mui-content">
+       
+        <!-- body内容 -->
+        <div id="xiao" class="mui-content">
+            <div id="form_css">
+                
+            </div>
+            <!-- 下拉刷新内容 -->
+            <div id="pullrefresh" class="mui-scroll-wrapper ">
+                
+                <div class="mui-scroll">
+                    <!--数据列表-->
+                     <!-- 选择机构-->
+        <div class="mui-input-row mui-select">
+                <select name="" style="color:rgb(105, 104,104);margin-bottom: 4px;" id="all_organization"
+                  onchange="gradeChange_organization()">
+                  <!-- <option value="">所有机构</option> -->
+                  <!-- <option value="">上海部门</option>
+                                <option value="">海南部门</option>
+                                <option value="">澳大利亚部门</option> -->
+                </select>
+              </div>
+              <!-- 选择门店-->
+              <div class="mui-input-row mui-select">
+                <select name="" style="color:rgb(105, 104,104);margin-bottom: 4px;" id="all_stores"
+                  onchange="gradeChange_stores()">
+                  <!-- <option value="">所有门店</option> -->
+                  <!-- <option value="">上海部门</option>
+                          <option value="">海南部门</option>  
+                          <option value="">澳大利亚部门</option> -->
+                </select>
+              </div>
+              <!-- 请选择导购 -->
+              <div class="mui-input-row mui-select">
+                <select name="" style="color:rgb(105, 104,104);margin-bottom: 4px;" id="all_shopping">
+                  <!-- <option value="">形象顾问</option> -->
+                  <!-- <option value="">上海部门</option>
+                          <option value="">海南部门</option>
+                          <option value="">澳大利亚部门</option> -->
+                </select>
+              </div>
+               <!-- 开始时间 -->
+        <!-- <div class="mui-row " style="border-bottom: 1px solid #eee;height: 37px;line-height: 37px;text-align: center;" id="divid"> -->
+            <!-- <div class="mui-col-xs-4 mui-col-sm-4">
+                &nbsp;&nbsp;&nbsp;&nbsp;开始时间：
+            </div> -->
+            <!-- <div id="start_time" class="mui-col-xs-5 mui-col-sm-5" style="border: 1px solid white;background-color: white;border-radius:20px;" onclick="start_time();">
+                &nbsp;
+                <span class="time_">2015</span>
+            </div> -->
+            <!-- <div class="mui-col-xs-2 mui-col-sm-2">
+                至
+            </div> -->
+            <!-- <div id="over_time" class="mui-col-xs-5 mui-col-sm-5" style="border: 1px solid white;background-color: white;" onclick="over_time();">&nbsp;
+                <span class="time_">2018</span>
+            </div> -->
+        <!-- </div> -->
+            <!-- 查询 -->
+            <div class="mui-button-row" style="height: 45px;margin-top: 10px;">
+                <button type="button" data-loading-text="查询中" data-loading-icon="mui-spinner mui-spinner-custom" class="mui-btn mui-btn-blue" style="width:300px;" id="query">查询</button>
+              </div>
+              <!-- 总数据 -->
+              <div style="background-color: white; height: 140px;;border: 1px solid white; box-shadow: 0px 0px 10px #ccc;width:98%;border-radius:5px;margin-left: 1%;;" >
+                   <div style="margin-left: 2%;margin-top:10px;">
+                     总数(总公司)
+                   </div>
+                   <div style="margin-left: 2%;margin-top:10px;font-size: 18px;color: chocolate;" id="jine">
+                    0
+                   </div>
+                   <div style="margin-left: 2%;margin-top:10px;font-size: 13px;">
+                    目标金额: <span style="color: chocolate;" id="mubiao">0</span>
+                   </div>
+                   <div class="mui-row" style="margin-left: 2%;margin-top:10px;font-size: 18px;">
+                   <div class="mui-col-xs-6 mui-col-sm-6">
+                      同比: <span style="color: chocolate;" id="tongbi">0</span>
+                   </div>
+                   <div class="mui-col-xs-6 mui-col-sm-6">
+                      环比: <span style="color: chocolate;" id="huanbi">0</span>
+                   </div>
+                   </div>
+                   <!-- 进度条 -->
+                    <div style="margin-left:58%;margin-top:-80px;" class="tiao">
+                    <span>达成率:</span>
+                    <div class="circle-bar" style="margin-left: 63px;margin-top:-45px;">
+                        <div class="circle-bar-left"></div>
+                        <div class="circle-bar-right"></div>
+                         <!--遮罩层，显示百分比-->
+                        <div class="mask" style="color:chocolate ">
+                            <span id="dachenglv" class="percent" style="color:chocolate ">0</span>
+                        </div>
+                    </div>
+                     </div>
+                </div>
+                <!-- 循环的内容 -->
+                    <div id="qqq" style="width: 100%;">
+                      <!-- <div style="margin-top: 10px; background-color: white; height: 140px;;border: 1px solid white; box-shadow: 0px 0px 10px #ccc;width:98%;border-radius:5px;margin-left: 1%;;" >
+                        <div style="margin-left: 2%;margin-top:10px;">
+                          <span>张三</span>(<span style="">唯帅裤业</span>)
+                        </div>
+                        <div style="margin-left: 2%;margin-top:10px;font-size: 18px;">
+                          销售金额:  <span style="color: chocolate;">33638</span> 
+                        </div>
+                        <div style="margin-left: 2%;margin-top:10px;font-size: 10px;">
+                         目标金额: <span style="color: chocolate;">2000</span>
+                        </div>
+                        <div class="mui-row" style="margin-left: 2%;margin-top:10px;font-size: 18px;">
+                        <div class="mui-col-xs-6 mui-col-sm-6">
+                           同比: <span style="color: chocolate;">50%</span>
+                        </div>
+                        <div class="mui-col-xs-6 mui-col-sm-6">
+                           环比: <span style="color: chocolate;">50%</span>
+                        </div>
+                        </div> -->
+                        <!-- 进度条 -->
+                         <!-- <div style="margin-left:58%;margin-top:-80px;"  class="tiao">
+                         <span>达成率:</span>
+                         <div class="circle-bar" style="margin-left: 60px;margin-top:-45px;">
+                             <div class="circle-bar-left"></div>
+                             <div class="circle-bar-right"></div> -->
+                              <!--遮罩层，显示百分比-->
+                             <!-- <div class="mask">
+                                 <span class="percent" style="color:chocolate ">15%</span>
+                             </div>
+                         </div>
+                          </div>
+                     </div> -->
+                     <!-- 2 -->
+                     <!-- <div style="margin-top: 10px; background-color: white; height: 140px;;border: 1px solid white; box-shadow: 0px 0px 10px #ccc;width:98%;border-radius:5px;margin-left: 1%;;" >
+                      <div style="margin-left: 2%;margin-top:10px;">
+                        <span>李四</span>(<span style="">唯帅裤业</span>)
+                      </div>
+                      <div style="margin-left: 2%;margin-top:10px;font-size: 18px;">
+                        销售金额:  <span style="color: chocolate;">33638</span> 
+                      </div>
+                      <div style="margin-left: 2%;margin-top:10px;font-size: 10px;">
+                       目标金额: <span style="color: chocolate;">2000</span>
+                      </div>
+                      <div class="mui-row" style="margin-left: 2%;margin-top:10px;font-size: 18px;">
+                      <div class="mui-col-xs-6 mui-col-sm-6">
+                         同比: <span style="color: chocolate;">50%</span>
+                      </div>
+                      <div class="mui-col-xs-6 mui-col-sm-6">
+                         环比: <span style="color: chocolate;">50%</span>
+                      </div>
+                      </div> -->
+                      <!-- 进度条 -->
+                       <!-- <div style="margin-left:58%;margin-top:-80px;" class="tiao"> 
+                       <span>达成率:</span>
+                       <div class="circle-bar" style="margin-left: 60px;margin-top:-45px;">
+                           <div class="circle-bar-left"></div>
+                           <div class="circle-bar-right"></div> -->
+                            <!--遮罩层，显示百分比-->
+                           <!-- <div class="mask">
+                               <span class="percent" style="color:chocolate ">85%</span>
+                           </div>
+                       </div>
+                        </div>
+                   </div> -->
+                   <!-- ... -->
+                   <!-- <div style="margin-top: 10px; background-color: white; height: 140px;;border: 1px solid white; box-shadow: 0px 0px 10px #ccc;width:98%;border-radius:5px;margin-left: 1%;;" >
+                    <div style="margin-left: 2%;margin-top:10px;">
+                      <span>王五</span>(<span style="">唯帅裤业</span>)
+                    </div>
+                    <div style="margin-left: 2%;margin-top:10px;font-size: 18px;">
+                      销售金额:  <span style="color: chocolate;">33638</span> 
+                    </div>
+                    <div style="margin-left: 2%;margin-top:10px;font-size: 10px;">
+                     目标金额: <span style="color: chocolate;">2000</span>
+                    </div>
+                    <div class="mui-row" style="margin-left: 2%;margin-top:10px;font-size: 18px;">
+                    <div class="mui-col-xs-6 mui-col-sm-6">
+                       同比: <span style="color: chocolate;">50%</span>
+                    </div>
+                    <div class="mui-col-xs-6 mui-col-sm-6">
+                       环比: <span style="color: chocolate;">50%</span>
+                    </div>
+                    </div> -->
+                    <!-- 进度条 -->
+                     <!-- <div style="margin-left:58%;margin-top:-80px;" class="tiao"> 
+                     <span>达成率:</span>
+                     <div class="circle-bar" style="margin-left: 60px;margin-top:-45px;">
+                         <div class="circle-bar-left"></div>
+                         <div class="circle-bar-right"></div> -->
+                          <!--遮罩层，显示百分比-->
+                         <!-- <div class="mask">
+                             <span class="percent" style="color:chocolate ">65%</span>
+                         </div>
+                     </div>
+                      </div>
+                 </div> -->
+                 <!-- .. -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+<script>
+      var load = new Loading();
+    load.init();
+    // load.start();
+    // load.stop();
+    //a标签不能用
+    mui('body').on('tap', 'a', function () {
+        window.top.location.href = this.href;
+    });
+  //   mui("#divid").on("tap","#start_time",function(){
+	// // 逻辑代码，例如跳转详情页、ajax
+  //       var dtpicker = new mui.DtPicker({
+  //       type: "date",//设置日历初始视图模式 
+  //       beginDate: new Date(1970, 01, 01),//设置开始日期 
+  //       endDate: new Date(2070, 01, 01),//设置结束日期 
+  //       labels: ['年', '月', '日'],//设置默认标签区域提示语 
+  //       });
+  //           dtpicker.show(function (items) {
+  //           birth[0].innerHTML = items.y.value + '-' + items.m.value + '-' + items.d.value;
+  //           })
+  //   });
+    mui("#divid").on("tap","#over_time",function(){
+	// 逻辑代码，例如跳转详情页、ajax
+    var dtpicker = new mui.DtPicker({
+            type: "month",//设置日历初始视图模式 
+            beginDate: new Date(1970, 01),//设置开始日期 
+            endDate: new Date(2170, 01),//设置结束日期 
+            labels: ['年', '月'],//设置默认标签区域提示语 
+            });
+            dtpicker.show(function (items) {
+            birth[0].innerHTML = items.y.value + '-' + items.m.value 
+            })
+    });
+    var pp = document.getElementById("form_css");
+    var pullrefresh = document.getElementById("pullrefresh");
+    var all_stores = document.getElementById("all_stores");
+    var all_shopping = document.getElementById("all_shopping");
+    window.onload = function () {
+        new_data();
+        onload_select_innerHTML();
+        onload_select();
+        hidden_title();
+        pullrefresh.style.marginTop = pp.clientHeight + 50 + 'px';
+        pullupRefresh()
+    }
+     // 获取当前时间
+  var new_star = "";
+  var new_end = "";
+  function new_data() {
+    var myDate = new Date();//获取系统当前时间
+    if ((myDate.getMonth() + 1) <= 9) {
+      // new_star = myDate.getFullYear() + '-' + '0'+(myDate.getMonth() + 1) + '-' + (myDate.getDate() - 1);
+      new_end = myDate.getFullYear() + '-' + '0'+(myDate.getMonth() + 1);
+    }else{
+      // new_star = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + (myDate.getDate() - 1);
+      new_end = myDate.getFullYear() + '-' + (myDate.getMonth() + 1);
+    }
+    // birth[0].innerHTML = new_star;
+    birth[0].innerHTML = new_end;
+
+  }
+  var birth = document.getElementsByClassName("time_");
+     // 下拉框初始赋值
+  function onload_select_innerHTML() {
+    // 给组织加载多余
+    var option_all_organization = document.createElement("option");
+    option_all_organization.value = "";
+    option_all_organization.innerHTML = "所有机构";
+    document.getElementById("all_organization").appendChild(option_all_organization);
+     // 门店加载多余 
+    var option_all_stores = document.createElement("option");
+    option_all_stores.value = "";
+    option_all_stores.innerHTML = "所有门店";
+    document.getElementById("all_stores").appendChild(option_all_stores);
+     // 形象顾问加载多余
+    var option_all_shopping = document.createElement("option");
+    option_all_shopping.value = "";
+    option_all_shopping.innerHTML = "选择员工";
+    document.getElementById("all_shopping").appendChild(option_all_shopping);
+   
+  }
+  // 选择组织
+  function onload_select() {
+    mui.post('/index.php/UserlistOrg/', {
+    }, function (data) {
+      //服务器返回响应，根据响应结果，分析是否登录成功；
+      if (data.code == 200) {
+        for (i = 0; i < data.data.length; i++) {
+          var option = document.createElement('option');
+          option.value = data.data[i].code;
+          option.innerHTML = data.data[i].name
+          document.getElementById("all_organization").appendChild(option);
+        }
+      }
+    }, 'json'
+    );
+  }
+// 进来加载组织
+function gradeChange_organization() {
+
+mui.post('/index.php/UserlistStore/', {
+  code: document.getElementById("all_organization").options[document.getElementById("all_organization").selectedIndex].value
+}, function (data) {
+  //服务器返回响应，根据响应结果，分析是否登录成功；
+  if (data.code == 200) {
+    document.getElementById("all_stores").innerHTML = '<option value="">选择门店</option>'
+    for (i = 0; i < data.data.length; i++) {
+      var option = document.createElement('option');
+      option.value = data.data[i].code;
+      option.innerHTML = data.data[i].name;
+      document.getElementById("all_stores").appendChild(option);
+    }
+  }
+}, 'json'
+);
+}
+// 选择门店 店员下拉发生改变
+function gradeChange_stores() {
+
+mui.post('/index.php/UserlistStaff/', {
+  code: all_stores.options[all_stores.selectedIndex].value
+}, function (data) {
+  //服务器返回响应，根据响应结果，分析是否登录成功；
+  if (data.code == 200) {
+    document.getElementById("all_shopping").innerHTML = '<option value="">选择店员</option>'
+    for (i = 0; i < data.data.length; i++) {
+      var option = document.createElement('option');
+      option.value = data.data[i].code;
+      option.innerHTML = data.data[i].name;
+      document.getElementById("all_shopping").appendChild(option);
+    }
+  }
+}, 'json'
+);
+}
+// 点击按钮查询
+var query = document.getElementById("query");
+  query.onclick = function () {
+    select_org = document.getElementById("all_organization").options[document.getElementById("all_organization").selectedIndex].value;
+    select_store = all_stores.options[all_stores.selectedIndex].value;
+    select_staff = all_shopping.options[all_shopping.selectedIndex].value
+    document.getElementById("qqq").innerHTML = "";
+    count = 0;
+    mui('#pullrefresh').pullRefresh().refresh(true);
+    pullupRefresh();
+    mui(this).button('loading');
+            setTimeout(function() {
+              mui(this).button('reset');
+            }.bind(this), 2000);
+  }
+   // //select安卓和ios的判断样式
+   var picture3 = document.getElementById("all_organization");
+  var picture = document.getElementById("all_stores");
+  var picture1 = document.getElementById("all_shopping");
+  //苹果手机采用CSS1
+  if (/iphone/i.test(navigator.userAgent)) {
+    picture3.style.paddingLeft = "42%";
+    picture.style.paddingLeft = "42%";
+    picture1.style.paddingLeft = "42%";
+    // addStyleLink('CSS1.css');
+
+  }
+  // 安卓手机采用CSS2
+  if (/android/i.test(navigator.userAgent)) {
+    //alert("安卓");
+    picture3.style.paddingLeft = "42%";
+    picture.style.paddingLeft = "42%";
+    picture1.style.paddingLeft = "42%";
+    // addStyleLink('CSS2.css');
+
+  }
+</script>
+<script>
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+                callback: pulldownRefresh
+            },
+            up: {
+                contentrefresh: '正在加载...',
+                // auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+	/**
+	 * 下拉刷新具体业务实现
+	 */
+    function pulldownRefresh() {
+    }
+	/**
+	 * 上拉加载具体业务实现
+	 */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    var splb="";
+    var store="";
+    var staff="";
+    // 分的条数
+    var limit_num = 10;
+    function pullupRefresh() {
+      load.start();
+            mui.post('/index.php/MAttainmentSel/', {
+                time_month:birth[0].innerHTML,
+                splb:document.getElementById("all_organization").options[document.getElementById("all_organization").selectedIndex].value,//组织
+                store:all_stores.options[all_stores.selectedIndex].value,//门店
+                staff:all_shopping.options[all_shopping.selectedIndex].value,//员工
+                page: ++count,//分页
+                limit: limit_num//每页的条数
+            }, function (data) {
+                // 服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    document.getElementById("jine").innerHTML = data.data.totalData.realNumber;
+                    document.getElementById("mubiao").innerHTML= data.data.totalData.totalMission;
+                    document.getElementById("tongbi").innerHTML=data.data.totalData.sameRate+"%";
+                    document.getElementById("huanbi").innerHTML=data.data.totalData.ringRate+"%";
+                    document.getElementById("dachenglv").innerHTML=data.data.totalData.completion+"%"; 
+
+                    setTimeout(function () {
+                        mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                        // var table = document.body.querySelector('.mui-table-view');
+                        var qq = document.getElementById("qqq");
+                        for (i = 0; i < data.data.data.length; i++) {
+                            var li = document.createElement('div');
+                            // li.className = 'mui-table-view-cell';
+                            li.style = "margin-top: 10px; background-color: white; height: 140px;;border: 1px solid white; box-shadow: 0px 0px 10px #ccc;width:98%;border-radius:5px;margin-left: 1%;;"
+                            li.innerHTML = '<div style="margin-left: 2%;margin-top:10px;">'
+                              +'<span>'+data.data.data[i].vyname+'</span>(<span style="">'+data.data.data[i].vsname+'</span>)'
+                              +'</div>'
+                              + '<div style="margin-left: 2%;margin-top:10px;font-size: 18px;">'
+                              +'销售金额:  <span style="color: chocolate;">'+data.data.data[i].realNumber+'</span>'
+                              +'</div>'
+                              +'<div style="margin-left: 2%;margin-top:10px;font-size: 13px;">'
+                              +' 目标金额: <span style="color: chocolate;">'+data.data.data[i].totalMission+'</span>'
+                              +'</div>'
+                              +'<div class="mui-row" style="margin-left: 2%;margin-top:10px;font-size: 18px;">'
+                              +'<div class="mui-col-xs-6 mui-col-sm-6">'
+                              +'同比: <span style="color: chocolate;">'+data.data.data[i].sameRate+'%</span>'
+                              +'</div>'
+                              +'<div class="mui-col-xs-6 mui-col-sm-6">'
+                              +' 环比: <span style="color: chocolate;">'+data.data.data[i].ringRate+'%</span>'
+                              +'</div>'
+                              +'</div>'
+                              +'<div style="margin-left:58%;margin-top:-80px;" class="tiao">'
+                              +'<span>达成率:</span>'
+                              +'<div class="circle-bar" style="margin-left: 63px;margin-top:-45px;">'
+                              +'<div class="circle-bar-left"></div>'
+                              +'<div class="circle-bar-right"></div>'
+                              +'<div class="mask">'
+                              +'<span class="percent" style="color:chocolate ">'+data.data.data[i].completion+'%</span>'
+                              +'</div>'
+                              +'</div>'
+                              +'</div>'
+                            qq.appendChild(li);
+                            //进度条　　　
+                                      $(function(){
+                                              var percent = parseInt($('.mask :first-child').text());
+                                              var baseColor = $('.circle-bar').css('background-color');
+                                              $(".percent").each(function(y,tt) {
+                                                
+                                                          if( parseInt(tt.innerHTML)<=50 ){
+                                                            $(this).parent().prev().css('transform','rotate('+(parseInt(tt.innerHTML)*3.6)+'deg)');
+                                                              }else {
+                                                                  $(this).parent().prev().css({
+                                                                        'transform':'rotate(0deg)',
+                                                                        'background-color':baseColor
+                                                                    });
+                                                                    $(this).parent().prev().prev().css('transform','rotate('+((parseInt(tt.innerHTML)-50)*3.6)+'deg)');
+                                                                }
+                                                  });
+                                          })
+                        }
+                    }, 1000);
+                }
+                load.stop();
+                mui("#query").button('loading');
+            setTimeout(function() {
+              mui("#query").button('reset');
+            }.bind("#query"), 2000);
+            }, 'json'
+            );
+        
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+</script>
+</html>

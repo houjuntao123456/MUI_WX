@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/picture_compress.js"></script>
+
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+
+    <!-- <script src="../js/vconsole.js"></script> -->
+    <title>富信/视图</title>
+</head>
+<style>
+    footer {
+        width: 100%;
+        /* background-color: blue; */
+        position: absolute;
+        bottom: 0px;
+        height: 50px;
+        border-top: 1px solid #f3f3f3;
+        padding-top: 7px;
+    }
+
+    /* .mui-popover.mui-popover-action {
+        bottom: 50px;
+    } */
+    .display_none {
+        display: none;
+    }
+
+    .mui-card {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .mui-card-footer,
+    .mui-card-header {
+        min-height: 0px;
+    }
+
+    .tubiao {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        color: #DD524D;
+        z-index: 3;
+    }
+</style>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a class="mui-icon mui-icon-back mui-action-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;">视图</h1>
+        <span style="color: white; float: right;line-height:44px" id="mum">0</span>
+    </header>
+
+    <div class="mui-scroll-wrapper mui-content" style="bottom: 50px;overflow-y: auto;">
+        <div class="mui-scroll" id="content_card" style="overflow-y: auto;">
+            <!-- 这里放置真实显示的DOM内容
+            <div class="mui-card" id="suoke88">
+                <span class="tubiao" onclick="delect_TB(this)" nameId="suoke88">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="mui-icon mui-icon-trash"></span>
+                </span>
+                页眉，放置标题
+                <div class="mui-card-header" style="padding-top:8px;"></div>
+                内容区
+                <div class="mui-card-content mui-card-media">
+                    <img src="../images/1.jpg" width="100%">
+                </div>
+                页脚，放置补充信息或支持的操作
+                <div class="mui-card-footer">卧似一张弓展示喜欢就看着是发动机和骄傲闪电发货撒发动机看见爱上 打了返回键拉水电费就回家湖师大房价会考虑很快就回家撒回家国家大事发过火的撒咖啡馆
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <div id="popover" class="box mui-popover mui-popover-action mui-popover-bottom">
+        <ul class="mui-table-view">
+            <input type="file" accept="image/*" multiple id="upload_picture" class="display_none"
+                onchange="uploadImageHandle(this,0.3)">
+            <li class="mui-table-view-cell" id="product"><span class="mui-icon mui-icon-camera"></span> 上传图片
+            </li>
+            <li class="mui-table-view-cell">
+                <textarea rows="6" cols="10" id="text_area"
+                    style="padding-bottom: 1px;margin-bottom: 0px; color: #6F6F73;font: size 14px;"
+                    placeholder="输入文字"></textarea>
+                <h6 style="overflow: hidden;">
+                    <span style="float: left;">&nbsp;当前字数:<span id="text_area_show">0</span></span>
+                    <span style="float: right;">文本信息不能超过600字&nbsp;</span>
+                </h6>
+
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="mui-row" style="text-align: center;">
+                    <div class="mui-col-xs-6 mui-col-sm-6">
+                        <button type="button" class="mui-btn mui-btn-primary"
+                            onclick="determine()">&nbsp;确定&nbsp;</button>
+                    </div>
+                    <div class="mui-col-xs-6 mui-col-sm-6">
+                        <button type="button" class="mui-btn mui-btn-danger" onclick="cancel()">&nbsp;取消&nbsp;</button>
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+
+    <footer>
+        <div class="mui-row" style="text-align: center;">
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <button type="button" class="mui-btn mui-btn-danger" onclick="add()"><span
+                        class="mui-icon mui-icon-plus" style="font-size: 20px;"></span> 添加图文&nbsp;</button>
+            </div>
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <button type="button" class="mui-btn mui-btn-primary" onclick="send_true()"><span
+                        class="mui-icon mui-icon-paperplane" style="font-size: 20px;"></span>确认发送&nbsp;</button>
+            </div>
+
+            <div class="mui-col-xs-4 mui-col-sm-4">
+                <button type="button" class="mui-btn " onclick="all_empty()"><span class="mui-icon mui-icon-trash"
+                        style="font-size: 20px;"></span>清空彩信</button>
+            </div>
+        </div>
+    </footer>
+</body>
+<script>
+    // var vConsole = new VConsole();
+    var load = new Loading();
+    load.init();
+
+    var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('=');
+    var n3 = loc.indexOf('*');
+    var n4 = loc.indexOf('#');
+    var idd = decodeURI(loc.substr(n2 + 1, n3 - n2 - 5)); 
+    var code = decodeURI(loc.substr(n3 + 1, n4 - n3 - 9));
+    var bar_code = decodeURI(loc.substr(n4 + 1, n1 - n4));
+
+    // 随机元素ID
+    var suoke = "suoke";
+    var num = 0;
+    var nums = 0;
+
+    hidden_title();
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+
+    // 添加帧数
+    function add() {
+        console.log(789)
+        mui('#popover').popover('show');
+    }
+    // 清空彩信
+    function all_empty() {
+        mui.confirm('', '确认清空彩信', ['确认', '取消'], function (e) {
+            // e.index == 1
+            if (e.index == 0) {
+                mui.post('/index.php/webimgEmptyCache/', {
+                }, function (data) {
+                    //服务器返回响应，根据响应结果，分析是否登录成功；
+                    // console.log(data);
+                    if (data.code == 200) {
+                        nums = 0;
+                        mui("#mum")[0].innerHTML = nums;
+                        // 进行删除
+                        document.getElementById('content_card').innerHTML = "";
+                        // 清空size计数数组
+                        size_array = [];
+                    } else {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        });
+                    }
+                }, 'json'
+                );
+            }
+        })
+
+    }
+
+    // 确认发送
+    function send_true() {
+        // 总大小不能大于85kb
+        if (total_size() > 87040) {
+            mui.toast('图片总大小(' + conver(total_size()) + ')不能大于85KB', {
+                duration: 'long',
+                type: 'div'
+            })
+        } else {
+            mui.prompt('', '请输入要发送的主题', '主题', ['发送', '取消'], function (e) {
+
+                if (e.index == 0) {
+                    load.start();
+                    if (localStorage.getItem("rfm_type") == "R") {
+                        mui.post('/index.php/webCargoGuestFuxin/', {
+                            id: idd,
+                            store_code: code,
+                            content: e.value,
+                            rfm_type: 'r',
+                            bar_code:bar_code
+                        }, function (data) {
+                            if (data.code == 200) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                                nums = 0;
+                                mui("#mum")[0].innerHTML = nums;
+                                // 清空size计数数组
+                                size_array = [];
+                                // 文本域字数归0
+                                mui('#text_area_show')[0].innerHTML = 0;
+                                document.getElementById('content_card').innerHTML = "";
+                            } else if (data.code == 400) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                            }
+                            load.stop();
+                            //服务器返回响应，根据响应结果，分析是否登录成功；
+                        }, 'json'
+                        );
+                    } else if (localStorage.getItem("rfm_type") == "F") {
+                        mui.post('/index.php/webCargoGuestFuxin/', {
+                            id: idd,
+                            content: e.value,
+                            store_code: code,
+                            rfm_type: 'f',
+                            bar_code:bar_code
+                        }, function (data) {
+
+                            if (data.code == 200) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                                nums = 0;
+                                mui("#mum")[0].innerHTML = nums;
+                                // 清空size计数数组
+                                size_array = [];
+                                // 文本域字数归0
+                                mui('#text_area_show')[0].innerHTML = 0;
+                                document.getElementById('content_card').innerHTML = "";
+                            } else if (data.code == 400) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                            }
+                            load.stop();
+                            //服务器返回响应，根据响应结果，分析是否登录成功；
+                        }, 'json'
+                        );
+                    } else if (localStorage.getItem("rfm_type") == "M") {
+                        mui.post('/index.php/webCargoGuestFuxin/', {
+                            id: idd,
+                            content: e.value,
+                            store_code: code,
+                            rfm_type: 'm',
+                            bar_code:bar_code
+                        }, function (data) {
+                            if (data.code == 200) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                                nums = 0;
+                                mui("#mum")[0].innerHTML = nums;
+                                // 清空size计数数组
+                                size_array = [];
+                                // 文本域字数归0
+                                mui('#text_area_show')[0].innerHTML = 0;
+                                document.getElementById('content_card').innerHTML = "";
+                            } else if (data.code == 400) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                            }
+                            load.stop();
+                            //服务器返回响应，根据响应结果，分析是否登录成功；
+                        }, 'json'
+                        );
+                    } else if (localStorage.getItem("rfm_type") == "N") {
+                        mui.post('/index.php/webCargoGuestFuxin/', {
+                            id: idd,
+                            content: e.value,
+                            store_code: code,
+                            rfm_type: 'n',
+                            bar_code:bar_code
+                        }, function (data) {
+                            if (data.code == 200) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                                nums = 0;
+                                mui("#mum")[0].innerHTML = nums;
+                                // 清空size计数数组
+                                size_array = [];
+                                // 文本域字数归0
+                                mui('#text_area_show')[0].innerHTML = 0;
+                                document.getElementById('content_card').innerHTML = "";
+                            } else if (data.code == 400) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                            }
+                            load.stop();
+                            //服务器返回响应，根据响应结果，分析是否登录成功；
+                        }, 'json'
+                        );
+                    } else if (localStorage.getItem("rfm_type") == "P") {
+                        mui.post('/index.php/webCargoGuestFuxin/', {
+                            id: idd,
+                            content: e.value,
+                            store_code: code,
+                            rfm_type: 'p',
+                            bar_code:bar_code
+                        }, function (data) {
+                            if (data.code == 200) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                                nums = 0;
+                                mui("#mum")[0].innerHTML = nums;
+                                // 清空size计数数组
+                                size_array = [];
+                                // 文本域字数归0
+                                mui('#text_area_show')[0].innerHTML = 0;
+                                document.getElementById('content_card').innerHTML = "";
+                            } else if (data.code == 400) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                            }
+                            load.stop();
+                            //服务器返回响应，根据响应结果，分析是否登录成功；
+                        }, 'json'
+                        );
+                    } else if (localStorage.getItem("rfm_type") == "A") {
+                        mui.post('/index.php/webCargoGuestFuxin/', {
+                            id: idd,
+                            content: e.value,
+                            store_code: code,
+                            rfm_type: 'a',
+                            bar_code:bar_code
+                        }, function (data) {
+                            if (data.code == 200) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                                nums = 0;
+                                mui("#mum")[0].innerHTML = nums;
+                                // 清空size计数数组
+                                size_array = [];
+                                // 文本域字数归0
+                                mui('#text_area_show')[0].innerHTML = 0;
+                                document.getElementById('content_card').innerHTML = "";
+                            } else if (data.code == 400) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                            }
+                            load.stop();
+                            //服务器返回响应，根据响应结果，分析是否登录成功；
+                        }, 'json'
+                        );
+                    } else if (localStorage.getItem("rfm_type") == "J") {
+                        mui.post('/index.php/webCargoGuestFuxin/', {
+                            id: idd,
+                            content: e.value,
+                            store_code: code,
+                            rfm_type: 'j',
+                            bar_code:bar_code
+                        }, function (data) {
+                            if (data.code == 200) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                                nums = 0;
+                                mui("#mum")[0].innerHTML = nums;
+                                // 清空size计数数组
+                                size_array = [];
+                                // 文本域字数归0
+                                mui('#text_area_show')[0].innerHTML = 0;
+                                document.getElementById('content_card').innerHTML = "";
+                            } else if (data.code == 400) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                            }
+                            load.stop();
+                            //服务器返回响应，根据响应结果，分析是否登录成功；
+                        }, 'json'
+                        );
+                    } else if (localStorage.getItem("rfm_type") == "C") {
+                        mui.post('/index.php/webCargoGuestFuxin/', {
+                            id: idd,
+                            content: e.value,
+                            store_code: code,
+                            rfm_type: 'c',
+                            bar_code:bar_code
+                        }, function (data) {
+                            if (data.code == 200) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                                nums = 0;
+                                mui("#mum")[0].innerHTML = nums;
+                                // 清空size计数数组
+                                size_array = [];
+                                // 文本域字数归0
+                                mui('#text_area_show')[0].innerHTML = 0;
+                                document.getElementById('content_card').innerHTML = "";
+                            } else if (data.code == 400) {
+                                mui.toast(data.msg, {
+                                    duration: 'long',
+                                    type: 'div'
+                                })
+                            }
+                            load.stop();
+                            //服务器返回响应，根据响应结果，分析是否登录成功；
+                        }, 'json'
+                        );
+                    }
+                }
+            }, 'div')
+        }
+
+    }
+
+    // 取消
+    function cancel() {
+        mui('#popover').popover('hide');
+        // 清空上传图片的files
+        var obj = mui("#upload_picture")[0];
+        obj.outerHTML = obj.outerHTML;
+        // 清空文本输入
+        mui("#text_area")[0].value = "";
+        // 文本域字数归0
+        mui('#text_area_show')[0].innerHTML = 0;
+        // 清空图片储存
+        base64_YS = "";
+        // 清空文件储存
+        file_File = "";
+        // 清空图片size
+        conver_size = "";
+    }
+
+
+    // 确定
+    function determine() {
+        // 回显照片如果是空 不执行操作
+        if (base64_YS != "") {
+            load.start();
+            // 关闭下滑
+            mui('#popover').popover('hide');
+            // 将照片和数据添加入数组,用以传递数据
+            // 将数据显示到页面上
+            if (nums > 10) {
+                alert('至于允许添加10帧');
+
+            } else {
+                nums += 1;
+                //先请求后台接口 成功显示界面
+                // console.log(base64_YS);
+                // console.log(file_File);
+                var data = new FormData();
+                data.append('file', file_File);
+                data.append('img_txt', mui("#text_area")[0].value);
+                $.ajax({
+                    data: data,
+                    type: "POST",
+                    url: '/index.php/webimgcache/',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        // console.log(JSON.parse(data).data.delete_id);
+                        if (JSON.parse(data).code == 200) {
+                            size_array.push(conver_size);
+                            create_content(JSON.parse(data).data.delete_id, mui("#text_area")[0].value, base64_YS, conver_size);
+                            mui.toast('上传成功', {
+                                duration: 'long',
+                                type: 'div'
+                            });
+                            load.stop();
+                        } else if (JSON.parse(data).code == 400) {
+                            mui.toast(data.msg, {
+                                duration: 'long',
+                                type: 'div'
+                            });
+                            load.stop();
+                        }
+
+                        // 清空图片储存
+                        base64_YS = "";
+                        // 清空文件储存
+                        file_File = "";
+                        // 清空接受图片大小
+                        conver_size = "";
+                        // 清空上传图片的files
+                        var obj = mui("#upload_picture")[0];
+                        obj.outerHTML = obj.outerHTML;
+                        // 清空文本输入
+                        mui("#text_area")[0].value = "";
+                        num++;
+                    },
+                    error: function (xhr) {
+                        mui.toast('图片上传失败', {
+                            duration: 'long',
+                            type: 'div'
+                        });
+                        load.stop();
+                    }
+                }, 'JSON');
+
+
+            }
+
+        } else {
+            console.log('请上传照片')
+        }
+    }
+
+    // 删除图标
+    function delect_TB(TB) {
+
+        var NameId = TB.getAttribute("nameId");
+        let conver_size2 = TB.getAttribute("conver_size2");
+        mui.confirm('', '确认删除', ['确认', '取消'], function (e) {
+            // e.index == 1
+            if (e.index == 0) {
+                mui.post('/index.php/webimgdelCache/', {
+                    id: NameId
+                }, function (data) {
+                    //服务器返回响应，根据响应结果，分析是否登录成功；
+                    console.log(data);
+                    if (data.code == 200) {
+                        nums -= 1;
+                        mui("#mum")[0].innerHTML = nums;
+                        // 数组进行删除
+                        delete_array(conver_size2);
+                        // 进行删除
+                        document.getElementById(NameId).remove();
+
+                    } else {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        });
+                    }
+                }, 'json'
+                );
+            }
+        })
+    }
+
+
+    // 文本域控制字数
+    $(function () {
+        $('#text_area').bind('input propertychange', function () {
+            mui('#text_area_show')[0].innerHTML = this.value.length;
+        });
+    })
+
+    // 图片上传
+    mui("#product")[0].addEventListener("tap", function () {
+        $('#upload_picture').click();
+    });
+
+    // 内容显示
+    function create_content(idCode, content, imgUrl, conver_size) {
+        var div = document.createElement('div');
+        div.className = "mui-card";
+        div.id = idCode;
+        div.innerHTML = '<span class="tubiao" onclick="delect_TB(this)" conver_size2="' + conver_size + '" nameId="' + idCode + '">&nbsp;&nbsp;&nbsp;&nbsp;<span class="mui-icon mui-icon-trash"></span></span>'
+            // 页眉，放置标题
+            + '<div class="mui-card-header" style="padding-top:8px;"></div>'
+            // 内容区 
+            + '<div class="mui-card-content mui-card-media">'
+            + ' <img src="' + imgUrl + '" width="100%">'
+            + '<p style="margin:0px;padding-right:15px;overflow: hidden"> <span style="float:right">' + conver(conver_size) + '<span></p>'
+            + '</div>'
+            // 页脚，放置补充信息或支持的操作
+            + '<div class="mui-card-footer">' + content + '</div>'
+        mui("#content_card")[0].appendChild(div);
+        mui("#mum")[0].innerHTML = nums;
+    }
+
+    // 条数提示
+    mui("#mum")[0].onclick = function () {
+        mui.toast('最多添加10张图片!', { duration: 'long', type: 'div' })
+    }
+</script>
+
+</html>

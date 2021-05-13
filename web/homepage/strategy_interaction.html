@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>互动策略</title>
+    <script src="../js/vconsole.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.css">
+    <script src="../mui/js/mui.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/loading.js"></script>
+    <script src="../js/tankuang.js"></script>
+    <style id="ppp">
+        .mui-off-canvas-left,
+        .mui-off-canvas-right {
+            width: 100%;
+        }
+
+        .mui-table-view-cell.mui-active {
+            background-color: #efeff0;
+        }
+
+        .mui-table-view-cell::after {
+            right: 15px;
+            background-color: #e8e8e8;
+        }
+
+        .mui-popover {
+            height: 300px;
+        }
+
+        .mui-content {
+            background: #fff
+        }
+
+        /* 控制弹框 */
+        #popover a {
+            text-align: center;
+        }
+
+        /* 标题table */
+        .table {
+            width: 100%;
+            background-color: #FFFFFF;
+            position: absolute;
+            left: 0px;
+        }
+
+        .table>thead>tr {
+            border-bottom: 2px solid #ddd;
+        }
+
+        .table>thead>tr>th {
+            padding: 9px 0px 9px 0px;
+            border-bottom-width: 2px;
+            border: 1px solid #ddd;
+        }
+
+        /* 具体内容table */
+        .table2 {
+            width: 100%;
+            background-color: #FFFFFF;
+        }
+
+        .table2>tbody>tr>td {
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 4px 0px 4px 0px;
+            background-color: #F9F9F9;
+        }
+
+        .table2>tbody>tr>td:nth-child(1) {
+            width: 60%;
+        }
+
+        .table2>tbody>tr>td:nth-child(2) {
+            width: 40%;
+        }
+
+        .table2>tbody>tr>td:nth-child(2)>button {
+            padding-top: 4px;
+            padding-bottom: 4px;
+        }
+
+        /* 查看 */
+        .table3 {
+            width: 100%;
+            background-color: #FFFFFF;
+        }
+
+        .table3>thead>tr {
+            border-bottom: 2px solid #ddd;
+        }
+
+        .table3>thead>tr>th {
+            padding: 9px 0px 9px 0px;
+            border-bottom-width: 2px;
+            border: 1px solid #ddd;
+        }
+
+        .table3>tbody>tr {
+            border: 1px solid #ddd;
+            text-align: center;
+            background-color: #FFFFFF;
+        }
+
+        .tr_cl {
+            border: 1px solid #ddd;
+            text-align: center;
+            background-color: #FFFFFF;
+        }
+
+        .table3>tbody>tr>th {
+            width: 25%;
+        }
+
+        .table3>tbody>tr>td {
+            width: 75%;
+        }
+
+        .table3 textarea,
+        input[type='text'] {
+            width: 90%;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        .dis {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg"
+        style="background-color:#007aff; padding-left: 0px;padding-right:0px;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;padding-left:15px;"></a>
+        <h1 id="ttt" class="mui-title" style="color:white;width: 50%;margin: 0 auto;">互动策略</h1>
+        <a href="#popover" style="float: right;line-height: 44px;color: white;margin-right: 10px;" id="menu">100天模板</a>
+
+        <table class="table" id="titie_table">
+            <thead>
+                <tr>
+                    <th style="width: 60%;">互动名称</th>
+                    <th style="width: 40%;">
+                        操作
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </header>
+    <!-- 详细内容 -->
+    <!-- 手势动作 mui-draggable -->
+    <div class="mui-off-canvas-wrap  mui-slide-in mui-content">
+        <!-- 主页面容器 -->
+        <div class="mui-inner-wrap">
+            <!-- 菜单容器 -->
+            <aside class="mui-off-canvas-right" id="asides">
+                <div class="mui-scroll-wrapper" style="background-color: #FFFFFF">
+                    <!--  style="padding-left:20px;" -->
+                    <div class="mui-scroll">
+                        <!-- 筛选模板 -->
+                        <table class="table3">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" id="template_title">100天模板</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="template_conter">
+                                <tr>
+                                    <th>组织机构</th>
+                                    <td><input type="text" disabled="" value="" id="org" class="layui-input"></td>
+                                </tr>
+                                <tr>
+                                    <th>互动名称</th>
+                                    <td><input type="text" disabled="" value="" id="name" class="layui-input"></td>
+                                </tr>
+                                <tr>
+                                    <th>时间(天)</th>
+                                    <td><input type="text" disabled="" value="" id="day" class="layui-input"></td>
+                                </tr>
+                                <tr>
+                                    <th>互动目的</th>
+                                    <td><input type="text" disabled="" value="" id="objective" class="layui-input"></td>
+                                </tr>
+                                <tr>
+                                    <th>互动方式</th>
+                                    <td><input type="text" disabled="" value="" id="mode" class="layui-input"></td>
+                                </tr>
+                                <tr>
+                                    <th>执行话术
+                                        <button type="button" class="mui-btn mui-btn-primary"
+                                            style="font-size: small;padding-top: 3px;padding-bottom: 3px;margin-top: 5px; background-color: rgba(46, 133, 228, 0.89);border:1px solid rgba(46, 133, 228, 0.89)"
+                                            onclick="details_cen()">详&nbsp;情</button>
+                                    </th>
+                                    <td><textarea disabled="" rows="3" id="skills"></textarea>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="mui-row" style="text-align: center;padding-top: 10px;">
+                            <button type="button" style="width: 50%;" class="mui-btn mui-btn-primary"
+                                onclick="close_p()">关闭</button>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+            <!-- 主页面内容容器 -->
+            <div class="mui-scroll-wrapper" id="pullrefresh" style="top: 43px;">
+                <div class="mui-scroll">
+                    <!-- 主界面具体展示内容 -->
+                    <div class="mui-row" style="margin-bottom:3px;">
+                        <table class="table2">
+                            <tbody id="table2_conter">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 弹框区域 -->
+    <div id="popover" class="mui-popover">
+        <div class="mui-popover-arrow"></div>
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <ul class="mui-table-view" id="popover_ul">
+                    <li class="mui-table-view-cell"><a href="#" value="100天模板" code='1'>100天模板</a></li>
+                    <li class="mui-table-view-cell"><a href="#" value="专场模板" code='2'>专场模板</a></li>
+                    <li class="mui-table-view-cell"><a href="#" value="生日模板" code='3'>生日模板</a></li>
+                    <li class="mui-table-view-cell"><a href="#" value="传统模板" code='4'>传统模板</a></li>
+                    <li class="mui-table-view-cell"><a href="#" value="公众模板" code='5'>公众模板</a></li>
+                    <li class="mui-table-view-cell"><a href="#" value="短信模板" code='6'>短信模板</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 控制弹框 -->
+    <script>
+        //加载动画
+        var load = new Loading();
+        load.init();
+        // 弹框区域
+        mui('#popover').on('tap', 'a', function (e) {
+            mui("#menu")[0].innerHTML = this.innerHTML;
+            mui('.mui-popover').popover('toggle', document.getElementById("menu"));
+            close_p();
+            moban(this);
+        })
+        //滚动区域
+        mui('.mui-scroll-wrapper').scroll({
+            deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+
+        var template_conter = document.getElementById("template_conter");
+        function moban(obj) {
+            template_conter.innerHTML = '';
+            let code = obj.getAttribute('code');
+            let value = obj.getAttribute('value');
+            mui("#template_title")[0].innerHTML = json[parseInt(code) - 1].name;
+            let json_children = json[parseInt(code) - 1].children;
+            for (let i = 0; i < json_children.length; i++) {
+                let tr = document.createElement('tr');
+                if (json_children[i].type == "I") {
+                    tr.innerHTML = '<th>' + json_children[i].text + '</th>'
+                        + '<td><input type="text" disabled="" value="" id="' + json_children[i].id + '" class="layui-input"></td>'
+                } else if (json_children[i].type == "T") {
+                    tr.innerHTML = '<th>' + json_children[i].text + '<button type="button" class="mui-btn mui-btn-primary"style = "font-size: small;padding-top: 3px;padding-bottom: 3px;margin-top: 5px; background-color: rgba(46, 133, 228, 0.89);border:1px solid rgba(46, 133, 228, 0.89)" onclick = "details_cen()" > 详 &nbsp; 情</button ></th>'
+                        + '<td><textarea disabled="" rows="3" id="' + json_children[i].id + '"></textarea></td>'
+                }
+                template_conter.appendChild(tr);
+            }
+            document.getElementById("table2_conter").innerHTML = '';
+            count = 0;
+            type_type = obj.getAttribute('code')
+            mui('#pullrefresh').pullRefresh().refresh(true);
+            pullupRefresh();
+        }
+    </script>
+</body>
+<script>
+    var cehua = false;
+    window.onload = function () {
+        hidden_title();
+        mui('.mui-popover').popover('toggle', document.getElementById("menu"));
+    }
+    // 点击查询按钮
+    mui(".table2").on('tap', '.mui-btn-primary', function () {
+        cehua = true;
+        mui('.mui-off-canvas-wrap').offCanvas().toggle();
+        document.getElementById("titie_table").classList.add("dis");
+        //获取id
+        // var id = this.getAttribute("id");
+        if (type_type == '6') {
+            mui("#org")[0].value = this.getAttribute("org");
+            mui("#name")[0].value = this.getAttribute("name");
+            mui("#skills")[0].innerHTML = this.getAttribute("skills");
+        } else {
+            mui("#org")[0].value = this.getAttribute("org");
+            mui("#mode")[0].value = this.getAttribute("mode");
+            mui("#name")[0].value = this.getAttribute("name");
+            mui("#day")[0].value = this.getAttribute("day");
+            mui("#objective")[0].value = this.getAttribute("objective");
+            mui("#skills")[0].innerHTML = this.getAttribute("skills");
+        }
+    })
+    // 关闭
+    function close_p() {
+        if (cehua == true) {
+            mui('.mui-off-canvas-wrap').offCanvas().toggle();
+            document.getElementById("titie_table").classList.remove("dis");
+        }
+        cehua = false;
+    }
+    // 详情
+    function details_cen() {
+        tan.texts(document.getElementById("skills").innerHTML);
+    }
+
+    var json = [{
+        id: '1',
+        name: '100天模板',
+        children: [{
+            text: '组织机构',
+            id: 'org',
+            type: 'I'
+        }, {
+            text: '互动名称',
+            id: 'name',
+            type: 'I'
+        }, {
+            text: '时间(天)',
+            id: 'day',
+            type: 'I'
+        },
+        {
+            text: '互动目的',
+            id: 'objective',
+            type: 'I'
+        }, {
+            text: '互动方式',
+            id: 'mode',
+            type: 'I'
+        }, {
+            text: '执行话术',
+            id: 'skills',
+            type: 'T'
+        }]
+    }, {
+        id: '2',
+        name: '专场模板',
+        children: [{
+            text: '组织机构',
+            id: 'org',
+            type: 'I'
+        }, {
+            text: '互动名称',
+            id: 'name',
+            type: 'I'
+        }, {
+            text: '时间(日期)',
+            id: 'day',
+            type: 'I'
+        },
+        {
+            text: '互动目的',
+            id: 'objective',
+            type: 'I'
+        }, {
+            text: '互动方式',
+            id: 'mode',
+            type: 'I'
+        }, {
+            text: '执行话术',
+            id: 'skills',
+            type: 'T'
+        }]
+    }, {
+        id: '3',
+        name: '生日模板',
+        children: [{
+            text: '组织机构',
+            id: 'org',
+            type: 'I'
+        }, {
+            text: '互动名称',
+            id: 'name',
+            type: 'I'
+        }, {
+            text: '时间(天)',
+            id: 'day',
+            type: 'I'
+        },
+        {
+            text: '互动目的',
+            id: 'objective',
+            type: 'I'
+        }, {
+            text: '互动方式',
+            id: 'mode',
+            type: 'I'
+        }, {
+            text: '执行话术',
+            id: 'skills',
+            type: 'T'
+        }]
+    }, {
+        id: '4',
+        name: '传统模板',
+        children: [{
+            text: '组织机构',
+            id: 'org',
+            type: 'I'
+        }, {
+            text: '互动名称',
+            id: 'name',
+            type: 'I'
+        }, {
+            text: '时间(日期)',
+            id: 'day',
+            type: 'I'
+        },
+        {
+            text: '互动目的',
+            id: 'objective',
+            type: 'I'
+        }, {
+            text: '互动方式',
+            id: 'mode',
+            type: 'I'
+        }, {
+            text: '执行话术',
+            id: 'skills',
+            type: 'T'
+        }]
+    }, {
+        id: '5',
+        name: '公众模板',
+        children: [{
+            text: '组织机构',
+            id: 'org',
+            type: 'I'
+        }, {
+            text: '互动名称',
+            id: 'name',
+            type: 'I'
+        }, {
+            text: '时间(日期)',
+            id: 'day',
+            type: 'I'
+        },
+        {
+            text: '互动目的',
+            id: 'objective',
+            type: 'I'
+        }, {
+            text: '互动方式',
+            id: 'mode',
+            type: 'I'
+        }, {
+            text: '执行话术',
+            id: 'skills',
+            type: 'T'
+        }]
+    }, {
+        id: '6',
+        name: '短信模板',
+        children: [{
+            text: '组织机构',
+            id: 'org',
+            type: 'I'
+        }, {
+            text: '模板名称',
+            id: 'name',
+            type: 'I'
+        }, {
+            text: '模板内容',
+            id: 'skills',
+            type: 'T'
+        }]
+    }]
+
+</script>
+<script>
+    var type_type = '1';
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            // down: {
+            //     callback: pulldownRefresh
+            // },
+            up: {
+                contentrefresh: '正在加载...',
+                auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+	/**
+	 * 下拉刷新具体业务实现
+	 */
+    // function pulldownRefresh() {
+    // }
+	/**
+	 * 上拉加载具体业务实现
+	 */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+
+    function pullupRefresh() {
+        load.start()
+        mui.post('/index.php/ReinteractionSel/', {
+            type: type_type,
+            page: ++count,//分页
+            limit: limit_num//每页的条数
+        }, function (data) {
+            // 服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                    if (data.data.count == 0) {
+                        mui("#titie_table")[0].classList.add("dis");
+                    } else {
+                        mui("#titie_table")[0].classList.remove("dis");
+                        for (let i = 0; i < data.data.data.length; i++) {
+                            var tr = document.createElement('tr');
+                            tr.innerHTML = ' <td>' + data.data.data[i].name + '</td>'
+                                + ' <td><button type="button" class="mui-btn mui-btn-primary" org="' + data.data.data[i].vgname + '" name="' + data.data.data[i].name + '" day="' + data.data.data[i].time_g + '"  objective="' + data.data.data[i].purpose + '" mode="' + data.data.data[i].function + '" skills="' + data.data.data[i].speech + '">查看</button></td>'
+                            document.getElementById("table2_conter").appendChild(tr);
+                        }
+                    }
+                    load.stop();
+
+                }, 1000);
+            } else {
+                load.stop();
+            }
+
+        }, 'json'
+        );
+    }
+
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+
+    // 解决手机端textarea无法滑动问题(触发textarea滑动的时候，产生了冒泡事件，引起了整个页面的滑动)
+    window.addEventListener('touchmove', function (e) {
+        let target = e.target
+        if (target && target.tagName === 'TEXTAREA') {
+            e.stopPropagation();
+        }
+    }, true)
+
+</script>
+
+</html>

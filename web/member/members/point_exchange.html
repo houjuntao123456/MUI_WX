@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>积分兑换</title>
+    <link rel="stylesheet" href="../../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../../css/iconfont.css">
+    <script src="../../mui/js/muiR.js"></script>
+    <script src="../../js/stm_Pull_up_loading.js"></script>
+    <link rel="stylesheet" href="../../css/card_coupon.css">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jquery.cookie.js"></script>
+
+    <link rel="stylesheet" href="../../css/loading.css">
+    <script src="../../js/loading.js"></script>
+
+    <style>
+        .yinying {
+            border-radius: 5px;
+            box-shadow: #666 0px 0px 3px;
+            -webkit-box-shadow: #666 0px 0px 3px;
+            -moz-box-shadow: #666 0px 0px 3px;
+        }
+
+        .border_bottom {
+            color: #007aff;
+            border-bottom: #007aff 2px solid;
+        }
+
+        #mdcard {
+            padding: 20px;
+            border-radius: 30px;
+        }
+
+        .style_span {
+            font-weight: bolder;
+        }
+
+        h6 {
+            color: white;
+            text-align: center;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;">积分兑换</h1>
+        <div id="mdcard" class="cardclose display_none">
+            <h6> <span class="style_span" id="memndian2">适用门店：</span> <span id="md_text"></span></h6>
+            <h6> <span class="style_span">可用时段：</span> <span id="his"></span></h6>
+            <h6><span class="style_span">使用须知：</span> <span id="remark"></span></h6>
+        </div>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <!-- 卡券 -->
+        <div id="kkquan">
+
+            <div class="mui-row" id="form_css">
+                <div class="mui-col-sm-4 mui-col-xs-4 border_bottom" id="div1" onclick="card('Y')">
+                    优惠券
+                </div>
+                <div class="mui-col-sm-4 mui-col-xs-4" id="div2" onclick="card('Z')">
+                    折扣劵
+                </div>
+                <div class="mui-col-sm-4 mui-col-xs-4" id="div3" onclick="card('L')">
+                    礼品劵
+                </div>
+            </div>
+            <div class="mui-row yinying"
+                style=" text-align: center;width: 90%;margin: 7px auto;background-color: white;border-radius: 30px;">
+                <div class="mui-col-sm-6 mui-col-xs-6" style="color: #007aff;">当前积分: <span id="JFen"></span> </div>
+                <div class="mui-col-sm-6 mui-col-xs-6" style="border-left: 1px solid #ccc;" onclick="record()">兑换记录
+                </div>
+            </div>
+            <div id="pullrefresh2" class="mui-scroll-wrapper" style="top: 20%;">
+                <div class="mui-scroll">
+                    <!--数据列表-->
+                    <div id="show" class="display_none">
+                        <span class="mui-icon mui-icon-info"></span>
+                        <br>
+                        <span id="span1"></span>
+                    </div>
+
+                    <div id="qqq" style="padding: 10px 2px;">
+                        <!-- <div class="stamp stamp02">
+                            <div class="par">
+                                <p> 开心卡</p>
+                                <p><sub class="sign"></sub><span>789</span><sub class="unit"></sub></p>
+                                <p>订单满100元</p>
+                                <p>有效期: 2010-02-01</p>
+                                <p style="margin-left:24%;">2020-09-15</p>
+                            </div>
+                            <div class="copy">
+                                <p>适用门店</p>
+                                <p>
+                                    1505积分兑换
+                                </p>
+                            </div>
+                            <i></i>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+<script>
+    var load = new Loading();
+    load.init();
+
+    // $.cookie("code", '13773033340', { path: '/' })
+    // $.cookie("code")
+    // var pp = document.getElementById("form_css");
+    // var vop = document.getElementById("pullrefresh");
+
+    // window.onload = function () {
+    //     // vop.style.marginTop = pp.clientHeight + 45 + 'px';
+    //     window_not_used();
+    // }
+    var span1 = document.getElementById("span1");
+    var div1 = document.getElementById("div1");
+    var div2 = document.getElementById("div2");
+    var div3 = document.getElementById("div3");
+
+    // mui("#qqq").on('tap', '.cardmd', function (event) {
+    //     event.stopPropagation();
+    //     document.getElementById("mdcard").classList.remove("display_none");
+    //     var e = event || window.event;
+
+    //     var x = event.detail.center.x;
+    //     var y = event.detail.center.y;
+    //     //获取id 18 100
+    //     var id = this.getAttribute("id");
+    //     document.getElementById("mdcard").style.left = (x - 269) + 'px';
+    //     document.getElementById("mdcard").style.top = (y - 35) + 'px';
+    //     document.getElementById("md_text").innerHTML = this.getAttribute("code") + ' , ';
+    // })
+    // mui("#qqq").on('tap', '.curecard', function (event) {
+    //     event.stopPropagation();
+    //     location.href = 'card_detailed.html?card_code=' + this.getAttribute("card_code") + '#code*' + this.getAttribute("code") + '&card_type%' + this.getAttribute("card_type");
+    // })
+
+    // //点击其余区域 隐藏 
+    // mui(".mui-content")[0].addEventListener("tap", function () {
+    //     document.getElementById("mdcard").classList.add("display_none");
+
+    // });
+    // //点击其余区域 隐藏 
+    // mui(".cardclose")[0].addEventListener("tap", function () {
+    //     document.getElementById("mdcard").classList.add("display_none");
+
+    // });
+
+    // 未使用
+
+    // 查询积分
+    // 进来加载的方法
+    $(function () {
+        load.start();
+        mui.post('/index.php/webViplistListIntegral/', {
+            code: $.cookie("code")
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                // console.log(data);
+                if ((data.data == null) || (data.data == "") || (data.data == undefined)) {
+
+                } else {
+                    document.getElementById("JFen").innerHTML = data.data.residual_integral;
+                    card("Y");
+                }
+                load.stop();
+            } else {
+                load.stop();
+            }
+
+        }, 'json'
+        );
+
+    });
+
+
+    // 点击优惠券/折扣劵/礼品劵
+    var table = document.getElementById("qqq");
+    function card(event) {
+        div1.classList.remove("border_bottom");
+        div2.classList.remove("border_bottom");
+        div3.classList.remove("border_bottom");
+        document.getElementById("show").classList.add("display_none");
+        table.innerHTML = "";
+        if (event == "Y") {
+            load.start();
+            mui.post('/index.php/webViplistPointExchange/', {
+                type: 0
+            }, function (data) {
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    // console.log(data);
+                    div1.classList.add("border_bottom");
+                    if (data.data.length == 0) {
+                        span1.innerHTML = "您还没有可兑换的优惠券~";
+                        document.getElementById("show").classList.remove("display_none");
+                    } else {
+                        for (i = 0; i < data.data.length; i++) {
+                            var div = document.createElement('div');
+                            div.className = "stamp stamp05";
+                            div.innerHTML = '<div class="par">'
+                                + ' <p> ' + data.data[i].name + '</p>'
+                                + '<p><sub class="sign"></sub><span>' + data.data[i].card_money + '元</span><sub class="unit"></sub></p>'
+                                + ' <p>订单满' + data.data[i].money + '元</p>'
+                                + '<p>有效期: ' + data.data[i].start_time + '</p>'
+                                + '<p style="margin-left:24%;">' + data.data[i].end_time + '</p>'
+                                + ' </div>'
+                                + '<div class="copy">'
+                                + '<p class="cardmd" store_name="' + data.data[i].store_name + '" week="' + data.data[i].week + '" remark="' + data.data[i].card_remark + '" hsi="' + data.data[i].hsi + '"  >使用详情</p>'
+                                + '<p class="card_exchange" coupon_code="' + data.data[i].code + '" type="' + 0 + '">' + data.data[i].integral + '积分</p>'
+                                + '  </div>'
+                                + ' <i></i>'
+                            table.appendChild(div);
+                        }
+                    }
+                    load.stop();
+                }
+            }, 'json'
+            );
+
+        } else if (event == "Z") {
+            load.start();
+            mui.post('/index.php/webViplistPointExchange/', {
+                type: 2
+            }, function (data) {
+                // console.log(data);
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    div2.classList.add("border_bottom");
+                    if (data.data.length == 0) {
+                        span1.innerHTML = "您还没有可兑换的折扣劵~";
+                        document.getElementById("show").classList.remove("display_none");
+                    } else {
+                        for (i = 0; i < data.data.length; i++) {
+                            var div = document.createElement('div');
+                            div.className = "stamp stamp02";
+                            div.innerHTML = '<div class="par">'
+                                + ' <p> ' + data.data[i].name + '</p>'
+                                + '<p><sub class="sign"></sub><span>' + data.data[i].card_discount + '折</span><sub class="unit"></sub></p>'
+                                + ' <p>订单满' + data.data[i].money + '元</p>'
+                                + '<p>有效期: ' + data.data[i].start_time + '</p>'
+                                + '<p style="margin-left:24%;">' + data.data[i].end_time + '</p>'
+                                + ' </div>'
+                                + '<div class="copy">'
+                                + '<p class="cardmd" store_name="' + data.data[i].store_name + '" week="' + data.data[i].week + '" remark="' + data.data[i].card_remark + '" hsi="' + data.data[i].hsi + '"  >使用详情</p>'
+                                + '<p class="card_exchange" coupon_code="' + data.data[i].code + '" type="' + 1 + '">' + data.data[i].integral + '积分</p>'
+                                + '  </div>'
+                                + ' <i></i>'
+                            table.appendChild(div);
+                        }
+                    }
+
+                }
+                load.stop();
+            }, 'json'
+            );
+
+
+
+        } else if (event == "L") {
+            load.start();
+            mui.post('/index.php/webViplistPointExchange/', {
+                type: 1
+            }, function (data) {
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    // console.log(data);
+                    div3.classList.add("border_bottom");
+                    if (data.data.length == 0) {
+                        span1.innerHTML = "您还没可兑换的礼品劵~";
+                        document.getElementById("show").classList.remove("display_none");
+
+                    } else {
+                        for (i = 0; i < data.data.length; i++) {
+                            var div = document.createElement('div');
+                            div.className = "stamp stamp01";
+                            div.innerHTML = '<div class="par">'
+                                + ' <p> ' + data.data[i].name + '</p>'
+                                + '<p><sub class="sign"></sub><span>' + data.data[i].gift_code + '</span><sub class="unit"></sub></p>'
+                                // + ' <p>订单满' + data.data[i].money + '元</p>'
+                                + '<p>有效期: ' + data.data[i].start_time + '</p>'
+                                + '<p style="margin-left:24%;">' + data.data[i].end_time + '</p>'
+                                + ' </div>'
+                                + '<div class="copy">'
+                                + '<p class="cardmd" store_name="' + data.data[i].store_name + '" week="' + data.data[i].week + '" remark="' + data.data[i].card_remark + '" hsi="' + data.data[i].hsi + '"  >使用详情</p>'
+                                + '<p class="card_exchange" coupon_code="' + data.data[i].code + '" type="' + 2 + '">' + data.data[i].integral + '积分</p>'
+                                + '  </div>'
+                                + ' <i></i>'
+                            table.appendChild(div);
+                        }
+                    }
+
+                }
+                load.stop();
+            }, 'json'
+            );
+
+
+
+
+        }
+    }
+    // 使用详情
+    mui("#qqq").on('tap', '.cardmd', function (event) {
+        event.stopPropagation();
+        document.getElementById("mdcard").classList.remove("display_none");
+        var e = event || window.event;
+
+        var x = event.detail.center.x;
+        var y = event.detail.center.y;
+        //获取id 18 100
+        var id = this.getAttribute("id");
+        document.getElementById("mdcard").style.left = (x - 269) + 'px';
+        document.getElementById("mdcard").style.top = (y - 35) + 'px';
+
+        if (y > 510) {
+            document.getElementById("mdcard").style.left = (x - 269) + 'px';
+            document.getElementById("mdcard").style.top = (y - 200) + 'px';
+        } else {
+            document.getElementById("mdcard").style.left = (x - 269) + 'px';
+            document.getElementById("mdcard").style.top = (y - 35) + 'px';
+        }
+        // 适用门店
+        // document.getElementById("memndian2").innerHTML = '适用门店：';
+        document.getElementById("md_text").innerHTML = this.getAttribute("store_name");
+        // 可用时段
+        if ((this.getAttribute("his") == "") || (this.getAttribute("his") == null) || (this.getAttribute("his") == undefined) || (this.getAttribute("his") == 'undefined')) {
+            document.getElementById("his").innerHTML = this.getAttribute("week");
+        } else {
+            document.getElementById("his").innerHTML = this.getAttribute("week") + '(' + this.getAttribute("his") + ')';
+        }
+        // 使用须知
+        if ((this.getAttribute("remark") == "") || (this.getAttribute("remark") == null) || (this.getAttribute("remark") == undefined) || (this.getAttribute("remark") == 'undefined')) {
+            document.getElementById("remark").innerHTML = " ";
+        } else {
+            document.getElementById("remark").innerHTML = this.getAttribute("remark");
+        }
+
+
+
+    })
+    // 积分兑换
+    mui("#qqq").on('tap', '.card_exchange', function (event) {
+         let xinxi = this;
+        mui.confirm('确认用' + this.innerHTML + '兑换此卡劵吗?', '兑换卡劵', ['取消', '确定'], function (e) {
+            // e.index == 1
+            if (e.index == 1) {
+                load.start();
+                event.stopPropagation();
+                //获取id 18 100
+                mui.post('/index.php/webViplistOffExchange/', {
+                    vip_code: $.cookie("code"),
+                    coupon_code: xinxi.getAttribute("coupon_code"),
+                    type: xinxi.getAttribute("type")
+                }, function (data) {
+                    //服务器返回响应，根据响应结果，分析是否登录成功；
+                    if (data.code == 200) {
+                        // console.log(data);
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                        setTimeout(function () {
+                            window.location.reload()
+                        }, 1000)
+
+                    } else {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+
+                    }
+                    load.stop();
+                }, 'json'
+                );
+            } 
+        })
+
+
+
+
+    })
+    //点击其余区域 隐藏 
+    mui(".mui-content")[0].addEventListener("tap", function () {
+        document.getElementById("mdcard").classList.add("display_none");
+
+    });
+    //点击其余区域 隐藏 
+    mui(".cardclose")[0].addEventListener("tap", function () {
+        document.getElementById("mdcard").classList.add("display_none");
+
+    });
+    // 积分记录
+    function record() {
+        // mui.toast('暂无记录!', {
+        //     duration: 'long',
+        //     type: 'div'
+        // })
+        location.href = "./point_exchange_record.html";
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+</script>
+
+</html>

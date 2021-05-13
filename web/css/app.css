@@ -1,0 +1,347 @@
+/*
+ *这是单独为hello mui准备的个性化css，可以覆盖标准mui的css定义；
+ * 在实际项目开发时，建议为App单独写一个css文件，从而实现项目的自定义皮肤功能；
+ * 
+ * */
+.mui-plus header.mui-bar{
+	display: none;
+}
+.mui-plus .mui-bar-nav~.mui-content{
+	padding: 0;
+}
+
+/*hm开头的表示仅为 Hello MUI示例定义*/
+.hm-description{
+	margin: .5em 0;
+}
+
+.hm-description>li {
+	font-size: 14px;
+	color: #8f8f94;
+}
+
+/* 会员资料 */
+.ul_nav {
+	list-style: none;
+	overflow: hidden;
+	padding-left: 0px;
+	text-align: center;
+	line-height: 30px;
+	margin-top: 0px;
+	margin-bottom: 2px;
+	padding-bottom: 10px;
+	/* background-color: #297CFF; */
+}
+
+.label {
+	float: left;
+	width: 25%;
+	padding-bottom: 3px;
+	background: rgba(2,136,209,.3);
+	margin: 10px 15px 0 15px;
+	border-radius: 30px;
+}
+
+.lable_p {
+	margin: 0;
+	padding: 0;
+	height: 27px;
+	font-size: 16px;
+	color: #fff;
+}
+.hide {
+	display: none;            
+}
+
+.display_inline-block {
+	display: inline-block;
+}
+/* 资料样式 */
+.data_style1{
+	padding-top: 25px;
+	border-radius:  0 0 10px 10px;
+	position:absolute;
+	width:100%;
+	background: linear-gradient(#297CFF,#35CBFE);
+}
+.data_head{
+	width:100px;
+	height:100px;
+	margin:auto;
+	background-color: #fff;
+	border-radius: 50%;
+}
+.data_head img{
+	width:96%;
+	height:96%;
+	border-radius: 50%;
+	margin-top: 2px;
+}
+.data_style2{
+	width: 100%;
+	position: absolute;
+	top: 357px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	font-size: 15px;
+}
+.data_module_title{
+	background-color: #fff;
+	color: #000;
+	border-bottom: 1px dashed #ddd;
+	border-top: 1px solid #e6e4e4;
+}
+.data_module_title label:nth-child(1){
+	font-weight: bold;
+	letter-spacing: 2px;
+}
+.label_s{
+	float:right !important;text-align:right;color: rgb(82, 165, 224);letter-spacing: 2px;
+	padding: 5px 15px !important;
+}
+.data_module_content{
+	text-align: left;
+	overflow: hidden;
+	margin-bottom: 10px;
+	background-color: #fff;
+}
+.txt1{
+	font-weight: bold;
+	letter-spacing: 2px;
+}
+.data_hide_style{
+	width:95%;
+	margin:0 auto;
+	margin-top: 10px;
+	position: absolute;
+	left: 0;right: 0;
+	top: 80px;
+	font-size: 16px;
+}
+.data_hide_style label{
+	padding: 14px 15px 0 15px;
+}
+
+.photo_top{
+	position: absolute;
+	top: 100px;
+	border-radius: 18px;
+	background: rgba(2,136,209,.3);
+	width: 35px;
+	height: 35px;
+}
+.photo_bottom{
+	position: absolute;
+	bottom: 0;
+	top: 100px;
+	border-radius: 18px;
+	background: rgba(2,136,209,.3);
+	width: 35px;
+	height: 35px;
+}
+.kk{
+	background: rgba(2,136,209,.7);
+}
+
+/* 会员归属 */
+.huiy_title{
+	text-align:center;
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid #eee;
+}
+
+
+.clear {
+	clear: both
+}
+.RadioStyle input,.checkboxStyle input {
+	display: none
+}
+.checkboxStyle label {
+	padding: 2px 5px 2px 5px;
+	line-height: 28px;
+	min-width: 75px;
+	text-align: center;
+	float: left;
+	margin: 0px;
+	/* border-radius: 20px; */
+	font-size: 15px;
+	background: #f2f2f2;
+}
+.checkboxStyle input:checked + label {
+	color: #00a4ff;
+	background: #d4e5f6;
+}
+.RadioStyle label {
+	border: 1px solid #00a4ff;
+	padding: 2px 10px 2px 5px;
+	line-height: 23px;
+	min-width: 60px;
+	text-align: center;
+	float: left;
+	margin-top: 10px;
+	border-radius: 4px;
+	color: #6c6c6f
+}
+.RadioStyle input:checked + label {
+	background: url(../images/ico_checkon.svg) no-repeat right bottom;
+	background-size: 25px 25px;
+	color: #00a4ff
+}
+.m-t-8{
+	margin: 8px 0 0 0;
+}
+
+
+/* 新建会员 */
+a {
+	text-decoration: none;
+}
+
+.button_style:active {
+	top: 2px;
+	/**向下偏移2px **/
+}
+select {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+table tr td {
+	width: 20%;
+	text-align: center;
+	background-color: white;
+}
+/* 更改密码框 */
+.changepass{
+	width: 98%;
+    border: 1px solid #ddd;
+    margin: 5px auto 0 auto;
+    border-radius: 5px;
+    background-color: white;
+    background-color: white;
+}
+/* 修改资料 */
+.xgzl_title{
+	background-color:#fff;
+	font-weight: bold;
+	margin-top: 10px; 
+	padding-bottom: 10px;
+	border-radius: 10px 10px 0px 0px;
+	border-left: 3px solid rgb(41, 208, 250);
+	border-bottom:1px dashed #ddd;
+}
+
+
+/* login样式 */
+.footer{
+	position:absolute;
+	bottom: 6%; 
+	width:100%;
+	position: fixed;
+}
+
+/* mui样式增改 */
+
+.mui-input-group .mui-input-row {
+    height: 45px;
+}
+.mui-table-view-cell::after{
+	background-color: #fff;
+	left: 0;
+	top: 1px;
+}
+.bg-cell::after{
+	background-color: #fff;
+}
+.mui-table-view::after{
+	background-color: #ececed;
+}
+.mui-table-view-cell.mui-active{
+	background-color: #fff;
+}
+.mui-table-view-cell.mui-collapse.mui-active{
+	margin-top: 0px;
+}
+.mui-table-view-cell>a:not(.mui-btn).mui-active {
+	background-color: rgb(178, 219, 250);
+}
+.mui-table-view-cell.mui-collapse > .mui-navigate-right::after, .mui-table-view-cell.mui-collapse > .mui-push-right::after{
+	color: #007AFF;
+}
+.mui-navigate-right::after, .mui-push-right::after{
+	color:#007AFF;
+}
+.mui-table-view::before{
+	background-color: #fff;
+}
+.mui-btn-danger, .mui-btn-negative, .mui-btn-red{
+	border: 1px solid #2e86dd;
+	background-color: #2e86dd;
+}
+.mui-table-view-cell.mui-collapse .mui-table-view{
+	margin: 0px;
+}
+.mui-bar {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.mui-bar-nav {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.mui-select:before {
+	color: #007aff;
+}
+.mui-input-group .mui-input-row::after{
+	background-color: #efeff3;
+	left: 0;
+}
+.mui-input-group::before{
+	background-color: #efeff3;
+}
+.mui-input-row label ~ input, .mui-input-row label ~ select, .mui-input-row label ~ textarea{
+	font-size: 15px;
+	color: #29292c;
+	-webkit-user-select: auto;
+}
+.mui-input-group::after{
+	background-color: #fff;
+}
+
+.mui-table-view-cell.mui-collapse .mui-collapse-content{
+	border-top: 1px dashed #d6def8;
+	padding: 0;
+}
+/* .table_view_xt:after{
+	height: 2px;
+	background: #000000;
+} */
+/* .mui-input-group .mui-input-row:after{
+	background-color: snow;
+} */
+
+.mui-input-group:after{
+	background-color: snow;
+}
+.mui-button-row{
+	padding-top: 8px;
+}
+.mui-input-group{
+	background: none
+}
+.mui-content-white{
+	background: #fff;
+}
+.mui-content-none{
+	background: none;
+}
+.mui-input-group:before{
+	height: 0px;
+}
+button:enabled:active{
+	color: #fff;
+	background-color: #007aff;
+}

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>回购查询</title>
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <!-- <link rel="stylesheet" href="../css/iconfont.css"> -->
+    <script src="../mui/js/mui.min.js"></script>
+    <!-- <script src="../mui/js/muiR.js"></script> -->
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/loading.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+</head>
+<style>
+    body{font-size: 14px;}
+    p {
+        margin-bottom: 5px;
+    }
+
+    a {
+        color: black;
+    }
+    .mui-input-row select {
+        font-size: 14px;
+    }
+    .tips{
+        width: 100%;
+        height:35px;
+        line-height: 35px;
+        padding-left:2%;
+        border-bottom:#ccc 1px solid;
+        color:red;
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+    .data-style{
+        width: 100%;
+        background: #fff;
+        height: 182px;
+        margin-bottom: 6px;
+    }
+    .data-title{
+        padding: 8px 12px;
+        border-bottom: 1px solid #eee;
+    }
+    .money-mix{
+        margin-top: 15px;
+    }
+    .money-mix div{
+        width: 32.5%;
+        display: inline-block;
+        text-align: center;
+    }
+    .money-mix div h4{
+        margin: 8px 0 0 0;
+        color: #F19E54;
+    }
+    .money-mix div a{
+        color: #5ba8fa;
+        padding: 1px 0;
+        border-bottom: 1px solid #5ba8fa;
+    }
+    
+</style>
+
+<body>
+    <!-- 原回购人数链接D:\www\wx\web\homepage\wepurchase_number.html-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" id="a_title" style="color:white;"></a>
+        <h1 class="mui-title" id="title_" style="color:white;">回购查询</h1>
+    </header>
+    <!-- 头部选择器 -->
+    <div id="da" class="mui-content">
+        <div class="mui-content" style="background-color: rgb(255, 255, 255)">
+            <div class="tips">回购人数:购买2次及以上的会员数</div>
+        </div>
+       
+        <!-- body内容 -->
+        <div id="xiao" class="mui-content">
+            <div id="form_css">
+                
+            </div>
+            <!-- 下拉刷新内容 -->
+            <div id="pullrefresh" class="mui-scroll-wrapper ">
+                
+                <div class="mui-scroll">
+                    <!--数据列表-->
+                     <!-- 选择机构-->
+        <div class="mui-input-row mui-select">
+                <select name="" style="color:rgb(105, 104,104);margin-bottom: 4px;" id="all_organization"
+                  onchange="gradeChange_organization()">
+                  <!-- <option value="">所有机构</option> -->
+                  <!-- <option value="">上海部门</option>
+                                <option value="">海南部门</option>
+                                <option value="">澳大利亚部门</option> -->
+                </select>
+              </div>
+              <!-- 选择门店-->
+              <div class="mui-input-row mui-select">
+                <select name="" style="color:rgb(105, 104,104);margin-bottom: 4px;" id="all_stores"
+                  onchange="gradeChange_stores()">
+                  <!-- <option value="">所有门店</option> -->
+                  <!-- <option value="">上海部门</option>
+                          <option value="">海南部门</option>  
+                          <option value="">澳大利亚部门</option> -->
+                </select>
+              </div>
+              <!-- 请选择导购 -->
+              <div class="mui-input-row mui-select">
+                <select name="" style="color:rgb(105, 104,104);margin-bottom: 4px;" id="all_shopping">
+                  <!-- <option value="">形象顾问</option> -->
+                  <!-- <option value="">上海部门</option>
+                          <option value="">海南部门</option>
+                          <option value="">澳大利亚部门</option> -->
+                </select>
+              </div>
+               <!-- 开始时间 -->
+        <div class="mui-row " style="border-bottom: 1px solid #eee;height: 37px;line-height: 37px;text-align: center;" id="divid">
+            <!-- <div class="mui-col-xs-4 mui-col-sm-4">
+                &nbsp;&nbsp;&nbsp;&nbsp;开始时间：
+            </div> -->
+            <div id="start_time" class="mui-col-xs-5 mui-col-sm-5" style="border: 1px solid white;background-color: white;border-radius:20px;" onclick="start_time();">
+                &nbsp;
+                <span class="time_">2015</span>
+            </div>
+            <div class="mui-col-xs-2 mui-col-sm-2">
+                至
+            </div>
+            <div id="over_time" class="mui-col-xs-5 mui-col-sm-5" style="border: 1px solid white;background-color: white;border-radius:20px;" onclick="over_time();">&nbsp;
+                <span class="time_">2018</span>
+            </div>
+        </div>
+            <!-- 查询 -->
+            <div class="mui-button-row" style="height: 45px;margin-top: 10px;">
+                <button type="button" class="mui-btn mui-btn-blue" style="width:300px;" id="query">查询</button>
+              </div>
+              <div style="z-index: 1;" id="dadada">
+                   <!-- 内容 -->
+                </div>
+                    <div id="qqq">
+                       <!-- 内容 -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+<script>
+    //a标签不能用
+    mui('body').on('tap', 'a', function () {
+        window.location.href = this.href;
+    });
+    mui("#divid").on("tap","#start_time",function(){
+	// 逻辑代码，例如跳转详情页、ajax
+        var dtpicker = new mui.DtPicker({
+        type: "date",//设置日历初始视图模式 
+        beginDate: new Date(1970, 01, 01),//设置开始日期 
+        endDate: new Date(2070, 01, 01),//设置结束日期 
+        labels: ['年', '月', '日'],//设置默认标签区域提示语 
+        });
+            dtpicker.show(function (items) {
+            birth[0].innerHTML = items.y.value + '-' + items.m.value + '-' + items.d.value;
+            })
+            
+    });
+    mui("#divid").on("tap","#over_time",function(){
+	// 逻辑代码，例如跳转详情页、ajax
+    var dtpicker = new mui.DtPicker({
+            type: "date",//设置日历初始视图模式 
+            beginDate: new Date(1970, 01, 01),//设置开始日期 
+            endDate: new Date(2170, 01, 01),//设置结束日期 
+            labels: ['年', '月', '日'],//设置默认标签区域提示语 
+            });
+            dtpicker.show(function (items) {
+            birth[1].innerHTML = items.y.value + '-' + items.m.value + '-' + items.d.value
+            })
+            
+    });
+    var pp = document.getElementById("form_css");
+    var pullrefresh = document.getElementById("pullrefresh");
+    var all_stores = document.getElementById("all_stores");
+    var all_shopping = document.getElementById("all_shopping");
+    window.onload = function () { 
+        if (localStorage.getItem("best_huigou") == "") {
+      onload_select();
+    }     
+        onload_select_innerHTML();
+        new_data();
+        hidden_title();
+        pullupRefresh();
+        zongshu();
+        pullrefresh.style.marginTop = pp.clientHeight + 85 + 'px';
+    }
+     // 获取当前时间
+  var new_star = "";
+  var new_end = "";
+  function new_data() {
+    var myDate = new Date();//获取系统当前时间
+    if ((myDate.getMonth() + 1) <=9) {
+      if (myDate.getDate()<10) {
+        new_star = myDate.getFullYear() + '-' + '0'+(myDate.getMonth() + 1) + '-' +'0'+ (myDate.getDate() - 1);
+      new_end = myDate.getFullYear() + '-' + '0'+(myDate.getMonth() + 1) + '-' +'0'+ myDate.getDate();
+      } else {
+        new_star = myDate.getFullYear() + '-' + '0'+(myDate.getMonth() + 1) + '-' + (myDate.getDate() - 1);
+      new_end = myDate.getFullYear() + '-' + '0'+(myDate.getMonth() + 1) + '-' + myDate.getDate();
+      }
+    }else{
+        if (myDate.getDate()<10) {
+        new_star = myDate.getFullYear() + '-' +(myDate.getMonth() + 1) + '-' +'0'+ (myDate.getDate() - 1);
+      new_end = myDate.getFullYear() + '-' +(myDate.getMonth() + 1) + '-' +'0'+ myDate.getDate();
+      } else {
+      new_star = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + (myDate.getDate() - 1);
+      new_end = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate();
+      }
+    }
+    time1=myDate.getFullYear()+"-"+(myDate.getMonth()+1)+"-"+myDate.getDate();//time1表示当前时间
+    var date2 = new Date(myDate);
+    date2.setDate(myDate.getDate()-7);
+    if ((date2.getMonth()+1)<9) {
+        if (date2.getDate()<10) {
+            var time2 = date2.getFullYear()+"-"+"0"+(date2.getMonth()+1)+"-"+"0"+date2.getDate();
+        } else {
+            var time2 = date2.getFullYear()+"-"+"0"+(date2.getMonth()+1)+"-"+date2.getDate();
+        }
+    } else {
+        var time2 = date2.getFullYear()+"-"+(date2.getMonth()+1)+"-"+date2.getDate();
+    }
+    birth[0].innerHTML = time2;
+    birth[1].innerHTML = new_end;
+  }
+  var birth = document.getElementsByClassName("time_");
+  //开始时间
+  function start_time() {
+    
+  }
+  // 结束时间
+  function over_time() {
+    
+  }
+     // 下拉框初始赋值
+  function onload_select_innerHTML() {
+    // 给组织加载多余
+    var option_all_organization = document.createElement("option");
+    option_all_organization.value = "";
+    option_all_organization.innerHTML = "所有机构";
+    document.getElementById("all_organization").appendChild(option_all_organization);
+     // 门店加载多余 
+    var option_all_stores = document.createElement("option");
+    option_all_stores.value = "";
+    option_all_stores.innerHTML = "所有门店";
+    document.getElementById("all_stores").appendChild(option_all_stores);
+     // 形象顾问加载多余
+    var option_all_shopping = document.createElement("option");
+    option_all_shopping.value = "";
+    option_all_shopping.innerHTML = "所有员工";
+    document.getElementById("all_shopping").appendChild(option_all_shopping);
+   
+  }
+  // 进来加载组织
+  // 选择组织
+  function onload_select() {
+    mui.post('/index.php/UserlistOrg/', {
+    }, function (data) {
+      //服务器返回响应，根据响应结果，分析是否登录成功；
+      if (data.code == 200) {
+        for (i = 0; i < data.data.length; i++) {
+          var option = document.createElement('option');
+          option.value = data.data[i].code;
+          option.innerHTML = data.data[i].name
+          document.getElementById("all_organization").appendChild(option);
+        }
+      }
+    }, 'json'
+    );
+  }
+
+function gradeChange_organization() {
+
+// load.start();
+mui.post('/index.php/UserlistStore/', {
+  code: document.getElementById("all_organization").options[document.getElementById("all_organization").selectedIndex].value
+}, function (data) {
+  //服务器返回响应，根据响应结果，分析是否登录成功；
+  if (data.code == 200) {
+    document.getElementById("all_stores").innerHTML = '<option value="">选择门店</option>'
+    for (i = 0; i < data.data.length; i++) {
+      var option = document.createElement('option');
+      option.value = data.data[i].code;
+      option.innerHTML = data.data[i].name;
+      document.getElementById("all_stores").appendChild(option);
+    }
+    // load.stop();
+  }
+}, 'json'
+);
+}
+// 选择门店 店员下拉发生改变
+function gradeChange_stores() {
+
+// load.start();
+mui.post('/index.php/UserlistStaff/', {
+  code: all_stores.options[all_stores.selectedIndex].value
+}, function (data) {
+  //服务器返回响应，根据响应结果，分析是否登录成功；
+  if (data.code == 200) {
+    document.getElementById("all_shopping").innerHTML = '<option value="">选择店员</option>'
+    for (i = 0; i < data.data.length; i++) {
+      var option = document.createElement('option');
+      option.value = data.data[i].code;
+      option.innerHTML = data.data[i].name;
+      document.getElementById("all_shopping").appendChild(option);
+    }
+    // load.stop();
+  }
+}, 'json'
+);
+}
+// 点击按钮查询
+var query = document.getElementById("query");
+  query.onclick = function () {
+    select_org = document.getElementById("all_organization").options[document.getElementById("all_organization").selectedIndex].value;
+    select_store = all_stores.options[all_stores.selectedIndex].value;
+    select_staff = all_shopping.options[all_shopping.selectedIndex].value
+    document.getElementById("qqq").innerHTML = "";
+    contont = true;
+    count = 0;
+    mui('#pullrefresh').pullRefresh().refresh(true);
+    console.log();
+    pullupRefresh();
+    zongshu();
+    var gg = [ select_org, select_store, select_staff,birth[0].innerHTML, birth[1].innerHTML];
+    localStorage.setItem("best_huigou", gg);
+  }
+   // //select安卓和ios的判断样式
+   var picture3 = document.getElementById("all_organization");
+  var picture = document.getElementById("all_stores");
+  var picture1 = document.getElementById("all_shopping");
+  //苹果手机采用CSS1
+  if (/iphone/i.test(navigator.userAgent)) {
+    picture3.style.paddingLeft = "42%";
+    picture.style.paddingLeft = "42%";
+    picture1.style.paddingLeft = "42% ";
+    // addStyleLink('CSS1.css');
+
+  }
+  // 安卓手机采用CSS2
+  if (/android/i.test(navigator.userAgent)) {
+    //alert("安卓");
+    picture3.style.paddingLeft = "42%";
+    picture.style.paddingLeft = "42%";
+    picture1.style.paddingLeft = "42% ";
+    // addStyleLink('CSS2.css');
+
+  }
+ //进来获取数据
+
+</script>
+<script>
+        var load = new Loading();
+    load.init();
+    // load.start();
+    // load.stop();
+    mui.init({
+
+        pullRefresh: {
+            container: '#pullrefresh',
+            // down: {
+            //     callback: pulldownRefresh
+            // },
+            up: {
+                contentrefresh: '正在加载...',
+                // auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+	/**
+	 * 下拉刷新具体业务实现
+	 */
+    // function pulldownRefresh() {
+    // }
+	/**
+	 * 上拉加载具体业务实现
+	 */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var select_org = "";
+  var select_store = "";
+  var select_staff = "";
+    var count = 0;
+    var contont = false; //进入页面 根据是否为true 进行判断  false执行初始化操作或者缓存操作  true进行页面操作
+    // 分的条数
+    var limit_num = 10;
+    function pullupRefresh() {
+        if (contont) {
+      jiaai();
+    } else {
+      if (localStorage.getItem("best_huigou") == "") {
+        jiaai();
+      } else {
+        select_org = localStorage.getItem("best_huigou").split(',')[0];
+        select_store = localStorage.getItem("best_huigou").split(',')[1];
+        select_staff = localStorage.getItem("best_huigou").split(',')[2];
+        birth[0].innerHTML = localStorage.getItem("best_huigou").split(',')[3];
+        birth[1].innerHTML = localStorage.getItem("best_huigou").split(',')[4];
+        
+                if (select_org==""&&select_store==""&&select_staff=="") {
+                    onload_select();
+                    jiaai();
+                } else {
+                    onload_zu_ji(select_org, select_store,select_staff)
+                }
+      }
+    }
+    }
+
+    function jiaai(){
+        if (Date.parse(birth[0].innerHTML) > Date.parse(birth[1].innerHTML)) {
+            mui.alert('开始时间不能大于结束时间', '提示', '确定'['div']);
+        } else {
+            load.start();
+            mui.post('/index.php/RepurchaseSel/', {
+                splb:select_org,//机构
+                store:select_store,//门店
+                staff:select_staff,//员工
+                start:birth[0].innerHTML,
+                end:birth[1].innerHTML,
+                page: ++count,//分页
+                limit: limit_num//每页的条数
+            }, function (data) {
+                // console.log(data)
+                // 服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    setTimeout(function () {
+                        mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                        // var table = document.body.querySelector('.mui-table-view');
+                        var qq = document.getElementById("qqq");
+                        for (i = 0; i < data.data.data.length; i++) {
+                            var li = document.createElement('div');
+                            // li.className = 'mui-table-view-cell';
+                            li.innerHTML =  '<div class="data-style"> <div class="data-title">'+ data.data.data[i].staff_name + '</div>'
+                            +'<div class="money-mix">'
+                            +'<div>销售金额 <h4>'+ data.data.data[i].order_amount_g +'</h4></div>'
+                            +'<div>回购金额 <h4>'+ data.data.data[i].re_purchase_amount +'</h4></div>'
+                            +'<div>回购占比 <h4>'+ data.data.data[i].amount_proportion +'%</h4></div>'  
+                            +'</div>'
+                            +'<div class="money-mix">'
+                            +'<div><a href="www_member.html????data=' + data.data.data[i].operate_code + '=' + birth[0].innerHTML + '=' + birth[1].innerHTML + '='+data.data.data[i].total_status+'">新购会员</a>'
+                            +'<h4>'+data.data.data[i].vip_number+'</h4></div>'
+                            +'<div><a href="follow_up_member.html????data=' + data.data.data[i].operate_code + '=' + birth[0].innerHTML + '=' + birth[1].innerHTML + '='+data.data.data[i].total_status+'">跟进人数</a>'
+                            +'<h4>'+data.data.data[i].follow_up+'</h4></div>'
+                            +'<div><a href="buy_back.html????data=' + data.data.data[i].operate_code + '=' + birth[0].innerHTML + '=' + birth[1].innerHTML + '='+data.data.data[i].total_status+'">回购人数</a>'
+                            +'<h4>'+data.data.data[i].repeat_purchase+'</h4></div>'
+                            +'</div></div>'
+                            qq.appendChild(li);
+                        }load.stop();
+                    }, 1000);
+                } 
+                
+            }, 'json'
+            );
+            
+        }
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+
+
+    function onload_zu_ji(select_org, select_store,select_staff) {
+
+            mui.post('/index.php/UserlistOrg/', {
+            }, function (data) {
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    document.getElementById("all_organization").innerHTML = "";
+                    for (i = 0; i < data.data.length; i++) {
+                        if (data.data[i].code == select_org) {
+                            var option = document.createElement('option');
+                            option.value = data.data[i].code;
+                            option.selected = true;
+                            option.innerHTML = data.data[i].name
+                            document.getElementById("all_organization").appendChild(option);
+                        } else {
+                            var option = document.createElement('option');
+                            option.value = data.data[i].code;
+                            option.innerHTML = data.data[i].name
+                            document.getElementById("all_organization").appendChild(option);
+                        }
+                    }
+                    klk(select_org, select_store,select_staff);
+                }
+            }, 'json'
+            );
+        }
+
+        function klk(select_org, select_store,select_staff) {
+            mui.post('/index.php/UserlistStore/', {
+                code: select_org
+            }, function (data) {
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    document.getElementById("all_stores").innerHTML = '<option value="">选择门店</option>'
+                    for (i = 0; i < data.data.length; i++) {
+                        if (data.data[i].code == select_store) {
+                            var option = document.createElement('option');
+                            option.value = data.data[i].code;
+                            option.selected = true;
+                            option.innerHTML = data.data[i].name;
+                            document.getElementById("all_stores").appendChild(option);
+                        } else {
+                            var option = document.createElement('option');
+                            option.value = data.data[i].code;
+                            option.innerHTML = data.data[i].name;
+                            document.getElementById("all_stores").appendChild(option);
+                        }
+                    }
+                    kll(select_org, select_store,select_staff);
+                }
+            }, 'json'
+            );
+        }
+        function kll(select_org, select_store,select_staff) {
+            mui.post('/index.php/UserlistStaff/', {
+                code: select_store
+            }, function (data) {
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    document.getElementById("all_shopping").innerHTML = '<option value="">选择店员</option>'
+                    for (i = 0; i < data.data.length; i++) {
+                        if (data.data[i].code == select_staff) {
+                            var option = document.createElement('option');
+                            option.value = data.data[i].code;
+                            option.selected = true;
+                            option.innerHTML = data.data[i].name;
+                            document.getElementById("all_shopping").appendChild(option);
+                        } else {
+                            var option = document.createElement('option');
+                            option.value = data.data[i].code;
+                            option.innerHTML = data.data[i].name;
+                            document.getElementById("all_shopping").appendChild(option);
+                        }
+                    }
+                    jiaai();
+                }
+            }, 'json'
+            );
+        }
+        function zongshu(){
+            var da = document.getElementById("dadada");
+                    da.innerHTML =  '<div class="data-style"> <div class="data-title">总数(合计)</div>'
+                            +'<div class="money-mix">'
+                            +'<div>销售金额 <h4>正在加载...</h4></div>'
+                            +'<div>回购金额 <h4>正在加载...</h4></div>'
+                            +'<div>回购占比 <h4>正在加载...</h4></div>'  
+                            +'</div>'
+                            +'<div class="money-mix">'
+                            +'<div><a >新购会员</a>'
+                            +'<h4>正在加载...</h4></div>'
+                            +'<div><a>跟进人数</a>'
+                            +'<h4>正在加载...</h4></div>'
+                            +'<div><a>回购人数</a>'
+                            +'<h4>正在加载...</h4></div>'
+                            +'</div></div>'
+            mui.post('/index.php/RepurchaseTotal/', {
+                splb:select_org,//机构
+                store:select_store,//门店
+                staff:select_staff,//员工
+                start:birth[0].innerHTML,
+                end:birth[1].innerHTML,
+            }, function (data) {
+                // console.log(birth[0].innerHTML)
+                // 服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    var da = document.getElementById("dadada");
+                    da.innerHTML =  '<div class="data-style"> <div class="data-title">'+data.data.staff_name+'</div>'
+                            +'<div class="money-mix">'
+                            +'<div>销售金额 <h4>'+ data.data.order_amount +'</h4></div>'
+                            +'<div>回购金额 <h4>'+ data.data.re_purchase_amount +'</h4></div>'
+                            +'<div>回购占比 <h4>'+ data.data.amount_proportion +'%</h4></div>'  
+                            +'</div>'
+                            +'<div class="money-mix">'
+                            +'<div><a href="www_member.html????data=' + data.data.operate_code + '=' + birth[0].innerHTML + '=' + birth[1].innerHTML + '='+data.data.total_status+'">新购会员</a>'
+                            +'<h4>'+data.data.vip_number+'</h4></div>'
+                            +'<div><a href="follow_up_member.html????data=' + data.data.operate_code + '=' + birth[0].innerHTML + '=' + birth[1].innerHTML + '='+data.data.total_status+'">跟进人数</a>'
+                            +'<h4>'+data.data.follow_up+'</h4></div>'
+                            +'<div><a href="buy_back.html????data=' + data.data.operate_code + '=' + birth[0].innerHTML + '=' + birth[1].innerHTML + '='+data.data.total_status+'">回购人数</a>'
+                            +'<h4>'+data.data.repeat_purchase+'</h4></div>'
+                            +'</div></div>'
+                } 
+                
+            }, 'json'
+            );
+            
+    }
+</script>
+
+</html>

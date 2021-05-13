@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>会员列表</title>
+    <script src="../js/vconsole.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.css">
+    <script src="../mui/js/mui.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/select_all.js"></script>
+    <style>
+        .RadioStyle input {
+            display: none
+        }
+
+        .RadioStyle {
+            width: 100%;
+            margin-top: 6px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .RadioStyle label {
+            display: block;
+            border-bottom: 1px solid #f3f3f3;
+            position: relative;
+            padding: 10px 15px;
+
+        }
+
+        .lable_img {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+        }
+
+        .lable_div {
+            width: 80%;
+            height: 50px;
+            position: absolute;
+            top: 12px;
+            right: -5px;
+        }
+
+        .lable_div p:nth-child(2) {
+            color: #6b6969;
+        }
+
+        .lable_div_name {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .lable_div_birthday {
+            color: rgb(255, 153, 0);
+            font-size: 15px;
+        }
+
+        img {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .RadioStyle input:checked+label>.lable_img {
+            background: url(../images/ico_checkon.svg) no-repeat right bottom;
+            background-size: 25px 25px;
+            background-color: rgba(212, 229, 246, 0);
+            ;
+            color: #00a4ff
+        }
+
+        p {
+            margin-bottom: 3px;
+            color: black;
+        }
+
+        footer input:checked+label {
+            background: url(../images/ico_checkon.svg) no-repeat right bottom;
+            background-size: 25px 25px;
+            background-color: rgb(255, 255, 255);
+            color: #00a4ff;
+        }
+
+        .footer_RadioStyle {
+            padding: 6px 12px;
+            line-height: 1.42;
+            /* min-width: 60px; */
+            text-align: center;
+            /* margin-left: 35px; */
+            /* margin-bottom: 5px; */
+            /* float: left; */
+            display: inline-block;
+            margin-top: 10px;
+            border-radius: 4px;
+            color: #007aff;
+            font-size: 14px;
+            letter-spacing: 1px;
+            border: 1px solid #00a4ff;
+            /* background-color: #007aff; */
+            position: relative;
+        }
+
+        .footer_RadioStyle div {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+
+        /* 会员全选 */
+        .img_header {
+            background: url(../images/ico_checkon.svg) no-repeat right bottom;
+            background-size: 20px 20px;
+            background-color: rgb(255, 255, 255);
+            color: #00a4ff;
+            border: 1px solid #00a4ff;
+
+        }
+
+        .header_ {
+            padding: 3px 15px;
+            border: 1px solid #ccc;
+            float: right;
+            margin-top: 7px;
+            margin-right: 10px;
+            line-height: 20px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        body {
+            background: #fff;
+        }
+
+        .mui-bar {
+            padding: 0px;
+        }
+
+        .bar_padding {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .bar_num {
+            border: 1px solid #ececec;
+            background-color: #fff;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        #header_all_nums {
+            color: burlywood;
+            font-size: 20px;
+        }
+
+        #header_xuan {
+            color: black;
+            font-size: 14px
+        }
+
+        .thispage {
+            border-right: 1px dashed #f3f3f3;
+            text-align: center;
+        }
+
+        .sure {
+            text-align: center;
+        }
+
+        .sure button {
+            margin-top: 10px;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .tall {
+            margin: 0 auto;
+            padding-left: 15px;
+            margin-top: 5px;
+            border-radius: 10px;
+            background-color: rgba(226, 226, 226, 0.93);
+            width: 100%;
+            font-size: 16px;
+            height: 40px;
+            line-height: 40px;
+            color: #333;
+            font-family: '黑体';
+        }
+
+        .dis {
+            display: none;
+        }
+        .mui-bar-nav ~ .mui-content {
+            padding-top: 90px;
+        }
+        .mui-popup {
+            width: 310px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <div class="bar_padding">
+            <a class="mui-icon mui-icon-back mui-action-back" style="color:white;"></a>
+            <!-- <h1 id="" class="mui-title" style="color:white;width: 50%;margin: 0 auto;">会员列表</h1> -->
+            <h1 class="mui-title" style="color:white;">会员资料
+                <span id="nums" class="mui-badge mui-badge-primary dis">0</span>
+            </h1>
+            <span class="dis" style="float:right;line-height:44px;color:white;" id="show_qunfa"
+                onclick="cluste_hai(this)">群发</span>
+            <div class="tall">
+                当前总人数为: <span id="header_all_nums" style="color: chocolate">0</span>人
+                <a id="vtitle" style="padding-right: 5%;text-decoration: underline;float: right;">全部会员</a>
+            </div>
+        </div>
+    </header>
+    <div class="mui-scroll-wrapper mui-content" id="pullrefresh" style="background: #f5f5f5;font-family: '黑体'">
+        <div class="mui-scroll">
+            <!--这里放置真实显示的DOM内容-->
+            <div class="RadioStyle" id="RadioStyle_checked">
+                <br><br>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    //js控制页面输出详细资料
+    var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('#');
+    var iddcode = loc.indexOf('=');
+    var idd = decodeURI(loc.substr(iddcode + 1, n1 - iddcode));
+    var idd2 = decodeURI(loc.substr(n2 + 1, n1 - n2));
+    var f = idd2.indexOf('&');
+    var iddf = idd2.substr(0, f);
+
+
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+
+    mui(".RadioStyle").on('tap', '.member_archives', function () {
+        // 冒泡
+        event.stopPropagation();
+        //获取id
+        // var code = this.getAttribute("code");
+        location.href = '../homepage/member_data.html?' + 'code=' + this.getAttribute("code");
+    })
+
+
+    // 确定群发
+    function cluste_hai(h) {
+        localStorage.setItem("route", '/index.php/webCustomerServiceShu/');
+        mui.confirm('', '精准营销工具', ['短信', '视图', '微信', '卡劵'], function (e) {
+            // e.index == 1
+            if (e.index == 1) {
+                // 视图
+                if (control_Member) {
+                    // 已选择全部会员
+                    // 控制短信页面选择全部会员 true(会员全选)
+                    localStorage.setItem("array_shuzu_control", 'true');
+                    localStorage.setItem("array_shuzu_type", wvip);
+                    location.href = '../homepage/rich_letter_view.html';
+                } else {
+                    // 控制短信页面选择全部会员 false(不是会员全选)
+                    localStorage.setItem("array_shuzu_control", 'false');
+                    if (shuzu.length != 0) {
+                        localStorage.setItem("array_shuzu", shuzu);
+                        location.href = '../homepage/rich_letter_view.html';
+                    } else {
+                        mui.toast('请选择需要发送微信的会员!!', {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                }
+
+            } else if (e.index == 2) {
+                // 微信
+                if (control_Member) {
+                    // 已选择全部会员
+                    // 控制短信页面选择全部会员 true(会员全选)
+                    localStorage.setItem("array_shuzu_control", 'true');
+                    localStorage.setItem("array_shuzu_type", wvip);
+                    location.href = '../homepage/short_weixin_group.html';
+                } else {
+                    // 控制短信页面选择全部会员 false(不是会员全选)
+                    localStorage.setItem("array_shuzu_control", 'false');
+                    if (shuzu.length != 0) {
+                        localStorage.setItem("array_shuzu", shuzu_code);
+                        location.href = '../homepage/short_weixin_group.html';
+                    } else {
+                        mui.toast('请选择需要发送微信的会员!!', {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                }
+
+            } else if (e.index == 3) {
+                // 卡劵
+                if (control_Member) {
+                    // 已选择全部会员
+                    localStorage.setItem("array_shuzu_control", 'true');
+                    localStorage.setItem("array_shuzu_type", wvip);
+
+                    location.href = '../homepage/group_card_coupon.html';
+                } else {
+                    // 控制页面选择全部会员 false(不是会员全选)
+                    localStorage.setItem("array_shuzu_control", 'false');
+                    if (shuzu.length != 0) {
+                        localStorage.setItem("array_shuzu", shuzu_code);
+                        location.href = '../homepage/group_card_coupon.html';
+                    } else {
+                        mui.toast('请选择需要发送微信的会员!!', {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                }
+            } else {
+                // 短信
+                if (control_Member) {
+                    // 已选择全部会员
+                    // 控制短信页面选择全部会员 true(会员全选)
+                    localStorage.setItem("array_shuzu_control", 'true');
+                    localStorage.setItem("array_shuzu_type", wvip);
+
+                    location.href = '../homepage/short_message.html?type=true';
+                } else {
+                    // 控制短信页面选择全部会员 false(不是会员全选)
+                    localStorage.setItem("array_shuzu_control", 'false');
+                    if (shuzu.length != 0) {
+                        localStorage.setItem("array_shuzu", shuzu);
+                        location.href = '../homepage/short_message.html?type=true';
+
+                    } else {
+                        mui.toast('请选择需要发送短信的会员!!', {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                }
+            }
+        })
+    }
+
+</script>
+
+
+<script>
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+                // callback: pulldownRefresh
+            },
+            up: {
+                contentrefresh: '正在加载...',
+                auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+    /**
+     * 下拉刷新具体业务实现
+     */
+    function pulldownRefresh() {
+    }
+
+    var RadioStyle_checked = document.getElementById("RadioStyle_checked");
+    /**
+     * 上拉加载具体业务实现
+     */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 30;// whole: 1,
+    var wvip = "";
+    var v = true;
+    mui(".tall").on('tap', 'a', function () { //点击查看微信会员 
+        mui.confirm('', '会员筛选', ['非微信会员', '微信会员', '全部会员'], function(e) {
+            if (e.index == 0) {
+                wvip = "0";
+                count = 0;
+                document.getElementById('vtitle').innerHTML = '非微信会员';
+                mui('#pullrefresh').pullRefresh().refresh(true);
+                pullupRefresh();
+            } else if (e.index == 1) {
+                wvip = "1";
+                count = 0;
+                document.getElementById('vtitle').innerHTML = '微信会员';
+                mui('#pullrefresh').pullRefresh().refresh(true);
+                pullupRefresh();
+            } else{
+                wvip = "";
+                count = 0;
+                document.getElementById('vtitle').innerHTML = '全部会员';
+                mui('#pullrefresh').pullRefresh().refresh(true);
+                pullupRefresh();
+            }
+        })
+
+       
+    })
+
+    function pullupRefresh() {
+        document.getElementById("RadioStyle_checked").innerHTML = '';
+        mui.post('/index.php/webCargoGuestUser/', {
+            id: iddf,
+            bar_code: idd,
+            whole: 1,
+            vvip: wvip,
+            page: ++count,
+            limit: limit_num
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                    mui("#header_all_nums")[0].innerHTML = data.data.count;
+                    if (data.data.count == 0) {
+                        var h1 = document.createElement("h1");
+                        h1.style = "padding-top:10px;text-align:center;"
+                        h1.innerHTML = "没有符合条件的会员!!!!";
+                        RadioStyle_checked.appendChild(h1);
+                    } else {
+                        document.getElementById("show_qunfa").classList.remove("dis");
+                        for (i = 0; i < data.data.data.length; i++) {
+                            var nameLower = data.data.data[i].username.toLowerCase();
+                            if (nameLower == null || nameLower == 'null' || nameLower == undefined || nameLower == '') {
+                                data.data.data[i].username = '';
+                            }
+                            var phoneLower = data.data.data[i].phone_g;
+                            if (phoneLower == null || phoneLower == 'null' || phoneLower == undefined || phoneLower == '') {
+                                data.data.data[i].phone_g = '';
+                            }
+                            var colorLower = data.data.data[i].color.toLowerCase();
+                            if (colorLower == null || colorLower == 'null' || colorLower == undefined || colorLower == '') {
+                                data.data.data[i].color = '';
+                            }
+                            var sizesLower = data.data.data[i].sizes.toLowerCase();
+                            if (sizesLower == null || sizesLower == 'null' || sizesLower == undefined || sizesLower == '') {
+                                data.data.data[i].sizes = '';
+                            }
+                            var span = document.createElement("span");
+                            span.innerHTML = '<input type="checkbox" id="hh' + count + i + '" name="checkbox_son" onclick="checked_box(this)" phone="' + data.data.data[i].phone_g + '" code="' + data.data.data[i].code + '">'
+                                + '<label for="hh' + count + i + '">'
+                                + '<div class="lable_img"> </div>'
+                                + '<img width="50px" height="50px" src="../images/suoke.jpg">'
+                                + ' <div class="lable_div">'
+                                + ' <p><span class="lable_div_name">' + data.data.data[i].username + '</span>&nbsp;&nbsp;<span class="lable_div_birthday">' + data.data.data[i].phone_g + '</span></p>'
+                                + '<p><span>' + data.data.data[i].color + '</span> / <span>' + data.data.data[i].sizes + '</span></p>'
+                                + '</div>'
+                                + '<button style="float: right;top: 10px;" class="member_archives" code="' + data.data.data[i].code + '">会员档案</button>'
+                                + '</label>'
+                            RadioStyle_checked.appendChild(span);
+                        }
+                        if (document.getElementById("all").checked == true) {
+                            all.checked = false;
+                        }
+                        if (document.getElementById("header_lable").classList.contains("img_header")) {
+                            for (j = 0; j < checkbox_son.length; j++) {
+                                checkbox_son[j].checked = true;
+                                checkbox_son[j].disabled = true;
+                            }
+                        }
+                    }
+                }, 1000);
+            }
+        }, 'json');
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+    // 点击按钮,将参数传递到另一个页面
+
+
+</script>
+
+</html>

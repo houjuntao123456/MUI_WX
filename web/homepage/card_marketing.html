@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>传统日子</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <!-- <script src="../mui/js/mui.min.js"></script> -->
+    <script src="../mui/js/muiR.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/loading.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+
+    <script src="../mui/js/mui.poppicker.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.poppicker.css">
+    <style>
+        .mui-off-canvas-left,
+        .mui-off-canvas-right {
+            width: 90%;
+        }
+
+        .oa-contact-cell.mui-table .mui-table-cell {
+            /* padding: 11px 0; */
+            vertical-align: middle;
+        }
+
+        .oa-contact-cell {
+            position: relative;
+            /* margin: 4px 0; */
+        }
+
+        .oa-contact-content {
+            width: 100%;
+
+        }
+
+        .oa-contact-name,
+        oa-contact-position {
+            float: left;
+        }
+
+        li {
+            border: none;
+            list-style: none;
+        }
+
+
+        .mui-table-view-chevron .mui-table-view-cell {
+            padding-right: 10px;
+        }
+
+        .session_style {
+            width: 90%;
+            margin-top: 4px;
+            margin: 0 auto;
+            margin-bottom: 4px;
+            background: #D0EEFF;
+            border: 1px solid #99D3F5;
+            color: #6c6c6f;
+            /*#6c6c6f;*/
+            border-radius: 8px;
+            line-height: 35px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .search_div {
+            text-align: center;
+            margin-top: 8px;
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+        }
+
+        .search_div>input {
+            background-color: white;
+            margin-bottom: 8px;
+            width: 95%;
+        }
+
+        .mui-table-view-cell {
+            padding: 0;
+        }
+
+        .mui-table-view-cell:after {
+            left: 0;
+            background-color: #dfdee4;
+        }
+
+        .mui-search.mui-active:before {
+            left: 25px;
+            top: 25px;
+        }
+
+        input[type=search] {
+            font-size: 15px;
+        }
+
+        .mui-search .mui-placeholder {
+            font-size: 15px;
+        }
+
+        .mui-input-row select {
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+
+        .mui-search .mui-placeholder .mui-icon {
+            margin-right: 10px;
+        }
+
+        .title-but {
+            position: absolute;
+            z-index: 2;
+            right: 0;
+            top: 0;
+            width: 40%;
+        }
+
+        .title-but span {
+            float: right;
+            line-height: 44px;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .xuanzhong {
+            background: url(../images/ico_checkon.svg) no-repeat right bottom;
+            background-size: 25px 25px;
+            background-color: rgba(212, 229, 246, 0);
+            color: #00a4ff;
+        }
+
+        .dis {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;">卡劵营销<span id="nums" class="mui-badge  mui-badge-primary dis">0</span>
+        </h1>
+        <div class="title-but">
+            <span class="dis" id="menu" onclick="cluste_hai()">发送</span>
+            <span id="menu_query">查询</span>
+        </div>
+    </header>
+    <!-- 侧滑导航根容器 -->
+    <!-- 手势动作 mui-draggable -->
+    <div class="mui-off-canvas-wrap   mui-slide-in mui-content">
+        <!-- 主页面容器 -->
+        <div class="mui-inner-wrap ">
+            <!-- 菜单容器 -->
+            <aside class="mui-off-canvas-left">
+                <div class="mui-scroll-wrapper" style="background-color: #e4eaf5">
+                    <!-- style="padding-left:5px;" -->
+                    <div class="mui-scroll">
+                        <!-- 筛选模板 -->
+                        <!-- 搜索框 -->
+                        <div class="mui-input-row mui-search search_div">
+                            <input style="width: 70%;" type="search" id="sesame" placeholder="请输入卡劵">
+                            <button type="button" class="mui-btn mui-btn-primary button1"
+                                style="width: 18%;right: 12px;" onclick="sousuo()">搜索</button>
+                        </div>
+                        <!-- <p style="margin-top: 5px;margin-bottom: 5px;margin-left: 11px;">选择操作</p> -->
+                        <!-- 卡劵类型 -->
+                        <div class="mui-input-row"
+                            style="width:95%;margin:0 auto;border-bottom: 1px solid #eee;background-color: white;">
+                            <label style="width: 100%;text-align: center;" id="leixing" value="">卡劵类型</label>
+                        </div>
+                        <!-- 卡劵名称 -->
+                        <div class="mui-input-row"
+                            style="width:95%;margin:0 auto;border-bottom: 1px solid #eee;background-color: white;">
+                            <label style="width: 100%;text-align: center;" id="mingcheng" value="">卡劵名称</label>
+                        </div>
+                        <div class="mui-input-row"
+                            style="width:95%;margin:0 auto;border-bottom: 1px solid #eee;background-color: white;">
+                            <label style="width: 100%;text-align: center;" id="start" value="">开始时间</label>
+                        </div>
+
+                        <div class="mui-input-row"
+                            style="width:95%;margin:0 auto;border-bottom: 1px solid #eee;background-color: white;">
+                            <label style="width: 100%;text-align: center;" id="end" value="">结束时间</label>
+                        </div>
+                        <p style="text-align:center;margin-top: 10px;">
+                            <!-- <button type="button" class="mui-btn mui-btn-primary button1" style="width: 15%;" onclick="all_election(1)">全选</button> -->
+                            <button type="button" class="mui-btn mui-btn-primary button1" style="width: 60%;"
+                                id="chanxun">查&nbsp;询</button>
+                        </p>
+
+
+
+                    </div>
+
+                </div>
+            </aside>
+            <!-- 主页面标题 -->
+
+            <!-- 主页面内容容器 -->
+            <div class="mui-scroll-wrapper" id="pullrefresh">
+                <div class="mui-scroll">
+                    <!-- 主界面具体展示内容 -->
+                    <div class="mui-row" style="margin-bottom:3px;">
+                        <ul class="mui-table-view li-style" id="ul_come">
+
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+<!-- <script src="../js/hudong.js"></script> -->
+<script>
+    function cluste_hai() {
+        localStorage.setItem("route", '/index.php/webCustomerServiceShu/');
+        mui.confirm('', '精准营销工具', ['短信', '视图', '微信', '卡劵'], function (e) {
+            // e.index == 1
+            if (e.index == 1) {
+                // 视图
+                if (control_Member) {
+                    // 已选择全部会员
+                    // 控制短信页面选择全部会员 true(会员全选)
+                    localStorage.setItem("array_shuzu_control", 'true');
+                    location.href = '../homepage/rich_letter_view.html';
+                } else {
+                    // 控制短信页面选择全部会员 false(不是会员全选)
+                    localStorage.setItem("array_shuzu_control", 'false');
+                    if (shuzu.length != 0) {
+                        localStorage.setItem("array_shuzu", shuzu);
+                        location.href = '../homepage/rich_letter_view.html';
+                    } else {
+                        mui.toast('请选择需要发送视图的会员!!', {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                }
+
+            } else if (e.index == 2) {
+                // 微信
+                if (control_Member) {
+                    // 已选择全部会员
+                    // 控制短信页面选择全部会员 true(会员全选)
+                    localStorage.setItem("array_shuzu_control", 'true');
+                    location.href = '../homepage/short_weixin_group.html';
+                } else {
+                    // 控制短信页面选择全部会员 false(不是会员全选)
+                    localStorage.setItem("array_shuzu_control", 'false');
+                    if (shuzu.length != 0) {
+                        localStorage.setItem("array_shuzu", shuzu_code);
+                        location.href = '../homepage/short_weixin_group.html';
+                    } else {
+                        mui.toast('请选择需要发送微信的会员!!', {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                }
+
+            } else if (e.index == 3) {
+                // 卡劵
+                if (control_Member) {
+                    // 已选择全部会员
+                    localStorage.setItem("array_shuzu_control", 'true');
+                    location.href = '../homepage/group_card_coupon.html';
+                } else {
+                    // 控制页面选择全部会员 false(不是会员全选)
+                    localStorage.setItem("array_shuzu_control", 'false');
+                    if (shuzu.length != 0) {
+                        localStorage.setItem("array_shuzu", shuzu_code);
+                        location.href = '../homepage/group_card_coupon.html';
+                    } else {
+                        mui.toast('请选择需要发送卡劵的会员!!', {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                }
+            } else {
+                // 短信
+                if (control_Member) {
+                    // 已选择全部会员
+                    // 控制短信页面选择全部会员 true(会员全选)
+                    localStorage.setItem("array_shuzu_control", 'true');
+                    location.href = '../homepage/short_message.html?type=true';
+                } else {
+                    // 控制短信页面选择全部会员 false(不是会员全选)
+                    localStorage.setItem("array_shuzu_control", 'false');
+                    if (shuzu.length != 0) {
+                        localStorage.setItem("array_shuzu", shuzu);
+                        location.href = '../homepage/short_message.html?type=true';
+
+                    } else {
+                        mui.toast('请选择需要发送短信的会员!!', {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                }
+            }
+        })
+
+    }
+
+    // 发送富信,短信,视图,卡劵
+    mui(".mui-table-view").on('tap', '.xuanze', function () {
+        console.log(789)
+        //获取id
+        // var id = this.getAttribute("id");
+        //传值给详情页面，通知加载新数据
+        // 非全选状态
+        if (this.classList.contains("xuanzhong")) {
+            // 不包含 (未选中状态)
+            this.classList.remove("xuanzhong");
+            console.log('未选中状态')
+            // 添加数组
+            remove_array(this.getAttribute("phone"), this.getAttribute("code"))
+        } else {
+            // 包含(选中状态)
+            this.classList.add("xuanzhong");
+            console.log('选中状态')
+            add_array(this.getAttribute("phone"), this.getAttribute("code"));
+        }
+
+    })
+
+    var shuzu = [];
+    var shuzu_code = [];
+    // 向数组添加
+    function add_array(phone, code) {
+        shuzu.push(phone);
+        shuzu_code.push(code)
+        // console.log(shuzu);
+        // console.log(shuzu_code);
+        jsNum()
+
+    }
+    // 向数组删除
+    function remove_array(phone, code) {
+        for (i = 0; i < shuzu.length; i++) {
+            if (shuzu[i] == phone) {
+                shuzu.splice(i, 1);
+            }
+        }
+        for (i = 0; i < shuzu_code.length; i++) {
+            if (shuzu_code[i] == code) {
+                shuzu_code.splice(i, 1);
+            }
+        }
+        jsNum();
+        // console.log(shuzu);
+        // console.log(shuzu_code);
+    }
+    // 计算数量显示
+    function jsNum() {
+        if (shuzu.length == 0) {
+            document.getElementById("nums").classList.add("dis");
+            document.getElementById("menu").innerHTML = '发送';
+            control_Member = false;
+        } else {
+            control_Member = false;
+            document.getElementById("menu").innerHTML = '发送';
+            document.getElementById("nums").classList.remove("dis");
+            document.getElementById("nums").innerHTML = shuzu.length;
+        }
+    }
+    var control_Member = false;
+</script>
+<script>
+    var load = new Loading();
+    load.init();
+
+    //筛选模板ID
+    var screen_template = document.getElementById('screen_template');
+    // 主界面容器的ID
+    var ul_content = document.getElementById("ul_come");
+    // 控制初始化分页插件
+    var kk = true;
+    // 往分页中传数据
+    var session_id = "";
+    // 页面初始化的方法
+    window.onload = function () {
+        hidden_title();
+    }
+    var json_type = [{ text: '优惠券', id: '0' }, { text: '折扣劵', id: '1' }, { text: '礼品劵', id: '2' }];
+    var json_name = [];
+    var json_name2 = []
+    //监听点击事件
+    mui('#leixing')[0].addEventListener("tap", function () {
+        let time = this;
+        let picker = new mui.PopPicker();
+        picker.setData(json_type);
+        picker.show(function (selectItems) {
+            console.log(selectItems);
+            time.innerHTML = selectItems[0].text;
+            time.setAttribute("value", selectItems[0].id);
+        })
+    });
+
+
+    mui('#mingcheng')[0].addEventListener("tap", function () {
+        let time = this;
+        let picker = new mui.PopPicker();
+        picker.setData(json_name);
+        picker.show(function (selectItems) {
+            console.log(selectItems);
+            time.innerHTML = selectItems[0].text;
+            time.setAttribute("value", selectItems[0].id);
+        })
+    });
+
+    mui('#start')[0].addEventListener("tap", function () {
+        let time = this;
+        let dtpicker = new mui.DtPicker({
+            type: "date",//设置日历初始视图模式 
+            beginDate: new Date(1949, 01, 01),//设置开始日期 
+            endDate: new Date(2100, 04, 25),//设置结束日期 
+            labels: ['年', '月', '日'],//设置默认标签区域提示语 
+        })
+        dtpicker.show(function (e) {
+            time.innerHTML = e.text;
+            time.setAttribute("value", e.value);
+        })
+    });
+    
+    mui('#end')[0].addEventListener("tap", function () {
+        let time = this;
+        let dtpicker = new mui.DtPicker({
+            type: "date",//设置日历初始视图模式 
+            beginDate: new Date(1949, 01, 01),//设置开始日期 
+            endDate: new Date(2100, 04, 25),//设置结束日期 
+            labels: ['年', '月', '日'],//设置默认标签区域提示语 
+        })
+        dtpicker.show(function (e) {
+            time.innerHTML = e.text;
+            time.setAttribute("value", e.value);
+        })
+    });
+
+    function sousuo() {
+        load.start();
+        json_name2 = [];
+        mui.post('/index.php/CouponListSelect/', {
+            name: document.getElementById("sesame").value
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                if (data.data.length == 0) {
+                    mui.toast('未搜索到对应卡劵,请重试!', { duration: 'long', type: 'div' })
+                } else {
+                    for (let i = 0; i < data.data.length; i++) {
+                        let json2 = {
+                            id: data.data[i].card_code,
+                            text: data.data[i].card_name
+                        }
+                        json_name2.push(json2);
+                    }
+                    suosou_xuan();
+                }
+                load.stop();
+            } else {
+                load.stop();
+            }
+        }, 'json'
+        );
+    }
+
+    var mmmm = mui("#mingcheng")[0];
+    function suosou_xuan() {
+        let time = mmmm;
+        let picker = new mui.PopPicker();
+        picker.setData(json_name2);
+        picker.show(function (selectItems) {
+            console.log(selectItems);
+            time.innerHTML = selectItems[0].text;
+            time.setAttribute("value", selectItems[0].id);
+        })
+    }
+
+
+</script>
+<script>
+    (function () {
+        mui.post('/index.php/CouponListSelect/', {
+        }, function (data) {
+            console.log(data)
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                for (let i = 0; i < data.data.length; i++) {
+                    let json2 = {
+                        id: data.data[i].card_code,
+                        text: data.data[i].card_name
+                    }
+                    json_name.push(json2);
+                }
+            }
+        }, 'json'
+        );
+
+    })();
+
+    // 点击按钮查询
+    var query = document.getElementById("chanxun");
+    query.onclick = function () {
+
+        load.start();
+        document.getElementById("ul_come").innerHTML = "";
+        count = 0;
+        mui('#pullrefresh').pullRefresh().refresh(true);
+        pullupRefresh();
+        mui('.mui-off-canvas-wrap').offCanvas().toggle();
+    }
+
+</script>
+
+<script>
+
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+                callback: pulldownRefresh
+            },
+            up: {
+                contentrefresh: '正在加载...',
+                auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+    // mui('.mui-off-canvas-wrap').offCanvas().toggle();
+    /**
+       * 下拉刷新具体业务实现
+       */
+    function pulldownRefresh() {
+    }
+    /**
+     * 上拉加载具体业务实现
+     */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+    function pullupRefresh() {
+        load.start();
+        mui.post('/index.php/CouponListVip/', {
+            search: document.getElementById("sesame").value,
+            card_code: document.getElementById("mingcheng").getAttribute("value"),
+            card_type: document.getElementById("leixing").getAttribute("value"),
+            start: document.getElementById("start").getAttribute("value"),
+            end: document.getElementById("end").getAttribute("value"),
+            page: ++count,
+            limit: limit_num
+        }, function (data) {
+            if (data.code == 200) {
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                    var ul_come = document.getElementById('ul_come');
+                    if (data.data.count == 0) {
+                        var li = document.createElement('li');
+                        li.className = 'mui-table-view-cell';
+                        li.style = 'padding-top:5px;padding-bottom: 11px;text-align:center;';
+                        li.innerHTML = '<h1 style="font-size:20px">暂无数据</h1>'
+                        ul_come.appendChild(li);
+                        document.getElementById("menu").classList.add("dis");
+                    } else {
+                        document.getElementById("menu").classList.remove("dis");
+                        for (i = 0; i < data.data.data.length; i++) {
+                            if (data.data.data[i].img == "") {
+                                data.data.data[i].img = '../images/suoke.jpg';
+                            }
+                            if (data.data.data[i].username == "" || data.data.data[i].username == undefined) {
+                                data.data.data[i].username = "";
+                            }
+                            if (data.data.data[i].birthday == "" || data.data.data[i].birthday == undefined) {
+                                data.data.data[i].birthday = "";
+                            }
+                            if (data.data.data[i].total_consumption == "" || data.data.data[i].total_consumption == undefined) {
+                                data.data.data[i].total_consumption = 0;
+                            }
+                            if (data.data.data[i].consumption_times == "" || data.data.data[i].consumption_times == undefined) {
+                                data.data.data[i].consumption_times = 0;
+                            }
+                            if (data.data.data[i].consumption_number == "" || data.data.data[i].consumption_number == undefined || data.data.data[i].consumption_number == null) {
+                                data.data.data[i].consumption_number = 0;
+                            }
+
+                            if (data.data.data[i].rfm_days == null || data.data.data[i].rfm_days == undefined || data.data.data[i].rfm_days == "") {
+                                data.data.data[i].rfm_days = "未消费";
+                            } else if (data.data.data[i].rfm_days != "未消费") {
+                                data.data.data[i].rfm_days = "未消费" + data.data.data[i].rfm_days + "天";
+                            }
+
+                            if (data.data.data[i].visit_g == null || data.data.data[i].visit_g == undefined) {
+                                data.data.data[i].visit_g = "未回访";
+                            } else if (data.data.data[i].visit_g != "未回访") {
+                                data.data.data[i].visit_g = parseInt(data.data.data[i].visit_g.replace(/,/g, ""));
+                                if (data.data.data[i].visit_g > 365) {
+                                    data.data.data[i].visit_g = "未回访365+天";
+                                } else {
+                                    data.data.data[i].visit_g = "未回访" + data.data.data[i].visit_g + "天";
+                                }
+                            }
+                            var li = document.createElement('li');
+                            li.className = 'mui-table-view-cell';
+                            li.innerHTML = '<div class="mui-slider-cell">'
+                                + '<div class="oa-contact-cell mui-table">'
+                                // + '<div class="mui-table-cell" style="width:80px;">'
+                                + ' <div class="mui-table-cell xuanze all_quanxuan" code="' + data.data.data[i].code + '"phone="' + data.data.data[i].phone + '" style="width:80px;top:3px;left:3px;">'
+                                + '<img src="' + data.data.data[i].img + '" alt="暂无图片"style="width:100%;border-radius:50%;" />'
+                                + '</div>'
+                                + '<div class="mui-table-cell"style="padding-left: 20px;width:65%;float:left;">'
+                                + '<div class="mui-clearfix" style="text-align:left;line-height: 28px;width: 100%;margin-top: 8%;">'
+                                + '<h4 class="oa-contact-name">' + data.data.data[i].username + '</h4>&nbsp;&nbsp;<span style="font-size:12px;color:#757171;">' + data.data.data[i].birthday + '</span>'
+
+                                + '<p class="mui-h6" style="text-align:left;width: 80%;margin-bottom: 0px;line-height: 22px;">'
+                                + '<span style="font-weight:bold;font-size:15px;">¥</span>'
+                                + '<span> ' + data.data.data[i].total_consumption + '</span>'
+                                + '<span>&nbsp;/</span>'
+                                + '<span> ' + data.data.data[i].consumption_times + '</span>'
+                                + '<span>次 / ' + data.data.data[i].consumption_number + '件</span>'
+                                + '</p>'
+                                + '<p style="font-size:14px;color: #757171;line-height:22px;">' + data.data.data[i].rfm_days + ' / ' + data.data.data[i].visit_g
+                                + '</p>'
+                                + '</div>'
+                                + '</div>'
+                                + '<div>'
+                                + '<button style="float: right;padding: 7px 10px;color: #77a1f8;border: 1px solid #77a1f8;margin-top:5%;margin-right:3%;" name="' + data.data.data[i].code + '"onclick="memberdata(this)">会员档案</button>'
+                                // + '<button style="float: right;padding: 7px 10px;color: #77a1f8;border: 1px solid #77a1f8;margin-top:4%;margin-right:3%;" code="' + data.data.data[i].code + '" level_code="' + data.data.data[i].level_code + ' " username="' + data.data.data[i].username + '" onclick="member(this)">专场跟进</button>'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>'
+                            ul_come.appendChild(li);
+                        }
+                    }
+                    load.stop();
+                }, 1000);
+                // mui('.mui-off-canvas-wrap').offCanvas().toggle();
+            }
+        }, 'json'
+        );
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+    // 点击筛选
+    document.getElementById("menu_query").onclick = function () {
+        mui('.mui-off-canvas-wrap').offCanvas().toggle();
+    }
+    // 滚动的系数
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+
+    // 点击按钮,将参数传递到另一个页面
+    function memberdata(e) {
+        location.href = '../homepage/member_data.html?' + 'code=' + e.getAttribute("name");
+    }
+    // function member(e) {
+    //     localStorage.setItem("hd_username", e.getAttribute("username"));
+    //     location.href = '../homepage/chart_moban_traditional_days.html?' + 'code=' + e.getAttribute("code") + "level_code*" + e.getAttribute("level_code");
+    // }
+</script>
+
+
+
+</html>

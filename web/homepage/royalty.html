@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>机构业绩</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <!-- <script src="../mui/js/mui.min.js"></script> -->
+    <script src="../mui/js/muiR.js"></script>
+    <script src="../js/echarts.min.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <style>
+        .mui-off-canvas-left,
+        .mui-off-canvas-right {
+            width: 90%;
+        }
+
+        select {
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+        }
+
+        /* table {
+            width: 90%;
+            margin: 20px auto;
+        } */
+
+        /* table td {
+            border: 1px solid rgb(160, 158, 158);
+        } */
+        .td1-style {
+            font-size: 16px;
+        }
+
+        .td1-style tr {
+            height: 35px;
+        }
+
+        .td1-style tr td:nth-child(2n) {
+            padding-left: 10px;
+            color: #243e77;
+        }
+
+        .td1-style tr td:nth-child(2n-1) {
+            color: #9b9c9f;
+        }
+
+        .table_css {
+            margin-left: 10px;
+            text-align: center;
+            height: 46px;
+            line-height: 55px;
+            border-radius: 0 10px 0 10px;
+            font-size: 17px;
+            color: #000;
+        }
+
+        .select_css {
+            color: rgb(105, 104, 104);
+            margin: 0px 0px 0px 0px;
+            padding: 0px 0px 0px 5px;
+        }
+
+        .errr {
+            border: none;
+            height: 40px;
+            line-height: 40px;
+            margin-left: 3px;
+            background: #fff;
+        }
+
+        .input_css {
+            border: none;
+            font-size: 14px;
+            width: 100%;
+            color: rgb(105, 104, 104);
+            padding: 19px 0px 0px 17px;
+            margin-left: 3px;
+            background: none;
+        }
+
+        .mui-btn-warning {
+            width: 93%;
+            margin: 20px 0 11px 11px;
+            border: 1px solid #5d94f5;
+            background-color: #5d94f5;
+        }
+
+        .mui-btn-warning:enabled:active {
+            border: 1px solid #427af1;
+            background-color: #427af1;
+        }
+
+        .mui-select:before {
+            top: 15px;
+            color: #007aff;
+        }
+
+        .mui-input-row label {
+            padding: 12px 15px 0px 15px;
+            line-height: 2;
+        }
+
+        .mui-input-row label~select {
+            margin: 9px 0 0 0;
+        }
+
+        .mui-select-style {
+            border-bottom: 1px #acafbb dashed;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .mui-table-view-cell.mui-active {
+            background: none;
+        }
+
+        .mui-table-view::after {
+            background: none;
+            /* box-shadow: 1px 1px 5px #f2f3f5;
+            border-bottom: 1px solid #f2f3f5; */
+        }
+
+        .mui-table-view::before {
+            background: none;
+        }
+
+        .mui-table-view-cell::after {
+            background: none;
+        }
+
+        .mui-table-view {
+            background: none;
+        }
+
+        .mui-navigate-right::after {
+            color: #2070e9;
+        }
+
+        .mui-table-view-cell.mui-collapse .mui-collapse-content {
+            background: none;
+            margin: 20px auto;
+        }
+
+        .li-style li {
+            margin-bottom: 3px;
+        }
+
+        .li-color {
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;">提成管理</h1>
+        <span style="float:right;line-height:44px;color:white;" id="menu_query">查询</span>
+    </header>
+    <!-- 侧滑导航根容器 -->
+    <!-- 手势动作 mui-draggable -->
+    <div class="mui-off-canvas-wrap   mui-slide-in mui-content">
+        <!-- 主页面容器 -->
+        <div class="mui-inner-wrap ">
+            <!-- 菜单容器 -->
+            <aside class="mui-off-canvas-left">
+                <div class="mui-scroll-wrapper" style="background-color: #e4eaf5">
+                    <div class="mui-scroll" style="padding-top:20px;">
+                        <!-- 门店 -->
+                        <div class="mui-input-row mui-select mui-select-style">
+                            <label>门&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;店</label>
+                            <select name="" style="color:rgb(105, 104,104);background: none;font-size: 15px;"
+                                id="select_store" onchange="store()">
+                                <option value="">选择门店</option>
+
+                            </select>
+                        </div>
+                        <!-- 员工工号 -->
+                        <div class="mui-input-row mui-select mui-select-style">
+                            <label>员&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;工</label>
+                            <select name="" style="color:rgb(105, 104,104);background: none;font-size: 15px;"
+                                id="select_staff">
+                                <option value="">请选择员工</option>
+
+                            </select>
+                        </div>
+                        <!-- 提成来源 -->
+                        <!-- <div class="mui-input-row mui-select mui-select-style">
+                            <label>提成来源</label>
+                            <select name="" style="color:rgb(105, 104,104);background: none;font-size: 15px;"
+                                id="select_come">
+                                <option value="">请选择来源</option>
+                            </select>
+                        </div> -->
+                        <!-- 开始时间 -->
+                        <div class="mui-row mui-select-style">
+                            <div class="mui-col-sm-3 mui-col-xs-3 table_css">
+                                开始时间
+                            </div>
+                            <div class="mui-col-sm-8 mui-col-xs-8">
+                                <input type=" text" class="input_css" value="" id="start" placeholder="年-月-日 时:分:秒">
+                            </div>
+                        </div>
+                        <!-- 结束时间 -->
+                        <div class="mui-row mui-select-style">
+                            <div class="mui-col-sm-3 mui-col-xs-3 table_css">
+                                结束时间
+                            </div>
+                            <div class="mui-col-sm-8 mui-col-xs-8">
+                                <input type=" text" class="input_css" value="" id="end" placeholder="年-月-日 时:分:秒">
+                            </div>
+                            <br>
+                        </div>
+                        <div class="mui-row">
+                            <div class="mui-col-sm-12 mui-col-xs-12">
+                                <button type="button" class="mui-btn mui-btn-warning" id="lookup">查找</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </aside>
+            <!-- 主页面标题 -->
+
+            <!-- 主页面内容容器 -->
+            <div class="mui-scroll-wrapper" id="pullrefresh">
+                <div class="mui-scroll">
+                    <!-- 主界面具体展示内容 -->
+                    <div class="mui-row" style="margin-bottom:3px;">
+                        <ul class="mui-table-view li-style" id="ul_come">
+                            <!-- 无 -->
+                            <!-- <li class="mui-table-view-cell mui-collapse" style="background: #fff;">
+                                <a class="mui-navigate-right" href="#"
+                                    style="border-bottom: 1px solid #f2f3f5;box-shadow: 0px 1px 5px #f2f3f5;">公会1</a>
+                                <div class="mui-collapse-content" style="margin:30px;padding:0;">
+                                    <table class="td1-style">
+                                        <tr>
+                                            <td>门&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;店：</td>
+                                            <td>北京门店</td>
+                                        </tr>
+                                        <tr>
+                                            <td>员工工号：</td>
+                                            <td>678</td>
+                                        </tr>
+                                        <tr>
+                                            <td>员工姓名：</td>
+                                            <td>慧慧</td>
+                                        </tr>
+                                        <tr>
+                                            <td>提成来源：</td>
+                                            <td>微信</td>
+                                        </tr>
+                                        <tr>
+                                            <td>提成金额：</td>
+                                            <td>500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>提成时间：</td>
+                                            <td>2019-4-15</td>
+                                        </tr>
+                                        <tr>
+                                            <td>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</td>
+                                            <td>暂无</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </li> -->
+                            <!-- <li class="mui-table-view-cell mui-collapse" style="background: #fff;">
+                                <a class="mui-navigate-right" href="#"
+                                    style="border-bottom: 1px solid #f2f3f5;box-shadow: 0px 1px 5px #f2f3f5;">公会1</a>
+                                <div class="mui-collapse-content" style="margin:30px;padding:0;">
+                                    <table class="td1-style">
+                                        <tr>
+                                            <td>门&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;店：</td>
+                                            <td>北京门店</td>
+                                        </tr>
+                                        <tr>
+                                            <td>员工工号：</td>
+                                            <td>678</td>
+                                        </tr>
+                                        <tr>
+                                            <td>员工姓名：</td>
+                                            <td>慧慧</td>
+                                        </tr>
+                                        <tr>
+                                            <td>提成来源：</td>
+                                            <td>微信</td>
+                                        </tr>
+                                        <tr>
+                                            <td>提成金额：</td>
+                                            <td>500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>提成时间：</td>
+                                            <td>2019-4-15</td>
+                                        </tr>
+                                        <tr>
+                                            <td>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</td>
+                                            <td>暂无</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </li>   -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+<script>
+    window.onload = function () {
+        submission();
+        hidden_title();
+    }
+    //上拉加载
+    var ul_content = document.getElementById("ul_come");
+    document.getElementById("lookup").onclick = function () {
+        mui('.mui-off-canvas-wrap').offCanvas().toggle();
+    }
+    // mui.init({
+    //     pullRefresh: {
+    //         container: '#pullrefresh',
+    //         down: {
+    //             callback: pulldownRefresh
+    //         },
+    //         up: {
+    //             contentrefresh: '正在加载...',
+    //             //auto: true,//可选,默认false.首次加载自动上拉刷新一次
+    //             callback: pullupRefresh
+    //         }
+    //     }
+    // });
+    /**
+       * 下拉刷新具体业务实现
+       */
+    function pulldownRefresh() {
+    }
+    /**
+     * 上拉加载具体业务实现
+     */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 6;
+    function pullupRefresh() {
+        mui.post('/index.php/percentageManagePaManage/', {
+            store: select_store.options[select_store.selectedIndex].value,
+            staff: select_staff.options[select_staff.selectedIndex].value,
+            start: start.value,
+            end: end.value,
+            page: ++count,
+            limit: limit_num
+        }, function (data) {
+            if(data.code == 200){
+            setTimeout(function () {
+                mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.count.length / limit_num))); //参数为true代表没有更多数据了。
+                var table = document.getElementById('ul_come');
+                for (i = 0; i < data.count.length; i++) {
+                    var li = document.createElement('li');
+                    li.className = 'mui-table-view-cell mui-collapse';
+                    li.style = "background: #fff;";
+                    li.innerHTML = '<a class="mui-navigate-right" href="#" style="border-bottom: 1px solid #f2f3f5;box-shadow: 0px 1px 5px #f2f3f5;">' + data.count[i].staff_name + '</a>'
+                        + '<div class="mui-collapse-content" style="margin:30px;padding:0;">'
+                        + '<table class="td1-style">'
+                        + '<tr>'
+                        + '<td>门&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;店：</td>'
+                        + '<td>' + data.count[i].store_name + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                        + '<td>员工工号：</td>'
+                        + '<td>' + data.count[i].staff_number + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                        + '<td>员工姓名：</td>'
+                        + '<td>' + data.count[i].staff_name + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                        + '<td>提成来源：</td>'
+                        + '<td>' + data.count[i].type + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                        + '<td>提成金额：</td>'
+                        + '<td>' + data.count[i].commission + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                        + '<td>提成时间：</td>'
+                        + '<td>' + data.count[i].create_time + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                        + '<td>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</td>'
+                        + '<td>' + data.count[i].remarks + '</td>'
+                        + '</tr>'
+                        + '</table>'
+                        + '</div>'
+                    table.appendChild(li);
+                }
+            }, 1000);
+            }
+        }, 'json'
+        );
+    
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+
+    var kk = true;
+
+    // 点击查询
+    document.getElementById("menu_query").onclick = function () {
+        mui('.mui-off-canvas-wrap').offCanvas().toggle();
+    }
+    // 点击查找
+    var ul_content = document.getElementById("ul_come");
+    document.getElementById("lookup").onclick = function () {
+        Contrast();
+        //mui('.mui-off-canvas-wrap').offCanvas().toggle();
+        if (kk) {
+            //alert("执行一次");
+            mui.init({
+                pullRefresh: {
+                    container: '#pullrefresh',
+                    down: {
+                        callback: pulldownRefresh
+                    },
+                    up: {
+                        contentrefresh: '正在加载...',
+                        auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                        callback: pullupRefresh
+                    }
+                }
+            });
+        }else{
+            count=0;
+            mui('#pullrefresh').pullRefresh().refresh(true);
+            document.getElementById('ul_come').innerHTML="";
+            pullupRefresh();
+        }
+        kk=false;
+
+
+    }
+    // 开始时间
+    //生日
+    var start = document.getElementById("start");
+    start.onfocus = function () {
+        // 禁止唤醒手机键盘
+        document.activeElement.blur();
+        var dtpicker = new mui.DtPicker({
+            type: "date",//设置日历初始视图模式
+            beginDate: new Date(1970, 01, 01),//设置开始日期
+            endDate: new Date(2070, 01, 01),//设置结束日期
+            labels: ['年', '月', '日'],//设置默认标签区域提示语
+        });
+        //将时间显示
+        dtpicker.show(function (items) {
+            // sj[0].innerHTML = items.y.value;
+            // sj[1].innerHTML = items.m.value;
+            // sj[2].innerHTML = items.d.value;
+            start.value = items.y.value + "-" + items.m.value + "-" + items.d.value;
+        })
+    }
+    // 结束时间
+    var end = document.getElementById("end");
+    end.onfocus = function () {
+        // 禁止唤醒手机键盘
+        document.activeElement.blur();
+        var dtpicker = new mui.DtPicker({
+            type: "date",//设置日历初始视图模式
+            beginDate: new Date(1970, 01, 01),//设置开始日期
+            endDate: new Date(2070, 01, 01),//设置结束日期
+            labels: ['年', '月', '日'],//设置默认标签区域提示语
+        });
+        //将时间显示
+        dtpicker.show(function (items) {
+            // sj[0].innerHTML = items.y.value;
+            // sj[1].innerHTML = items.m.value;
+            // sj[2].innerHTML = items.d.value;
+            end.value = items.y.value + "-" + items.m.value + "-" + items.d.value;
+        })
+    }
+    //开始时间不能大于结束时间
+    function Contrast(){
+        if(Date.parse(start.value) > Date.parse(end.value)){
+            mui.alert('开始时间不能大于结束时间', '提示', '确定'['div']);
+        }else{
+            mui('.mui-off-canvas-wrap').offCanvas().toggle();
+        }
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+
+
+    var select_store = document.getElementById("select_store");
+    var select_staff = document.getElementById('select_staff');
+    // var select_come =document.getElementById('select_come');
+    //传参
+    function submission() {
+        mui.post('/index.php/sercentageManageStoreList/', {
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                for (i = 0; i < data.count.length; i++) {
+                    var option = document.createElement('option');
+                    option.value = data.count[i].ERP;
+                    option.innerHTML = data.count[i].store_name
+                    document.getElementById("select_store").appendChild(option);
+                }
+            }
+        }, 'json'
+        );
+    }
+
+    function store() {
+        mui.post('/index.php/percentageManageStaffList/', {
+            ERP: select_store.options[select_store.selectedIndex].value
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                for (i = 0; i < data.count.length; i++) {
+                    var option = document.createElement('option');
+                    option.value = data.count[i].staff_number;
+                    option.innerHTML = data.count[i].staff_name;
+                    document.getElementById("select_staff").appendChild(option);
+                }
+            }
+        }, 'json'
+        );
+    }
+</script>
+
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="../mui/css/mui.css">
+	<link rel="stylesheet" href="../css/iconfont_centent.css">
+	<script src="../mui/js/mui.js"></script>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/hidden-titile.js"></script>
+
+	<!-- <link rel="stylesheet" href="../css/loading.css">
+	<script src="../js/loading.js"></script> -->
+	<title>货客精准九</title>
+	<style>
+		li {
+            list-style: none;
+            background-color: white;
+            text-align: center;
+        }
+		.div_mk {
+            background-color: white;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            font-size: 15px;
+            border-bottom: 1px solid #ebeaea;
+		}
+		.span_size {
+            color: #3abeee;
+            font-size: 26px;
+        }
+	</style>
+</head>
+
+<body>
+	<header class="mui-bar mui-bar-nav" style="background-color: #007AFF;">
+        <a class="mui-action-back  mui-icon mui-icon-back mui-pull-left" style="color:white;"></a>
+        <a class="mui-icon  mui-icon-extra mui-icon-extra-sweep mui-pull-right" style="color:white;"></a>
+        <h1 class="mui-title" id="ppp" style="color:white;">会员九维数据管理</h1>
+	</header>
+	<div class="mui-content" id="main">
+		<div class="mui-row div_mk" name="STM" id="15904848094781">会员九维数据管理(STM)</div>
+        <div class="mui-row">
+            <!-- 活跃度 -->
+            <div class="mui-col-xs-4 mui-col-sm-4" id="15905420344065">
+                <li class="mui-table-view-cell">
+                    <a onclick="R();">
+                        <span class="iconfont icon-svg- span_size" style="color:#f88b2a;"></span>
+                        <p>活跃度</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 回购率 -->
+            <div class="mui-col-xs-4 mui-col-sm-4" id="15905420450388">
+                <li class="mui-table-view-cell">
+                    <a onclick="F();">
+                        <span class="iconfont  icon-huiguiceshi span_size"></span>
+                        <p>回购率</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 贡献度 -->
+            <div class="mui-col-xs-4 mui-col-sm-4" id="15905420554428">
+                <li class="mui-table-view-cell">
+                    <a onclick="M();">
+                        <span class="iconfont icon-gongxian span_size" style="color:#55cebc;font-weight: bold;"></span>
+                        <p>贡献度</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 忠诚度 -->
+            <div class="mui-col-xs-4 mui-col-sm-4" id="15905420659216">
+                <li class="mui-table-view-cell">
+                    <a onclick="I();">
+                        <span class="iconfont icon-chengxin span_size" style="color:#55cebc;"></span>
+                        <p>忠诚度</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 高件数 -->
+            <div class="mui-col-xs-4 mui-col-sm-4" id="15905420736563">
+                <li class="mui-table-view-cell">
+                    <a onclick="N();">
+                        <span class="iconfont  icon-number span_size" style="color:#f88b2a;font-weight: bold;"></span>
+                        <p>高件数</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 高客单 -->
+            <div class="mui-col-xs-4 mui-col-sm-4" id="15905420876134">
+                <li class="mui-table-view-cell">
+                    <a onclick="P();">
+                        <span class="iconfont  icon-icon4 span_size" style="font-weight: bold;"></span>
+                        <p>高客单</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 高件单 -->
+            <div class="mui-col-xs-4 mui-col-sm-4" id="15905421005156">
+                <li class="mui-table-view-cell">
+                    <a onclick="A();">
+                        <span class="iconfont icon-zhuanti span_size" style="color:#ff7b93;"></span>
+                        <p>高件单</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 高连带 -->
+            <div class="mui-col-xs-4 mui-col-sm-4" id="15905421463302">
+                <li class="mui-table-view-cell">
+                    <a onclick="J();">
+                        <span class="iconfont  icon-shujuzhongxin span_size"></span>
+                        <p>高连带</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 高消费 -->
+            <div class="mui-col-xs-4 mui-col-sm-4" id="15905421547764">
+                <li class="mui-table-view-cell">
+                    <a onclick="C();">
+                        <span class="iconfont icon-gaoxiaofei span_size"
+                            style="color:#ff7b93;font-weight: bold;"></span>
+                        <p id="ISM">高消费</p>
+                    </a>
+                </li>
+            </div>
+        </div>
+	</div>
+
+</body>
+<script>
+	 //js控制页面输出详细资料
+	var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('=');
+	var idd = decodeURI(loc.substr(n2 + 1, n1 - n2));
+
+    //console.log(idd); href="cargo_recurrence_rate.html"  cargo_precision_member
+    
+    function R(){ //活跃
+        location.href = '../homepage/cargo_activity_level.html?' + 'barcode=' + idd;
+    } 
+    function F(){ //回购
+        location.href = '../homepage/cargo_recurrence_rate.html?' + 'barcode=' + idd;
+    } 
+    function M(){ //贡献
+        location.href = '../homepage/cargo_contribution_degree.html?' + 'barcode=' + idd;
+    } 
+    function I(){ //忠诚
+        location.href = '../homepage/cargo_loyalty.html?' + 'barcode=' + idd;
+    } 
+    function N(){ //高件数
+        location.href = '../homepage/cargo_high_number.html?' + 'barcode=' + idd;
+    } 
+    function P(){ //高客单
+        location.href = '../homepage/cargo_gao_ke.html?' + 'barcode=' + idd;
+    } 
+    function A(){ //高件单
+        location.href = '../homepage/cargo_tall_sheet.html?' + 'barcode=' + idd;
+    } 
+    function J(){ //高连带
+        location.href = '../homepage/cargo_high_joint.html?' + 'barcode=' + idd;
+    } 
+    function C(){ //高消费
+        location.href = '../homepage/cargo_high_consumption.html?' + 'barcode=' + idd;
+    } 
+    
+	
+	hidden_title();
+</script>
+
+</html>

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../mui/css/mui.min.css">
+  <!-- <link rel="stylesheet" href="../css/iconfont.css"> -->
+  <script src="../mui/js/mui.min.js"></script>
+  <!-- <script src="../mui/js/muiR.js"></script> -->
+  <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+  <script src="../mui/js/mui.dtpicker.js"></script>
+  <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+  <script src="../mui/js/mui.picker.min.js"></script>
+  <script src="../js/hidden-titile.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <link rel="stylesheet" href="../css/loading.css">
+  <script src="../js/loading.js"></script>
+  <title>畅销排行</title>
+  <style>
+    body{font-size: 14px;}
+    .mui-input-row select,.mui-search .mui-placeholder{font-size: 14px;}
+    tr {
+      height: 30px;
+      text-align: center;
+    }
+
+    td {
+      width: 33%;
+    }
+    header a{text-decoration:none;border:none}
+    a {
+      color: #333;
+      /* text-decoration: underline; */
+      padding-bottom: 1px;
+      border-bottom: 1px solid #333;
+    }
+    
+
+    .btnp {
+      color: black;
+      font-size: 15px;
+
+    }
+
+    .mui-popup {
+      text-align: left;
+    }
+
+    .mui-card-header>img:first-child {
+      width: 66px;
+      height: 66px;
+    }
+
+    .mui-card-footer:before,
+    .mui-card-header:after {
+      background: none;
+    }
+    .mui-card-header.mui-card-media{
+      padding: 5px 0 0 20px;
+    }
+    .mui-search.mui-active:before{font-size: 18px;left: 8px;}
+    .mui-search:before{top: 62%;}
+
+    .left-data,.right-data {
+      width: 50%;
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+
+    .left-data div:nth-child(1) {
+      color: white;
+      background-color: #007aff;
+      text-align: center;
+      border: 1px solid #007aff;
+      width: 70px;
+      font-size: 11px;
+      float: left;
+      border-radius: 10px 0 0 10px;
+    }
+
+    .left-data div:nth-child(2) {
+      color: #007aff;
+      text-align: center;
+      border: 1px solid #007aff;
+      width: 100px;
+      font-size: 14px;
+      float: left;
+      border-radius: 0 10px 10px 0;
+      
+    }
+    /* .right-data{
+      width: 50%;
+      display: inline-block;
+      margin-bottom: 5px;
+    } */
+    .right-data div:nth-child(1){
+      color:#007aff;
+      text-align: center;
+      border:1px solid #007aff;
+      width: 88px;
+      font-size:14px;
+      float: right;
+      border-radius:0 10px 10px 0;
+    }
+    .right-data div:nth-child(2){
+      color:white; 
+      background-color:#007aff; 
+      text-align: center; 
+      border:1px solid #007aff;
+      width: 70px;
+      font-size:11px;
+      float: right;
+      border-radius:10px 0 0 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+    <a href="javascript:history.go(-1);" class="mui-icon mui-icon-back" id="a_title" style="color:white;"></a>
+    <h1 class="mui-title" id="title_" style="color:white;">畅销排行</h1>
+  </header>
+  <!-- 头部选择器 -->
+  <div id="da" class="mui-content">
+    <!-- body内容 -->
+    <div id="xiao" class="mui-content">
+      <div id="form_css">
+
+      </div>
+      <!-- 下拉刷新内容 -->
+      <div id="pullrefresh" class="mui-scroll-wrapper ">
+        <div class="mui-scroll">
+          <!-- 选择机构-->
+          <div class="mui-input-row mui-select">
+            <select name="" style="color:rgb(105, 104,104);margin-bottom: 4px;" id="all_organization"
+              onchange="gradeChange_organization()">
+              <!-- <option value="">所有机构</option> -->
+              <!-- <option value="">上海部门</option>
+                                <option value="">海南部门</option>
+                                <option value="">澳大利亚部门</option> -->
+            </select>
+          </div>
+          <!-- 选择门店-->
+          <div class="mui-input-row mui-select">
+            <select name="" style="color:rgb(105, 104,104);margin-bottom: 4px;" id="all_stores">
+              <!-- <option value="">所有门店</option> -->
+              <!-- <option value="">上海部门</option>
+                          <option value="">海南部门</option>  
+                          <option value="">澳大利亚部门</option> -->
+            </select>
+          </div>
+          <!-- 请选择货号 -->
+          <!-- 搜索 -->
+          <div class="mui-input-row mui-search" style="height:40px;padding:0px;">
+            <input type="search" class="mui-input-clear" placeholder="请输入货号" style="background-color:white;"
+              id="phone_num">
+          </div>
+          <!-- 开始时间 -->
+          <div class="mui-row " style="border-bottom: 1px solid #eee;height: 37px;line-height: 37px;text-align: center;"
+            id="divid">
+            <!-- <div class="mui-col-xs-4 mui-col-sm-4">
+                &nbsp;&nbsp;&nbsp;&nbsp;开始时间：
+            </div> -->
+            <div id="start_time" class="mui-col-xs-5 mui-col-sm-5"
+              style="border: 1px solid white;background-color: white;border-radius:20px;" onclick="start_time();">
+              &nbsp;
+              <span class="time_">2015</span>
+            </div>
+            <div class="mui-col-xs-2 mui-col-sm-2">
+              至
+            </div>
+            <div id="over_time" class="mui-col-xs-5 mui-col-sm-5"
+              style="border: 1px solid white;background-color: white;border-radius:20px;" onclick="over_time();">&nbsp;
+              <span class="time_">2018</span>
+            </div>
+          </div>
+          <!-- 查询 -->
+          <div class="mui-button-row" style="height: 45px;margin-top: 10px;">
+            <button type="button" class="mui-btn mui-btn-blue" style="width:300px;" id="query">查询</button>
+          </div>
+          <!--数据列表-->
+          <div id="qqq" style="width: 100%;">
+            <!-- <div style="background-color: white;width: 100%;height:200px;" >
+              <div style="width: 100%;">
+                <p style="color: black;font-size: 20px;padding-left: 2%;padding-top: 2%;"><a href="best_selling_details.html">19012</a></p>
+                <div class="mui-card-header mui-card-media">
+                    <img src="../images/2.jpg" />
+                    <div class="mui-media-body" >
+                        
+                        <p style="color: black;font-size: 15px;"> <span style="margin-left: 2%;"> 名称: <span>女裤</span></span> </p>
+                        <p>&nbsp;</p>
+                        <p style="color: black;font-size: 15px;"> <span style="margin-left: 2%;">售价: <span>128.00</span></span> </p>
+                    </div>
+                </div>
+              </div>
+              <div style="width: 100%;height: 200px;">
+                <div class="left-data">
+                    <div>数量</div>
+                    <div>0.99</div>
+                </div>
+                <div class="right-data">
+                    <div>111</div>
+                    <div>数量占比</div>
+                </div>
+                <div class="left-data">
+                    <div>销售额</div>
+                    <div>0.99</div>
+                </div>
+                <div class="right-data">
+                    <div>111</div>
+                    <div>销售额占比</div>
+                </div>
+              </div>
+            </div> -->
+            <!-- <div style="border-radius:0px 0px 10px 10px; width: 100%;height: 40px;text-align: center;line-height: 40px;background-color:chocolate ;"><a style="text-decoration: none;color: #fff;" href="see_more.html">查看更多</a></div> -->
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+<script>
+  //加载动画
+  var load = new Loading();
+  load.init();
+  // load.start();
+  // load.stop();
+  //a标签不能用
+  mui('body').on('tap', 'a', function () {
+    window.location.href = this.href;
+  });
+  mui("#divid").on("tap", "#start_time", function () {
+    // 逻辑代码，例如跳转详情页、ajax
+    var dtpicker = new mui.DtPicker({
+      type: "date",//设置日历初始视图模式 
+      beginDate: new Date(1970, 01, 01),//设置开始日期 
+      endDate: new Date(2070, 01, 01),//设置结束日期 
+      labels: ['年', '月', '日'],//设置默认标签区域提示语 
+    });
+    dtpicker.show(function (items) {
+      birth[0].innerHTML = items.y.value + '-' + items.m.value + '-' + items.d.value;
+      time_start = birth[0].innerHTML;
+    })
+  });
+
+
+  mui("#divid").on("tap", "#over_time", function () {
+    // 逻辑代码，例如跳转详情页、ajax
+    var dtpicker = new mui.DtPicker({
+      type: "date",//设置日历初始视图模式 
+      beginDate: new Date(1970, 01, 01),//设置开始日期 
+      endDate: new Date(2170, 01, 01),//设置结束日期 
+      labels: ['年', '月', '日'],//设置默认标签区域提示语 
+    });
+    dtpicker.show(function (items) {
+      birth[1].innerHTML = items.y.value + '-' + items.m.value + '-' + items.d.value
+      time_end = birth[1].innerHTML;
+    })
+  });
+
+
+  var pp = document.getElementById("form_css");
+  var pullrefresh = document.getElementById("pullrefresh");
+  var all_stores = document.getElementById("all_stores");
+  var all_shopping = document.getElementById("all_shopping");
+
+  window.onload = function () {
+    if (localStorage.getItem("best_changxiao") == "") {
+      onload_select();
+    }
+    new_data();
+    onload_select_innerHTML();
+    hidden_title();
+    pullrefresh.style.marginTop = pp.clientHeight + 50 + 'px';
+    pullupRefresh();
+  }
+
+  // 获取当前时间
+  var new_star = "";
+  var new_end = "";
+   var birth = document.getElementsByClassName("time_");
+
+  function new_data() {
+    var myDate = new Date();//获取系统当前时间
+
+    var preDate = new Date(myDate.getTime() - 24 * 60 * 60 * 1000*7); //前七天
+    var nextDate = new Date(myDate.getTime()); //后一天
+
+    var Past_year = preDate.getFullYear(); //前七天 年份
+    var Future_year = nextDate.getFullYear(); //后一天 年份
+    var Past_month = preDate.getMonth() + 1; //前七天 月份
+    var Future_month = nextDate.getMonth() + 1; //后一天 月份
+
+    var Past_time_data = preDate.getDate(); //过去一天
+    var Future_time_data = nextDate.getDate(); //未来一天
+
+    if (Past_month >= 1 && Past_month <= 9) {
+      Past_month = "0" + Past_month;
+    }
+    if (Future_month >= 1 && Future_month <= 9) {
+      Future_month = "0" + Future_month;
+    }
+    if (Past_time_data >= 1 && Past_time_data <= 9) {
+      Past_time_data = "0" + Past_time_data;
+    }
+    if (Future_time_data >= 1 && Future_time_data <= 9) {
+      Future_time_data = "0" + Future_time_data;
+    }
+    let times_start = Past_year + "-" + Past_month + "-" + Past_time_data;
+    let times_ends = Future_year + "-" + Future_month + "-" + Future_time_data;
+   
+    birth[0].innerHTML = times_start;
+    birth[1].innerHTML = times_ends;
+    time_start = birth[0].innerHTML;
+    time_end = birth[1].innerHTML;
+  }
+ 
+  // 下拉框初始赋值
+  function onload_select_innerHTML() {
+    // 给组织加载多余
+    var option_all_organization = document.createElement("option");
+    option_all_organization.value = "";
+    option_all_organization.innerHTML = "所有机构";
+    document.getElementById("all_organization").appendChild(option_all_organization);
+    // 门店加载多余 
+    var option_all_stores = document.createElement("option");
+    option_all_stores.value = "";
+    option_all_stores.innerHTML = "所有门店";
+    document.getElementById("all_stores").appendChild(option_all_stores);
+
+  }
+  // 进来加载组织
+  // 选择组织
+  function onload_select() {
+
+    mui.post('/index.php/UserlistOrg/', {
+    }, function (data) {
+      //服务器返回响应，根据响应结果，分析是否登录成功；
+      if (data.code == 200) {
+        for (i = 0; i < data.data.length; i++) {
+          var option = document.createElement('option');
+          option.value = data.data[i].code;
+          option.innerHTML = data.data[i].name
+          document.getElementById("all_organization").appendChild(option);
+        }
+      }
+
+    }, 'json'
+    );
+    ;
+  }
+  // 进来加载组织
+  function gradeChange_organization() {
+    // 
+    mui.post('/index.php/UserlistStore/', {
+      code: document.getElementById("all_organization").options[document.getElementById("all_organization").selectedIndex].value
+    }, function (data) {
+      //服务器返回响应，根据响应结果，分析是否登录成功；
+      if (data.code == 200) {
+        document.getElementById("all_stores").innerHTML = '<option value="">选择门店</option>'
+        for (i = 0; i < data.data.length; i++) {
+          var option = document.createElement('option');
+          option.value = data.data[i].code;
+          option.innerHTML = data.data[i].name;
+          document.getElementById("all_stores").appendChild(option);
+        }
+        //;
+      }
+    }, 'json'
+    );
+  }
+  // 选择门店 店员下拉发生改变
+  // function gradeChange_stores() {
+
+  //   // 
+  //   mui.post('/index.php/UserlistStaff/', {
+  //     code: all_stores.options[all_stores.selectedIndex].value
+  //   }, function (data) {
+  //     //服务器返回响应，根据响应结果，分析是否登录成功；
+  //     if (data.code == 200) {
+  //       document.getElementById("all_shopping").innerHTML = '<option value="">选择店员</option>'
+  //       for (i = 0; i < data.data.length; i++) {
+  //         var option = document.createElement('option');
+  //         option.value = data.data[i].code;
+  //         option.innerHTML = data.data[i].name;
+  //         document.getElementById("all_shopping").appendChild(option);
+  //       }
+  //       //;
+  //     }
+  //   }, 'json'
+  //   );
+  // }
+  // 点击按钮查询
+  var query = document.getElementById("query");
+  query.onclick = function () {
+    contont = true;
+    select_org = document.getElementById("all_organization").options[document.getElementById("all_organization").selectedIndex].value;
+    select_store = all_stores.options[all_stores.selectedIndex].value;
+    document.getElementById("qqq").innerHTML = "";
+    count = 0;
+    phone_num1 = document.getElementById("phone_num").value;
+    mui('#pullrefresh').pullRefresh().refresh(true);
+    pullupRefresh();
+
+    var gg = [phone_num1, select_org, select_store, birth[0].innerHTML, birth[1].innerHTML];
+    localStorage.setItem("best_changxiao", gg);
+  }
+  // //select安卓和ios的判断样式
+  var picture3 = document.getElementById("all_organization");
+  var picture = document.getElementById("all_stores");
+  //苹果手机采用CSS1
+  if (/iphone/i.test(navigator.userAgent)) {
+    picture3.style.paddingLeft = "42%";
+    picture.style.paddingLeft = "42%";
+    // addStyleLink('CSS1.css');
+
+  }
+  // 安卓手机采用CSS2
+  if (/android/i.test(navigator.userAgent)) {
+    //alert("安卓");
+    picture3.style.paddingLeft = "42%";
+    picture.style.paddingLeft = "42%";
+    // addStyleLink('CSS2.css');
+
+  }
+</script>
+
+<script>
+
+  mui.init({
+
+    pullRefresh: {
+      container: '#pullrefresh',
+      down: {
+        // callback: pulldownRefresh
+      },
+      up: {
+        contentrefresh: '正在加载...',
+        // auto: true,//可选,默认false.首次加载自动上拉刷新一次
+        callback: pullupRefresh
+      }
+    }
+  });
+	/**
+	 * 下拉刷新具体业务实现
+	 */
+  function pulldownRefresh() {
+  }
+	/**
+	 * 上拉加载具体业务实现
+	 */
+  // 重新开启加载
+  // mui('#pullrefresh').pullRefresh().refresh(true);
+  // 分页计数
+  var select_org = "";
+  var select_store = "";
+  var phone_num1 = "";
+  var time_start = "";
+  var time_end = "";
+  var count = 0;
+  var contont = false; //进入页面 根据是否为true 进行判断  false执行初始化操作或者缓存操作  true进行页面操作
+  // 分的条数
+  var limit_num = 10;
+  function pullupRefresh() {
+    if (contont) {
+      jiaai();
+    } else {
+      if (localStorage.getItem("best_changxiao") == "") {
+        jiaai();
+      } else {
+        phone_num1 = localStorage.getItem("best_changxiao").split(',')[0];
+        select_org = localStorage.getItem("best_changxiao").split(',')[1];
+        select_store = localStorage.getItem("best_changxiao").split(',')[2];
+        time_start = localStorage.getItem("best_changxiao").split(',')[3];
+        time_end = localStorage.getItem("best_changxiao").split(',')[4];
+        birth[0].innerHTML = time_start;
+        birth[1].innerHTML = time_end;
+        onload_zu_ji(select_org, select_store)
+      }
+    }
+  }
+
+
+  mui('.mui-scroll-wrapper').scroll({
+    indicators: false, //是否显示滚动条
+  });
+  function jiaai() {
+    load.start();
+    if (Date.parse(birth[0].innerHTML) > Date.parse(birth[1].innerHTML)) {
+      mui.alert('开始时间不能大于结束时间', '提示', '确定'['div']);
+    } else {
+      mui.post('/index.php/webBestSeller/', {
+        code: phone_num1,
+        org: select_org,//机构
+        store: select_store,//门店
+        startTime: time_start,
+        endTime: time_end,
+        page: ++count,//分页
+        limit: limit_num//每页的条数
+      }, function (data) {
+        // 服务器返回响应，根据响应结果，分析是否登录成功；
+
+        if (data.code == 200) {
+          setTimeout(function () {
+            mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+            // var table = document.body.querySelector('.mui-table-view');
+            var qq = document.getElementById("qqq");
+            for (i = 0; i < data.data.data.length; i++) {
+              var li = document.createElement('div');
+              // li.className = 'mui-table-view-cell';
+              li.style = "margin-top:10px; background-color: white;width: 100%;height:205px;"
+              li.innerHTML = '<div style="width: 100%;">'
+                + '<p  style="color: black;font-size: 18px;padding-left: 5%;padding-top: 2%;"><a href="best_selling_details.html???data=' + data.data.data[i].code + '=' + birth[0].innerHTML + '=' + birth[1].innerHTML + '">' + data.data.data[i].code + '</a></p>'
+                + '<div class="mui-card-header mui-card-media">'
+                + '<img src="' + data.data.data[i].img + '" />'
+                + '<div class="mui-media-body" >'
+                + '<p style="color: #333;font-size: 15px;"> <span style="margin-left: 5%;"> 名称: <span>' + data.data.data[i].name + '</span></span> </p>'
+                + '<p>&nbsp;</p>'
+                // + '<p style="color: black;font-size: 15px;"> <span style="margin-left: 2%;">售价: <span>' + data.data.data[i].price + '</span></span> </p>'
+                + '</div>'
+                + '</div>'
+                + '</div>'
+                + '<div style="width: 100%;height: 100px;float:left;margin-top: 13px;border-top: 1px solid #eee;padding:10px;">'
+                + '<div class="left-data">'
+                + '<div>数量</div>'
+                + '<div>' + data.data.data[i].number + '</div>'
+                + '</div>'
+                + '<div class="right-data">'
+                + '<div>' + data.data.data[i].countNumber + '</div>'
+                + '<div>数量占比</div>'
+                + '</div>'
+                + '<div class="left-data">'
+                + '<div>销售额</div>'
+                + '<div>' + data.data.data[i].dis_price + '</div>'
+                + '</div>'
+                + '<div class="right-data">'
+                + '<div>'+ data.data.data[i].countMoney + '</div>'
+                + '<div>销售额占比</div>'
+                + '</div>'
+                + '</div>'
+              qq.appendChild(li);
+            }
+          }, 1000);
+        }
+        load.stop();
+      }, 'json'
+      );
+      ;
+
+    }
+  }
+
+
+  function onload_zu_ji(org_code, store_code) {
+
+    mui.post('/index.php/UserlistOrg/', {
+    }, function (data) {
+      //服务器返回响应，根据响应结果，分析是否登录成功；
+      if (data.code == 200) {
+        document.getElementById("all_organization").innerHTML = "";
+        for (i = 0; i < data.data.length; i++) {
+          if (data.data[i].code == org_code) {
+            var option = document.createElement('option');
+            option.value = data.data[i].code;
+            option.selected = true;
+            option.innerHTML = data.data[i].name
+            document.getElementById("all_organization").appendChild(option);
+          } else {
+            var option = document.createElement('option');
+            option.value = data.data[i].code;
+            option.innerHTML = data.data[i].name
+            document.getElementById("all_organization").appendChild(option);
+          }
+        }
+        klk(org_code, store_code);
+      }
+    }, 'json'
+    );
+  }
+
+  function klk(org_code, store_code) {
+    mui.post('/index.php/UserlistStore/', {
+      code: org_code
+    }, function (data) {
+      //服务器返回响应，根据响应结果，分析是否登录成功；
+      if (data.code == 200) {
+        document.getElementById("all_stores").innerHTML = '<option value="">选择门店</option>'
+        for (i = 0; i < data.data.length; i++) {
+          if (data.data[i].code == store_code) {
+            var option = document.createElement('option');
+            option.value = data.data[i].code;
+            option.selected = true;
+            option.innerHTML = data.data[i].name;
+            document.getElementById("all_stores").appendChild(option);
+          } else {
+            var option = document.createElement('option');
+            option.value = data.data[i].code;
+            option.innerHTML = data.data[i].name;
+            document.getElementById("all_stores").appendChild(option);
+          }
+        }
+        jiaai();
+      }
+    }, 'json'
+    );
+  }
+</script>
+
+</html>

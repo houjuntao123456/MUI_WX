@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组中排名</title>
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <!-- <script src="../mui/js/mui.min.js"></script> -->
+    <script src="../mui/js/muiR.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/echarts.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/loading.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+</head>
+<style>
+    p {
+        margin-bottom: 5px;
+    }
+
+    a {
+        color: black;
+    }
+    .mui-input-row select{ font-size: 15px;}
+</style>
+
+<body>
+    <!-- 原回购人数链接D:\www\wx\web\homepage\wepurchase_number.html-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" id="a_title" style="color:white;"></a>
+        <h1 class="mui-title" id="title_" style="color:white;">组中排名</h1>
+        <div id="divid" style="float: right;margin-right:-7px;">
+            <div id="over_time" style="height: 45px;">&nbsp;
+              <span class="time_" style="color: white;line-height:45px;"></span>
+          </div>
+        </div>
+    </header>
+    <!-- 头部选择器 -->
+    <div id="da" class="mui-content">
+        
+        <!-- body内容 -->
+        <div id="xiao" class="mui-content">
+            <div id="form_css">
+                  <div style="background-color: white;height:40px;line-height: 40px;font-size: 15px;padding-left: 8px;">
+            小组名称: <span style="color: coral;border-bottom: 1px solid coral;" id="zuname">敢死队</span>
+                  </div>  
+            </div>
+            <!-- 下拉刷新内容 -->
+            <div style="" id="pullrefresh" class="mui-scroll-wrapper "> 
+                <div class="mui-scroll">
+                     <!-- 排名条件 -->
+        <div class="mui-input-row mui-select" style="margin-top:5px;">
+            <select name="" style="color:rgb(105, 104,104);margin-bottom: 4px;" id="all_tiaojian">
+                      <!-- <option value="">排名条件</option> -->
+                      <option value="1">完成率</option>
+                      <option value="2">件单价</option>
+                      <option value="3">客单价</option>
+                      <option value="4">连带率</option>
+                      <option value="5">单数</option>
+                      <option value="6">件数</option>
+            </select>
+          </div>
+                 <!-- 开始时间 -->
+        <!-- <div class="mui-row " style="border-bottom: 1px solid #eee;height: 37px;line-height: 37px;text-align: center;font-size: 15px;" id="divid"> -->
+            <!-- <div class="mui-col-xs-4 mui-col-sm-4">
+                &nbsp;&nbsp;&nbsp;&nbsp;开始时间：
+            </div> -->
+            <!-- <div id="start_time" class="mui-col-xs-5 mui-col-sm-5" style="border: 1px solid white;background-color: white;border-radius:20px;" onclick="start_time();">
+                &nbsp;
+                <span class="time_">2015</span>
+            </div>
+            <div class="mui-col-xs-2 mui-col-sm-2">
+                至
+            </div>
+            <div id="over_time" class="mui-col-xs-5 mui-col-sm-5" style="border: 1px solid white;background-color: white;border-radius:20px;" onclick="over_time();">&nbsp;
+                <span class="time_">2018</span>
+            </div>
+        </div> -->
+        <div class="mui-button-row" style="height: 45px;margin-top: 10px;">
+            <button type="button"  data-loading-icon="mui-spinner mui-spinner-custom"  class="mui-btn mui-btn-blue" style="width:300px;" id="query">查询</button>
+        </div>
+                <!--数据列表-->
+                    <div style="border: 2px solid #007aff; margin-top:5px;width: 96%;height: 200px;background-color: white;margin-left: 2%;border-radius:10px;">
+                        <p style="padding-left: 2%;padding-top:5px;">
+                                <span class="mui-badge mui-badge-blue" id="PAI"></span>                   
+                        </p>
+                        <div style="margin-left: 6%;">
+                           <span style="font-weight:bolder;" id="name1"></span>  (<span style="font-size:13px;" id="mendian1">机构</span>)
+                        </div>
+                        <div style="margin-left: 7%;font-weight:bolder;color: chocolate;font-size:16px;margin-top: 10px;" id="zhibiao1">
+                              
+                        </div>
+                        <div style="margin-left: 6%;font-size: 16px; margin-top: 30px;">
+                             目标: <span style="font-weight:bolder;color: chocolate;font-size:15px;" id="mubian1"></span>
+                          </div>
+                          <div style="margin-left: 6%;font-size: 16px; margin-top: 15px;">
+                            完成率:  <span style="font-weight:bolder;color: chocolate;font-size:15px;" id="lv1"></span>
+                          </div> 
+                          <div id="main" style="margin-top:-196px;  float: right; width: 250px;height:250px;"></div>
+                     </div>
+                <!-- 循环的内容 -->
+                    <div id="qqq" style="width: 100%;" >
+                            <!-- <div  style="border: 2px solid #007aff; margin-top:5px;width: 96%;height: 200px;background-color: white;margin-left: 2%;border-radius:10px;">
+                                    <p style="padding-left: 2%;padding-top:5px;">
+                                            <span class="mui-badge mui-badge-blue PaiM"></span>                   
+                                    </p>
+                                    <div style="margin-left: 6%;">
+                                       <span style="font-weight:bolder;">候一</span>  (<span style="font-size:13px;">唯帅裤业</span>)
+                                    </div>
+                                    <div style="margin-left: 7%;font-weight:bolder;color: chocolate;font-size:20px;margin-top: 10px;">
+                                          14,527
+                                    </div>
+                                    <div style="margin-left: 6%;font-size: 16px; margin-top: 30px;">
+                                         目标: <span style="font-weight:bolder;color: chocolate;font-size:15px;">12,344</span>
+                                      </div>
+                                      <div style="margin-left: 6%;font-size: 16px; margin-top: 15px;">
+                                        完成率:  <span style="font-weight:bolder;color: chocolate;font-size:15px;">90%</span>
+                                      </div> 
+                                      <div style="width:60%;height:120px;margin-left:136px;margin-top:-121px;"> -->
+                                        <!-- <div style="width: 100%;float: left;">
+                                            <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: left;border-radius:10px 0 0 10px;">
+                                                平均折扣
+                                            </div>
+                                            <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: left;border-radius:0 10px 10px 0;">
+                                                0.99
+                                            </div>
+                                        </div> -->
+                                        <!-- <div style="width: 100%;float: right;">
+                                            <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: right;border-radius:0 10px 10px 0;">
+                                                111
+                                            </div>
+                                            <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: right;border-radius:10px 0 0 10px;">
+                                                连带率
+                                            </div>
+                                            
+                                        </div>
+                                        <div style="width: 100%;float: left;">
+                                            <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: left;border-radius:10px 0 0 10px;">
+                                            客单价
+                                            </div>
+                                            <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: left;border-radius:0 10px 10px 0;">
+                                                4754
+                                            </div>
+                                        </div>
+                                        <div style="width: 100%;float: right;">
+                                            <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: right;border-radius:0 10px 10px 0;">
+                                                422
+                                            </div>
+                                            <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: right;border-radius:10px 0 0 10px;">
+                                                件单价
+                                            </div>
+                                            
+                                        </div>
+                                        <div style="width: 100%;float: left;">
+                                            <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: left;border-radius:10px 0 0 10px;">
+                                                单数
+                                            </div>
+                                            <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: left;border-radius:0 10px 10px 0;">
+                                               774
+                                            </div>
+                                        </div>
+                                        <div style="width: 100%;float: right;">
+                                            <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: right;border-radius:0 10px 10px 0;">
+                                                452
+                                            </div>
+                                            <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: right;border-radius:10px 0 0 10px;">
+                                                件数
+                                            </div>
+                                            
+                                        </div>
+                       
+                                      </div>
+                                 </div> -->
+                                 <!-- **************************** -->
+                                 <!-- <div  style="border: 2px solid #007aff; margin-top:5px;width: 96%;height: 200px;background-color: white;margin-left: 2%;border-radius:10px;">
+                                        <p style="padding-left: 2%;padding-top:5px;">
+                                                <span class="mui-badge mui-badge-blue PaiM"></span>                   
+                                        </p>
+                                        <div style="margin-left: 6%;">
+                                           <span style="font-weight:bolder;">李二</span>  (<span style="font-size:13px;">唯帅裤业</span>)
+                                        </div>
+                                        <div style="margin-left: 7%;font-weight:bolder;color: chocolate;font-size:20px;margin-top: 10px;">
+                                              14,527
+                                        </div>
+                                        <div style="margin-left: 6%;font-size: 16px; margin-top: 30px;">
+                                             目标: <span style="font-weight:bolder;color: chocolate;font-size:15px;">12,344</span>
+                                          </div>
+                                          <div style="margin-left: 6%;font-size: 16px; margin-top: 15px;">
+                                            完成率:  <span style="font-weight:bolder;color: chocolate;font-size:15px;">90%</span>
+                                          </div> 
+                                          <div style="width:60%;height:120px;margin-left:136px;margin-top:-121px;"> -->
+                                            <!-- <div style="width: 100%;float: left;">
+                                                <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: left;border-radius:10px 0 0 10px;">
+                                                    平均折扣
+                                                </div>
+                                                <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: left;border-radius:0 10px 10px 0;">
+                                                    0.99
+                                                </div>
+                                            </div> -->
+                                            <!-- <div style="width: 100%;float: right;">
+                                                <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: right;border-radius:0 10px 10px 0;">
+                                                    111
+                                                </div>
+                                                <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: right;border-radius:10px 0 0 10px;">
+                                                    连带率
+                                                </div>
+                                                
+                                            </div>
+                                            <div style="width: 100%;float: left;">
+                                                <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: left;border-radius:10px 0 0 10px;">
+                                                客单价
+                                                </div>
+                                                <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: left;border-radius:0 10px 10px 0;">
+                                                    4754
+                                                </div>
+                                            </div>
+                                            <div style="width: 100%;float: right;">
+                                                <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: right;border-radius:0 10px 10px 0;">
+                                                    422
+                                                </div>
+                                                <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: right;border-radius:10px 0 0 10px;">
+                                                    件单价
+                                                </div>
+                                                
+                                            </div>
+                                            <div style="width: 100%;float: left;">
+                                                <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: left;border-radius:10px 0 0 10px;">
+                                                    单数
+                                                </div>
+                                                <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: left;border-radius:0 10px 10px 0;">
+                                                   774
+                                                </div>
+                                            </div>
+                                            <div style="width: 100%;float: right;">
+                                                <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: right;border-radius:0 10px 10px 0;">
+                                                    452
+                                                </div>
+                                                <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: right;border-radius:10px 0 0 10px;">
+                                                    件数
+                                                </div>
+                                                
+                                            </div>
+                           
+                                          </div>
+                                     </div>
+                                     <div  style="border: 2px solid #007aff; margin-top:5px;width: 96%;height: 200px;background-color: white;margin-left: 2%;border-radius:10px;">
+                                            <p style="padding-left: 2%;padding-top:5px;">
+                                                    <span class="mui-badge mui-badge-blue PaiM"></span>                   
+                                            </p>
+                                            <div style="margin-left: 6%;">
+                                               <span style="font-weight:bolder;">王三</span>  (<span style="font-size:13px;">唯帅裤业</span>)
+                                            </div>
+                                            <div style="margin-left: 7%;font-weight:bolder;color: chocolate;font-size:20px;margin-top: 10px;">
+                                                  14,527
+                                            </div>
+                                            <div style="margin-left: 6%;font-size: 16px; margin-top: 30px;">
+                                                 目标: <span style="font-weight:bolder;color: chocolate;font-size:15px;">12,344</span>
+                                              </div>
+                                              <div style="margin-left: 6%;font-size: 16px; margin-top: 15px;">
+                                                完成率:  <span style="font-weight:bolder;color: chocolate;font-size:15px;">90%</span>
+                                              </div> 
+                                              <div style="width:60%;height:120px;margin-left:136px;margin-top:-121px;"> -->
+                                                <!-- <div style="width: 100%;float: left;">
+                                                    <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: left;border-radius:10px 0 0 10px;">
+                                                        平均折扣
+                                                    </div>
+                                                    <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: left;border-radius:0 10px 10px 0;">
+                                                        0.99
+                                                    </div>
+                                                </div> -->
+                                                <!-- <div style="width: 100%;float: right;">
+                                                    <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: right;border-radius:0 10px 10px 0;">
+                                                        111
+                                                    </div>
+                                                    <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: right;border-radius:10px 0 0 10px;">
+                                                        连带率
+                                                    </div> 
+                                                    
+                                                </div>
+                                                <div style="width: 100%;float: left;">
+                                                    <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: left;border-radius:10px 0 0 10px;">
+                                                    客单价
+                                                    </div>
+                                                    <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: left;border-radius:0 10px 10px 0;">
+                                                        4754
+                                                    </div>
+                                                </div>
+                                                <div style="width: 100%;float: right;">
+                                                    <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: right;border-radius:0 10px 10px 0;">
+                                                        422
+                                                    </div>
+                                                    <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: right;border-radius:10px 0 0 10px;">
+                                                        件单价
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div style="width: 100%;float: left;">
+                                                    <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: left;border-radius:10px 0 0 10px;">
+                                                        单数
+                                                    </div>
+                                                    <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: left;border-radius:0 10px 10px 0;">
+                                                       774
+                                                    </div>
+                                                </div>
+                                                <div style="width: 100%;float: right;">
+                                                    <div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: right;border-radius:0 10px 10px 0;">
+                                                        452
+                                                    </div>
+                                                    <div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: right;border-radius:10px 0 0 10px;">
+                                                        件数
+                                                    </div>
+                                                    
+                                                </div>
+                               
+                                              </div>
+                                         </div> -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+<script>
+      //查询按钮
+      mui(document.body).on('tap', '.mui-btn', function(e) {
+        paim = picture2.options[picture2.selectedIndex].value;
+    document.getElementById("qqq").innerHTML = "";
+    count = 0;
+    pullupRefresh();
+    mui(this).button('loading');
+    setTimeout(function() {
+        mui(this).button('reset');
+    }.bind(this), 2000);
+})
+          //加载动画
+          var load = new Loading();
+        load.init();
+        //load.start();
+        //load.stop();
+    //a标签不能用
+    mui('body').on('tap', 'a', function () {
+        window.top.location.href = this.href;
+    });
+    var pp = document.getElementById("form_css");
+    var pullrefresh = document.getElementById("pullrefresh");
+    var birth = document.getElementsByClassName("time_");
+    //接收参数
+    var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('=');
+    var n3 = loc.indexOf('*');
+    var n4 = loc.indexOf('#');
+    var idd = decodeURI(loc.substr(n2 + 1, n3 - n2 - 5));
+    var name= decodeURI(loc.substr(n3 + 1, n4 - n3-4));
+    var code = decodeURI(loc.substr(n4 + 1, n1 - n4));
+    mui("#divid").on("tap","#over_time",function(){
+	// 逻辑代码，例如跳转详情页、ajax
+    var dtpicker = new mui.DtPicker({
+            type: "month",//设置日历初始视图模式 
+            beginDate: new Date(1970, 01),//设置开始日期 
+            endDate: new Date(2170, 01),//设置结束日期 
+            labels: ['年', '月'],//设置默认标签区域提示语 
+            });
+            dtpicker.show(function (items) {
+            birth[0].innerHTML = items.y.value + '-' + items.m.value 
+            })
+    });
+       // 获取当前时间
+       var new_star = "";
+        var new_end = "";
+        function new_data() {
+            var myDate = new Date();//获取系统当前时间
+            if ((myDate.getMonth() + 1) <= 9) {
+            // new_star = myDate.getFullYear() + '-' + '0'+(myDate.getMonth() + 1) + '-' + (myDate.getDate() - 1);
+            new_end = myDate.getFullYear() + '-' + '0'+(myDate.getMonth() + 1);
+            }else{
+            // new_star = myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + (myDate.getDate() - 1);
+            new_end = myDate.getFullYear() + '-' + (myDate.getMonth() + 1);
+            }
+            // birth[0].innerHTML = new_star;
+            birth[0].innerHTML = new_end;
+
+        }
+    window.onload = function () {
+        new_data();
+        // hidden_title();
+        pullrefresh.style.marginTop = pp.clientHeight + 50 + 'px';
+        document.getElementById("zuname").innerHTML = name;
+        pullupRefresh()
+    }
+    var picture2 = document.getElementById("all_tiaojian");
+
+//苹果手机采用CSS1
+if (/iphone/i.test(navigator.userAgent)) {
+  picture2.style.paddingLeft = "40%";
+  // addStyleLink('CSS1.css');
+}
+// 安卓手机采用CSS2
+if (/android/i.test(navigator.userAgent)) {
+  //alert("安卓");
+  picture2.style.paddingLeft = "40%";
+  // addStyleLink('CSS2.css');
+}
+////////////////////////////////////////////////////////图
+    
+// /////////////////////////////////////////////////////////////
+var query = document.getElementById("query");
+//   query.onclick = function () {
+//     paim = picture2.options[picture2.selectedIndex].value;
+//     document.getElementById("qqq").innerHTML = "";
+//     count = 0;
+//     pullupRefresh();
+//   }
+
+</script>
+<script>
+    // 分页计数
+    var paim = 1;
+    // 分的条数
+    // var limit_num = 10;
+    function pullupRefresh() {
+        load.start();
+            mui.post('/index.php/MOrgGroupPlanData/', {
+                org_code:code,
+                group_type:paim,
+                group_id:idd,
+                times:birth[0].innerHTML
+            }, function (data) {
+                // console.log(data)
+                // 服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    document.getElementById("name1").innerHTML = data.data.dataOne.findName;
+                    // document.getElementById("mendian1").innerHTML= data.data.dataOne.storeName;
+                    document.getElementById("zhibiao1").innerHTML=data.data.dataOne.realNumber;
+                    document.getElementById("mubian1").innerHTML=data.data.dataOne.totalMission;
+                    document.getElementById("lv1").innerHTML=data.data.dataOne.completion+"%";
+                    var myChart = echarts.init(document.getElementById('main'));
+                    option = {
+                        // title : {
+                        //     text: '某站点用户访问来源',
+                        //     subtext: '纯属虚构',
+                        //     x:'center'
+                        // },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b} : {c} ({d}%)"
+                        },
+                        // legend: {
+                        //     orient: 'vertical',
+                        //     left: 'left',
+                        //     data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+                        // },
+                        series: [
+                            {
+                                name: '详细',
+                                type: 'pie',
+                                radius: '40%',
+                                center: ['50%', '50%'],
+                                data: [
+                                    { value: data.data.dataOne.jointNumber, name: '连带率' },
+                                    { value: data.data.dataOne.priceNumber, name: '客单价' },
+                                    { value: data.data.dataOne.univalentNumber, name: '件单价' },
+                                    { value: data.data.dataOne.codeNumber, name: '单数' },
+                                    { value: data.data.dataOne.totalNumber, name: '件数' }
+                                ],
+                                itemStyle: {
+                                    emphasis: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowColor: 'rgba(0, 0, 0, 1)'
+                                    }
+                                }
+                            }
+                        ]
+                    };
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+                    setTimeout(function () {
+                        // var table = document.body.querySelector('.mui-table-view');
+                        var qq = document.getElementById("qqq");
+                        for (i = 0; i < data.data.data.length; i++) {
+                            if (data.data.data[i].findCode==data.data.dataOne.findCode) {
+                                document.getElementById("PAI").innerHTML = i+1;
+                            } 
+                            var li = document.createElement('div');
+                            // li.className = 'mui-table-view-cell';
+                            li.style = "border: 2px solid #007aff; margin-top:5px;width: 96%;height: 200px;background-color: white;margin-left: 2%;border-radius:10px;"
+                            li.innerHTML = '<p style="padding-left: 2%;padding-top:5px;">'
+                                    +'<span class="mui-badge mui-badge-blue PaiM">'+(i+1)+'</span>'                   
+                                    +'</p>'
+                                    +'<div style="margin-left: 6%;">'
+                                    +'<span style="font-weight:bolder;width:100%;">'+data.data.data[i].findName+'</span>  (<span style="font-size:13px;">机构</span>)'
+                                    +'</div>'
+                                    +'<div style="margin-left: 7%;font-weight:bolder;color: chocolate;font-size:16px;margin-top: 10px;">'+data.data.data[i].realNumber+'</div>'
+                                    +'<div style="margin-left: 6%;font-size: 16px; margin-top: 30px;">'
+                                    +'目标: <span style="font-weight:bolder;color: chocolate;font-size:15px;">'+data.data.data[i].totalMission+'</span>'
+                                    +'</div>'
+                                    +'<div style="margin-left: 6%;font-size: 16px; margin-top: 15px;">'
+                                    +'完成率:  <span style="font-weight:bolder;color: chocolate;font-size:15px;">'+data.data.data[i].completion+'%</span>'
+                                    +'</div> '
+                                    +'<div style="width:60%;height:120px;margin-left:136px;margin-top:-121px;">'
+                                    +'<div style="width: 100%;float: right;">'
+                                    +'<div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: right;border-radius:0 10px 10px 0;">'
+                                    +data.data.data[i].jointNumber
+                                    +'</div>'
+                                    +'<div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: right;border-radius:10px 0 0 10px;">'
+                                    +'连带率'
+                                    +'</div>'
+                                    +'</div>'
+                                    +'<div style="width: 100%;float: left;">'
+                                    +'<div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: left;border-radius:10px 0 0 10px;">'
+                                    +'客单价'
+                                    +'</div>'
+                                    +'<div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: left;border-radius:0 10px 10px 0;">'
+                                    +data.data.data[i].priceNumber
+                                    +'</div>'
+                                    +'</div>'
+                                    +'<div style="width: 100%;float: right;">'
+                                    +'<div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: right;border-radius:0 10px 10px 0;">'
+                                    +data.data.data[i].univalentNumber
+                                    +'</div>'
+                                    +'<div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: right;border-radius:10px 0 0 10px;">'
+                                    +'件单价'
+                                    +'</div>'
+                                    +'</div>'
+                                    +'<div style="width: 100%;float: left;">'
+                                    +'<div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: left;border-radius:10px 0 0 10px;">'
+                                    +'单数'
+                                    +'</div>'
+                                    +'<div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: left;border-radius:0 10px 10px 0;">'
+                                    +data.data.data[i].codeNumber
+                                    +'</div>'
+                                    +'</div>'
+                                    +'<div style="width: 100%;float: right;">'
+                                    +'<div style="color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:14px;float: right;border-radius:0 10px 10px 0;">'
+                                    +data.data.data[i].totalNumber
+                                    +'</div>'
+                                    +'<div style="color:white; background-color:#007aff; text-align: center; border:1px solid #007aff;width: 60px;font-size:11px;float: right;border-radius:10px 0 0 10px;">'
+                                    +'件数'
+                                    +'</div>'
+                                    +'</div>'
+                                    +'</div>'
+                            qq.appendChild(li);
+                            
+                        }load.stop();
+                    }, 1000);
+                }
+                
+            }, 'json'
+            );
+        
+        
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+</script>
+
+</html>

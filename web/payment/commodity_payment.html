@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximu-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="./mui/css/mui.css">
+    <script src="./mui/js/mui.js"></script>
+    <script src="./js/iconfont/iconfont.js"></script>
+    <link rel="stylesheet" href="./mui/css/mui.picker.min.css">
+    <script src="./mui/js/mui.picker.min.js"></script>
+    <link rel="stylesheet" href="./mui/css/icons-extra.css">
+    <link rel="stylesheet" href="./mui/fonts/mui-icons-extra.ttf">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery-qrcode.js"></script>
+    <script src="./js/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="./css/loading.css">
+
+    <script src="./js/loading.js"></script>
+    <script src="../js/vconsole.js"></script>
+    <title>商品-支付</title>
+</head>
+<style>
+    *,
+    .mui-input-row label,
+    input {
+        font-family: '微软雅黑';
+    }
+
+    .pay_bg_image:before {
+        content: ' ';
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: url(../payment/images/bg_img.jpg) center 0 no-repeat;
+        background-size: cover;
+    }
+
+    .mui-table-view-cell:after {
+        background-color: #A9A9A9;
+        left: 0;
+    }
+
+    .mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell:after {
+        left: 15px;
+        right: 15px;
+    }
+
+
+
+    .mui-input-group .mui-input-row:after {
+        right: 15px;
+        background-color: #DEDCDC;
+    }
+
+    .icon {
+        width: 1.6em;
+        height: 1.6em;
+        vertical-align: -0.3em;
+        fill: currentColor;
+        overflow: hidden;
+    }
+
+    .checkeds {
+        background: url(./images/gg.svg) no-repeat right 7px;
+        background-size: 25px 25px;
+        /* background-color: #d4e5f6; */
+        color: #00a4ff
+    }
+
+    .ziti_font_size {
+        font-size: 17px;
+        font-family: '微软雅黑';
+        letter-spacing: 2px;
+    }
+
+    /* 支付方式选择样式 */
+    .radios {
+        text-align: left;
+        /* height: 32px;
+        padding-top: 8px;
+        padding-bottom: 31px; */
+        border-bottom: 1px solid #DEDCDC;
+        line-height: 38px;
+    }
+
+    .mui-input-group label {
+        /* font-weight: 800; */
+        font-size: 16px;
+    }
+
+    .mui-input-group input {
+        font-size: 15px;
+    }
+
+
+    .mui-off-canvas-left,
+    .mui-off-canvas-right {
+        width: 100%;
+    }
+
+    .mui-table-view .mui-media-object {
+        line-height: 100px;
+        max-width: 100px;
+        width: 100px;
+        height: 100px;
+    }
+
+    .mui-popup {
+        top: 36%;
+        width: 311px;
+    }
+
+    .ui_class {
+        list-style: none;
+        /* border: 1px solid red; */
+        padding-left: 20px;
+        padding-right: 20px;
+        margin: 0;
+    }
+
+    .ui_class li {
+        padding: 8px 5px 8px 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 4px auto;
+        font-family: '微软雅黑';
+        letter-spacing: 1px;
+        font-size: 15px;
+    }
+
+    .result {
+        font-size: 16px;
+        font-family: '微软雅黑';
+        letter-spacing: 1px;
+        color: #333;
+        margin-bottom: 15px;
+        padding-left: 10px;
+        padding-top: 15px;
+    }
+
+    .result span {
+        color: #BBB;
+        padding-left: 3px;
+        font-weight: normal;
+    }
+
+    .but {
+        width: 90%;
+        letter-spacing: 1px;
+        margin: 0 auto;
+        overflow: hidden;
+        padding-right: 10px;
+        padding-top: 10px;
+        padding-bottom: 5px;
+    }
+
+    .but div:nth-child(1) p:nth-child(1) {
+        width: 40%;
+        float: left;
+        margin-left: 8%;
+        margin-top: 2px;
+        margin-bottom: 2px;
+        height: 40px;
+        background: #2CCA67;
+        border-radius: 30px;
+        text-align: center;
+        line-height: 40px;
+        color: #fff;
+        font-family: '微软雅黑';
+        font-size: 16px;
+    }
+
+    .but div:nth-child(1) p:nth-child(2) {
+        width: 40%;
+        float: right;
+        margin-right: 8%;
+        margin-top: 2px;
+        margin-bottom: 2px;
+        height: 40px;
+        background: #007aff;
+        border-radius: 30px;
+        text-align: center;
+        line-height: 40px;
+        color: #fff;
+        font-family: '微软雅黑';
+        font-size: 16px;
+    }
+
+
+
+
+
+    .but div:nth-child(2) p {
+        margin-top: 2px;
+        margin-bottom: 2px;
+        height: 40px;
+        background: #007aff;
+        border-radius: 30px;
+
+        text-align: center;
+        line-height: 40px;
+        color: #fff;
+        font-family: '微软雅黑';
+        font-size: 16px;
+    }
+
+    .but div:nth-child(3) p {
+        margin-top: 2px;
+        margin-bottom: 2px;
+        height: 40px;
+        background: #8A6DE9;
+        border-radius: 30px;
+        text-align: center;
+        line-height: 40px;
+        color: #fff;
+        font-family: '微软雅黑';
+        font-size: 16px;
+    }
+
+    .but div:nth-child(4) p {
+        margin-top: 2px;
+        margin-bottom: 2px;
+        height: 40px;
+        background: #EC971F;
+        border-radius: 30px;
+        text-align: center;
+        line-height: 40px;
+        color: #fff;
+        font-family: '微软雅黑';
+        font-size: 16px;
+    }
+
+    .pay_reuslt {
+        background-color: white;
+        margin: 0 auto;
+        border-radius: 10px;
+        width: 95%;
+        padding-bottom: 10px;
+        margin-bottom: 5px;
+    }
+
+    .dis {
+        display: none;
+    }
+
+    .mui-tell_bg {
+        width: 95%;
+        margin: 64px auto 25px auto;
+        background-color: rgba(0, 0, 0, .1);
+    }
+
+    .mui-popup mui-popup-in {
+        /* 输入框宽度 */
+        width: 90%;
+    }
+
+    .input_style_left {
+        float: left !important;
+        width: 40% !important;
+    }
+
+    .input_style_right {
+        float: left !important;
+        width: 24% !important;
+        text-align: center;
+        font-size: x-small;
+        color: #A2A2A2;
+        font-family: '微软雅黑';
+    }
+
+    .mui-table-view:before {
+        height: 0px;
+    }
+
+    .mui-table-view:after {
+        height: 0px;
+    }
+
+    .yansghi1 {
+        font-size: 17px;
+        padding: 0 0 0 10px;
+        line-height: 30px;
+        height: 30px;
+        margin: 0;
+        font-family: '微软雅黑';
+        /* font-weight: bold; */
+        color: black;
+    }
+
+    .yansghi2 {
+        font-size: 18px;
+        line-height: 20px;
+        padding: 10px 0 10px 25px;
+        margin: 0;
+        font-family: '微软雅黑';
+        /* text-align: center; */
+        /* font-weight: bold; */
+        color: black;
+        background-color: antiquewhite;
+    }
+</style>
+
+<body>
+    <!-- 侧滑导航根容器mui-draggable -->
+    <div class="mui-off-canvas-wrap mui-slide-in">
+        <!-- 菜单容器 -->
+        <aside class="mui-off-canvas-right" style="background-color: #EFEFF4;">
+            <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+                <a href="" class="mui-icon mui-icon-back" style="color:white;" id="back_kjWrite"></a>
+                <h1 class="mui-title" style="color:white;">添加商品</h1>
+                <span class="mui-icon mui-icon-search" style="float: right;color: white;" id="searchs"></span>
+            </header>
+            <div id="pullrefresh" class="mui-scroll-wrapper" style="top: 45px;">
+                <div class="mui-scroll">
+                    <ul class="mui-table-view" id="add_shoppings_center">
+                        <!-- <li class="mui-table-view-cell mui-media">
+                            <a href="javascript:;">
+                                <img class="mui-media-object mui-pull-left"
+                                    src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604657237294&di=3c7f506d2c832f352bc41e972305228d&imgtype=0&src=http%3A%2F%2Fa1.att.hudong.com%2F05%2F00%2F01300000194285122188000535877.jpg">
+                                <div class="mui-media-body">
+                                    <span>小猫咪</span>
+                                    <p class='mui-ellipsis'>
+                                    <p>IGX-6531300126</p>
+                                    <p>红色</p>
+                                    <p>999元</p>
+                                    </p>
+                                    <button type="button" class="mui-btn mui-btn-primary"
+                                        style="position: absolute;top: 33%;right: 10px;">添加</button>
+                                </div>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <!-- 主页面容器 -->
+        <div class="mui-inner-wrap">
+            <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+                <a href="" class="mui-icon mui-icon-back mui-action-back" style="color:white;"></a>
+                <h1 class="mui-title" style="color:white;">商品支付</h1>
+            </header>
+            <div class="mui-content mui-scroll-wrapper pay_bg_image" style="bottom: 108px;">
+                <div class="mui-scroll">
+                    <!-- 主界面具体展示内容 -->
+                    <ul class="mui-table-view mui-tell_bg " style="border-radius: 12px;">
+                        <li id="member_ziliao" class="mui-table-view-cell mui-collapse mui-active"
+                            style="border-radius: 12px 12px 0px 0px;">
+                            <a href="#">会员信息
+                                <span class="switch_member"
+                                    style="float: right; color: #D85959;font-size: medium;text-decoration:underline;">
+                                    切换会员
+                                </span></a>
+                            <div class="mui-collapse-content">
+
+                                <form class="mui-input-group" style="background-color: aliceblue;">
+                                    <div class="mui-input-row">
+                                        <label>会员卡号</label>
+                                        <input type="text" disabled id="member_code">
+                                    </div>
+                                    <div class="mui-input-row">
+                                        <label>会员姓名</label>
+                                        <input type="text" disabled id="member_username">
+                                    </div>
+                                    <div class="mui-input-row">
+                                        <label>会员级别</label>
+                                        <input type="text" disabled id="member_vlname" class="input_style_left">
+                                        <input type="text" id="member_discount" class="input_style_right">
+                                        </span>
+
+
+                                    </div>
+                                    <!-- <div class="mui-input-row">
+                                        <label>级别折扣</label>
+                                        <input type="text" disabled id="member_discount">
+                                    </div> -->
+                                    <div class="mui-input-row">
+                                        <label>手机号</label>
+                                        <input type="text" disabled id="member_phone">
+                                    </div>
+                                    <div class="mui-input-row">
+                                        <label>会员钱包</label>
+                                        <input type="text" disabled id="member_money">
+                                    </div>
+                                    <div class="mui-input-row">
+                                        <label>会员生日</label>
+                                        <input type="text" disabled id="member_birthday" class="input_style_left">
+                                        <input type="text" disabled id="member_bir_a" class="input_style_right">
+                                    </div>
+                                    <!-- <div class="mui-input-row">
+                                        <label>生日专享</label>
+                                        <input type="text" disabled id="member_bir_a">
+                                    </div> -->
+
+
+                                </form>
+                            </div>
+                        </li>
+                        <li class="mui-table-view-cell mui-collapse" style="border-radius: 0px 0px 12px 12px;"
+                            id="shangpin">
+                            <a href="#">商品信息
+                                <span class="add_shoping"
+                                    style="float: right; color: #D85959;font-size: medium;text-decoration:underline;">
+                                    添加商品
+                                </span></a>
+
+                            <div class="mui-collapse-content" style="background-color: aliceblue;">
+                                <ul class="mui-table-view" style="background-color: aliceblue;" id="add_shoppings_look">
+                                    <!-- <li class="mui-table-view-cell mui-media" style="padding-left: 15px;">
+                                        <a href="javascript:;">
+                                            <img class="mui-media-object mui-pull-left"
+                                                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604657237294&di=3c7f506d2c832f352bc41e972305228d&imgtype=0&src=http%3A%2F%2Fa1.att.hudong.com%2F05%2F00%2F01300000194285122188000535877.jpg">
+                                            <div class="mui-media-body" style="padding-top: 10px;">
+                                                <span>小猫咪</span>
+                                                <p class='mui-ellipsis'>
+                                                <p>IGX-6531300126</p>
+                                                <p>红色</p>
+                                                <p>999元</p>
+                                                </p>
+                                                <button type="button" class="mui-btn mui-btn-primary"
+                                                    style="position: absolute;top: 33%;right: 10px;">删除</button>
+                                            </div>
+                                        </a>
+                                    </li> -->
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- 结算方式和支付方式 -->
+                    <div id="id_pay_result" style="width: 100%; z-index: 5;padding-top: 10px;">
+                        <div class="pay_reuslt">
+
+                            <h4 class="result">结算信息:
+                                <span id="span_wx_show"
+                                    style="color: #D85959;font-size: medium;text-decoration: underline;">(微信支付)</span>
+
+                                <span id="span_zfb_show" class="dis"
+                                    style="color: #D85959;font-size: medium;text-decoration: underline;">(支付宝支付)</span>
+
+                                <span id="span_qt_show" class="dis"
+                                    style="color: #D85959;font-size: medium;text-decoration: underline;">(会员钱包)</span>
+
+                                <span id="span_cash_show" class="dis"
+                                    style="color: #D85959;font-size: medium;text-decoration: underline;">(现金)</span>
+                            </h4>
+                            <ul class="ui_class">
+                                <li class="" style="background-color: #F0F8FF;">会员折扣: <span
+                                        id="result_zhekou">0.00</span> </li>
+                                <li class="" style="background-color: #F0F8FF;">生日折扣: <span
+                                        id="result_birthday">0.00</span> </li>
+                                <li class="yhk_pay" style="background-color: #F0F8FF;">卡劵优惠: <span
+                                        id="yh_card">0.00</span> <span class="mui-icon mui-icon-arrowdown"
+                                        style="float: right;"></span></li>
+                                <li class="" style="background-color: #F0F8FF;">
+                                    <span> 总计金额: <span id="result_price">0.00</span></span>
+                                    <!-- <span style="float: right;margin-right: 20px;">支付:<span id="result_result"
+                                            style="color: red;font-size: 22px;">0.00</span></span> -->
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+            <div style="border-top: 1px solid #CAC3C3; 
+                position: absolute;bottom: 0px;width: 100%;
+                background-color: aliceblue; 
+                border-top: 1px solid #ccc;">
+                <div style="">
+                    <!-- <p class="yansghi1">
+                        <span>总计:<span id="result_price">0.00</span></span>
+                    </p> -->
+                    <p class="yansghi2">
+                        <span>实付金额: <span style="color: red;font-size: 20px;">¥</span> <span id="result_result"
+                                style="color: red;font-size: 24px;">0.00</span></span>
+                    </p>
+
+                </div>
+                <div class="but">
+                    <!-- 微信支付(1888.88元) -->
+                    <div id="wx_pays">
+                        <p class="but_ps" name="wx_saoma"><span class="mui-icon mui-icon-weixin"></span>微信支付</p>
+                        <p class="but_ps" name="wx_money"><span class="mui-icon-extra mui-icon-extra-prech"
+                                style="position: relative;top:3px"></span>直接结算</p>
+                    </div>
+                    <div id="zfb_pays" class="dis">
+                        <p class="but_ps" name="zfb_saoma"><span class="mui-icon-extra mui-icon-extra-alipay"
+                                style="position: relative;top:3px"></span>支付宝支付</p>
+                    </div>
+
+                    <div id="qt_pays" class="dis">
+                        <p class="but_ps" name="qt_money"><span class="mui-icon-extra mui-icon-extra-card"
+                                style="position: relative;top:1px;font-size: 28px;"></span>会员钱包</p>
+                    </div>
+                    <div id="cash_pays" class="dis">
+                        <p class="but_ps" name="cash_money">
+                            <span class="mui-icon-extra mui-icon-extra-gold"
+                                style="position: relative;top:4px;font-size: 28px;"></span>
+                            现金
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+<script>
+    //获取父页面
+    // var hd = window.parent.document.getElementById("hd");
+    var nav = window.parent.document.getElementById("nav");
+    //页面的margin-top
+    var hh = window.parent.document.getElementsByClassName("mui-iframe-wrapper");
+
+    function hidden_title() {
+        // hd.style.display = "none";
+        nav.style.display = "none";
+        // hh[0].style.top = "0px";
+        hh[0].style.bottom = "0px";
+    }
+    hidden_title();
+    // var vConsole = new VConsole();
+</script>
+<script>
+    var load = new Loading();
+    load.init();
+    // load.start();
+    // load.stop();
+    window.onload = function () {
+        window_pay();
+        member_discountss();
+        member_discountss2();
+    }
+    function member_discountss() {
+        mui.post('/index.php/webViplistChasys/', {
+        }, function (data) {
+            if (data.code == 200) {
+                if (data.data == 'off') {
+                    document.getElementById("member_discount").disabled = true;
+                } else {
+                    document.getElementById("member_discount").disabled = false;
+                }
+            }
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+
+    var price_xiugai = false;
+    function member_discountss2() {
+        mui.post('/index.php/webViplistChasysMoney/', {
+        }, function (data) {
+            if (data.code == 200) {
+                if (data.data == 'off') {
+                    price_xiugai = false;
+                } else {
+                    price_xiugai = true;
+                }
+            }
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+    $(function () {
+        $("#member_discount").bind('input porpertychange', function () {
+            mui("#member_discount")[0].setAttribute("discount", this.value);
+            calculate_price();
+        });
+    });
+    // 输入会员
+    function window_pay() {
+
+        mui.prompt('', '输入卡号', '会员卡号', ['非会员', '查询会员'], function (e) {
+            load.start();
+            if (e.index == 0) {
+                document.activeElement.blur();
+                // console.log('非会员');
+                mui("#member_code")[0].value = '非会员'; //卡号
+                mui("#member_code")[0].setAttribute("code", "");
+                mui("#member_username")[0].value = '非会员';//姓名
+                mui("#member_vlname")[0].value = ""; //会员级别
+                mui("#member_discount")[0].value = "";//级别折扣
+                mui("#member_phone")[0].value = "";//级别折扣
+                mui("#member_money")[0].value = "";//钱包
+                mui("#member_birthday")[0].value = "";//生日
+
+
+                mui("#result_zhekou")[0].innerHTML = '0.00';//结算-会员折扣
+                mui("#result_birthday")[0].innerHTML = '0.00';//结算-生日折扣
+
+                mui("#member_discount")[0].setAttribute("discount", 10);
+                mui("#member_discount")[0].setAttribute("original_discount", 10);
+                mui("#member_bir_a")[0].setAttribute("discount", 10);
+                calculate_price();
+
+                load.stop();
+            } else if (e.index == 1) {
+
+                mui.post('/index.php/webVipQuery/', {
+                    code: e.value,
+                }, function (data) {
+                    // console.log(data);
+                    if (data.code == 200) {
+                        document.activeElement.blur();
+                        mui("#member_code")[0].value = data.data.code; //卡号
+                        mui("#member_code")[0].setAttribute("code", data.data.code);
+                        mui("#member_username")[0].value = data.data.username;//姓名
+                        mui("#member_vlname")[0].value = data.data.vlname; //级别
+
+                        mui("#member_phone")[0].value = data.data.phone;//手机号
+                        mui("#member_money")[0].value = data.data.residual_value;//钱包
+                        mui("#member_birthday")[0].value = data.data.birthday;//生日
+                        if ((data.data.discount == "") || (data.data.discount == null) || (data.data.discount == undefined)) {
+                            mui("#member_discount")[0].setAttribute("discount", 10);
+                            mui("#member_discount")[0].setAttribute("original_discount", 10);
+                            mui("#member_discount")[0].value = "";//级别折扣
+                            mui("#result_zhekou")[0].innerHTML = '0.00';//结算-会员折扣
+                        } else {
+                            mui("#member_discount")[0].value = data.data.discount;//折扣
+                            mui("#member_discount")[0].setAttribute("original_discount", data.data.discount);
+                            mui("#member_discount")[0].setAttribute("discount", data.data.discount);
+                        }
+                        if ((data.data.bir_a == "") || (data.data.bir_a == null) || (data.data.bir_a == undefined) || (data.data.bir_a == '无折扣')) {
+                            mui("#member_bir_a")[0].setAttribute("discount", 10);
+                            mui("#member_bir_a")[0].value = "";
+                            mui("#result_birthday")[0].innerHTML = '0.00';//结算-生日折扣
+                        } else {
+                            mui("#member_bir_a")[0].setAttribute("discount", data.data.bir_a);
+                            mui("#member_bir_a")[0].value = '(' + data.data.bir_a + '折)';//专享
+                        }
+                        calculate_price();
+                        load.stop();
+                    } else {
+                        mui.juntao(data.msg, { duration: 'long', type: 'div' }, function () {
+                            load.stop();
+                            window_pay();
+                        });
+
+                    }
+                    //服务器返回响应，根据响应结果，分析是否登录成功；
+                }, 'json'
+                );
+            }
+
+        });
+        let zhishi = document.getElementsByClassName("mui-popup-title")[0].parentElement;
+        let p = document.createElement("p");
+        p.style = "font-size: xx-small;  margin-top: 10px;margin-bottom: 0px;"
+        p.innerHTML = "注意:(会员必须输入卡号/手机号,非会员无需输入!))";
+        zhishi.appendChild(p);
+        // console.log(.innerHTML);
+        // 恢复默认值
+        jsonss = [{
+            result_money: '0',
+            text: '不使用卡劵2',
+            card_many: '0',
+            card_type: '0',
+            money: '0',
+            name: '不使用卡劵2',
+            value: ""
+        }];
+
+    }
+
+
+    // 切换会员
+    mui(".mui-table-view").on('tap', '.switch_member', function (e) {
+        event.stopPropagation();
+        //获取id
+        window_pay();
+        mui("#member_ziliao")[0].classList.add("mui-active");
+
+    })
+    //自定义展开后不需要讲同级元素折叠
+
+    mui(".mui-table-view").on('tap', '.add_shoping', function (e) {
+        event.stopPropagation();
+        //获取id
+        // var id = this.getAttribute("id");
+        mui('.mui-off-canvas-wrap').offCanvas().toggle();
+        // console.log('123456');
+    })
+
+
+    document.getElementById("back_kjWrite").onclick = function () {
+        mui('.mui-off-canvas-wrap').offCanvas().toggle();
+    }
+
+
+    var jsonss = [{
+        result_money: '0',
+        text: '不使用卡劵2',
+        card_many: '0',
+        card_type: '0',
+        money: '0',
+        name: '不使用卡劵2',
+        value: ""
+    }]
+    function card_kj(money) {
+        jsonss = [{
+            result_money: money,
+            text: '不使用卡劵',
+            card_many: '0',
+            card_type: '0',
+            money: '0',
+            name: '不使用卡劵',
+            value: ""
+        }];
+        mui.post('/index.php/webStackableCoupon/', {
+            vip_code: mui("#member_code")[0].getAttribute("code"),
+            money: money
+        }, function (data) {
+            // console.log(data);
+            if (data.code == 200) {
+                for (let i = 0; i < data.data.length; i++) {
+                    let jos = {
+                        result_money: money,
+                        text: data.data[i].name,
+                        card_many: data.data[i].card_many,
+                        card_type: data.data[i].card_type,
+                        money: data.data[i].money,
+                        name: data.data[i].name,
+                        value: data.data[i].value
+                    }
+                    jsonss.push(jos);
+                }
+            }
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+
+    mui(".ui_class").on('tap', '.yhk_pay', function (e) {
+        // event.stopPropagation();
+        let picker = new mui.PopPicker();
+        picker.setData(jsonss);
+        // console.log(jsonss);
+        //picker.pickers[0].setSelectedIndex(4, 2000);
+        // picker.pickers[0].setSelectedValue('fourth', 2000);
+        picker.show(function (SelectedItem) {
+
+            // console.log(SelectedItem);
+            card_card_money(SelectedItem[0].result_money, SelectedItem[0].card_type, SelectedItem[0].card_many, SelectedItem[0].value)
+
+        })
+
+    })
+    // 根据卡劵再算金额
+    var result_moneys = 0; //优惠劵减的金额
+    var result_code = ""; //卡劵的code
+    function card_card_money(result_money, type, money, card_code) {
+        // console.log(result_money, type, money, card_code);
+        result_code = card_code;
+        //合计的金额  卡劵类型  打折或者满减
+        let moneys = 0;
+        if (type == 0) {
+            //优惠券
+            moneys = result_money - money;
+            result_moneys = money;
+
+            if (round_tow(result_moneys) != 0.00) {
+                mui("#yh_card")[0].innerHTML = '-' + round_tow(result_moneys);
+            } else {
+                mui("#yh_card")[0].innerHTML = round_tow(result_moneys);
+            }
+
+        } else {
+            //折扣劵
+            moneys = result_money * (money / 10);
+            result_moneys = result_money - moneys;
+            if (round_tow(result_moneys) != 0.00) {
+                mui("#yh_card")[0].innerHTML = '-' + round_tow(result_moneys);
+            } else {
+                mui("#yh_card")[0].innerHTML = round_tow(result_moneys);
+            }
+
+        }
+        mui("#result_result")[0].innerHTML = round_tow(moneys);
+    }
+
+    // 添加商品搜索图标
+    mui('.mui-bar-nav-bg').on('tap', '#searchs', function () {
+        mui.prompt('', '输入货号/名称', '商品搜索', ['搜索'], function (e) {
+            if (e.index == 0) {
+                serchs_code = e.value;
+                document.getElementById("add_shoppings_center").innerHTML = "";
+                mui('#pullrefresh').pullRefresh().refresh(true);
+                count = 0;
+
+                pullupRefresh();
+            }
+
+        });
+    })
+
+    // 选择支付方式
+    var pay_fansghi = 'WeChat';
+    mui("#id_pay_result").on('tap', '.result', function (e) {
+        let weixin = '<div class="radios" name="WeChat">'
+            + '<svg class="icon" aria-hidden="true">'
+            + '<use xlink: href="#icon-weixinlogo3"></use>'
+            + '</svg >'
+            + '<span class="ziti_font_size">&nbsp;微信</span>'
+            + '</div>'
+
+        let zhifubao = '<div class="radios" name="Alipay">'      //支付宝
+            + '<svg class="icon" aria-hidden="true">'
+            + '<use xlink: href="#icon-zhifubaozhifu"></use>'
+            + '</svg >'
+            + '<span class="ziti_font_size">&nbsp;支付宝</span>'
+            + '</div>'
+        let other = '<div class="radios" name="other">'      //会员钱包
+            + '<svg class="icon" aria-hidden="true">'
+            + '<use xlink: href="#icon-qitazhifu4"></use>'
+            + '</svg >'
+            + '<span class="ziti_font_size">&nbsp;会员钱包</span>'
+            + '</div>'
+
+        let cash = '<div class="radios" name="cash">'      //现金支付
+            + '<svg class="icon" aria-hidden="true">'
+            + '<use xlink: href="#icon-qitazhifu3"></use>'
+            + '</svg >'
+            + '<span class="ziti_font_size">&nbsp;现金</span>'
+            + '</div>'
+
+        if (pay_fansghi == "WeChat") {
+            weixin = '<div class="checkeds radios" name="WeChat">'    //微信
+                + '<svg class="icon" aria-hidden="true">'
+                + '<use xlink: href="#icon-weixinlogo3"></use>'
+                + '</svg >'
+                + '<span class="ziti_font_size">&nbsp;微信</span>'
+                + '</div>'
+        } else if (pay_fansghi == "Alipay") {
+            zhifubao = '<div class="checkeds radios" name="Alipay">'      //支付宝
+                + '<svg class="icon" aria-hidden="true">'
+                + '<use xlink: href="#icon-zhifubaozhifu"></use>'
+                + '</svg >'
+                + '<span class="ziti_font_size">&nbsp;支付宝</span>'
+                + '</div>'
+        } else if (pay_fansghi == "other") {
+            other = '<div class="checkeds radios" name="other">'      //其他
+                + '<svg class="icon" aria-hidden="true">'
+                + '<use xlink: href="#icon-qitazhifu4"></use>'
+                + '</svg >'
+                + '<span class="ziti_font_size">&nbsp;会员钱包</span>'
+                + '</div>'
+        } else if (pay_fansghi == "cash") {
+            cash = '<div class="checkeds radios" name="cash">'      //现金
+                + '<svg class="icon" aria-hidden="true">'
+                + '<use xlink: href="#icon-qitazhifu3"></use>'
+                + '</svg >'
+                + '<span class="ziti_font_size">&nbsp;现金</span>'
+                + '</div>'
+        }
+
+        mui.confirm(weixin + zhifubao + other + cash, '选择支付方式', ['确定'], function (el) {
+            switch (pay_fansghi) {
+
+                case 'WeChat':
+                    // console.log('微信');
+                    $('#wx_pays').removeClass('dis').siblings().addClass('dis');  //当前元素添加样式同胞元素移除样式
+                    $('#span_wx_show').removeClass('dis').siblings().addClass('dis');  //当前元素添加样式同胞元素移除样式
+                    break;
+                case 'Alipay':
+                    // console.log('支付宝');
+                    $('#zfb_pays').removeClass('dis').siblings().addClass('dis');  //当前元素添加样式同胞元素移除样式
+                    $('#span_zfb_show').removeClass('dis').siblings().addClass('dis');  //当前元素添加样式同胞元素移除样式
+                    break;
+                case 'other':
+                    $('#qt_pays').removeClass('dis').siblings().addClass('dis');  //当前元素添加样式同胞元素移除样式
+                    $('#span_qt_show').removeClass('dis').siblings().addClass('dis');  //当前元素添加样式同胞元素移除样式
+                    break;
+                case 'cash':
+                    $('#cash_pays').removeClass('dis').siblings().addClass('dis');  //当前元素添加样式同胞元素移除样式
+                    $('#span_cash_show').removeClass('dis').siblings().addClass('dis');  //当前元素添加样式同胞元素移除样式
+                    break;
+                default:
+                // console.log('其他');
+            }
+
+
+
+        }) //回调获取用户选择: (res) => {console.log(res)}
+        mui(".mui-popup-text").on('tap', '.radios', function (e) {
+            $(this).addClass('checkeds').siblings().removeClass('checkeds');  //当前元素添加样式同胞元素移除样式
+            pay_fansghi = this.getAttribute("name");
+        })
+    })
+    var reg_suokeduos = new RegExp("^[0-9]*$");
+    // 点击结算按钮
+    mui(".but").on('tap', '.but_ps', function (e) {
+
+        let name = this.getAttribute("name");
+        // console.log(mui("#result_result")[0].innerHTML);
+
+        switch (this.getAttribute("name")) {
+            case 'wx_saoma':
+                // console.log('微信扫描');
+                if (tijiao_money_shop.length != 0) {
+                    mui.post('/index.php/webSalesAdd/', {
+                        coupon_code: result_code,//卡劵的code
+                        code: mui("#member_code")[0].getAttribute("code"),// 会员的code
+                        payment: 0,// 支付方式 （0:微信支付 1:支付宝 2:银行卡 3:现金 4:会员钱包）
+                        goods: tijiao_money_shop,// 商品的数组
+                        number: tijiao_money_shop.length,//商品数量
+                        remark: '原折扣:' + mui("#member_discount")[0].getAttribute("original_discount") + '现折扣:' + mui("#member_discount")[0].getAttribute("discount"),
+                        s_money: result_price,// 没有打折前的金额
+                        real_pay: mui("#result_result")[0].innerHTML,//最终支付金额
+                        special_offer: price_tejia,//特价商品总价格
+                        num_s: num_s,//特价商品件数
+                        dis_money: zhekou_price,//折扣金额
+                        coupon_money: result_moneys,//优惠劵减的金额
+                    }, function (data) {
+                        //success的回调函数
+                        // console.log(data);
+                        if (data.code == 200) {
+                            mui.alert('扫描二维码付款', '<div id="qrcode" style="width:200px;margin:20px auto;"></div>', '关闭', function (e) {
+                                // console.log('清除定时器');
+                                clearInterval(test2);
+                            }, 'div');
+                            let newCompany = $.cookie("company");
+                            let strs = newCompany.substring(newCompany.length - 4);
+                            if (newCompany == "ic") {
+                                let qrcode = new QRCode(document.getElementById("qrcode"), {
+                                    text: 'https://wechat.suokeduo.com/pay/wechat/get?company=' + $.cookie('company') + '&orderNo=' + data.data,
+                                    width: 200,
+                                    height: 200
+                                });
+                            } else {
+                                if (reg_suokeduos.test(strs)) {
+                                    // console.log('四位数');
+                                    let qrcode = new QRCode(document.getElementById("qrcode"), {
+                                        text: 'https://wechat.suokeduo.com/pay/wechat/get?company=' + $.cookie('company') + '&orderNo=' + data.data,
+                                        width: 200,
+                                        height: 200
+                                    });
+                                } else {
+                                    //  console.log('不是四位数');
+                                    let qrcode = new QRCode(document.getElementById("qrcode"), {
+                                        text: 'https://wxauth.suokeduo.com/weChatPay/cashier?company=' + $.cookie('company') + '&orderNo=' + data.data,
+                                        width: 200,
+                                        height: 200
+                                    });
+                                }
+                            }
+
+
+
+                            var test2 = setInterval(function () {
+                                //直接使用POST|GET请求方式向服务器发送数据、且不处理timeout和异常
+                                mui.post('/index.php/webSuccessful/', {
+                                    company: $.cookie('company'), //企业号
+                                    order_code: data.data   // 销售记录
+                                }, function (data) {
+                                    if (data.code == 200) {
+                                        location.href = 'payment.html';
+                                    }
+                                    //success的回调函数
+                                }, 'json');
+                            }, 5000)
+
+                        }
+                    }, 'json');
+                } else {
+                    mui.toast('当前没有选择商品,请先添加商品!!!', { duration: 'long', type: 'div' });
+                }
+
+
+                break;
+            case 'wx_money':
+                // console.log('微信直接支付');
+                if (tijiao_money_shop.length != 0) {
+                    load.start();
+                    //直接使用POST|GET请求方式向服务器发送数据、且不处理timeout和异常
+                    mui.post('/index.php/webDirectPayment/', {
+                        coupon_code: result_code,//卡劵的code
+                        code: mui("#member_code")[0].getAttribute("code"),// 会员的code
+                        payment: 0,// 支付方式 （0:微信支付 1:支付宝 2:银行卡 3:现金 4:会员钱包）
+                        goods: tijiao_money_shop,// 商品的数组
+                        number: tijiao_money_shop.length,//商品数量
+                        s_money: result_price,// 没有打折前的金额
+                        remark: '原折扣:' + mui("#member_discount")[0].getAttribute("original_discount") + '现折扣:' + mui("#member_discount")[0].getAttribute("discount"),
+                        real_pay: mui("#result_result")[0].innerHTML,//最终支付金额
+                        special_offer: price_tejia,//特价商品总价格
+                        num_s: num_s,//特价商品件数
+                        dis_money: zhekou_price,//折扣金额
+                        coupon_money: result_moneys,//优惠劵减的金额
+                    }, function (data) {
+                        //success的回调函数
+                        // console.log(data);
+                        if (data.code == 200) {
+                            mui.juntao('支付成功', { duration: 'long', type: 'div' }, function () {
+                                load.stop();
+                                location.href = "payment.html";
+                                // window.location.reload();
+                            });
+
+                        } else {
+                            load.stop();
+                        }
+                    }, 'json');
+                } else {
+                    mui.toast('当前没有选择商品,请先添加商品!!!', { duration: 'long', type: 'div' });
+                }
+
+                break;
+            case 'zfb_saoma':
+                // console.log('支付宝直接支付');
+                if (tijiao_money_shop.length != 0) {
+                    mui.post('/index.php/webDirectPayment/', {
+                        coupon_code: result_code,//卡劵的code
+                        code: mui("#member_code")[0].getAttribute("code"),// 会员的code
+                        payment: 1,// 支付方式 （0:微信支付 1:支付宝 2:银行卡 3:现金 4:会员钱包）
+                        goods: tijiao_money_shop,// 商品的数组
+                        number: tijiao_money_shop.length,//商品数量
+                        remark: '原折扣:' + mui("#member_discount")[0].getAttribute("original_discount") + '现折扣:' + mui("#member_discount")[0].getAttribute("discount"),
+                        s_money: result_price,// 没有打折前的金额
+                        real_pay: mui("#result_result")[0].innerHTML,//最终支付金额
+                        special_offer: price_tejia,//特价商品总价格
+                        num_s: num_s,//特价商品件数
+                        dis_money: zhekou_price,//折扣金额
+                        coupon_money: result_moneys,//优惠劵减的金额
+                    }, function (data) {
+                        //success的回调函数
+                        // console.log(data);
+                        if (data.code == 200) {
+                            mui.juntao('支付成功', { duration: 'long', type: 'div' }, function () {
+                                load.stop();
+                                location.href = "payment.html";
+                                // window.location.reload();
+                            });
+
+                        } else {
+                            mui.toast(data.msg, { duration: 'long', type: 'div' });
+                            load.stop();
+                        }
+                    }, 'json');
+                } else {
+                    mui.toast('当前没有选择商品,请先添加商品!!!', { duration: 'long', type: 'div' });
+                }
+
+                break;
+            case 'qt_money':
+                // console.log('会员钱包支付');
+                if (tijiao_money_shop.length != 0) {
+                    load.start();
+                    mui.post('/index.php/webDirectPayment/', {
+                        coupon_code: result_code,//卡劵的code
+                        code: mui("#member_code")[0].getAttribute("code"),// 会员的code
+                        payment: 4,// 支付方式 （0:微信支付 1:支付宝 2:银行卡 3:现金 4:会员钱包）
+                        goods: tijiao_money_shop,// 商品的数组
+                        number: tijiao_money_shop.length,//商品数量
+                        remark: '原折扣:' + mui("#member_discount")[0].getAttribute("original_discount") + '现折扣:' + mui("#member_discount")[0].getAttribute("discount"),
+                        s_money: result_price,// 没有打折前的金额
+                        real_pay: mui("#result_result")[0].innerHTML,//最终支付金额
+                        special_offer: price_tejia,//特价商品总价格
+                        num_s: num_s,//特价商品件数
+                        dis_money: zhekou_price,//折扣金额
+                        coupon_money: result_moneys,//优惠劵减的金额
+                    }, function (data) {
+                        //success的回调函数
+                        // console.log(data);
+                        if (data.code == 200) {
+                            mui.juntao('支付成功', { duration: 'long', type: 'div' }, function () {
+                                load.stop();
+                                location.href = "payment.html";
+                                // window.location.reload();
+                            });
+
+                        } else {
+                            mui.toast(data.msg, { duration: 'long', type: 'div' });
+                            load.stop();
+                        }
+                    }, 'json');
+                } else {
+                    mui.toast('当前没有选择商品,请先添加商品!!!', { duration: 'long', type: 'div' });
+                }
+
+                break;
+            case 'cash_money':
+                if (tijiao_money_shop.length != 0) {
+                    load.start();
+                    mui.post('/index.php/webDirectPayment/', {
+                        coupon_code: result_code,//卡劵的code
+                        code: mui("#member_code")[0].getAttribute("code"),// 会员的code
+                        payment: 3,// 支付方式 （0:微信支付 1:支付宝 2:银行卡 3:现金 4:会员钱包）
+                        goods: tijiao_money_shop,// 商品的数组
+                        number: tijiao_money_shop.length,//商品数量
+                        remark: '原折扣:' + mui("#member_discount")[0].getAttribute("original_discount") + '现折扣:' + mui("#member_discount")[0].getAttribute("discount"),
+                        s_money: result_price,// 没有打折前的金额
+                        real_pay: mui("#result_result")[0].innerHTML,//最终支付金额
+                        special_offer: price_tejia,//特价商品总价格
+                        num_s: num_s,//特价商品件数
+                        dis_money: zhekou_price,//折扣金额
+                        coupon_money: result_moneys,//优惠劵减的金额
+                    }, function (data) {
+                        //success的回调函数
+                        // console.log(data);
+                        if (data.code == 200) {
+                            mui.juntao('支付成功', { duration: 'long', type: 'div' }, function () {
+                                load.stop();
+                                location.href = "payment.html";
+                                // window.location.reload();
+                            });
+
+                        } else {
+                            mui.toast(data.msg, { duration: 'long', type: 'div' });
+                            load.stop();
+                        }
+                    }, 'json');
+                } else {
+                    mui.toast('当前没有选择商品,请先添加商品!!!', { duration: 'long', type: 'div' });
+                }
+
+                break;
+            default:
+            // console.log('其他支付方式');
+
+        }
+
+
+
+
+
+
+    })
+
+
+</script>
+<script>
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            //       down: {
+            //         callback: pulldownRefresh
+            //       },
+            up: {
+                contentrefresh: '正在加载...',
+                auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+    /**
+     * 下拉刷新具体业务实现
+     */
+
+    var serchs_code = "";
+    function pulldownRefresh() {
+    }
+    /**
+     * 上拉加载具体业务实现
+     */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+    var Discount = 'off';
+    function pullupRefresh() {
+        load.start();
+        mui.post('/index.php/webGoodsQuery/', {
+            code: serchs_code,
+            page: ++count,
+            limit: limit_num,
+        }, function (data) {
+            // console.log(data);
+            if (data.code == 200) {
+                if ((data.data.data == "") || (data.data.data == null) || (data.data.data == undefined)) {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+                    load.stop();
+                } else {
+                    //服务器返回响应，根据响应结果，分析是否登录成功；
+                    setTimeout(function () {
+                        Discount = data.data.special_is_discount;
+                        mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                        data.data.data.forEach((value, index) => {
+                            let li = document.createElement("li");
+                            li.className = 'mui-table-view-cell mui-media'
+                            li.innerHTML = '<a href="javascript:;">'
+                                + '<img class="mui-media-object mui-pull-left"'
+                                + 'src="' + value.img + '">'
+                                + ' <div class="mui-media-body">'
+                                + '<span>' + value.name + '</span>'
+                                + '<p class="mui-ellipsis">'
+                                + '<p>' + value.code + '</p>'
+                                + '<p> 颜色:' + value.color + '</p>'
+                                + ' <p>尺码:' + value.sizes + '</p>'
+                                + ' <p>' + value.price + '元</p>'
+                                + '</p>'
+                                + '<button type="button" class="mui-btn mui-btn-primary" style="position: absolute;top: 33%;right: 10px;"  onclick="add_shop(this)" bar_code = "' + value.bar_code + '" code = "' + value.code + '" color = "' + value.color + '"frenum = "' + value.frenum + '"img = "' + value.img + '"name = "' + value.name + '" price = "' + value.price + '"sizes = "' + value.sizes + '"  special="' + value.special + '">添加</button>'
+                                + ' </div>'
+                                + '</a>'
+                            mui("#add_shoppings_center")[0].appendChild(li);
+                        });
+                        load.stop();
+                    }, 1000);
+                }
+
+            }
+        }, 'json'
+        );
+    }
+    var tijiao_money_shop = [];
+
+    // 添加商品
+    function add_shop(value) {
+        mui("#shangpin")[0].classList.add("mui-active");
+        mui("#member_ziliao")[0].classList.remove("mui-active");
+        load.start();
+        let times = Date.now();
+        let json = {
+            'times': times,
+            'bar_code': value.getAttribute("bar_code"),
+            'code': value.getAttribute("code"),
+            'color': value.getAttribute("color"),
+            'frenum': value.getAttribute("frenum"),
+            'img': value.getAttribute("img"),
+            'name': value.getAttribute("name"),
+            'price': value.getAttribute("price"),
+            'sizes': value.getAttribute("sizes"),
+            'special': value.getAttribute("special"),
+        }
+
+        tijiao_money_shop.push(json);
+        // console.log(tijiao_money_shop);
+        let li = document.createElement("li");
+        li.setAttribute("id", times);
+        li.className = 'mui-table-view-cell mui-media';
+        li.style = "padding-left: 15px;";
+        li.innerHTML = '<a href="javascript:;">'
+            + ' <img class="mui-media-object mui-pull-left"'
+            + ' src="' + value.getAttribute("img") + '">'
+            + '<div class="mui-media-body" style="padding-top: 10px;">'
+            + '<span>' + value.getAttribute("name") + '</span>'
+            + '<p class="mui-ellipsis">'
+            + ' <p>' + value.getAttribute("code") + '</p>'
+            + '<p>颜色:' + value.getAttribute("color") + '</p>'
+            + '<p>尺码:' + value.getAttribute("sizes") + '</p>'
+
+            + '<p><span>' + value.getAttribute("price") + '</span>元</p>'
+            + ' </p>'
+
+            + ' <button type="button" class="mui-btn mui-btn-primary"'
+            + 'style="position: absolute;top: 5%;right: 10px;" times="' + times + '" codes=' + value.getAttribute("code") + ' onclick="modify_shop(this)">修改</button>'
+            + ' <button type="button" class="mui-btn mui-btn-primary"'
+            + 'style="position: absolute;top: 47%;right: 10px;" times="' + times + '" onclick="delect_shop(this)">删除</button>'
+            + ' </div>'
+            + ' </a>'
+        mui("#add_shoppings_look")[0].appendChild(li);
+        mui.juntao('商品[' + value.getAttribute("name") + ']添加成功', { duration: 'short', type: 'div' }, function () {
+            load.stop();
+        });
+        calculate_price();
+    }
+
+    // 删除商品
+    function delect_shop(value) {
+        load.start();
+        let idd = value.getAttribute("times");
+        for (let i = 0; i < tijiao_money_shop.length; i++) {
+            if (tijiao_money_shop[i].times == idd) {
+                mui.juntao('商品[' + tijiao_money_shop[i].name + ']删除成功', { duration: 'short', type: 'div' }, function () {
+                    load.stop();
+                });
+                tijiao_money_shop.splice(i, 1);
+                mui("#" + idd)[0].parentNode.removeChild(mui("#" + idd)[0]);
+                calculate_price();
+                break;
+            }
+        }
+    }
+    // 修改价格
+    // var arry_price =[]; //修改价格记录
+    //  let jsons_price = {
+    //         times: idd,
+    //         oldPrice: x.price,
+    //         newPrice: e.value,
+    //     }
+    function modify_shop(pic) {
+        let idd = pic.getAttribute("times");
+        let pricess = pic.previousElementSibling.previousElementSibling.firstElementChild;
+        let codes = pic.getAttribute("times");
+        if(price_xiugai == false){
+            mui.juntao('修改商品权限未开启!', { duration: 'short', type: 'div' }, function () {
+            });
+        }else{
+            mui.prompt('', '输入要修改的价格', '商品价格', ['取消', '确定'], (e) => {
+                if (e.index == 1) {
+                    tijiao_money_shop.forEach((x, y) => {
+                        if (x.times == idd) {
+                            pricess.innerHTML = e.value;
+                            x.price = e.value;
+                            calculate_price();
+                        }
+                    });
+                }
+            });
+        }
+     
+    }
+
+    var result_price = 0;
+    var zhekou_price = 0;
+    var price_tejia = 0;
+    var num_s = 0;
+    function calculate_price() {
+        let price = 0;
+        price_tejia = 0;
+        num_s = 0;
+        if (Discount == "on") {
+            // 打折(不用)
+            for (let i = 0; i < tijiao_money_shop.length; i++) {
+                //不是特价商品 
+                price += Number(tijiao_money_shop[i].price);
+            }
+
+        } else {
+            // 不打折
+            for (let i = 0; i < tijiao_money_shop.length; i++) {
+                if (tijiao_money_shop[i].special == 1) {
+                    //不是特价商品 
+                    price += Number(tijiao_money_shop[i].price);
+                } else {
+                    //是特价商品 
+                    price_tejia += Number(tijiao_money_shop[i].price);
+                    num_s++;
+                }
+            }
+            // console.log(num_s);
+        }
+        let m_discount = Number(mui("#member_discount")[0].getAttribute("discount")); //级别折扣
+        let m_birthday = Number(mui("#member_bir_a")[0].getAttribute("discount")); //专享折扣
+        //折扣
+        // 10  
+        let r_discount = price * m_discount / 10; // 级别折扣后的金额  10
+        let r_birthday = r_discount * m_birthday / 10; // 生日折扣后的金额 5
+
+        let mm_m_discount = round_tow(price) - round_tow(r_discount);  //结算-会员折扣金额 0
+        let mm_m_birthday = round_tow(r_discount) - round_tow(r_birthday); //结算-生日折扣金额 5
+        zhekou_price = round_tow(mm_m_discount + mm_m_birthday); //最终折扣金额
+        result_price = round_tow(price + price_tejia);
+        mui("#result_price")[0].innerHTML = round_tow(result_price);
+
+        if (mm_m_discount != '0.00') {
+            mui("#result_zhekou")[0].innerHTML = '-' + round_tow(mm_m_discount);//结算-会员折扣
+        } else {
+            mui("#result_zhekou")[0].innerHTML = round_tow(mm_m_discount);//结算-会员折扣
+        }
+        if (mm_m_birthday != '0.00') {
+            mui("#result_birthday")[0].innerHTML = '-' + round_tow(mm_m_birthday);//结算-生日折扣
+        } else {
+            mui("#result_birthday")[0].innerHTML = round_tow(mm_m_birthday);//结算-生日折扣
+        }
+        mui("#result_result")[0].innerHTML = round_tow(r_birthday + price_tejia);//实付金额
+
+        card_kj(round_tow(r_birthday + price_tejia));
+    }
+
+    function round_tow(num) {
+        return parseFloat(num).toFixed(2);
+    }
+
+</script>
+<!-- 需手动初始化scroll控件 -->
+<script>
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005, //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        /* 下列可选修改属性 */
+        scrollY: true, //是否竖向滚动
+        // startX: 0, //初始化时滚动至x
+        // startY: 0, //初始化时滚动至y
+        indicators: false, //是否显示滚动条
+        // bounce: true //是否启用回弹
+    });
+</script>
+
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="../mui/css/mui.css">
+<script src="../mui/js/muiR.js"></script>
+<script src="../js/hidden-titile.js"></script>
+<script src="../js/jquery.min.js"></script>
+<link rel="stylesheet" href="../css/loading.css">
+<script src="../js/loading.js"></script>
+<title>活跃会员</title>
+
+<head>
+    <style>
+        /* 样式 */
+        .oa-contact-cell.mui-table .mui-table-cell {
+            padding: 11px 0;
+            vertical-align: middle;
+        }
+
+        .oa-contact-cell {
+            position: relative;
+            margin: -11px 0;
+        }
+
+        .oa-contact-content {
+            width: 65%;
+        }
+
+        .oa-contact-name,
+        oa-contact-position {
+            float: left;
+        }
+
+        li {
+            border: none;
+        }
+
+        .mui-table-view::before {
+            background-color: #e6e6e7;
+            left: 0;
+        }
+
+        .mui-table-view-cell::after {
+            background-color: #e6e6e7;
+            left: 0;
+        }
+
+        .mui-table-view::after {
+            background-color: #e6e6e7;
+            left: 0;
+        }
+
+        .b-r-c {
+            border-right: 1px solid #ccc;
+        }
+
+        .p-r-5 {
+            padding-right: 5px;
+        }
+
+        .m-l-5 {
+            margin-left: 5px;
+        }
+
+        .mui-bar-nav~.mui-content .mui-pull-top-pocket {
+            top: 0px;
+        }
+
+        .xuanzhong {
+            background: url(../images/ico_checkon.svg) no-repeat right bottom;
+            background-size: 25px 25px;
+            background-color: rgba(212, 229, 246, 0);
+            color: #00a4ff;
+        }
+
+        .title-but {
+            position: absolute;
+            z-index: 2;
+            right: 0;
+            top: 0;
+            width: 40%;
+        }
+
+        .title-but span {
+            float: right;
+            line-height: 44px;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .dis {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:#ffffff;"></a>
+        <h1 class="mui-title" style="color:white;">活跃会员<span id="nums" class="mui-badge  mui-badge-primary dis">0</span>
+        </h1>
+        <div class="title-but">
+            <span id="menu" onclick="cluste_hai()">发送</span>
+        </div>
+    </header>
+    <div class="mui-content " style="text-align: center;">
+        <div class="mui-row" id="form_css" style="padding: 15px 0px 15px 0px;background-color: #ffffff;">
+            <div class="mui-col-xs-1 mui-col-sm-1"></div>
+            <div class="mui-col-xs-2 mui-col-sm-2 b-r-c p-r-5" onclick="btntabs('one');">
+                <p style="color: black">30天内</p>
+                <p style="color: rgb(141, 91, 91)" id="active_1">348</p>
+                <!-- <p style="color: rgb(141, 91, 91)">2.07%</p> -->
+            </div>
+            <div class="mui-col-xs-2 mui-col-sm-2 b-r-c m-l-5 p-r-5" onclick="btntabs('three');">
+                <p style="color: black">2-3个月</p>
+                <p style="color: rgb(194, 189, 121)" id="active_2">348</p>
+                <!-- <p style="color: rgb(194, 189, 121)">2.07%</p> -->
+            </div>
+            <div class="mui-col-xs-2 mui-col-sm-2 b-r-c m-l-5 p-r-5" onclick="btntabs('six');">
+                <p style="color: black">3-6个月</p>
+                <p style="color: rgb(79, 163, 163)" id="active_3">348</p>
+                <!-- <p style="color: rgb(79, 163, 163)">2.07%</p> -->
+            </div>
+            <div class="mui-col-xs-2 mui-col-sm-2 b-r-c m-l-5 p-r-5" onclick="btntabs('nine');">
+                <p style="color: black">6-9个月</p>
+                <p style="color: rgb(166, 113, 190)" id="active_4">348</p>
+                <!-- <p style="color: rgb(166, 113, 190)">2.07%</p> -->
+            </div>
+            <div class="mui-col-xs-2 mui-col-sm-2 m-l-5" onclick="btntabs('twelve');">
+                <p style="color: black">9-12个月</p>
+                <p id="active_5">348</p>
+                <!-- <p>2.07%</p> -->
+            </div>
+            <div class="mui-col-xs-1 mui-col-sm-1"></div>
+        </div>
+        <!-- 会员展示 下拉刷新-->
+        <div class="mui-row mui-scroll-wrapper" id="pullrefresh">
+            <div class="mui-scroll">
+                <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed" id="member_data"></ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!-- <script src="../mui/js/mui.min.js"></script> -->
+<script src="../js/members.js"></script>
+<script>
+    //加载动画
+    var load = new Loading();
+    load.init();
+    load.start();
+    // load.stop();
+
+
+    var type = "one";
+    var pp = document.getElementById("form_css");
+    var vop = document.getElementById("pullrefresh");
+    window.onload = function () {
+        vop.style.marginTop = pp.clientHeight + 45 + 'px';
+        hidden_title();
+    }
+
+    function btntabs(time) {
+        load.start();
+         shuzu = [];
+         shuzu_code = [];
+         
+        type = time;
+        document.getElementById("member_data").innerHTML = "";
+        count = 0;
+        mui('#pullrefresh').pullRefresh().refresh(true);
+        pullupRefresh();
+    }     
+</script>
+<script>
+    var active_1 = document.getElementById("active_1");
+    var active_2 = document.getElementById("active_2");
+    var active_3 = document.getElementById("active_3");
+    var active_4 = document.getElementById("active_4");
+    var active_5 = document.getElementById("active_5");
+
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            // down: {
+            //     contentdown : "正在刷新...",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+            //     callback: pulldownRefresh
+            // },
+            up: {
+                contentrefresh: '正在加载...',
+                auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+
+    /**
+	 * 下拉刷新具体业务实现
+	 */
+    // function pulldownRefresh() {
+    //     setTimeout(function() {
+    // 		mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+    // 	}, 1500);
+    // }
+
+    /**
+     * 上拉加载具体业务实现
+     */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+
+    function pullupRefresh() {
+        mui.post('/index.php/UserlistActive/', {
+            type: type,
+            page: ++count,//分页
+            limit: limit_num//每页的条数           
+        }, function (data) {
+            if (data.code == 200) {
+                active_1.innerHTML = data.data.count.countOne;
+                active_2.innerHTML = data.data.count.countThree;
+                active_3.innerHTML = data.data.count.countSix;
+                active_4.innerHTML = data.data.count.countNine;
+                active_5.innerHTML = data.data.count.countTwelve;
+
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                    var kk1 = document.getElementById("member_data");
+
+                    if (data.data.data.count == 0) {
+                        document.getElementById("menu").classList.add("dis");
+                        document.getElementById("nums").classList.add("dis");
+                    } else {
+                        document.getElementById("menu").classList.remove("dis");
+                        for (i = 0; i < data.data.data.data.length; i++) {
+                            if (data.data.data.data[i].username == "" || data.data.data.data[i].username == null || data.data.data.data[i].username == undefined) {
+                                data.data.data.data[i].username = '&nbsp;';
+                            }
+                            if (data.data.data.data[i].birthday == "" || data.data.data.data[i].birthday == null || data.data.data.data[i].birthday == undefined) {
+                                data.data.data.data[i].birthday = "";
+                            }
+                            if (data.data.data.data[i].total_consumption == "" || data.data.data.data[i].total_consumption == null || data.data.data.data[i].total_consumption == undefined) {
+                                data.data.data.data[i].total_consumption = 0;
+                            }
+                            if (data.data.data.data[i].consumption_times == "" || data.data.data.data[i].consumption_times == null || data.data.data.data[i].consumption_times == undefined) {
+                                data.data.data.data[i].consumption_times = 0;
+                            }
+                            if (data.data.data.data[i].consumption_number == "" || data.data.data.data[i].consumption_number == undefined || data.data.data.data[i].consumption_number == null) {
+                                data.data.data.data[i].consumption_number = 0;
+                            }
+
+                            if (data.data.data.data[i].r_days == null || data.data.data.data[i].r_days == undefined || data.data.data.data[i].r_days == "") {
+                                data.data.data.data[i].r_days = "未消费";
+                            } else if (data.data.data.data[i].r_days != "未消费") {
+                                data.data.data.data[i].r_days = "未消费" + data.data.data.data[i].r_days + "天";
+                            }
+
+                            if (data.data.data.data[i].return_visit == null || data.data.data.data[i].return_visit == undefined || data.data.data.data[i].return_visit == "") {
+                                data.data.data.data[i].return_visit = "未回访";
+                            } else if (data.data.data.data[i].return_visit != "未回访") {
+                                data.data.data.data[i].return_visit = parseInt(data.data.data.data[i].return_visit.replace(/,/g, ""));
+                                if (data.data.data.data[i].return_visit > 365) {
+                                    data.data.data.data[i].return_visit = "未回访365+天";
+                                } else {
+                                    data.data.data.data[i].return_visit = "未回访" + data.data.data.data[i].return_visit + "天";
+                                }
+                            }
+
+                            //return_visit 未回访
+                            var lis = document.createElement("li");
+                            lis.className = 'mui-table-view-cell';
+                            lis.style = 'padding-left:5px';
+                            lis.innerHTML = '<div class="mui-slider-cell">'
+                                + ' <div class="oa-contact-cell mui-table">'
+                                + ' <div class="mui-table-cell xuanze" style="width:80px;"  code="' + data.data.data.data[i].code + '" phone="' + data.data.data.data[i].phone + '">'
+                                + '<img src="../images/suoke.jpg" style="width:100%;border: 1px solid #e0e1e3;border-radius:50%;">'
+                                + ' </div>'
+                                + '<div class="oa-contact-content mui-table-cell" style="padding-left: 12px;">'
+                                + ' <div class="mui-clearfix" style="text-align:left;line-height: 28px;width: 100%;">'
+                                + '  <h4 class="oa-contact-name">' + data.data.data.data[i].username + '</h4>&nbsp;'
+                                + ' <span class="oa-contact-position mui-h5">' + data.data.data.data[i].birthday + '</span>'
+                                + '</div>'
+                                + '<p class="mui-h6" style="text-align:left;width:100%;">'
+                                + '<span>¥' + data.data.data.data[i].total_consumption + ' / ' + data.data.data.data[i].consumption_times + '次 / ' + data.data.data.data[i].consumption_number + '件</span>'
+                                + '</p>'
+                                + '<p class="mui-h6" style="text-align:left;width:100%;">'
+                                + '<span>' + data.data.data.data[i].r_days + ' / ' + data.data.data.data[i].return_visit + '</span>'
+                                + '</p>'
+                                + '</div>'
+                                + '<button style="float: right;margin-top:35px" name="' + data.data.data.data[i].code + '"onclick="member(this)">会员详情</button>'
+                                + '</div>'
+                                + '</div>'
+                            kk1.appendChild(lis);
+                        }
+                    }
+
+                    load.stop();
+                }, 1000);
+            }
+        }, 'json');
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+
+    // 点击按钮,将参数传递到另一个页面
+    function member(e) {
+        location.href = '../homepage/member_data.html?' + 'code=' + e.getAttribute("name");
+    }
+</script>
+
+</html>

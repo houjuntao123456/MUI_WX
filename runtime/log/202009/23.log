@@ -1,0 +1,36 @@
+---------------------------------------------------------------
+[2020-09-23T09:45:08+08:00] 10.10.10.254 POST 10.10.10.254/index.php/UserlistViplist/
+[运行时间：0.186655s] [吞吐率：5.36req/s] [内存消耗：2,558.17kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'UserlistViplist/',
+  'route' => 'Userlist/viplist',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=4die443o8doieqd63hondfl65c; suoke_openId=ogx1nwc_vpQTPcNx9hEIDm8ezbOg; headImgUrl=https%3A%2F%2Fthirdwx.qlogo.cn%2Fmmopen%2Fvi_32%2FPiajxSqBRaEK7zXhTKo8rPFH192VgkBI98H0k5DwOoSm6e2M9KViafeIcIYibLU5jRzCUgYetjLRa1M1cKBS9JDHg%2F132; nickname=%3F%3F%3F%3F; company=suoke; locaton=http%3A%2F%2F10.10.10.254%2F%3Fcompany%3Dsuoke; openId=ogx1nwc_vpQTPcNx9hEIDm8ezbOg',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.254/index_centent.html',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.254',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => '10.10.10.254',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.068307s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`view_vip_staff` [ RunTime:0.044217s ]
+[ sql ] [ SQL ] SELECT `code`,`name`,`vpname`,`vgname`,`vsname`,`m_auth_code` FROM `suoke`.`view_vip_staff` WHERE  `code` = 'boss' LIMIT 1 [ RunTime:0.047457s ]

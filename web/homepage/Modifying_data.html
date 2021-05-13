@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>修改资料</title>
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <link rel="stylesheet" href="../mui/css/mui.poppicker.css">
+
+    <script src="../mui/js/mui.min.js"></script>
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <script src="../mui/js/city.data-3.js"></script>
+    <script src="../mui/js/mui.poppicker.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <title>Document</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+
+        .button_style:active {
+            top: 2px;
+            /**向下偏移2px **/
+        }
+
+        select {
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+        }
+    </style>
+</head>
+
+<body onload="myonload();">
+    <!-- 头部 -->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back"></a>
+        <h1 class="mui-title">修改资料</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <form class="mui-input-group">
+            <!-- 会员卡号 -->
+            <div class="mui-input-row">
+                <label>会员卡号：</label>
+                <input type="text" class="mui-input-clear" name="code" placeholder="请输入会员卡号" id="member_num">
+            </div>
+            <!-- 会员姓名 -->
+            <div class="mui-input-row">
+                <label>会员姓名：</label>
+                <input type="text" class="mui-input-clear " name="username" placeholder="请输入会员姓名" id="username">
+            </div>
+            <!-- 会员手机号 -->
+            <div class="mui-input-row">
+                <label>手机号码：</label>
+                <input type="text" class="mui-input-clear" name="phone" placeholder="请输入手机号" id="phone">
+            </div>
+            <p style="height:10px;background: rgba(240, 237, 237, 0.808);"></p>
+            <!-- 会员性别 -->
+            <div class="mui-input-row">
+                <label>会员性别：</label>
+                <P style="height:50px;line-height:40px;">
+                    <span style="font-size:16px;font-weight:bold;">&nbsp;&nbsp;男</span> &nbsp;
+                    <input type="radio" name="sex" id="sex" value="男" checked="checked">&nbsp;&nbsp;&nbsp;
+                    <span style="font-size:16px;font-weight:bold;">&nbsp;&nbsp;女</span> &nbsp;
+                    <input type="radio" name="sex" id="sex" value="女">
+                </P>
+            </div>
+            <!-- 会员生日类型 -->
+            <div class="mui-input-row">
+                <label>生日类型：</label>
+                <P style="height:50px;line-height:40px;">
+                    <span style="font-size:16px;font-weight:bold;">公历</span> &nbsp;
+                    <input type="radio" name="calendar" id="calendar" value="1" checked="checked">&nbsp;&nbsp;&nbsp;
+                    <span style="font-size:16px;font-weight:bold;">农历</span> &nbsp;
+                    <input type="radio" name="calendar" id="calendar" value="0">
+                </P>
+            </div>
+            <p style="height:10px;background: rgba(240, 237, 237, 0.808);"></p>
+            <!-- 会员生日 -->
+            <div class="mui-input-row">
+                <label>会员生日：</label>
+                <input type="text" class="" name="birthday" placeholder="请选择会员生日" id="member_birthday">
+            </div>
+            <!-- 所在地区 -->
+            <div class="mui-input-row">
+                <label for="">所在地区：</label>
+                <input type="text" class="" name="area" placeholder="请选择所在地区" id="region">
+            </div>
+            <!-- 客户详细地址 -->
+            <div class="mui-input-row">
+                <label>会员地址：</label>
+                <input type="text" class="mui-input-clear" name="address" placeholder="请输客户详细地址" id="address">
+            </div>
+            <!-- <p style="height:10px;background: rgba(240, 237, 237, 0.808);"></p> -->
+            <div class="mui-button-row" style="height: 50px;padding-top: 8px;">
+                <button type="button" class="mui-btn mui-btn-primary button_style" style="width:300px;"
+                    onclick="submission()">提交</button>
+            </div>
+
+    </div>
+
+    </form>
+    </div>
+
+    <script>
+       
+        function myonload() {
+            hidden_title();
+        }
+        //生日
+        var birthday = document.getElementById("member_birthday");
+        birthday.onfocus = function () {
+            // 禁止唤醒手机键盘
+            document.activeElement.blur();
+            var dtpicker = new mui.DtPicker({
+                type: "date",//设置日历初始视图模式 
+                beginDate: new Date(1970, 01, 01),//设置开始日期 
+                endDate: new Date(2070, 01, 01),//设置结束日期 
+                labels: ['年', '月', '日'],//设置默认标签区域提示语 
+            });
+            //将时间显示
+            dtpicker.show(function (items) {
+                // sj[0].innerHTML = items.y.value;
+                // sj[1].innerHTML = items.m.value;
+                // sj[2].innerHTML = items.d.value;
+                birthday.value = items.y.value + "-" + items.m.value + "-" + items.d.value;
+            })
+        }
+        //验证手机号
+        var phone = document.getElementById("phone");
+        phone.onblur = function () {
+            var num = phone.value;
+            if (num == "") {
+                mui.alert('手机号不能为空', '提示', '确定'['div']);
+            } else {
+                if (!isPoneAvailable(num)) {
+                    mui.alert('手机号格式不正确', '提示', '确定'['div']);
+                }
+            }
+        }
+        //验证方法
+        function isPoneAvailable($poneInput) {
+            var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+            if (!myreg.test($poneInput)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        //选择所在地区
+        var kk;
+        var region = document.getElementById("region");
+        region.onfocus = function () {
+            // 禁止唤醒手机键盘
+            document.activeElement.blur();
+            var cityPicker = new mui.PopPicker({
+                layer: 3
+            });
+            cityPicker.setData(cityData3);
+            //设置默认选择地址
+            cityPicker.pickers[0].setSelectedIndex(0);
+            cityPicker.pickers[1].setSelectedIndex(0);
+            cityPicker.pickers[2].setSelectedIndex(0);
+            //将内容显示在桌面
+            cityPicker.show(function (SelectedItem) {
+                kk = SelectedItem[0].text + "/" + SelectedItem[1].text + "/" + SelectedItem[2].text;
+                region.value = SelectedItem[0].text + "-" + SelectedItem[1].text + "-" + SelectedItem[2].text;
+            })
+        }
+        //提交进行验证
+        var member_num = document.getElementById("member_num");
+        var username = document.getElementById("username");
+        function submission() {
+            if (member_num.value == "" && username.value == "") {
+                mui.alert('会员卡号和会员姓名不能为空', '提示', '确定'['div']);
+            } else if (username.value == "") {
+                mui.alert('会员姓名不能为空', '提示', '确定'['div']);
+            } else if (member_num.value == "") {
+                mui.alert('会员卡号不能为空', '提示', '确定'['div']);
+            } else {
+                mui.ajax('/index.php/AddMember/', {
+                    data: {
+                        code: member_num.value,
+                        username: username.value,
+                        sex: document.getElementById("sex").value,
+                        phone: document.getElementById("phone").value,
+                        birthday: birthday.value,
+                        calendar: document.getElementById("calendar").value,
+                        area: kk,
+                        address: document.getElementById("address").value
+                    },
+                    dataType: 'json',//服务器返回json格式数据
+                    type: 'post',//HTTP请求类型
+                    timeout: 10000,//超时时间设置为10秒；
+                    // processData:false,
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function (data) {
+                        //服务器返回响应，根据响应结果，分析是否登录成功；
+                        if (data.code == 200) {
+                            mui.toast("新建成功", { duration: 'short', type: 'div' });
+
+                            //    location.href="../index.html";
+                            // setTimeout("javascript:location.href='../index.html'", 1000);history.go(0) 
+                            setTimeout("javascript:history.go(0)", 1000);
+                        } else {
+                            mui.alert(data.msg, "提示", "确定"["div"]);
+                        }
+                    },
+                    error: function (xhr, type, errorThrown) {
+                        //异常处理；
+                    }
+
+                });
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,269 @@
+#show .mui-icon {
+	font-size: 160px;
+	color: rgb(173, 173, 173);
+}
+
+#form_css {
+	border-bottom: rgb(201, 201, 201) 1px solid
+}
+
+/* 			#div1{
+		color: #007aff;
+		border-bottom: #007aff 2px solid;
+	} */
+#div1,
+#div2,
+#div3,
+#show {
+	text-align: center;
+}
+
+#show {
+	width: 100%;
+}
+
+#span1 {
+	color: rgb(173, 173, 173)
+}
+
+#kkquan {
+	line-height: 35px;
+	font-size: 16px;
+}
+
+.mui-scroll-wrapper {
+	top: 15%;
+}
+
+/* 卡券样式 */
+.stamp {
+	/* width: 362px; */
+	width: 100%;
+	height: 150px;
+	padding: 0 10px;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.stamp:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 10px;
+	right: 10px;
+	z-index: -1;
+}
+
+.stamp:after {
+	content: '';
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	right: 10px;
+	bottom: 10px;
+	box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.5);
+	z-index: -2;
+}
+
+.stamp i {
+	position: absolute;
+	left: 20%;
+	top: 45px;
+	height: 190px;
+	width: 390px;
+	background-color: rgba(255, 255, 255, .15);
+	transform: rotate(-30deg);
+}
+
+.stamp .par {
+	/* float: left; */
+	padding: 0px 15px;
+	width: 260px;
+	/* border-right: 2px dashed rgba(255, 255, 255, .3); */
+	text-align: left;
+	height: 130px;
+	position: absolute;
+	z-index: 2;
+	left: 0;
+}
+
+.stamp .par p {
+	color: #fff;
+	font-size: 14px;
+	margin: 0px 0 0 0;
+	letter-spacing: 1px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	line-height: 20px;
+}
+
+.stamp .par p:nth-child(1),
+.stamp .par p:nth-child(2) {
+	font-size: 15px;
+	line-height: 32px;
+	line-height: 32px;
+	padding-top: 2px;
+}
+
+.stamp .par p:nth-child(3) {
+	line-height: 32px;
+	font-size: 15px;
+}
+
+/* .stamp .par p:nth-child(4) { 
+	 margin-left: 54px;
+	 line-height: 14px; 
+ } */
+
+.stamp .par span {
+	font-size: 35px;
+	color: #fff;
+	margin-right: 5px;
+}
+
+.stamp .par .sign {
+	font-size: 20px;
+	/* margin-left: 13px; */
+}
+
+.stamp .par sub {
+	position: relative;
+	top: -5px;
+	color: rgba(255, 255, 255, .8);
+}
+
+.stamp .copy {
+	position: absolute;
+	z-index: 2;
+	right: 20px;
+	height: 150px;
+	padding: 5px 0px 0 12px;
+	/* width: 100px; */
+	border-left: 2px dashed rgba(255, 255, 255, .3);
+	vertical-align: text-bottom;
+	font-size: 24px;
+	color: rgb(255, 255, 255);
+}
+
+.stamp .copy p {
+	font-size: 13px;
+	margin-top: 27px;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	padding: 3px 6px;
+	text-align: center;
+	color: #fff;
+	line-height: 25px;
+}
+
+.stamp .copy p a {
+	color: #fff;
+}
+
+.stamp01 {
+	background: #F39B00;
+	background: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10px, #F39B00 10px);
+	background-size: 15px 15px;
+	background-position: 0px 0px;
+}
+/* .stamp01 {
+	background: #F39B00;
+	background: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 5px, #F39B00 5px);
+	background-size: 15px 15px;
+	background-position: 9px 3px;
+} */
+
+.stamp01:before {
+	background-color: #F39B00;
+}
+
+.stamp02 {
+	background: #D24161;
+	background: radial-gradient(transparent 0, transparent 10px, #D24161 10px);
+	background-size: 15px 15px;
+	background-position: 0px 0px;
+}
+/* .stamp02 {
+	background: #D24161;
+	background: radial-gradient(transparent 0, transparent 5px, #D24161 5px);
+	background-size: 15px 15px;
+	background-position: 9px 3px;
+} */
+
+.stamp02:before {
+	background-color: #D24161;
+}
+
+.stamp03 {
+	background: #9E9E9E;
+	background: radial-gradient(transparent 0, transparent 10px, #9E9E9E 10px);
+	background-size: 15px 15px;
+	background-position: 0px 0px;
+}
+/* .stamp03 {
+	background: #9E9E9E;
+	background: radial-gradient(transparent 0, transparent 5px, #9E9E9E 5px);
+	background-size: 15px 15px;
+	background-position: 9px 3px;
+} */
+
+.stamp03:before {
+	background-color: #9E9E9E;
+}
+
+#cardw,
+#cards,
+#cardg {
+	position: relative;
+}
+
+.cardclose {
+	height: auto;
+	width: 60%;
+	background-color: rgba(12, 76, 128, 0.7);
+	position: absolute;
+}
+#md_text{
+	color: #fff;
+	font-size: 14px;
+	padding: 7px;
+	line-height: 22px;
+}
+
+.display_none {
+	display: none;
+}
+/* ----------------------------------------- */
+.stamp05 {
+	background: #2BAAEC;
+	background: radial-gradient(transparent 0, transparent 10px, #2BAAEC 10px);
+	background-size: 15px 15px;
+	background-position: 0px 0px;
+}
+
+.stamp05:before {
+	background-color: #2BAAEC;
+}
+.stamp06 {
+	background: #F89700;
+	background: radial-gradient(transparent 0, transparent 10px, #F89700 10px);
+	background-size: 15px 15px;
+	background-position: 0px 0px;
+}
+
+.stamp06:before {
+	background-color: #F89700;
+}
+.stamp07 {
+	background: #4BBF27;
+	background: radial-gradient(transparent 0, transparent 10px, #4BBF27 10px);
+	background-size: 15px 15px;
+	background-position: 0px 0px;
+}
+
+.stamp07:before {
+	background-color: #4BBF27;
+}

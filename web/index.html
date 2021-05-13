@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Cache" content="no-cache">
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>锁客多</title>
+	<link rel="stylesheet" href="./css/app.css">
+	<link rel="stylesheet" href="./mui/css/mui.css">
+	<script src="./mui/js/mui.js"></script>
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/jquery.cookie.js"></script>
+	<script src="./js/md5.js"></script>
+	<script src="./js/vconsole.js"></script>
+	<link rel="stylesheet" href="./css/loading.css">
+	<script src="./js/loading.js"></script>
+	<style>
+		.suoke:before {
+			content: ' ';
+			position: absolute;
+			z-index: -1;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background: url(./images/loginbg.png) center 0 no-repeat;
+			background-size: cover;
+		}
+
+		.shanghui {
+			background-color: #16453B;
+		}
+
+		.mui-input-row::after {
+			height: 0px;
+		}
+
+		.mui-input-row label {
+			width: 25%;
+		}
+
+		.mui-content {
+			background: none;
+		}
+
+		.mui-input-row {
+			height: 40px;
+		}
+
+		#all_content {
+			position: absolute;
+			width: 60%;
+			top: 15%;
+			z-index: 1;
+			left: 0;
+			right: 0;
+			margin: 0 auto;
+			text-align: center;
+		}
+
+		#foler {
+			color: white;
+			font-size: 10px;
+			padding-top: 30%;
+		}
+	</style>
+</head>
+<!-- -->
+
+<body class="suoke" id="body_color">
+	<!-- <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" id="a_title" style="color:white;"></a>
+        <h1 class="mui-title" id="title_" style="color:white;">切换账号</h1>
+	</header> -->
+	<div id="all_content">
+		<img src="./logo/suoke.png" alt="" width="180px" id="Logo" class="imglogo">
+		<form class="mui-content" id="fcss" style="padding-top: 30%;padding-bottom: 30%;">
+			<!-- <div class="mui-input-row"
+			style="width: 60%;margin-left: 20%;background-color: white;border-radius: 5px 5px 5px 5px;">
+			<label><span class="mui-icon mui-icon-personadd"
+					style="margin-left: -5px;margin-top:-4px;"></span></label>
+			<input type="text" class="mui-input-clear" placeholder="请输入企业号" style="font-size: 15px;float: left;"
+				id="qynum">
+		</div> -->
+			<div class="mui-input-row" style="background-color: white;border-radius: 5px 5px 5px 5px;">
+				<label><span class="mui-icon mui-icon-contact"
+						style="margin-left: -5px;margin-top:-4px;"></span></label>
+				<input type="password" class="mui-input-clear" placeholder="请输入用户名" style="font-size: 15px;float: left;"
+					id="username">
+			</div>
+			<div class="mui-input-row" style="background-color: white;margin-top: 20px;border-radius: 5px 5px 5px 5px;">
+				<label><span class="mui-icon mui-icon-locked" style="margin-left: -5px;margin-top:-4px;"></span></label>
+				<input type="password" class="mui-input-password" placeholder="请输入密码"
+					style="font-size: 15px;float: left;" id="member_num">
+			</div>
+			<div class="mui-button-row" style="margin-top:10px;">
+				<button type="button" class="mui-btn mui-btn-outlined" style="width: 70%;font-size: 16px;color: white;"
+					onclick="submission()">登&nbsp;&nbsp;录</button>
+			</div>
+		</form>
+		<div id="foler">
+			<div>版本号:<span>4.0</span></div>
+			<div>@锁客科技版权所有</div>
+		</div>
+	</div>
+
+</body>
+<script src="./js/wechat_authentication.js"></script>
+<script>
+	var load = new Loading();
+	load.init();
+	// 获取openid
+	// var vConsole = new VConsole();
+	//手机端IOS系统微信中软键盘兼容
+	var iii = document.getElementsByTagName("input");
+	$(function () {
+		var u = navigator.userAgent;
+		var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+		var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+		var ua = window.navigator.userAgent.toLowerCase();
+		if (isAndroid) {
+			if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+				$("input").focus(function () {
+					setTimeout(function () {
+						all_content.style.top = "2%";
+						fcss.style.paddingTop = "25%";
+						foler.style.display = "none";
+					}, 100);
+				});
+			}
+		} else if (isiOS) {
+			if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+
+				$("input").focus(function () {
+					setTimeout(function () {
+						all_content.style.top = "24%";
+						fcss.style.paddingTop = "22%";
+						foler.style.display = "none";
+					}, 100);
+				});
+
+			}
+		}
+	});
+
+	$("input").blur(function () {
+		setTimeout(function () {
+			all_content.style.top = "15%";
+			fcss.style.paddingTop = "30%";
+			foler.style.display = "";
+			var scrollHeight = document.documentElement.scrollTop || document.body.scrollTop || 0;
+			window.scrollTo(0, Math.max(scrollHeight - 1, 0));
+			document.activeElement.scrollIntoViewIfNeeded(true);
+		}, 100);
+	});
+
+	$(function () {
+		//微信内置浏览器浏览H5页面弹出的键盘遮盖文本框的解决办法 
+		window.addEventListener("resize", function () {
+			if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+				window.setTimeout(function () {
+					document.activeElement.scrollIntoViewIfNeeded();
+				}, 0);
+			}
+		})
+	})
+
+	//openid 
+	var Logo = document.getElementById("Logo");
+	(function () {
+		if (decodeURIComponent(getQueryVariable("company")) == "") {
+			Logo.src = './logo/suoke.png';
+		} else {
+			if (decodeURIComponent(getQueryVariable("company")) == 'shanghui') {
+				document.getElementById("body_color").className = decodeURIComponent(getQueryVariable("company"));
+				document.getElementById("Logo").style.width = "120px";
+				document.getElementById("all_content").style.top = "8%";
+			}
+
+			Logo.src = "./logo/" + decodeURIComponent(getQueryVariable("company")) + '.png';
+		}
+	})();
+
+
+
+	//修改数据库
+	(function () {
+		mui.post('/index.php/dataBase/', {
+			database: $.cookie("company"),
+		}, function (data) {
+			automatic();
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+		}, 'json');
+	})();
+
+
+	//提交进行验证
+	var member_num = document.getElementById("member_num"); //密码
+	var username = document.getElementById("username"); //用户名
+
+	function opk() {
+		username.type = 'text';
+	}
+	opk();
+
+	function submission() {
+		if (member_num.value == "" && username.value == "") {
+			mui.alert('用户名和密码不能为空', '提示', '确定'['div']);
+		} else if (username.value == "") {
+			mui.alert('用户名不能为空', '提示', '确定'['div']);
+		} else if (member_num.value == "") {
+			mui.alert('密码不能为空', '提示', '确定'['div']);
+		} else {
+			let compss = decodeURIComponent(getQueryVariable("company"));
+			if ((compss == 'suoke') || (compss == 'suokeduo')) {
+				if (username.value == "admin" && member_num.value == "123456") {
+					var vConsole = new VConsole();
+					return false;
+				}
+			}
+			//登录
+			login();
+		}
+	}
+	// 自动登录
+
+	function automatic() {
+
+		mui.post('/index.php/Userlistopenid/', {
+			openId: $.cookie("openId"),
+			company: $.cookie("company")
+		}, function (data) {
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+			if (data.code == 200) {
+				location.href = "index_main.html";
+			}
+
+		}, 'json');
+
+	}
+	//去除空格
+	function trim(str) {
+		return str = str.replace(/\s*/g, "");
+		// return str.replace(/(^\s*)|(\s*$)/g, "");
+	}
+	//登录
+	function login() {
+		// oooooo = 'o9osQwUghKSMhf1ZGF3oclpiEvtc'
+		load.start();
+		mui.ajax('/index.php/Login/', {
+			data: {
+				password: md5(member_num.value),
+				username: trim(username.value),
+				openId: $.cookie("openId")
+			},
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post', //HTTP请求类型
+			timeout: 10000, //超时时间设置为10秒；
+			// processData:false,
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			success: function (data) {
+				//服务器返回响应，根据响应结果，分析是否登录成功；
+				if (data.code == 200) {
+					location.href = "index_main.html";
+					// setTimeout("javascript:location.href='index_main.html'", 1000);
+					// setTimeout("javascript:history.go(0)", 1000);
+					load.stop();
+				} else if (data.code == 400) {
+					mui.alert(data.msg, "提示", "确定"["div"]);
+					load.stop();
+				}
+
+			},
+
+			error: function (xhr, type, errorThrown) {
+				//异常处理；
+				if (type == "timeout")
+					type = type == "timeout" ? '登录超时请稍后重试' : type;
+				mui.toast(type, {
+					duration: 'long',
+					type: 'div'
+				})
+				load.stop();
+			}
+		});
+
+
+	}
+
+	// http://suokeduo.com/?company=suoke
+		// $(function () {
+		// 		// $.cookie("wx_user", "");
+		// 		var cookieJSON = $.cookie(decodeURIComponent(getQueryVariable("company")) + "_openId") ?
+		// 			$.cookie(decodeURIComponent(getQueryVariable("company")) + "_openId") : "";
+		// 		if (cookieJSON == "" || cookieJSON == " " || cookieJSON == undefined || cookieJSON == 'undefined') {
+		// 			$.ajax({
+		// 				type: 'GET',
+		// 				dataType: 'JSONP',
+		// 				url: 'https://wxauth.suokeduo.com/card/snsapi_userinfo/index?company=' + decodeURIComponent(getQueryVariable(
+		// 					"company")),
+		// 				//需要页面传入值
+		// 				success: function (data) {
+		// 					//这获取到用户的信息了；把这个信息放到cookie中
+
+		// 					$.cookie(decodeURIComponent(getQueryVariable("company")) + "_openId", data['openId'], { path: '/', expires: 1 });
+		// 					// $.cookie(decodeURIComponent(getQueryVariable("company"))+"_wx_user", data, { path: '/', expires: 1 });
+		// 					$.cookie("openId", data['openId'], { path: '/', expires: 1 });
+		// 					$.cookie("headImgUrl", data['headImgUrl'], {
+		// 						path: '/',
+		// 						expires: 1
+		// 					});
+		// 					$.cookie("nickname", data['nickname'], {
+		// 						path: '/',
+		// 						expires: 1
+		// 					});
+		// 					modify_mysql();
+		// 				},
+		// 				error: function (data) {
+		// 					modify_mysql();
+		// 					// 将下边这个baidu替换成实际当前请求的页面
+		// 					location.href = "https://wxauth.suokeduo.com/card/snsapi_userinfo/forword?redirect_url=" +
+		// 						'https://wx.suokeduo.com?company=' + decodeURIComponent(getQueryVariable("company")) + '&company= ' +
+		// 						decodeURIComponent(getQueryVariable("company"));
+		// 				}
+		// 			})
+		// 		} else {
+		// 			$.cookie("openId", $.cookie(decodeURIComponent(getQueryVariable("company")) + "_openId"), { path: '/', expires: 1 });
+		// 			// console.log($.cookie("openId"));
+		// 			//直接访问你现在的地址；啥都不用写也行
+		// 			modify_mysql();
+		// 			tijiao($.cookie(decodeURIComponent(getQueryVariable("company")) + "_openId"));
+		// 			// login()
+		// 		}
+		// 	});
+</script>
+
+</html>

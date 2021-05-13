@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <title>群发卡劵</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a class="mui-icon mui-icon-back mui-action-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;">群发卡劵</h1>
+    </header>
+    <div class="mui-content" id="main">
+        <form action="" class="mui-input-group" style="border:0px;">
+            <div class="mui-input-row">
+                <label><span style="color: red;">*</span>卡劵标题</label>
+                <input type="text" class="mui-input-clear" placeholder="请输入标题" id="card_title">
+            </div>
+            <div class="mui-input-row mui-select">
+                <label><span style="color: red;">*</span>卡劵类型:</label>
+                <select name="" style="color:rgb(105, 104,104)" id="select_kajuan">
+                    <option value="0">优惠券</option>
+                    <option value="1">折扣券</option>
+                    <option value="2">礼品券</option>
+                </select>
+            </div>
+            <div class="mui-input-row mui-select">
+                <label><span style="color: red;">*</span>选择卡劵:</label>
+                <select name="" style="color:rgb(105, 104,104)" id="select_xuanze_kajuan">
+
+                </select>
+            </div>
+            <fieldset style="margin-top:10px;">
+                <legend>说明备注</legend>
+                <textarea rows="6" cols="10" id="text_area" placeholder="输入文字"></textarea>
+            </fieldset>
+            <h6 style="text-align: center;"> <span style="color: red;">*</span> 提示:只会发送给已经绑定微信的会员</h6>
+            <div class="mui-button-row">
+                <button type="button" class="mui-btn mui-btn-primary"
+                    onclick="send()">&nbsp;&nbsp;&nbsp;发送&nbsp;&nbsp;&nbsp;</button>
+            </div>
+        </form>
+
+    </div>
+</body>
+<script>
+    var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('=');
+    var n3 = loc.indexOf('*');
+    var idd = decodeURI(loc.substr(n2 + 1, n3 - n2 - 5));
+    var code = decodeURI(loc.substr(n3 + 1, n1 - n3));
+
+    var load = new Loading();
+    load.init();
+
+    function send() {
+        load.start();
+        if (localStorage.getItem("rfm_type") == "R") {
+            mui.post('/index.php/RfmActiveGroupCardM/', {
+                id: idd,
+                store_code: code,
+                 vvip: localStorage.getItem("array_shuzu_type"),
+                 staff_code: localStorage.getItem("vip_staff_code"),
+                card_type: select_kajuan.options[select_kajuan.selectedIndex].value,//卡劵类型
+                coupon: select_xuanze_kajuan.options[select_xuanze_kajuan.selectedIndex].value,//卡劵单号                
+                remark: document.getElementById("text_area").value,//赠送备注
+                name: document.getElementById("card_title").value,//标题
+                rfm_type: 'r'
+            }, function (data) {
+                if (data.code == 200) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                } else if (data.code == 400) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                }
+                load.stop();
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+        } else if (localStorage.getItem("rfm_type") == "F") {
+            mui.post('/index.php/RfmActiveGroupCardM/', {
+                id: idd,
+                store_code: code,
+                 vvip: localStorage.getItem("array_shuzu_type"),
+                 staff_code: localStorage.getItem("vip_staff_code"),
+                card_type: select_kajuan.options[select_kajuan.selectedIndex].value,//卡劵类型
+                coupon: select_xuanze_kajuan.options[select_xuanze_kajuan.selectedIndex].value,//卡劵单号
+                remark: document.getElementById("text_area").value,//赠送备注
+                name: document.getElementById("card_title").value,//标题
+                rfm_type: 'f'
+            }, function (data) {
+
+                if (data.code == 200) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                } else if (data.code == 400) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                }
+                load.stop();
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+        } else if (localStorage.getItem("rfm_type") == "M") {
+            mui.post('/index.php/RfmActiveGroupCardM/', {
+                id: idd,
+                store_code: code,
+                 vvip: localStorage.getItem("array_shuzu_type"),
+                 staff_code: localStorage.getItem("vip_staff_code"),
+                card_type: select_kajuan.options[select_kajuan.selectedIndex].value,//卡劵类型
+                coupon: select_xuanze_kajuan.options[select_xuanze_kajuan.selectedIndex].value,//卡劵单号
+                remark: document.getElementById("text_area").value,//赠送备注
+                name: document.getElementById("card_title").value,//标题
+                rfm_type: 'm'
+            }, function (data) {
+                if (data.code == 200) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                } else if (data.code == 400) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                }
+                load.stop();
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+        } else if (localStorage.getItem("rfm_type") == "N") {
+            mui.post('/index.php/RfmActiveGroupCardM/', {
+                id: idd,
+                store_code: code,
+                 vvip: localStorage.getItem("array_shuzu_type"),
+                 staff_code: localStorage.getItem("vip_staff_code"),
+                card_type: select_kajuan.options[select_kajuan.selectedIndex].value,//卡劵类型
+                coupon: select_xuanze_kajuan.options[select_xuanze_kajuan.selectedIndex].value,//卡劵单号
+                remark: document.getElementById("text_area").value,//赠送备注
+                name: document.getElementById("card_title").value,//标题
+                rfm_type: 'n'
+            }, function (data) {
+                if (data.code == 200) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                } else if (data.code == 400) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                }
+                load.stop();
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+
+        } else if (localStorage.getItem("rfm_type") == "P") {
+            mui.post('/index.php/RfmActiveGroupCardM/', {
+                id: idd,
+                store_code: code,
+                 vvip: localStorage.getItem("array_shuzu_type"),
+                 staff_code: localStorage.getItem("vip_staff_code"),
+                card_type: select_kajuan.options[select_kajuan.selectedIndex].value,//卡劵类型
+                coupon: select_xuanze_kajuan.options[select_xuanze_kajuan.selectedIndex].value,//卡劵单号
+                remark: document.getElementById("text_area").value,//赠送备注
+                name: document.getElementById("card_title").value,//标题
+                rfm_type: 'p'
+            }, function (data) {
+                if (data.code == 200) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                } else if (data.code == 400) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                }
+                load.stop();
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+
+        } else if (localStorage.getItem("rfm_type") == "A") {
+            mui.post('/index.php/RfmActiveGroupCardM/', {
+                id: idd,
+                store_code: code,
+                 vvip: localStorage.getItem("array_shuzu_type"),
+                 staff_code: localStorage.getItem("vip_staff_code"),
+                card_type: select_kajuan.options[select_kajuan.selectedIndex].value,//卡劵类型
+                coupon: select_xuanze_kajuan.options[select_xuanze_kajuan.selectedIndex].value,//卡劵单号
+                remark: document.getElementById("text_area").value,//赠送备注
+                name: document.getElementById("card_title").value,//标题
+                rfm_type: 'a'
+            }, function (data) {
+                if (data.code == 200) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                } else if (data.code == 400) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                }
+                load.stop();
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+
+        } else if (localStorage.getItem("rfm_type") == "J") {
+            mui.post('/index.php/RfmActiveGroupCardM/', {
+                id: idd,
+                store_code: code,
+                 vvip: localStorage.getItem("array_shuzu_type"),
+                 staff_code: localStorage.getItem("vip_staff_code"),
+                card_type: select_kajuan.options[select_kajuan.selectedIndex].value,//卡劵类型
+                coupon: select_xuanze_kajuan.options[select_xuanze_kajuan.selectedIndex].value,//卡劵单号
+                remark: document.getElementById("text_area").value,//赠送备注
+                name: document.getElementById("card_title").value,//标题
+                rfm_type: 'j'
+            }, function (data) {
+                if (data.code == 200) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                } else if (data.code == 400) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                }
+                load.stop();
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+
+        } else if (localStorage.getItem("rfm_type") == "C") {
+            mui.post('/index.php/RfmActiveGroupCardM/', {
+                id: idd,
+                store_code: code,
+                 vvip: localStorage.getItem("array_shuzu_type"),
+                 staff_code: localStorage.getItem("vip_staff_code"),
+                card_type: select_kajuan.options[select_kajuan.selectedIndex].value,//卡劵类型
+                coupon: select_xuanze_kajuan.options[select_xuanze_kajuan.selectedIndex].value,//卡劵单号
+                remark: document.getElementById("text_area").value,//赠送备注
+                name: document.getElementById("card_title").value,//标题
+                rfm_type: 'c'
+            }, function (data) {
+                if (data.code == 200) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                } else if (data.code == 400) {
+                    mui.toast(data.msg, {
+                        duration: 'long',
+                        type: 'div'
+                    })
+                }
+                load.stop();
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+
+        }
+    }
+
+    var select_kajuan = document.getElementById("select_kajuan");
+    var select_xuanze_kajuan = document.getElementById("select_xuanze_kajuan");
+    select_kajuan.onchange = function () {
+        discount();
+    }
+    // 卡劵赋值
+    discount();
+    function discount() {
+
+          load.start();
+        mui.post('/index.php/GiveCouponQuery/', {
+            card_type: select_kajuan.options[select_kajuan.selectedIndex].value
+        }, function (data) {
+            // 优惠劵
+            if (data.code = 200) {
+                if (select_kajuan.options[select_kajuan.selectedIndex].value == '0') {
+
+                    if (data.data.length == 0) {
+                        select_xuanze_kajuan.innerHTML= '<option value="">暂无卡劵</option>';
+                    } else {
+                        var cont;
+                        for (i = 0; i < data.data.length; i++) {
+                            cont = cont + '<option value="' + data.data[i].code + '">' + data.data[i].type_name + " " + data.data[i].name + ':' + data.data[i].card_money + '¥' + ' ' + data.data[i].time_g + '</option>'
+                        }
+                        select_xuanze_kajuan.innerHTML = cont;
+                    }
+
+                    // 折扣卷
+                } else if (select_kajuan.options[select_kajuan.selectedIndex].value == '1') {
+                    if (data.data.length == 0) {
+                        console.log()
+                         select_xuanze_kajuan.innerHTML = '<option value="">暂无卡劵</option>';
+                    } else {
+                        var cont;
+                        for (i = 0; i < data.data.length; i++) {
+                            cont = cont + '<option value="' + data.data[i].code + '">' + data.data[i].type_name + " " + data.data[i].name + ':' + data.data[i].card_discount + '¥' + ' ' + data.data[i].time_g + '</option>'
+                        }
+                        select_xuanze_kajuan.innerHTML = cont;
+                    }
+
+                    // 礼品卷
+                } else if (select_kajuan.options[select_kajuan.selectedIndex].value == '2') {
+                    if (data.data.length == 0) {
+                         select_xuanze_kajuan.innerHTML = '<option value="">暂无卡劵</option>';
+                    } else {
+                        var cont;
+                        for (i = 0; i < data.data.length; i++) {
+                            cont = cont + '<option value="' + data.data[i].type_name + " " + data.data[i].name + ':' + data.data[i].gift_code + ' ' + data.data[i].time_g + '</option>'
+                        }
+                        select_xuanze_kajuan.innerHTML = cont;
+                    }
+
+                }
+                 load.stop();
+            }else{
+                console.log('访问失败');
+                load.stop(); 
+            }
+
+        }, 'json'
+        );
+    }
+</script>
+
+</html>

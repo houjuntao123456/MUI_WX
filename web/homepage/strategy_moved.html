@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>感动策略</title>
+    <script src="../js/vconsole.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.css">
+    <script src="../mui/js/mui.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/loading.js"></script>
+    <script src="../js/tankuang.js"></script>
+    <style>
+        .mui-off-canvas-left,
+        .mui-off-canvas-right {
+            width: 100%;
+            background-color: white;
+            margin-top: 85px;
+        }
+
+        .mui-table-view-cell.mui-active {
+            background-color: #efeff0;
+        }
+
+        .mui-table-view-cell::after {
+            right: 15px;
+            background-color: #e8e8e8;
+        }
+
+        .mui-popover {
+            height: 300px;
+        }
+
+        .mui-content {
+            background: #fff
+        }
+
+        .mui-table-view-cell.mui-active {
+            background-color: #efeff0;
+        }
+
+        .mui-table-view-cell::after {
+            right: 15px;
+            background-color: #e8e8e8;
+        }
+
+        .mui-popover {
+            height: 300px;
+        }
+
+        .mui-content {
+            background: #fff
+        }
+
+        /* 控制弹框 */
+        #popover a {
+            text-align: center;
+        }
+         /* 标题table */
+         .table {
+            width: 100%;
+            background-color: #FFFFFF;
+            position: absolute;
+            left: 0px;
+        }
+
+        .table>thead>tr {
+            border-bottom: 2px solid #ddd;
+        }
+
+        .table>thead>tr>th {
+            padding: 9px 0px 9px 0px;
+            border-bottom-width: 2px;
+            border: 1px solid #ddd;
+        }
+         /* 具体内容table */
+         .table2 {
+            width: 100%;
+            background-color: #FFFFFF;
+        }
+
+        .table2>tbody>tr>td {
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 4px 0px 4px 0px;
+            background-color: #F9F9F9;
+        }
+
+        .table2>tbody>tr>td:nth-child(1) {
+            width: 60%;
+        }
+
+        .table2>tbody>tr>td:nth-child(2) {
+            width: 40%;
+        }
+
+        .table2>tbody>tr>td:nth-child(2)>button {
+            padding-top: 4px;
+            padding-bottom: 4px;
+        }
+        /* 查看 */
+        .table3 {
+            width: 100%;
+            background-color: #FFFFFF;
+        }
+
+        .table3>thead>tr {
+            border-bottom: 2px solid #ddd;
+        }
+
+        .table3>thead>tr>th {
+            padding: 9px 0px 9px 0px;
+            border-bottom-width: 2px;
+            border: 1px solid #ddd;
+        }
+
+        .table3>tbody>tr {
+            border: 1px solid #ddd;
+            text-align: center;
+            background-color: #FFFFFF;
+        }
+
+        .tr_cl {
+            border: 1px solid #ddd;
+            text-align: center;
+            background-color: #FFFFFF;
+        }
+
+        .table3>tbody>tr>th {
+            width: 25%;
+        }
+
+        .table3>tbody>tr>td {
+            width: 75%;
+        }
+
+        .table3 textarea,
+        input[type='text'] {
+            width: 90%;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+     .ellipsiss{
+            width: 80px;
+            overflow: hidden;
+			/*自动隐藏文字*/
+			text-overflow: ellipsis;
+			/*文字隐藏后添加省略号*/
+			white-space: nowrap;
+			-webkit-line-clamp: 1;
+			/*想要显示的行数*/
+			-webkit-box-orient: vertical;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;padding-left: 0px;padding-right: 0px;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;padding-left: 15px;"></a>
+        <h1 id="ttt" class="mui-title" style="color:white;width: 50%;margin: 0 auto;">感动策略</h1>
+        <a href="#popover" class="ellipsiss" style="float: right;line-height: 44px;color: white;margin-right: 10px;" id="menu">策略</a>
+        <table class="table" id="titie_table" >
+            <thead>
+                <tr id="menuu">
+                    <th style="width: 60%;">策略步骤</th>
+                    <th style="width: 40%;">
+                        操作
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </header>
+    <!-- 侧滑导航根容器 -->
+<div class="mui-off-canvas-wrap mui-draggable">
+    <!-- 主页面容器 -->
+    <div class="mui-inner-wrap">
+       <!-- 菜单容器 -->
+      <aside class="mui-off-canvas-right">
+        <div class="mui-scroll-wrapper">
+          <div class="mui-scroll">
+            <!-- 菜单具体展示内容 -->
+            <table class="table3">
+                <tbody id="template_conter">
+                    <tr>
+                        <th>服务对象</th>
+                        <td><input type="text" name="function" disabled="" class="layui-input"
+                                value=""></td>
+                    </tr>
+
+                    <tr>
+                        <th>服务时机</th>
+                        <td><input type="text" name="function" disabled="" class="layui-input"
+                                value=""></td>
+                    </tr>
+                    <tr>
+                        <th>动作要素</th>
+                        <td><input type="text" name="function" disabled="" class="layui-input"
+                                value=""></td>
+                    </tr>
+                    <tr>
+                        <th>话术标准
+                            <button type="button" class="mui-btn mui-btn-primary"
+                                            style="font-size: small;padding-top: 3px;padding-bottom: 3px;margin-top: 5px; background-color: rgba(46, 133, 228, 0.89);border:1px solid rgba(46, 133, 228, 0.89)"
+                                            onclick="details_cen()">详&nbsp;情</button>
+                        </th>
+                        <td><textarea disabled="" rows="5" id="Bzhun"></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="mui-row" style="text-align: center;padding-top: 10px;">
+                <button type="button" style="width: 50%;" class="mui-btn mui-btn-primary"
+                    onclick="close_p()">关闭</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <!--  头部-->
+      <!-- 详细内容 -->
+    <div class="mui-content">
+        <div id="pullrefresh" class=" mui-content mui-scroll-wrapper " style="margin-top:45px;">
+            <div class="mui-scroll" style="margin-top: 50px">
+                <table class="table2">
+                    <tbody id="table2_conter">
+                        <!-- <tr>
+                            <td>4156</td>
+                            <td><button onclick="CK()" type="button" class="mui-btn mui-btn-primary">查看</button></td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>  
+    </div>
+  </div>
+
+
+    
+    
+
+
+    <!-- 弹框区域 -->
+    <div id="popover" class="mui-popover">
+        <div class="mui-popover-arrow"></div>
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <ul class="mui-table-view" id="popover_ul">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 控制弹框 -->
+    <script>
+        //加载动画
+        var load = new Loading();
+        load.init();
+        // 弹框区域
+        mui('#popover').on('tap', 'a', function (e) {
+            var code = this.getAttribute('code');
+            mui("#menu")[0].innerHTML = this.innerHTML;
+            mui('.mui-popover').popover('toggle', document.getElementById("menu"));
+            count = 0;
+            document.getElementById("table2_conter").innerHTML = "";
+            pullupRefresh(code);
+            if (mui('.mui-off-canvas-wrap').offCanvas().isShown()) {
+                mui('.mui-off-canvas-wrap').offCanvas().close();
+            }
+            document.getElementById("menuu").innerHTML = "<th style='width: 60%;'>"
+                                                    +"策略步骤"
+                                                    +"</th>"
+                                                    +"<th style='width: 40%;'>"
+                                                    +"操作"
+                                                    +"</th>"
+            // load.start();
+        })
+        //滚动区域
+        mui('.mui-scroll-wrapper').scroll({
+            deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+
+    </script>
+</body>
+<script>
+    //禁止滑动主界面的时候出现侧滑菜单
+document.getElementsByClassName('mui-inner-wrap')[0].addEventListener('drag', function(event) {
+　　event.stopPropagation();
+});
+    var titie_table = document.getElementById("titie_table");
+    window.onload = function () {
+        hidden_title();
+        select_men();
+        pullrefresh.style.marginTop = titie_table.clientHeight - 5 + 'px';
+    }
+    // 详情
+    function details_cen() {
+        tan.texts(document.getElementById("Bzhun").innerHTML);
+    }
+    //进来查询策略
+    function select_men() {
+        load.start();
+        mui.post('/index.php/RemovingName/', { 
+        }, function (data) {
+             //console.log(data)
+             var popover_ul = document.getElementById("popover_ul");
+            if (data.code == 200) {
+                if (data.data.count == 0) {
+                    document.getElementById("menu").innerHTML = "策略(无)"
+                } else {
+                        if (data.data.count < 6) {
+                        document.getElementById("popover").style.height = (data.data.count * 50) + 'px';
+                    }
+                    for (i = 0; i < data.data.count; i++) {
+                        var li = document.createElement('li');
+                        li.className = 'mui-table-view-cell'
+                        li.innerHTML = '<a href="#" code=' + data.data.data[i].name + '>' + data.data.data[i].name + '</a>'
+                        popover_ul.appendChild(li);
+                    }
+                    mui('.mui-popover').popover('toggle', document.getElementById("menu"));
+                }     
+            }
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            load.stop();
+        }, 'json'
+        );
+    }
+    //点击查看
+    function CK(e){
+        var count = 0;
+        document.getElementById("menuu").innerHTML = "<th style='width:100%;'>"+document.getElementById("menu").innerHTML+"</th>"
+        mui('.mui-off-canvas-wrap').offCanvas().show();
+        mui.post('/index.php/RemovingSel/', {
+            name:document.getElementById("menu").innerHTML,
+            page: ++count,
+            limit: limit_num
+        }, function (data) {
+            if (data.code == 200) { 
+                
+                for (i = 0; i < data.data.data.length; i++) {
+                    if (e==i) {
+                       document.getElementsByClassName("layui-input")[0].value = data.data.data[i].service_object;
+                        document.getElementsByClassName("layui-input")[1].value = data.data.data[i].opportunity;
+                        document.getElementsByClassName("layui-input")[2].value = data.data.data[i].elements;
+                        document.getElementById("Bzhun").innerHTML = data.data.data[i].speech;
+                    }
+                }
+            }
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+    //点击关闭
+    function close_p(){
+        document.getElementById("menuu").innerHTML = "<th style='width: 60%;'>"
+                                                    +"策略步骤"
+                                                    +"</th>"
+                                                    +"<th style='width: 40%;'>"
+                                                    +"操作"
+                                                    +"</th>"
+        mui('.mui-off-canvas-wrap').offCanvas().close();
+    }
+</script>
+<script>
+    
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            up: {
+                contentrefresh: '正在加载...',
+                auto: false,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+
+    /**
+       * 下拉刷新具体业务实现
+       */
+    function pulldownRefresh() {
+    }
+    /**
+     * 上拉加载具体业务实现
+     */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+
+    function pullupRefresh(code) {
+         load.start();
+        mui.post('/index.php/RemovingSel/', {
+            name: code,
+            page: ++count,
+            limit: limit_num
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            // console.log(data.data.count / limit_num);
+            if (data.code == 200) {
+                  console.log(data)
+                setTimeout(function () {
+                    // console.log(data.data.count);
+                    // console.log(count > (data.data.count / limit_num));
+                    // console.log(count);
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                    var table = document.body.querySelector('#table2_conter');
+                    for (i = 0; i < data.data.data.length; i++) {
+                        var tr = document.createElement('tr');
+                        tr.innerHTML = "<td>"+data.data.data[i].step+"</td>"
+                                        +"<td>"
+                                        +'<button onclick="CK('+i+')" type="button" class="mui-btn mui-btn-primary">'
+                                        +"查看</button></td>"
+                        table.appendChild(tr);
+                    }
+                     load.stop();
+                }, 1000);
+            }
+            // }
+        }, 'json'
+        );
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+</script>
+</html>

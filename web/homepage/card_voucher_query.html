@@ -1,0 +1,424 @@
+<html>
+
+<head>
+    <title>卡劵查询</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../mui/js/mui.min.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <script src="../mui/js/mui.picker.min.js"></script>
+
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+    <style>
+        select {
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .mui-collapse-content>.mui-row {
+            border-bottom: 1px solid #efefef;
+            margin-top: 10px;
+            padding-bottom: 10px;
+
+        }
+
+        .mui-collapse-content>.mui-row>:first-child {
+            font-size: 15px;
+            color: #505050;
+            padding-left: 25px;
+        }
+
+        .mui-collapse-content>.mui-row>:last-child {
+            padding-left: 25px;
+            font-size: 15px;
+            color: rgb(139, 139, 139);
+        }
+
+        #card_juan,
+        #select_kajuan {
+            font-size: 15px;
+        }
+
+        .mui-input-group:after {
+            background-color: #ffffff;
+        }
+
+        .mui-input-group .mui-input-row:after,
+        .mui-table-view-cell:after {
+            left: 0;
+            background-color: #e7e6e8;
+        }
+
+        .mui-table-view-cell.mui-collapse .mui-collapse-content {
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;">卡劵查询</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content" style="font-size: 15px;">
+        <form action="" class="mui-input-group" style="border:0px;">
+            <!-- 开始时间 -->
+            <!-- <div class="mui-input-row " onclick="start()">
+                <label>开始时间:</label>
+               <input type="text" placeholder="请选择开始时间" id="start_time">
+            </div> -->
+            <!-- 结束时间 -->
+            <!-- <div class="mui-input-row " onclick="over()">
+                <label>结束时间:</label>
+                <input type="text" placeholder="请选择结束时间" id="over_time">
+            </div> -->
+            <!-- 选择卡劵 -->
+            <div class="mui-input-row">
+                <label>筛选卡劵:</label>
+                <input type="text" value="" placeholder="筛选卡劵名称" id="card_juan">
+            </div>
+            <!-- 类型 -->
+            <div class="mui-input-row mui-select">
+                <label>类型:</label>
+                <select name="" style="color:rgb(105, 104,104)" id="select_kajuan">
+                    <option value="vip_cash_coupon">优惠券</option>
+                    <option value="vip_coupon">折扣劵</option>
+                    <option value="vip_coupon_gift">礼品劵</option>
+                </select>
+            </div>
+            <!-- 按钮 -->
+            <div class="mui-button-row" style="height: 50px;">
+                <button type="button" data-loading-text="查询中" class="mui-btn"
+                    style="width:340px;background-color:#007aff;color:white;" id="queren">确认筛选</button>
+            </div>
+        </form>
+        <div class="mui-scroll-wrapper" style="top: 180px;">
+            <div class="mui-scroll">
+                <!--这里放置真实显示的DOM内容-->
+                <ul class="mui-table-view" id="mui_table_view">
+                    <!-- <li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">金猪呱呱奖</a>
+                        <div class="mui-collapse-content">
+                            <div class="mui-row">
+                                <div class="mui-col-xs-5 mui-col-sm-5">卡劵名称:</div>
+                                <div class="mui-col-xs-7 mui-col-sm-7">金猪呱呱将</div>
+                            </div>
+                            <div class="mui-row">
+                                <div class="mui-col-xs-5 mui-col-sm-5">开始时间:</div>
+                                <div class="mui-col-xs-7 mui-col-sm-7">2012-13-11</div>
+                            </div>
+                            <div class="mui-row">
+                                <div class="mui-col-xs-5 mui-col-sm-5">结束时间:</div>
+                                <div class="mui-col-xs-7 mui-col-sm-7">2012-13-19</div>
+                            </div>
+                            <div class="mui-row">
+                                <div class="mui-col-xs-5 mui-col-sm-5">满多少元可用(元):</div>
+                                <div class="mui-col-xs-7 mui-col-sm-7">300</div>
+                            </div>
+                            <div class="mui-row">
+                                <div class="mui-col-xs-5 mui-col-sm-5">卡劵金额(元):</div>
+                                <div class="mui-col-xs-7 mui-col-sm-7">500</div>
+                            </div>
+                        </div>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var load = new Loading();
+    load.init();
+
+
+
+    window.onload = function () {
+        hidden_title();
+        queren();
+    }
+    var hhh = false;
+    var button_zt = "";
+    document.getElementById("queren").addEventListener('tap', function () {
+        mui(this).button('loading');//切换为loading状态
+        hhh = true;
+        button_zt = mui(this);
+        queren();
+
+    })
+    // picture.options[picture.selectedIndex].value
+    var table = document.getElementById("mui_table_view");
+    function queren() {
+        load.start();
+        // alert(document.getElementById("select_kajuan").options[document.getElementById("select_kajuan").selectedIndex].value)
+        // 代金劵vip_cash_coupon
+        if (document.getElementById("select_kajuan").options[document.getElementById("select_kajuan").selectedIndex].value == "vip_cash_coupon") {
+            //  alert('代金劵vip_cash_coupon')
+            mui.post('/index.php/CouponListIndex/', {
+                coupon: document.getElementById("card_juan").value, //卡劵
+                type: document.getElementById("select_kajuan").options[document.getElementById("select_kajuan").selectedIndex].value
+            }, function (data) {
+                if (data.code == 200) {
+                    table.innerHTML = "";
+                    if (data.data.data.length == 0) {
+                        table.innerHTML = "<h1 style='text-align:center;padding-top:20px;padding-bottom:20px;'>暂无数据</h1>";
+                    } else {
+                        for (i = 0; i < data.data.data.length; i++) {
+                            if (data.data.data[i].off_store_g == null) {
+                                data.data.data[i].off_store_g = "";
+                            }
+                            var type_name;
+                            if (data.data.data[i].coupon_type == 0 || data.data.data[i].coupon_type == "0") {
+                                type_name = "普通卡劵"
+                            } else if (data.data.data[i].coupon_type == 1 || data.data.data[i].coupon_type == "1") {
+                                type_name = "赠送卡劵"
+                            }
+                            var li = document.createElement('li');
+                            li.className = "mui-table-view-cell mui-collapse";
+                            li.innerHTML = '<a class="mui-navigate-right" href="#">' + data.data.data[i].name + '</a>'
+                                + '<div class="mui-collapse-content">'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">卡劵名称:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].name + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">卡劵类型:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + type_name + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">卡劵数量:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].coupon_number + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">已领数量:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].receive + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">剩余数量:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].number_g + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">开始时间:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].start_time + '</div>'
+                                + ' </div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">结束时间:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].end_time + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">满多少元可用(元):</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].money + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">卡劵金额:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].card_money + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">适用门店</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].store_g + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">核销门店:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].off_store_g + '</div>'
+                                + ' </div>'
+                                + ' </div >'
+
+                            table.appendChild(li);
+                        }
+                    }
+
+                    if (hhh) {
+                        button_zt.button('reset');
+                    }
+                    load.stop();
+
+                }
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+            //  折扣劵vip_coupon
+        } else if (document.getElementById("select_kajuan").options[document.getElementById("select_kajuan").selectedIndex].value == "vip_coupon") {
+            // alert('折扣劵vip_coupon')
+            mui.post('/index.php/CouponListIndex/', {
+                coupon: document.getElementById("card_juan").value, //卡劵
+                type: document.getElementById("select_kajuan").options[document.getElementById("select_kajuan").selectedIndex].value
+            }, function (data) {
+                if (data.code == 200) {
+                    table.innerHTML = "";
+                    if (data.data.data.length == 0) {
+                        table.innerHTML = "<h1 style='text-align:center;padding-top:20px;padding-bottom:20px;'>暂无数据</h1>";
+                    } else {
+                        for (i = 0; i < data.data.data.length; i++) {
+                            var type_name;
+                            if (data.data.data[i].coupon_type == 0 || data.data.data[i].coupon_type == "0") {
+                                type_name = "普通卡劵"
+                            } else if (data.data.data[i].coupon_type == 1 || data.data.data[i].coupon_type == "1") {
+                                type_name = "赠送卡劵"
+                            }
+                            var li = document.createElement('li');
+                            li.className = "mui-table-view-cell mui-collapse";
+                            li.innerHTML = '<a class="mui-navigate-right" href="#">' + data.data.data[i].name + '</a>'
+                                + '<div class="mui-collapse-content">'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">卡劵名称:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].name + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">卡劵类型:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + type_name + '</div>'
+                                + '</div>'
+                                +'<br>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">卡劵数量:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].coupon_number + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">已领数量:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].receive + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">剩余数量:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].number_g + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">开始时间:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].start_time + '</div>'
+                                + ' </div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">结束时间:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].end_time + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">满多少元可用(元):</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].money + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">卡劵折扣:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].card_discount + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">适用门店</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].store_g + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">核销门店:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].off_store_g + '</div>'
+                                + ' </div>'
+                                + ' </div >'
+
+                            table.appendChild(li);
+                        }
+                    }
+                    if (hhh) {
+                        button_zt.button('reset');
+                    }
+                    load.stop();
+                }
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+
+
+
+            // 礼品劵vip_coupon_gift
+        } else if (document.getElementById("select_kajuan").options[document.getElementById("select_kajuan").selectedIndex].value == "vip_coupon_gift") {
+            //    alert("礼品劵vip_coupon_gift")
+            mui.post('/index.php/CouponListIndex/', {
+                coupon: document.getElementById("card_juan").value, //卡劵
+                type: document.getElementById("select_kajuan").options[document.getElementById("select_kajuan").selectedIndex].value
+            }, function (data) {
+                if (data.code == 200) {
+                    table.innerHTML = "";
+                    if (data.data.data.length == 0) {
+                        table.innerHTML = "<h1 style='text-align:center;padding-top:20px;padding-bottom:20px;'>暂无数据</h1>";
+                    } else {
+                        for (i = 0; i < data.data.data.length; i++) {
+                            var type_name;
+                            if (data.data.data[i].coupon_type == 0 || data.data.data[i].coupon_type == "0") {
+                                type_name = "普通卡劵"
+                            } else if (data.data.data[i].coupon_type == 1 || data.data.data[i].coupon_type == "1") {
+                                type_name = "赠送卡劵"
+                            }
+                            var li = document.createElement('li');
+                            li.className = "mui-table-view-cell mui-collapse";
+                            li.innerHTML = '<a class="mui-navigate-right" href="#">' + data.data.data[i].name + '</a>'
+                                + '<div class="mui-collapse-content">'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">卡劵名称:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].name + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">卡劵类型:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + type_name + '</div>'
+                                + '</div>'
+
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">卡劵数量:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].coupon_number + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">已领数量:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].receive + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">剩余数量:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].number_g + '</div>'
+                                + '</div>'
+
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">开始时间:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].start_time + '</div>'
+                                + ' </div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">结束时间:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].end_time + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">礼品名称:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].store_code + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">适用门店</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].store_g + '</div>'
+                                + '</div>'
+                                + '<div class="mui-row">'
+                                + '<div class="mui-col-xs-5 mui-col-sm-5">核销门店:</div>'
+                                + '<div class="mui-col-xs-7 mui-col-sm-7">' + data.data.data[i].off_store_g + '</div>'
+                                + ' </div>'
+                                + ' </div >'
+
+                            table.appendChild(li);
+                        }
+
+                    }
+                    if (hhh) {
+                        button_zt.button('reset');
+                    }
+
+                }
+                load.stop();
+
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+            }, 'json'
+            );
+        }
+
+
+
+    }
+
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+</script>
+
+</html>

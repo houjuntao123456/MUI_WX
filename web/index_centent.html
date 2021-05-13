@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+
+    <!-- <meta name="viewport" content="width=device-width"> -->
+    <!-- 页面不进行缓存 -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Cache" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>锁客多</title>
+    <link href="./mui/css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/iconfont_centent.css">
+    <script src="./mui/js/mui.min.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery.cookie.js"></script>
+    <script src="./js/vconsole.js"></script>
+    <style>
+        a:hover {
+            text-decoration: none;
+        }
+
+        li {
+            list-style: none;
+            background-color: white;
+            text-align: center;
+        }
+
+        .span_size {
+            color: #3abeee;
+            font-size: 26px;
+        }
+
+        .div_mk {
+            background-color: white;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            font-size: 15px;
+            border-bottom: 1px solid #ebeaea;
+            margin-top: 20px;
+        }
+
+        .div3_mk {
+            background-color: white;
+            text-align: center;
+            /* height: 40px;
+            line-height: 40px; */
+            font-size: 15px;
+            border-bottom: 1px solid #ebeaea;
+        }
+
+        /* .div2_mk {
+
+            background-color: white;
+            text-align: center;
+            height: 80px;
+
+            font-size: 20px;
+            border-bottom: 1px solid #ebeaea;
+        }
+
+        .div2_mk>div {
+            line-height: 60px;
+            width: 96%;
+            height: 60px;
+            margin-top: 10px;
+            border-radius: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+             border-bottom: 1px solid #CAC8C8;
+            border-right: 1px solid #CAC8C8;
+            box-shadow: 3px 2px 5px #CAC8C8 inset;
+        }
+
+        .div2_mk>div:hover {
+             border-top: 1px solid #CAC8C8;
+            border-left: 1px solid #CAC8C8;
+            box-shadow: 2px 2px 5px #CAC8C8;
+        } */
+
+        /* 控制模块的高度 */
+        li {
+            height: 80px;
+        }
+
+        p {
+            color: black;
+            padding-top: 10px;
+            /* font-size: 17px; */
+        }
+
+
+        .sdh {
+            text-align: center;
+            margin: 10px 0 0 0;
+        }
+
+        .sdh a {
+            color: black;
+        }
+
+        .photo_Apple {
+            height: 200px;
+            font-family: "黑体";
+            font-weight: bolder;
+        }
+
+        .photo_Android {
+            height: 170px;
+        }
+
+        #picture {
+            width: 95%;
+            background: url(images/n1.png) no-repeat;
+            background-size: 100% 100%;
+            margin: 0 auto;
+            border-radius: 20px;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        .lett-spac-3 {
+            letter-spacing: 3px;
+            font-size: 24px;
+        }
+
+        .DH {
+            background-image: -webkit-linear-gradient(bottom, rgb(180, 179, 179), rgb(254, 254, 254));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* text-shadow: 2px 2px 4px #000; */
+        }
+
+        .dispay_none {
+            display: none;
+        }
+    </style>
+</head>
+
+
+<body>
+    <header class="mui-bar mui-bar-nav">
+        <span class="mui-icon mui-icon-email" id="email_">
+        </span>
+        <h1 class="mui-title">首页</h1>
+        <span class="iconfont  icon-xianshangxiaoshou" id="16057483824525"
+            style="float: right;line-height: 44px; font-size: 25px;">
+        </span>
+    </header>
+
+    <!-- 中间 -->
+    <div class="mui-content" id="main"><br>
+        <br>
+        <div class="photo_Apple" id="picture">
+            <div style="color: #ffffff;overflow: hidden;margin-top: 20px;margin-left: 20px;">
+                <!-- <img src="images/slogo.png" width="30px" height="30px" style="float:left;"> -->
+
+                <div style="float: left; overflow: hidden;line-height: 30px;padding-left: 10px;" class="DH"></div>
+            </div>
+            <div style="width: 87%;margin: auto;margin-top: 3%; position: relative;" id="tite">
+                <img src="" width="30px"
+                    style="top:-2px;left: -3px; border-radius: 10px; position: absolute;border:1px solid white;"
+                    id="ImgUrl">
+
+                <h3 style="font-size: 16px;margin-left: 32px;"><span class="DH lett-spac-3"></span>/<span
+                        style="font-size:16px;" class="DH"></span></h3>
+            </div>
+        </div>
+        <!-- 锚链接 -->
+        <!-- <div class="mui-row sdh">
+            <a class="mui-col-xs-3 mui-col-sm-3" href="#CRM">CRM</a>
+            <a class="mui-col-xs-3 mui-col-sm-3" href="#RFM">RFM</a>
+            <a class="mui-col-xs-3 mui-col-sm-3" href="#STM">STM</a>
+            <a class="mui-col-xs-3 mui-col-sm-3" href="#ISM">ISM</a>
+    
+        </div> -->
+        <!-- 销售报表 -->
+        <br>
+        <div class="mui-row div3_mk " style="line-height: 40px;" id="15904847277887">
+            <img src="images/suoke.jpg" alt="" style="border-radius:13px; position: relative;top:10px;"
+                width="40px"><span>VIP会员精准营销方案</span>
+        </div>
+        <div class="mui-row">
+            <!-- 关系图 -->
+            <!-- <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/rich_letter_view.html">
+                        <span class="iconfont icon-huaxiangfenxi span_size" style="color:#ff7b94;"></span>
+                        <p>富信/视图</p>
+                    </a>
+                </li>
+            </div> -->
+            <!-- 机构业绩 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904849201466">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/vip_precision.html">
+                        <span class="iconfont icon-huaxiangfenxi span_size" style="color:#ff7b94;"></span>
+                        <p>消费画像</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 门店业绩 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904849367926">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/wx_condition_group.html">
+                        <!--./homepage/wx_group.html -->
+                        <span class="iconfont  icon-huaxiangfenxi1 span_size" style="color:#55cebc;"></span>
+                        <p>顾客画像</p>
+                    </a>
+                </li>
+            </div>
+
+            <!-- 员工业绩 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904849944328">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/product_portrait.html">
+                        <span class="iconfont icon-hua3 span_size" style="color:#3abeee;"></span>
+                        <p>产品画像</p>
+                        <span></span>
+                    </a>
+                </li>
+            </div>
+            <!-- 货课精准 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904850423457">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/cargo_precision.html" id="hkcargo">
+                        <span class="iconfont icon--shuju-jingzhun span_size" style="color:#f88b2a;"></span>
+                        <p>货客精准</p>
+                        <span></span>
+                    </a>
+                </li>
+            </div>
+            <!-- 画像扩展 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904850605116">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/product_tags.html" id="bqtags">
+                        <span class="iconfont icon-svg-1 span_size" style="color:#3abeee;"></span>
+                        <p>画像扩展</p>
+                        <span></span>
+                    </a>
+                </li>
+            </div>
+            <!-- 上传图片 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904850740297">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/product_picture.html">
+                        <span class="iconfont icon-shangchuan1 span_size" style="color:#ff7b94;"></span>
+                        <p>商品 / 图片</p>
+                        <span></span>
+                    </a>
+                </li>
+            </div>
+            <!-- 提成管理 -->
+            <!-- <div class="mui-col-xs-4 mui-col-sm-4">
+                        <li class="mui-table-view-cell">
+                            <a href="./homepage/royalty.html">
+                                <span class="iconfont icon-web-icon- span_size" style="color:#ff7b93;font-weight: bold;"></span>
+                                <p>提成管理</p>
+                            </a>
+                        </li>
+                    </div> -->
+        </div>
+        <!-- 销售报表 -->
+        <div class="mui-row div_mk " id="15904847514263">销售报表分析(SAL)</div>
+        <div class="mui-row">
+            <!-- 机构业绩 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904850917463">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/institution_performance.html">
+                        <span class="iconfont icon-shuju3 span_size" style="color:#3abeee;"></span>
+                        <p>机构业绩</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 门店业绩 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="1590485103466">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/store_performance.html">
+                        <span class="iconfont  icon-yeji- span_size" style="color:#f88b2a;"></span>
+                        <p>门店业绩</p>
+                    </a>
+                </li>
+            </div>
+
+            <!-- 员工业绩 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904851175063">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/employee_performance.html">
+                        <span class="iconfont icon-89 span_size" style="color:#3abeee;"></span>
+                        <p>员工业绩</p>
+                        <span></span>
+                    </a>
+                </li>
+            </div>
+            <!-- 回购查询 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904851409991">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/buy_back_query.html" id="hgcx">
+                        <span class="iconfont icon-chaxun span_size" style="color:#55cebc;"></span>
+                        <p>回购查询</p>
+                        <span></span>
+                    </a>
+                </li>
+            </div>
+            <!-- 搭配计划  -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904851571455">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/return_order.html">
+                        <span class="iconfont icon-jihua span_size" style="color:#3abeee;"></span>
+                        <p>搭配计划</p>
+                        <span></span>
+                    </a>
+                </li>
+            </div>
+
+            <!-- 畅销排行  注释状态-->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904851720432" style="display: none;">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/best_sellers.html" id="cxph">
+                        <span class="iconfont icon-paihangbang span_size" style="color:#ff7b93;"></span>
+                        <p>畅销排行</p>
+                        <span></span>
+                    </a>
+                </li>
+            </div>
+            <!-- 员工PK -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904851863931">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/pk_grouping.html">
+                        <span class="iconfont icon-jingzhengfenxi  span_size" style="color:#f88b2a;"></span>
+                        <p>pk分组</p>
+                        <span></span>
+                    </a>
+                    </span>
+                </li>
+            </div>
+            <!-- 目标达成 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904851999333">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/goal_attainment.html">
+                        <span class="iconfont icon-mubiao- span_size" style="color:#ff7b93;"></span>
+                        <p>目标达成</p>
+                        <span></span>
+                    </a>
+                </li>
+            </div>
+
+            <!-- V票管理 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15960905834969">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/v_ticket.html">
+                        <span class="iconfont  icon-dingdan7 span_size" style="color:#f88b2a;"></span>
+                        <p>V票管理</p>
+                    </a>
+                </li>
+            </div>
+
+        </div>
+        <!-- <br> -->
+        <!-- 销售报表 -->
+        <div class="mui-row div_mk " id="15904847671151">微会员数据模型分析(MIM)</div>
+        <div class="mui-row">
+            <!-- 机构微会员 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904852111615">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/institution_member.html">
+                        <span class="iconfont icon-organization span_size" style="color:#55cebc;"></span>
+                        <p>机构微会员</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 门店微会员 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904852266672">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/store_member.html" id="">
+                        <span class="iconfont icon-mendian span_size" style="color:#f88b2a;"></span>
+                        <p>门店微会员</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 员工微会员 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15904852377602">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/mechanism_member.html">
+                        <span class="iconfont icon-kehuguanli span_size"></span>
+                        <p>员工微会员</p>
+                    </a>
+                </li>
+            </div>
+
+            <!-- 我的会员 -->
+            <!-- <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell">
+                    <a href="./membership.html">
+                        <span class="iconfont icon-yuangongguanli span_size" style="color:#ff7b93;"></span>
+                        <p>会员列表</p>
+                        <span ></span>
+                    </a>
+                </li>
+            </div> -->
+            <!-- 新建会员 -->
+            <!-- <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/new_member.html">
+                        <span class="iconfont icon-tianjiahuiyuan span_size" style="color:#239df7;"></span>
+                        <p>新建会员</p>
+                        <span ></span>
+                    </a>
+                </li>
+            </div> -->
+            <!-- 会员邀请码 -->
+            <!-- <div class="mui-col-xs-4 mui-col-sm-4">
+                <li class="mui-table-view-cell" id="spxsqk">
+                    <a href="./homepage/member_invitation.html">
+                        <span class="iconfont icon-erweima span_size" style="color:#ff4d6d;"></span>
+                        <p>会员邀请码</p>
+                    </a>
+                </li>
+            </div> -->
+        </div>
+        <!-- 第三模块 -->
+        <div class="mui-row div_mk " name="RFM" id="15904847859831">会员9维模型数据分析(RFM)</div>
+        <div class="mui-row">
+            <!-- R活跃分析 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905414198535">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/r_report.html">
+                        <span class="iconfont icon-R span_size" style="color:#3abeee;"></span>
+                        <p>R活跃分析</p>
+                    </a>
+                </li>
+            </div>
+            <!-- F回购率分析 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905414414683">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/f_report.html">
+                        <span class="iconfont icon-F1 span_size" style="color:#f88b2a;"></span>
+                        <p>F回购率分析</p>
+                    </a>
+                </li>
+            </div>
+            <!-- M贡献度分析 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905417386601">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/m_report.html">
+                        <span class="iconfont icon-M1 span_size" style="color:#3abeee;"></span>
+                        <p>M贡献度分析</p>
+                    </a>
+                </li>
+            </div>
+            <!-- I忠诚度分析 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905417583873">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/i_report.html">
+                        <span class="iconfont icon-I1 span_size" style="color:#ff7b93;"></span>
+                        <p>I忠诚度分析</p>
+                    </a>
+                </li>
+            </div>
+            <!-- N高件数分析 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905418291642">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/n_report.html">
+                        <span class="iconfont icon-N span_size" style="color:#3abeee;"></span>
+                        <p>N高件数分析</p>
+                    </a>
+                </li>
+            </div>
+            <!-- P高客单分析 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905419245925">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/p_report.html" id="">
+                        <span class="iconfont icon-P span_size" style="color:#ff7b93;"></span>
+                        <p>P高客单分析</p>
+                    </a>
+                </li>
+            </div>
+            <!-- A高件单分析 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905419446969">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/a_report.html">
+                        <span class="iconfont icon-A span_size" style="color:#55cebc;"></span>
+                        <p>A高件单分析</p>
+                    </a>
+                </li>
+            </div>
+            <!-- J高连带分析-->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="1590541961997">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/j_report.html">
+                        <span class="iconfont icon-J span_size" style="color:#f88b2a;"></span>
+                        <p>J高连带分析</p>
+                    </a>
+                </li>
+            </div>
+            <!-- C高消费分析-->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905419859215">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/c_report.html">
+                        <span class="iconfont icon-C span_size" style="color:#55cebc;"></span>
+                        <p>C高消费分析</p>
+                        <span id="STM"></span>
+                    </a>
+                </li>
+            </div>
+        </div>
+        <!-- <br> -->
+        <!-- 员工管理 -->
+        <div class="mui-row div_mk " name="STM" id="15904848094781">员工九维绩效管理(STM)</div>
+        <div class="mui-row">
+
+            <!-- 活跃度 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905420344065">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/activity_level.html">
+                        <span class="iconfont icon-svg- span_size" style="color:#f88b2a;"></span>
+                        <p>活跃度</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 回购率 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905420450388">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/recurrence_rate.html">
+                        <span class="iconfont  icon-huiguiceshi span_size"></span>
+                        <p>回购率</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 贡献度 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905420554428">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/contribution_degree.html">
+                        <span class="iconfont icon-gongxian span_size" style="color:#55cebc;font-weight: bold;"></span>
+                        <p>贡献度</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 忠诚度 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905420659216">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/loyalty.html">
+                        <span class="iconfont icon-chengxin span_size" style="color:#55cebc;"></span>
+                        <p>忠诚度</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 高件数 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905420736563">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/high_number.html">
+                        <span class="iconfont  icon-number span_size" style="color:#f88b2a;font-weight: bold;"></span>
+                        <p>高件数</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 高客单 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905420876134">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/gao_ke_shan.html">
+                        <span class="iconfont  icon-icon4 span_size" style="font-weight: bold;"></span>
+                        <p>高客单</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 高件单 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905421005156">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/tall_sheet.html">
+                        <span class="iconfont icon-zhuanti span_size" style="color:#ff7b93;"></span>
+                        <p>高件单</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 高连带 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905421463302">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/high_joint.html">
+                        <span class="iconfont  icon-shujuzhongxin span_size"></span>
+                        <p>高连带</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 高消费 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905421547764">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/high_consumption.html">
+                        <span class="iconfont icon-gaoxiaofei span_size"
+                            style="color:#ff7b93;font-weight: bold;"></span>
+                        <p id="ISM">高消费</p>
+                    </a>
+                </li>
+            </div>
+        </div>
+        <!-- <br> -->
+        <!-- 互动邀约方案 -->
+        <div class="mui-row div_mk " name="ISM" id="15904848243006">互动邀约方案(IMS)</div>
+        <div class="mui-row">
+            <!-- 100天跟进 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905421718077">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/one_hundred_all.html">
+                        <span class="iconfont icon-cash100 span_size" style="color:#3abeee;"></span>
+                        <p>100天跟进</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 专场跟进 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905421898495">
+                <li class="mui-table-view-cell">
+                    <!-- <a href="./homepage/special_follow.html" > -->
+                    <a href="./homepage/special_follow_new.html">
+                        <span class="iconfont icon-genjinkehu span_size" style="color:#f88b2a;"></span>
+                        <p>专场跟进</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 精准互动 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905422098642">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/wx_condition_group.html" id="wx_chat">
+                        <span class="iconfont icon-zhuanyegaoxiao span_size"
+                            style="color:#3abeee;font-size: 30px;"></span>
+                        <p>精准互动</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 感动日子 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905422263276">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/birthday_all.html">
+                        <span class="iconfont icon-shengri span_size" style="color:#ff7b93;"></span>
+                        <p>会员生日</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 传统日子 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905422495439">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/traditional_days.html">
+                        <span class="iconfont icon-hua4 span_size"></span>
+                        <p>传统日子</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 法定日子 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905422639391">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/public_day.html">
+                        <span class="iconfont icon-dujia span_size" style="color:#55cebc;font-weight: bold;"></span>
+                        <p>公众日子</p>
+                        <span id="STM"></span>
+                    </a>
+                </li>
+            </div>
+        </div>
+        <!-- <br> -->
+        <div class="mui-row div_mk " id="15984070167274">复购流程(CPS)</div>
+        <div class="mui-row">
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="1598407173607">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/strategy_free.html">
+                        <span class="iconfont   icon-kaoheweidufenxi span_size" style="color:#f88b2a;"></span>
+                        <p>免费策略</p>
+                    </a>
+                </li>
+            </div>
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15984071919242">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/strategy_value.html">
+                        <span class="iconfont icon-kucunpandian- span_size" style="color:#ff7b93;"></span>
+                        <p>价值策略</p>
+                    </a>
+                </li>
+            </div>
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15984072082565">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/strategy_moved.html">
+                        <span class="iconfont icon-icon-heart span_size" style="color:#f88b2a;"></span>
+                        <p>感动策略</p>
+                    </a>
+                </li>
+            </div>
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15984072233733">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/strategy_impression.html">
+                        <span class="iconfont icon-vs span_size" style="color:#3abeee;"></span>
+                        <p>印象策略</p>
+                    </a>
+                </li>
+            </div>
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15984072397256">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/strategy_believe.html">
+                        <span class="iconfont icon-gongxianbang span_size" style="color:#f88b2a;"></span>
+                        <p>相信策略</p>
+                    </a>
+                </li>
+            </div>
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15984072509326">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/strategy_interaction.html">
+                        <span class="iconfont icon-xinzenghuifang  span_size" style="color:#3abeee;"></span>
+                        <p>互动策略</p>
+                    </a>
+                </li>
+            </div>
+
+        </div>
+
+
+        <div class="mui-row div_mk " id="15904848445928">卡劵管理(CTM)</div>
+        <!-- 目标管理 -->
+        <div class="mui-row">
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905422749426">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/card_voucher_query.html">
+                        <span class="iconfont icon-tianchongxing- span_size" style="color:#f88b2a;"></span>
+                        <p>卡劵列表</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 目标管理 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905422835908">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/gift_write_off.html">
+                        <span class="iconfont icon-youhuijuan span_size" style="color:#55cebc;"></span>
+                        <p>赠送 / 核销</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 目标管理 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905422939466">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/card_marketing.html">
+                        <span class="iconfont icon-hexiao span_size" style="color:#ff7b93;"></span>
+                        <p>卡劵营销</p>
+                    </a>
+                </li>
+            </div>
+        </div>
+
+        <!-- <br> -->
+        <!-- 设置 -->
+        <div class="mui-row div_mk " id="1590484864372">账号设置管理(SET)</div>
+        <div class="mui-row">
+            <!-- 切换账号 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905423061989">
+                <li class="mui-table-view-cell">
+                    <a onclick="ppp()">
+                        <span class="iconfont icon-qiehuan span_size" style="color:#ff7b93;"></span>
+                        <p>切换账号</p>
+                    </a>
+                </li>
+            </div>
+
+            <!-- 修改资料 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="15905423152327">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/personal_data.html">
+                        <span class="iconfont  icon-gerenziliao span_size" style="color:#f88b2a;"></span>
+                        <p>个人资料</p>
+                    </a>
+                </li>
+            </div>
+            <!-- 修改密码 -->
+            <div class="mui-col-xs-4 mui-col-sm-4 " id="1590542322836">
+                <li class="mui-table-view-cell">
+                    <a href="./homepage/Change_Password.html">
+                        <span class="iconfont icon-mobile span_size"></span>
+                        <p>修改密码</p>
+                    </a>
+                </li>
+            </div>
+        </div><br><br>
+    </div>
+</body>
+<script>
+     let jsobs = {
+            cont: false,
+            phone: '',
+            jigou: '',
+            store: '',
+            guwen: '',
+            weixin: '',
+        };
+        localStorage.setItem("membership_jsobs", JSON.stringify(jsobs));
+    // 根据时间戳,进行访问页面,防止浏览器缓存
+    (function () {
+        let time = Date.now();
+        document.getElementById("bqtags").setAttribute("href", './homepage/product_tags.html?t=' + time);
+    })()
+    // var vConsole = new VConsole();
+    localStorage.setItem("vip_staff_code", '');
+    // vip消费画像后退
+    localStorage.setItem("location_tui", true);
+    //页面的margin-top
+    var hh = window.parent.document.getElementsByClassName("mui-iframe-wrapper");
+    var email_ = document.getElementById("email_");
+    email_.addEventListener("tap", function () {
+        location.href = './homepage/unread_message.html'
+    })
+    var commodity_pay = document.getElementById("16057483824525");
+    commodity_pay.addEventListener("tap", function () {
+        location.href = './payment/commodity_payment.html';
+
+    });
+   
+    window.onload = function () {
+        hh[0].style.bottom = "51px";
+        
+    }
+    function ppp() {
+        mui.post('/index.php/logout/', {
+        }, function (data) {
+            if (data.code == 0) {
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                top.location.href = $.cookie('locaton');
+            }
+        }, 'json'
+        );
+    }
+
+
+
+
+
+    // // 安卓手机采用CSS2
+    document.getElementById("ImgUrl").src = $.cookie('headImgUrl');
+    var arrays = [
+        "16057483824525",   //收银
+        "15904847277887",   //VIP会员精准营销方案
+        "15904849201466",   //消费画像
+        "15904849367926",   //顾客画像
+        "15904849944328",   //产品画像
+        "15904850423457",   //货客精准
+        "15904850605116",   //画像扩展
+        "15904850740297",   //上传图片
+        "15904847514263",   //销售报表分析(SAL)
+        "15904850917463",   //机构业绩
+        "1590485103466",    //门店业绩
+        "15904851175063",   //员工业绩
+        "15904851409991",   //回购查询
+        "15904851571455",   //搭配计划
+        "15904851720432",   //畅销排行
+        "15904851863931",   //pk分组
+        "15904851999333",   //目标达成
+        "15960905834969",   //V票管理
+        "15904847671151",   //微会员数据模型分析(MIM)
+        "15904852111615",   //机构微会员
+        "15904852266672",   //门店微会员
+        "15904852377602",   //员工微会员
+        "15904847859831",   //会员9维模型数据分析(RFM)
+        "15905414198535",   //R活跃分析
+        "15905414414683",   //F回购率分析
+        "15905417386601",   //M贡献度分析
+        "15905417583873",   //I忠诚度分析
+        "15905418291642",   //N高件数分析
+        "15905419245925",   //P高客单分析
+        "15905419446969",   //A高件单分析
+        "1590541961997",    //J高连带分析
+        "15905419859215",   //C高消费分析
+        "15904848094781",   //员工九维绩效管理(STM)
+        "15905420344065",   //活跃度
+        "15905420450388",   //回购率
+        "15905420554428",   //贡献度
+        "15905420659216",   //忠诚度
+        "15905420736563",   //高件数
+        "15905420876134",   //高客单
+        "15905421005156",   //高件单
+        "15905421463302",   //高连带
+        "15905421547764",   //高消费
+        "15904848243006",   //互动邀约方案(IMS)
+        "15905421718077",   //100天跟进
+        "15905421898495",   //专场跟进
+        "15905422098642",   //精准互动
+        "15905422263276",   //会员生日
+        "15905422495439",   //传统日子
+        "15905422639391",   //公众日子
+        "15904848445928",   //卡劵管理(CTM)
+        "15905422749426",   //卡劵列表
+        "15905422835908",   //赠送 / 核销
+        "15905422939466",   //卡劵营销
+        "1590484864372",    //账号设置管理(SET)
+        "15905423061989",   //切换账号
+        "15905423152327",   //个人资料
+        "1590542322836",    //修改密码
+        "15984070167274",   //复购流程(CPS)
+        "1598407173607",    // 免费策略
+        "15984071919242",   //价值策略
+        "15984072082565",   //感动策略
+        "15984072233733",   //印象策略
+        "15984072397256",   //相信策略
+        "15984072509326",   //互动策略
+
+        "16027323911575",   //员工PK 
+        "16027324050954",   //门店PK
+        "16027324319955",   //机构PK
+        "16027324518501",   //开卡指标
+
+        "16027324939666",   //v票奖励
+        "16027325073476",   //v票兑换
+        "16027325220545",   //v票查询
+
+        "16063706460525", // 卡券赠送
+        "16063706664317", // 卡券核销
+        "16063706859686" // 扫码核销
+    ];
+
+    $(function () {
+        mui.post('/index.php/UserlistViplist/', {
+        }, function (data) {
+            if (data.code == 200) {
+                localStorage.setItem("jurisdiction_Administration", '');
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                //------- 卡号,  姓名,  职位,   组织机构,  门店
+                //->field('code, name, vpname, vgname, vsname')
+                mui(".DH")[0].innerHTML = data.data.vgname;
+                mui(".DH")[1].innerHTML = data.data.name;
+                mui(".DH")[2].innerHTML = data.data.vpname;
+                // document.getElementById("789").classList.remove
+                if (data.data.phone_code.length == 0) {
+                    console.log('没有任何节点');
+                } else {
+                    let shuzu = getArrDifference(data.data.phone_code);
+                    localStorage.setItem("jurisdiction_Administration", shuzu);
+                    for (let i = 0; i < shuzu.length; i++) {
+                        // mui("#" + shuzu[i])[0].classList.add("dispay_none");
+
+                        let s = document.getElementById(shuzu[i]);
+                        if (s) s.classList.add("dispay_none");
+                    }
+                }
+
+            }
+        }, 'json'
+        );
+    })
+    // 两个数组不相同的
+    function getArrDifference(arr2) {
+        return arrays.concat(arr2).filter(function (v, i, arr) {
+            return arr.indexOf(v) === arr.lastIndexOf(v);
+        });
+    }
+
+
+
+
+</script>
+<script>
+    var u = navigator.userAgent, app = navigator.appVersion
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    $(document).ready(function () {
+        $("textarea").blur(function () {
+            if (isIOS) {
+                blurAdjust()
+                // alert("1231321233")
+            }
+        });
+    });
+    // 解决苹果不回弹页面
+    function blurAdjust(e) {
+        setTimeout(() => {
+            // alert("1231321233")
+            if (document.activeElement.tagName == 'INPUT' || document.activeElement.tagName == 'TEXTAREA') {
+                return
+            }
+            let result = 'pc';
+            if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) { //判断iPhone|iPad|iPod|iOS
+                result = 'ios'
+            } else if (/(Android)/i.test(navigator.userAgent)) {  //判断Android
+                result = 'android'
+            }
+            if (result = 'ios') {
+                document.activeElement.scrollIntoViewIfNeeded(true); // 解决苹果不回弹页面 关键
+            }
+        }, 100)
+    }
+
+
+</script>
+
+<script>
+    // alert($(window).height());
+
+    //获取父页面
+    // var hd = window.parent.document.getElementById("hd");
+    var nav = window.parent.document.getElementById("nav");
+    nav.style.bottom = '0px';
+    nav.style.display="";
+    //页面的margin-top
+
+    document.getElementById("bqtags").onclick = function () {
+        localStorage.removeItem("tagscode");
+        localStorage.setItem("contern_num", 0);
+    };
+    document.getElementById("hkcargo").onclick = function () {
+        localStorage.removeItem("tagscode");
+        localStorage.setItem("contern_num", 0);
+    };
+    //  document.getElementById("cxph").onclick = function () {
+    //     localStorage.setItem("best_changxiao", "");
+    // };
+    // document.getElementById("ygpk").onclick = function () {
+    //     localStorage.setItem("best_pk", "");
+    // };
+    document.getElementById("hgcx").onclick = function () {
+        localStorage.setItem("best_huigou", "");
+    };
+</script>
+
+
+</html>

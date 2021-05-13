@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/vconsole.js"></script>
+
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+    <title>介绍</title>
+    <style>
+        .mui-content>.mui-table-view:first-child {
+            margin-top: 0px;
+        }
+
+        .mui_row_style {
+            padding: 5px;
+            border-bottom: 1px solid #EEEEEE;
+        }
+
+        .mui_row_style p:nth-child(2) {
+            /* color: #007aff; */
+            text-align: right;
+            padding-right: 5px;
+        }
+
+        .see_xiangqing {
+            width: 95%;
+            margin: 0 auto;
+            /* border: 1px solid blue; */
+        }
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:#fff;"></a>
+        <h1 class="mui-title" style="color:#fff;">介绍</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content mui-scroll-wrapper">
+        <div class="mui-scroll">
+            <p style="padding-left: 20px;padding-top: 9px;">介绍人</p>
+            <ul class="mui-table-view" id="introducedMe">
+                <!-- <li class="mui-table-view-cell mui-collapse">
+                    <a class="mui-navigate-right" href="#">转介绍人:哈哈哈</a>
+                    <div class="mui-collapse-content">
+                        <div class="mui-row mui_row_style">
+                            <p class="mui-col-sm-9 mui-col-xs-9">姓名:</p>
+                            <p class="mui-col-sm-3 mui-col-xs-3">侯君</p>
+                        </div>
+                        <div class="mui-row mui_row_style">
+                            <p class="mui-col-sm-9 mui-col-xs-9">卡号:</p>
+                            <p class="mui-col-sm-3 mui-col-xs-3">侯君</p>
+                        </div>
+                        <div class="mui-row mui_row_style">
+                            <p class="mui-col-sm-9 mui-col-xs-9">介绍时间:</p>
+                            <p class="mui-col-sm-3 mui-col-xs-3">侯君</p>
+                        </div>
+                        <div class="mui-row mui_row_style">
+                            <p class="mui-col-sm-9 mui-col-xs-9">备注:</p>
+                            <p class="mui-col-sm-3 mui-col-xs-3 xiugai"
+                                content="您好！非常感谢您对我们【锁客科技】的支持和关照，您今天在我家购买的丽热线【】">
+                                <span class="mui-icon mui-icon-compose" style="color:#007aff;"></span></p>
+                        </div>
+                        <div style="text-align: center;padding-top: 5px;">
+                            <textarea style=" width: 90%;" name="" id="" rows="6" cols="30" disabled>
+                            您好！非常感谢您对我们【锁客科技】的支持和关照，您今天在我家购买的
+                            衣服建议您干洗，不要浸泡，桑蚕丝的必须干洗，防止缩水变形，有什么要求随时和我联系，我是您
+                            的专属时尚顾问【小春】，祝您开心快乐每一天，美丽热线【】
+                        </textarea>
+                        </div>
+                    </div>
+                </li> -->
+            </ul>
+            <p style="padding-left: 20px;padding-top: 9px;">被介绍人</p>
+            <ul class="mui-table-view" id="youIntroduce">
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- 修改备注 -->
+    <div id="sheet3" class="mui-popover mui-popover-bottom mui-popover-action">
+        <!-- <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                        <a href="#sheet3" style="color: black; font-size: 18px;">修改备注
+                            <span class="mui-icon mui-icon-closeempty" style=" float: right;"></span></a>
+                    </li>
+                </ul> -->
+        <!-- 可选择菜单 -->
+        <ul class="mui-table-view">
+            <li>
+                <div class="mui-row" style="width: 90%;margin:30px auto; text-align: center;">
+                    <textarea name="" id="ch_textarea" cols="30" rows="8"></textarea>
+                </div>
+            </li>
+
+        </ul>
+        <!-- 立即添加 -->
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell" onclick="button_Remarks()">
+                <b>修改备注</b>
+            </li>
+        </ul>
+    </div>
+</body>
+
+
+
+<script>
+    var load = new Loading();
+    load.init();
+    // 获取传过来的参数
+    var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('=');
+    var idd = decodeURI(loc.substr(n2 + 1, n1 - n2));
+    // console.log(idd);
+    // 记录备注的代码
+    var text = '';
+    $(function () {
+        load.start();
+        mui.post('/index.php/UserlistIntroducedMe/', {
+            // code: '15133256331'
+            code: idd
+        }, function (data) {
+            console.log(data);
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+
+            // 介绍人
+            if (data.code == 200) {
+                if ((data.data.introducedMe == null) || (data.data.introducedMe == "") || (data.data.introducedMe == undefined)) {
+                    var li = document.createElement('li');
+                    li.style = "text-align:center;"
+                    li.innerHTML = "暂无数据!";
+                    mui("#introducedMe")[0].appendChild(li);
+                } else {
+                    data.data.introducedMe.id = (data.data.introducedMe.id == "") || (data.data.introducedMe.id == undefined) || (data.data.introducedMe.id == null) ? "" : data.data.introducedMe.id;
+                    data.data.introducedMe.lnt_name = (data.data.introducedMe.lnt_name == "") || (data.data.introducedMe.lnt_name == undefined) || (data.data.introducedMe.lnt_name == null) ? "" : data.data.introducedMe.lnt_name;
+                    data.data.introducedMe.lnt_code = (data.data.introducedMe.lnt_code == "") || (data.data.introducedMe.lnt_code == undefined) || (data.data.introducedMe.lnt_code == null) ? "" : data.data.introducedMe.lnt_code;
+                    data.data.introducedMe.lnttime = (data.data.introducedMe.lnttime == "") || (data.data.introducedMe.lnttime == undefined) || (data.data.introducedMe.lnttime == null) ? "" : data.data.introducedMe.lnttime;
+                    data.data.introducedMe.remarks = (data.data.introducedMe.remarks == "") || (data.data.introducedMe.remarks == undefined) || (data.data.introducedMe.remarks == null) ? "" : data.data.introducedMe.remarks;
+                    var li = document.createElement('li');
+                    li.className = 'mui-table-view-cell mui-collapse';
+                    li.innerHTML = '<a class="mui-navigate-right" href="#">' + data.data.introducedMe.lnt_name + '</a>'
+                        + '<div class="mui-collapse-content" >'
+                        + '<div class="mui-row mui_row_style">'
+                        + ' <p class="mui-col-sm-9 mui-col-xs-9">姓名:</p>'
+                        + ' <p class="mui-col-sm-3 mui-col-xs-3">' + data.data.introducedMe.lnt_name + '</p>'
+                        + ' </div>'
+                        + '<div class="mui-row mui_row_style">'
+                        + '<p class="mui-col-sm-8 mui-col-xs-8">卡号:</p>'
+                        + '<p class="mui-col-sm-4 mui-col-xs-4">' + data.data.introducedMe.lnt_code + '</p>'
+                        + '</div>'
+                        + ' <div class="mui-row mui_row_style">'
+                        + ' <p class="mui-col-sm-5 mui-col-xs-5">介绍时间:</p>'
+                        + '<p class="mui-col-sm-7 mui-col-xs-7">' + data.data.introducedMe.lnttime + '</p>'
+                        + ' </div>'
+                        + '<div class="mui-row mui_row_style">'
+                        + ' <p class="mui-col-sm-9 mui-col-xs-9">备注:</p>'
+                        + '<p class="mui-col-sm-3 mui-col-xs-3 xiugai" content="' + data.data.introducedMe.remarks + '" id_num="' + data.data.introducedMe.id + '">'
+                        + ' <span class="mui-icon mui-icon-compose" style="color:#007aff;"></span></p>'
+                        + ' </div>'
+                        + ' <div style="text-align: center;padding-top: 5px;">'
+                        + ' <textarea style=" width: 90%;" name="" id="" rows="6" cols="30" disabled>'
+                        + data.data.introducedMe.remarks
+                        + '</textarea>'
+                        + ' </div>'
+                        + '</div >'
+                    mui("#introducedMe")[0].appendChild(li)
+                }
+
+
+                // 我介绍的人
+                if (data.data.youIntroduce.length == 0) {
+                    var li = document.createElement('li');
+                    li.style = "text-align:center;"
+                    li.innerHTML = "暂无数据!";
+                    mui("#youIntroduce")[0].appendChild(li)
+                } else {
+                    for (let i = 0; i < data.data.youIntroduce.length; i++) {
+
+                        data.data.youIntroduce[i].rsid_name = (data.data.youIntroduce[i].rsid_name == "") || (data.data.youIntroduce[i].rsid_name == undefined) || (data.data.youIntroduce[i].rsid_name == null) ? "" : data.data.youIntroduce[i].rsid_name;
+                        data.data.youIntroduce[i].rsid_code = (data.data.youIntroduce[i].rsid_code == "") || (data.data.youIntroduce[i].rsid_code == undefined) || (data.data.youIntroduce[i].rsid_code == null) ? "" : data.data.youIntroduce[i].rsid_code;
+                        data.data.youIntroduce[i].lnttime = (data.data.youIntroduce[i].lnttime == "") || (data.data.youIntroduce[i].lnttime == undefined) || (data.data.youIntroduce[i].lnttime == null) ? "" : data.data.youIntroduce[i].lnttime;
+                        data.data.youIntroduce[i].remarks = (data.data.youIntroduce[i].remarks == "") || (data.data.youIntroduce[i].remarks == undefined) || (data.data.youIntroduce[i].remarks == null) ? "" : data.data.youIntroduce[i].remarks;
+                        data.data.youIntroduce[i].id = (data.data.youIntroduce[i].id == "") || (data.data.youIntroduce[i].id == undefined) || (data.data.youIntroduce[i].id == null) ? "" : data.data.youIntroduce[i].id;
+
+                        var li = document.createElement('li');
+                        li.className = 'mui-table-view-cell mui-collapse';
+                        li.innerHTML = '<a class="mui-navigate-right" href="#">' + data.data.youIntroduce[i].rsid_name + '</a>'
+                            + '<div class="mui-collapse-content" >'
+                            + '<div class="mui-row mui_row_style">'
+                            + ' <p class="mui-col-sm-9 mui-col-xs-9">姓名:</p>'
+                            + ' <p class="mui-col-sm-3 mui-col-xs-3">' + data.data.youIntroduce[i].rsid_name + '</p>'
+                            + ' </div>'
+                            + '<div class="mui-row mui_row_style">'
+                            + '<p class="mui-col-sm-8 mui-col-xs-8">卡号:</p>'
+                            + '<p class="mui-col-sm-4 mui-col-xs-4">' + data.data.youIntroduce[i].rsid_code + '</p>'
+                            + '</div>'
+                            + ' <div class="mui-row mui_row_style">'
+                            + ' <p class="mui-col-sm-5 mui-col-xs-5">介绍时间:</p>'
+                            + '<p class="mui-col-sm-7 mui-col-xs-7">' + data.data.youIntroduce[i].lnttime + '</p>'
+                            + ' </div>'
+                            + '<div class="mui-row mui_row_style">'
+                            + ' <p class="mui-col-sm-9 mui-col-xs-9">备注:</p>'
+                            + '<p class="mui-col-sm-3 mui-col-xs-3 xiugai" content="' + data.data.youIntroduce[i].remarks + '" id_num="' + data.data.youIntroduce[i].id + '">'
+                            + ' <span class="mui-icon mui-icon-compose" style="color:#007aff;"></span></p>'
+                            + ' </div>'
+                            + ' <div style="text-align: center;padding-top: 5px;">'
+                            + ' <textarea style=" width: 90%;" name="" id="" rows="6" cols="30" disabled>'
+                            + data.data.youIntroduce[i].remarks
+                            + '</textarea>'
+                            + ' </div>'
+                            + '</div >'
+
+                        mui("#youIntroduce")[0].appendChild(li)
+                    }
+                }
+
+
+            }
+            load.stop();
+        }, 'json'
+        );
+
+    })
+
+    // 记录修改备注的id
+    var xg_remarks_id = 0;
+    // 记录点击修改按钮的代码
+    var text_content = '';
+    mui(".mui-scroll-wrapper").on('tap', '.xiugai', function (e) {
+        xg_remarks_id = this.getAttribute("id_num");
+        // this.getAttribute("content")
+        mui('#sheet3').popover('toggle');
+        text_content = this;
+        text = this.parentNode.nextElementSibling.firstElementChild;
+        mui('#ch_textarea')[0].value = this.getAttribute("content");
+    })
+
+    // 修改备注
+    function button_Remarks() {
+        load.start();
+        mui.post('/index.php/UserlistIntroducedRemarks/', {
+            id: xg_remarks_id,
+            remarks: mui('#ch_textarea')[0].value
+        }, function (data) {
+            console.log(data);
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                mui.toast(data.msg, {
+                    duration: 'long',
+                    type: 'div'
+                })
+                text_content.setAttribute("content", mui('#ch_textarea')[0].value);
+                text.value = mui('#ch_textarea')[0].value;
+                mui('#sheet3').popover('toggle');
+                load.stop();
+            } else if (data.code == 400) {
+                mui.toast(data.msg, {
+                    duration: 'long',
+                    type: 'div'
+                })
+                load.stop();
+            }
+        }, 'json'
+        );
+
+    }
+
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+    // 解决mui滚动条与textarea自身滚动冲突
+    window.addEventListener('touchmove', function (e) {
+        var target = e.target;
+        if (target && target.tagName === 'TEXTAREA') {//textarea阻止冒泡  
+            e.stopPropagation();
+        }
+    }, true);  
+</script>
+
+</html>

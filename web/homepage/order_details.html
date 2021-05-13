@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>订单详情</title>
+        <link rel="stylesheet" href="../mui/css/mui.css">
+        <script src="../mui/js/mui.js"></script>
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/hidden-titile.js"></script>
+
+        <link rel="stylesheet" href="../css/loading.css">
+        <script src="../js/loading.js"></script>
+        <style>
+                .pstyle1 {
+                        color: black;
+                        line-height: 30px;
+                        padding: 10px 15px 0px 15px;
+                }
+
+                .pstyle2 {
+                        color: black;
+                        padding: 0px 15px 10px 15px;
+                        margin-bottom: 3px;
+                }
+
+                .pstyle3 {
+                        color: black;
+                        line-height: 30px;
+                        padding: 0 15px;
+                }
+
+                .pstyle4 {
+                        color: black;
+                        line-height: 30px;
+                        padding: 0px 15px 10px 15px;
+                }
+
+                .spanstyle1 {
+                        float: right;
+                        margin-right: 15px;
+                }
+
+                .color1 {
+                        color: rgb(219, 108, 108);
+                }
+
+                .float-rights {
+                        float: right;
+                }
+
+                .bg-color-w {
+                        background-color: white;
+                }
+
+                #title-edit {
+                        display: inline-block;
+                        position: absolute;
+                        right: 0px;
+                        top: 5px;
+                        background-color: #007aff;
+                        color: #fff;
+                        border: none;
+                        font-size: 16px;
+                        letter-spacing: 2px;
+                        padding: 6px 5px;
+                }
+
+                .mui-off-canvas-left,
+                .mui-off-canvas-right {
+                        width: 100%;
+                        background-color: #fff;
+                }
+
+                .search-css {
+                        width: 80%;
+                }
+
+                .search-css,
+                .but-css {
+                        display: inline-block;
+                        top: 55px;
+                        left: 8px;
+                }
+
+                .but-css {
+                        background: #2196F3;
+                        border: none;
+                        color: #fff;
+                        padding: 7px 12px;
+                }
+
+                .mui-search .mui-placeholder,
+                input[type='search'] {
+                        font-size: 15px;
+                        background: #eeeef1;
+                }
+
+                tr {
+                        border-bottom: 1px solid #F3F1F1;
+                }
+
+                tr th,
+                tr td {
+                        text-align: center;
+                        line-height: 30px;
+                        font-size: 12px;
+                        padding: 2px;
+                        border-left: 1px solid #E4E3E3;
+                        border-right: 1px solid #E4E3E3;
+                }
+
+                th {
+                        background: #f3f1f1;
+                }
+
+                #member_data td:nth-child(1) {
+                        width: 35%;
+                }
+
+                #member_data td:nth-child(2),
+                #member_data td:nth-child(3) {
+                        width: 20%;
+                }
+
+                #member_data td:nth-child(4) {
+                        width: 25%;
+                }
+
+                td {
+                        /* width: 20%; */
+                        overflow: hidden;
+                        /*自动隐藏文字*/
+                        text-overflow: ellipsis;
+                        /*文字隐藏后添加省略号*/
+                        white-space: nowrap;
+                        -webkit-line-clamp: 1;
+                        /*想要显示的行数*/
+                        -webkit-box-orient: vertical;
+                }
+
+                tr {
+                        width: 100%;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        /* white-space: nowrap; */
+                }
+
+                table {
+                        table-layout: fixed;
+                        width: 98%;
+                        margin: 0 auto;
+                }
+
+                .mui-content {
+                        background-color: #fff;
+                }
+
+                .td-but {
+                        background: #2196F3;
+                        border: none;
+                        color: #fff;
+                        padding: 3px 12px;
+                        margin-top: 2px;
+                }
+
+                /* 商品详细样式 */
+                .sptitle {
+                        border-bottom: 1px dashed #caccd1;
+                }
+
+                .sptitle div {
+                        height: 50px;
+                        line-height: 50px;
+                        background-color: white
+                }
+
+                .sptitle div p {
+                        color: black;
+                        padding-left: 15px;
+                }
+
+                .spxx {
+                        padding: 10px;
+                        border-bottom: 3px solid #efeff4;
+                }
+
+                .spxx div {
+                        display: inline-block;
+                        padding-left: 20px;
+                }
+
+                .spxx div p {
+                        color: #333;
+                }
+
+                .b-b5 {
+                        border-bottom: 5px solid #efeff4;
+                }
+
+                .b-b10 {
+                        border-bottom: 10px solid #efeff4;
+                }
+
+                .display_show {
+                        display: none !important;
+                }
+        </style>
+</head>
+
+<body>
+        <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable mui-slide-in">
+                <!--侧滑菜单部分-->
+                <aside id="offCanvasSide" class="mui-off-canvas-left">
+                        <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+                                <a class="mui-icon mui-icon-back" id="cans" style="color:white;"></a>
+                                <h1 class="mui-title" style="color:white;">添加商品</h1>
+                        </header>
+                        <div class="mui-input-row mui-search search-css">
+                                <input id='seartxt' type="search" class="mui-input-clear" placeholder="请输入内容">
+                        </div>
+                        <button class="but-css" onclick="spsearch2()">搜索</button>
+                        <div class="mui-content">
+                                <table>
+                                        <tr>
+                                                <th style="width: 35%;">货号&nbsp;&nbsp;</th>
+                                                <th style="width: 20%;">颜色</th>
+                                                <th style="width: 20%;">尺码</th>
+                                                <th style="width: 25%;">会员</th>
+                                        </tr>
+                                </table>
+                        </div>
+                        <div id="pullrefresh" class="mui-scroll-wrapper" style="top: 132px;">
+                                <div class="mui-scroll">
+                                        <!-- 菜单具体展示内容 -->
+                                        <table id="member_data"></table>
+                                </div>
+                        </div>
+                </aside>
+                <!--主界面部分-->
+                <div class="mui-inner-wrap">
+                        <!-- 头部 -->
+                        <header class="mui-bar mui-bar-nav mui-bar-nav-bg title_display"
+                                style="background-color:#007aff;">
+                                <a class="mui-icon mui-icon-back mui-action-back" style="color:white;"></a>
+                                <h1 class="mui-title" id="h1_title" style="color:white;">订单详情</h1>
+                                <button id="title-edit" class="display_show">明细</button>
+                        </header>
+                        <!-- 内容 -->
+                        <div class="mui-scroll-wrapper" style="top: 44px;" id="content_chat2">
+                                <div class="mui-scroll" id="content_chat">
+                                        <div class="mui-content b-b10">
+                                                <div id="dingdan">
+                                                        <!-- 订单号 -->
+                                                        <div class="mui-row" style="border-bottom: 1px dashed #caccd1;">
+                                                                <div
+                                                                        style="height: 50px;line-height: 50px;background-color: white">
+                                                                        <p style="color: black;padding-left: 15px;">
+                                                                                订单号:<span
+                                                                                        id="order_number">188_HC10004267</span>
+                                                                                <span class="spanstyle1"
+                                                                                        id="state">已完成</span>
+                                                                        </p>
+                                                                </div>
+                                                        </div>
+                                                        <!--会员卡,卡号,订单类型-->
+                                                        <div class="mui-row b-b5">
+                                                                <div class="bg-color-w">
+                                                                        <p class="pstyle1">
+                                                                                会员级别: <span id="membership_level"
+                                                                                        class="spanstyle1"></span>
+                                                                        </p>
+                                                                        <p class="pstyle2">
+                                                                                会员卡号:<span id="member_number"
+                                                                                        class="spanstyle1"></span>
+                                                                        </p>
+                                                                </div>
+                                                        </div>
+                                                        <!-- 导购姓名/消费门店 -->
+                                                        <div class="mui-row b-b5">
+                                                                <div class="bg-color-w">
+                                                                        <p class="pstyle1">
+                                                                                导购姓名: <span id="shopping_name"
+                                                                                        class="spanstyle1">刘红</span>
+                                                                        </p>
+                                                                        <p class="pstyle2">
+                                                                                消费门店:<span id="consumer_stores"
+                                                                                        class="spanstyle1">贺彩全草养发</span>
+                                                                        </p>
+                                                                </div>
+                                                        </div>
+                                                        <!-- 消费金额/订单件数/获取积分/使用积分 -->
+                                                        <div class="mui-row b-b5">
+                                                                <div class="bg-color-w">
+                                                                        <p class="pstyle1">
+                                                                                消费金额: <span class="spanstyle1">元</span>
+                                                                                <span class="float-rights color1"
+                                                                                        id="consumption_amount">1784.00</span>
+                                                                        </p>
+                                                                        <p class="pstyle3">
+                                                                                订单件数:<span
+                                                                                        class="spanstyle1">&nbsp;件</span>
+                                                                                <span class="float-rights color1"
+                                                                                        id="piece_number">1321</span>
+                                                                        </p>
+                                                                        <p class="pstyle3">
+                                                                                获取积分:<span class="spanstyle1 color1"
+                                                                                        id="get_integra">0.00</span>
+                                                                        </p>
+                                                                        <p class="pstyle4">
+                                                                                使用积分: <span class="spanstyle1 color1"
+                                                                                        id="using_integral">0.00</span>
+                                                                        </p>
+                                                                </div>
+                                                        </div>
+                                                        <!-- 下单时间 -->
+                                                        <div class="mui-row b-b5">
+                                                                <div class="bg-color-w"
+                                                                        style="height:50px;line-height: 50px;">
+                                                                        <p style="margin-left: 15px;color: black;">
+                                                                                <span>下单时间:</span>
+                                                                                <span id="order_date"
+                                                                                        class="spanstyle1 color1"></span>
+                                                                        </p>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <div class="mui-content b-b10 display_show" id="shop_xx">
+                                                <!-- 商品详细 -->
+                                                <div class="mui-row sptitle">
+                                                        <div>
+                                                                <p>商品详细</p>
+                                                        </div>
+                                                </div>
+                                                <div id="shangp">
+                                                        <!--商品详细资料-->
+
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                        <!-- off-canvas backdrop -->
+                        <div class="mui-off-canvas-backdrop"></div>
+                </div>
+        </div>
+
+
+
+</body>
+<script>
+        var load = new Loading();
+        load.init();
+        // load.start();
+        // load.stop();
+
+        var loc = location.href;
+        var n1 = loc.length;
+        var n2 = loc.indexOf('=');
+        var idd = decodeURI(loc.substr(n2 + 1, n1 - n2));
+        var vip_code = "";
+        var d_code = "";
+        function qq() {
+                load.start();
+                mui.post('/index.php/OrderManagementSee/', {
+                        code: idd
+                }, function (data) {
+                        //服务器返回响应，根据响应结果，分析是否登录成功；
+                        if (data.code == 200) {
+                                document.getElementById("order_number").innerHTML = data.data[0].code;
+                                document.getElementById("membership_level").innerHTML = data.data[0].level;
+                                document.getElementById("member_number").innerHTML = data.data[0].vip_code;
+                                document.getElementById("shopping_name").innerHTML = data.data[0].operate_name;
+                                document.getElementById("consumer_stores").innerHTML = data.data[0].store_name;
+                                document.getElementById("consumption_amount").innerHTML = data.data[0].money;
+                                document.getElementById("piece_number").innerHTML = data.data[0].number;
+                                document.getElementById("get_integra").innerHTML = data.data[0].give_integral;
+                                document.getElementById("using_integral").innerHTML = data.data[0].use_integral;
+                                document.getElementById("order_date").innerHTML = data.data[0].date;
+                                document.getElementById("state").innerHTML = data.data[0].status;
+                                if ((data.data[0].x_status == 0)||(data.data[0].x_status == '0')) {
+                                        // 隐藏
+                                        document.getElementById("title-edit").classList.add("display_show");
+                                        document.getElementById("shop_xx").classList.add("display_show");
+                                } else {
+                                        // 显示
+                                        document.getElementById("title-edit").classList.remove("display_show");
+                                        document.getElementById("shop_xx").classList.remove("display_show");
+                                        // 添加数据
+                                        good_names(data.data[0].goods_name);
+                                }
+                                // data.data[0].code  data.data[0].vip_code;  data.data.data[i].code
+                                vip_code = data.data[0].vip_code;
+                                d_code = data.data[0].code;
+
+
+                                // load.stop();
+                        }
+                }, 'json');
+        }
+        window.onload = function () {
+                hidden_title();
+                qq();
+        }
+
+        // Route::rule('OrderManagementGoodsname/', 'OrderManagement/goodsname');      // 点击添加明细中商品列表
+        //Route::rule('OrderManagementDetailed/', 'OrderManagement/detailed');        // 点击商品添加到商品明细
+
+        //禁止滑动主界面的时候出现侧滑菜单
+        $('.mui-inner-wrap').on('drag', function (event) {
+                event.stopPropagation();
+        });
+        //侧滑
+        document.getElementById("title-edit").addEventListener("tap", function (e) {
+                e.preventDefault();//阻止提交form事件
+                mui('#offCanvasSide').offCanvas().show();
+        });
+        //点击返回关闭侧滑
+        document.getElementById("cans").addEventListener("tap", function () {
+                mui('#offCanvasWrapper').offCanvas('close');
+        });
+
+        mui.init({
+                pullRefresh: {
+                        container: '#pullrefresh',
+                        up: {
+                                height: 50,
+                                contentrefresh: '正在加载...',
+                                contentnomore: '没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+                                auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                                callback: spsearch
+                        }
+                }
+        });
+        // 分页计数
+        var count = 0;
+        // 分的条数
+        var limit_num = 20;
+        //通过后台加载
+        function spsearch2() {
+                count = 0;
+                document.getElementById("member_data").innerHTML = "";
+                mui('#pullrefresh').pullRefresh().refresh(true);
+                spsearch();
+        }
+        //member_data 商品加载
+        function spsearch() {
+                load.start();
+                mui.post('/index.php/OrderManagementGoodsname/', {
+                        where: document.getElementById('seartxt').value,
+                        page: ++count,
+                        limit: limit_num
+                }, function (data) {
+                        //服务器返回响应，根据响应结果，分析是否登录成功；
+                        if (data.code == 200) {
+                                setTimeout(function () {
+                                        mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。。
+                                        if (data.data.count == 0) {
+                                                var p = document.createElement("p");
+                                                p.style = "text-align:center;padding-top:10px;"
+                                                p.innerHTML = "暂无数据";
+                                                document.getElementById("member_data").appendChild(p);
+                                        }
+                                        for (i = 0; i < data.data.data.length; i++) {
+                                                var tr = document.createElement("tr");
+                                                tr.innerHTML = '<td class="scrool" code="IGX-65313">' + data.data.data[i].code + '</td>' +
+                                                        ' <td>' + data.data.data[i].color + '</td>' +
+                                                        ' <td>' + data.data.data[i].sizes + '</td>' +
+                                                        ' <td><button class="td-but" bar_code="' + data.data.data[i].bar_code + '" onclick="member(this)">添加</button></td>'
+                                                document.getElementById("member_data").appendChild(tr);
+                                        }
+                                        load.stop();
+                                }, 1000)
+                        }
+                }, 'json');
+
+        }
+        //点击添加关闭侧滑
+        function member(e) {
+                load.start();
+
+                mui('#offCanvasWrapper').offCanvas('close');
+
+                mui.post('/index.php/OrderManagementDetailed/', {
+                        order_code: d_code,
+                        vip_code: vip_code,
+                        bar_code: e.getAttribute("bar_code")
+                }, function (data) {
+                        //服务器返回响应，根据响应结果，分析是否登录成功；
+                        if (data.code == 200) {
+                                if (data.data.code == "" || data.data.code == " " || data.data.code == null) {
+                                        data.data.code = "";
+                                }
+                                if (data.data.name == "" || data.data.name == " " || data.data.name == null) {
+                                        data.data.name = "";
+                                }
+                                if (data.data.sizes == "" || data.data.sizes == " " || data.data.sizes == null) {
+                                        data.data.sizes = "";
+                                }
+                                if (data.data.color == "" || data.data.color == " " || data.data.color == null) {
+                                        data.data.color = "";
+                                }
+
+                                var div = document.createElement("div");
+                                div.className = 'mui-row spxx';
+                                div.innerHTML = '<div><img src="' + data.data.img + '" width="100" height="100"></div>' +
+                                        ' <div>' +
+                                        '  <p>货号：<span>' + data.data.code + '</span></p>' +
+                                        '  <p>名称：<span>' + data.data.name + '</span></p>' +
+                                        '  <p>尺码：<span>' + data.data.sizes + '</span></p>' +
+                                        '  <p>颜色：<span>' + data.data.color + '</span></p>' +
+                                        ' </div>'
+                                document.getElementById("shangp").appendChild(div);
+                                load.stop();
+                        }
+                }, 'json');
+        }
+        mui('.mui-scroll-wrapper').scroll({
+                indicators: true, //是否显示滚动条
+        });
+
+        function good_names(data) {
+
+
+                for (let i = 0; i < data.length; i++) {
+                        if (data[i].code == "" || data[i].code == " " || data[i].code == null) {
+                                data[i].code = "";
+                        }
+                        if (data[i].name == "" || data[i].name == " " || data[i].name == null) {
+                                data[i].name = "";
+                        }
+                        if (data[i].sizes == "" || data[i].sizes == " " || data[i].sizes == null) {
+                                data[i].sizes = "";
+                        }
+                        if (data[i].color == "" || data[i].color == " " || data[i].color == null) {
+                                data[i].color = "";
+                        }
+
+                        var div = document.createElement("div");
+                        div.className = 'mui-row spxx';
+                        div.innerHTML = '<div><img src="' + data[i].img + '" width="100" height="100"></div>' +
+                                ' <div>' +
+                                '  <p>货号：<span>' + data[i].code + '</span></p>' +
+                                '  <p>名称：<span>' + data[i].name + '</span></p>' +
+                                '  <p>尺码：<span>' + data[i].sizes + '</span></p>' +
+                                '  <p>颜色：<span>' + data[i].color + '</span></p>' +
+                                ' </div>'
+                        document.getElementById("shangp").appendChild(div);
+                }
+
+                load.stop();
+
+        }
+
+</script>
+
+</html>

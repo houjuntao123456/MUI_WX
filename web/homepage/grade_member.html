@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>会员等级</title>
+    <link rel="stylesheet" href="../mui/css/mui.css">
+    <script src="../mui/js/mui.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+     <style>
+         .mui-content{
+            background-color: #fff;
+         }
+         /* .mui-navigate-right::after, .mui-push-right::after{
+            color: #77b2f3;
+         } */
+         .grade-style{
+            border-bottom: 1px solid #E2E2E2;
+            list-style:none;
+         }
+         .grade-style a{
+            color: rgb(109, 107, 107);
+         }
+         .grade-style a span{
+            float: right;
+            margin-right: 20px
+         }
+         #content_row{font-size: 15px;}
+         .mui-table-view-cell::after{background-color: #ececed;}
+     </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color: #007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:#fff;"></a>
+        <h1 class="mui-title" style="color:#fff">会员等级</h1>
+    </header>
+    <div class="mui-content">
+        <div class="mui-row" id="content_row">
+            <!-- <div class="mui-col-sm-12 mui-col-xs-12">
+                <li class="mui-table-view-cell grade-style">
+                    <a class="mui-navigate-right" href="goddess_card.html?true=尊贵女神卡code*=123456">尊贵女神卡<span>5912</span></a>
+                </li>
+            </div> -->
+        </div>
+    </div>
+</body>
+<script>
+       var load = new Loading();
+        load.init();
+    load.start();
+   
+    window.onload = function () {
+        hidden_title();
+    }
+
+    // ajax
+    var content_row = document.getElementById("content_row");
+    mui.post('/index.php/UserlistMemberlevel/', {
+    }, function (data) {
+        if (data.code == 200) {
+            for (i = 0; i < data.data.length; i++) {
+                var div = document.createElement('div');
+                div.className = 'mui-col-sm-12 mui-col-xs-12';
+                div.innerHTML = '<li class="mui-table-view-cell grade-style">'
+                    + '<a class="mui-navigate-right"  href = "goddess_card.html?true=' + data.data[i].username + 'code*=' + data.data[i].code + '" >' + data.data[i].username
+                    + '<span>' + data.data[i].count + '</span >'
+                    + '</a>'
+                    + '</li>'
+                content_row.appendChild(div);
+
+            }
+ load.stop();
+        }
+        //服务器返回响应，根据响应结果，分析是否登录成功；
+    }, 'json'
+    );
+</script>
+
+</html>

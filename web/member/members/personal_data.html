@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>完善个人资料</title>
+    <link rel="stylesheet" href="../../mui/css/mui.css">
+    <script src="../../mui/js/mui.js"></script>
+
+    <link rel="stylesheet" href="../../mui/css/mui.picker.min.css">
+    <script src="../../mui/js/mui.picker.min.js"></script>
+    <link rel="stylesheet" href="../../mui/css/mui.poppicker.css">
+    <script src="../../mui/js/mui.poppicker.js"></script>
+
+    <link rel="stylesheet" href="../../mui/css/mui.dtpicker.css">
+    <script src="../../mui/js/mui.dtpicker.js"></script>
+    <script src="../../mui/js/city.data-3.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jquery.cookie.js"></script>
+    <script src="../../js/vconsole.js"></script>
+
+
+    <style>
+        body {
+            background-color: #fff;
+        }
+
+        .mui-input-group:after {
+            height: 0px;
+        }
+
+        .mui-input-group .mui-input-row::after {
+            height: 0px;
+        }
+
+        .mui-input-row label {
+            width: 25%;
+        }
+
+        .mui-content {
+            background: none;
+        }
+
+        .mui-input-group:before {
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;box-shadow:none;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" id="a_title" style="color:white;"></a>
+        <h1 class="mui-title" id="title_" style="color:white;">完善个人资料</h1>
+    </header>
+    <!-- <div style="text-align:center;padding: 60px 50px 20px 50px;background-color:#007aff;">
+        <div style="border-radius: 10px;overflow:hidden;margin: 0 auto;">
+            <img src="../images/suokewhite2.png" alt="" style="width: 100px;">
+        </div>
+    </div> -->
+    <form class="mui-input-group mui-content" style="border:0px;" id="form_css">
+
+        <!-- 姓名 -->
+        <div style="margin-top: 20px;">
+            <div style="width: 80%;margin: 0 auto;"><span style="color: rgb(136, 136, 136);font-size: 16px;"><span
+                        style="color: rgb(204, 137, 60)">* </span>姓名:</span></div>
+            <div class="mui-input-row"
+                style="width: 80%;margin: 0 auto;background-color: white;border-radius: 5px 5px 5px 5px;border: 1px solid rgb(168, 168, 168)">
+                <input type="text" class="mui-input-clear" placeholder="" style="font-size: 15px;float: left;"
+                    id="username">
+            </div>
+        </div>
+        <!-- 手机号 -->
+        <div style="margin-top: 10px;">
+            <div style="width: 80%;margin: 0 auto;"><span style="color: rgb(136, 136, 136);font-size: 16px;"><span
+                        style="color: rgb(204, 137, 60)">* </span>手机号:</span></div>
+            <div class="mui-input-row"
+                style="width: 80%;margin: 0 auto;background-color: white;border-radius: 5px 5px 5px 5px;border: 1px solid rgb(168, 168, 168)">
+                <input type="text" class="mui-input-clear" placeholder="" style="font-size: 15px;float: left;"
+                    id="phone">
+            </div>
+        </div>
+
+        <!-- 性别 -->
+        <div style="margin-top: 10px;">
+            <div style="width: 80%;margin: 0 auto;"><span style="color: rgb(136, 136, 136);font-size: 16px;"><span
+                        style="color: rgb(204, 137, 60)">* </span>性别:</span></div>
+            <div class="mui-input-row mui-select"
+                style="width: 80%;margin: 0 auto;background-color: white;border-radius: 5px 5px 5px 5px;border: 1px solid rgb(168, 168, 168)">
+                <select name="" id="select_store" style="padding-left: 10px; color: #A9A9A9;">
+                    <option value="M">男</option>
+                    <option value="W">女</option>
+                </select>
+            </div>
+        </div>
+        <!-- 生日 -->
+        <div style="margin-top: 10px; display: none;">
+            <div style="width: 80%;margin: 0 auto;"><span style="color: rgb(136, 136, 136);font-size: 16px;"><span
+                        style="color: rgb(204, 137, 60)">* </span>生日:</span></div>
+            <div class="mui-input-row mui-select"
+                style="width: 80%;margin: 0 auto;background-color: white;border-radius: 5px 5px 5px 5px;border: 1px solid rgb(168, 168, 168)">
+                <input readonly data-field="date" type="text" placeholder="请选择生日" style="font-size: 15px;float: left;"
+                    onclick="start_time();" id="time_">
+            </div>
+        </div>
+        <!-- 城市 -->
+        <div style="margin-top: 10px;">
+            <div style="width: 80%;margin: 0 auto;"><span style="color: rgb(136, 136, 136);font-size: 16px;"><span
+                        style="color: rgb(204, 137, 60)"></span>城市:</span></div>
+            <div class="mui-input-row mui-select"
+                style="width: 80%;margin: 0 auto;background-color: white;border-radius: 5px 5px 5px 5px;border: 1px solid rgb(168, 168, 168)">
+                <input readonly data-field="date" type="text" placeholder="请选择城市" style="font-size: 15px;float: left;"
+                    id="region">
+            </div>
+        </div>
+        <!-- 详细地址 -->
+        <div style="margin-top: 10px;">
+            <div style="width: 80%;margin: 0 auto;"><span style="color: rgb(136, 136, 136);font-size: 16px;"><span
+                        style="color: rgb(204, 137, 60)"></span>详细地址:</span></div>
+            <div class=""
+                style="width: 80%;margin: 0 auto;background-color: white;border-radius: 5px 5px 5px 5px;border: 1px solid rgb(168, 168, 168)">
+                <textarea name="" cols="15" rows="3" placeholder="请输入详细地址" id="detailed_address"></textarea>
+            </div>
+        </div>
+
+
+        <div style="width: 70%;margin: 10px auto;">
+            <span style="color: rgb(136, 136, 136);font-size: 14px;">亲! 为了您能够享受会员生日福利;会员生日注册提交成功后不可以更改了哦</span>
+        </div>
+        <!-- 提交 -->
+        <div class="mui-button-row" style="margin-top:10px;margin: 0 auto">
+            <button type="button" class="mui-btn mui-btn-primary"
+                style="width: 70%;font-size: 16px;border-radius: 50px;" onclick="submission()">提&nbsp;&nbsp;交</button>
+        </div>
+        <div id="aa"></div>
+    </form>
+
+
+
+
+</body>
+<script>
+    // var vConsole = new VConsole();
+    //进来加载时间
+
+    (function () {
+
+    })();
+    var username = document.getElementById("username"); //姓名
+    var phone = document.getElementById("phone"); //手机号
+    var select_store = document.getElementById("select_store"); //性别
+    var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+    var birth = document.getElementById("time_"); //生日
+    var region = document.getElementById("region"); //城市
+    var detailed_address = document.getElementById("detailed_address");//详细地址
+    var consultant_code = "";
+
+    //选择时间
+    function start_time() {
+        var dtpicker = new mui.DtPicker({
+            type: "date",//设置日历初始视图模式 
+            beginDate: new Date(1970, 01, 01),//设置开始日期 
+            endDate: new Date(2070, 01, 01),//设置结束日期 
+            labels: ['年', '月', '日'],//设置默认标签区域提示语 
+        });
+        dtpicker.show(function (items) {
+            birth.value = items.y.value + '-' + items.m.value + '-' + items.d.value;
+        })
+    }
+
+    //提交进行验证
+
+
+    function submission() {
+        var user_name = username.value == "" ? username.placeholder : username.value;
+        user_name = (user_name == "请输入姓名") ? "" : user_name;
+
+        var phone_num = phone.value == "" ? phone.placeholder : phone.value;
+        phone_num = (phone_num == "请输入手机号") ? "" : phone_num;
+
+        // var birthday = birth.value == "" ? birth.placeholder : birth.value;
+        // birthday = (birthday == "请选择生日") ? "" : birthday;
+
+        var region_city = region.value == "" ? region.placeholder : region.value; //城市
+        region_city = (region_city == "请选择城市") ? "" : region_city;
+
+        var see_address = detailed_address.value == "" ? detailed_address.placeholder : detailed_address.value; //详细地址
+        see_address = (see_address == "请输入详细地址") ? "" : see_address;
+        if ((user_name == " " && phone_num == " ")||(user_name == "" && phone_num == "")) {
+            mui.alert('姓名和手机号不能为空', '提示', '确定'['div']);
+        } else if (user_name == "" || user_name == " ") {
+            mui.alert('姓名不能为空', '提示', '确定'['div']);
+        } else if (phone_num == ""|| phone_num == " ") {
+            mui.alert('手机号不能为空', '提示', '确定'['div']);
+        }/** else if (birthday == ""|| birthday == " ") {
+            mui.alert('请选择生日', '提示', '确定'['div']);
+        } **/else if (!myreg.test(phone_num)) {
+            mui.alert('手机号格式不正确', '提示', '确定'['div']);
+        } else {
+            mui.post('/index.php/ViplistEdit/', {
+                card: $.cookie("code"),
+                username: user_name,//姓名
+                sex: select_store.options[select_store.selectedIndex].value,//性别
+                staff_code: consultant_code,//专属顾问
+                contact: phone_num,//手机号
+                // birthday: birthday,//生日
+                area: region_city, //所在城市
+                address: see_address//详细地址
+            }, function (data) {
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    mui.toast(data.msg, { duration: 'short', type: 'div' });
+                }else if(data.code==400){
+                    mui.toast(data.msg, { duration: 'short', type: 'div' });
+                }
+            }, 'json'
+            );
+        }
+    }
+
+
+
+    onload();
+    // 根据卡号加载个人信息
+    function onload() {
+        mui.post('/index.php/UserlistMemberdata/', {
+            // 1021010
+            code: $.cookie("code")
+        }, function (data) {
+            if (data.code == 200) {
+                //姓名
+                // data.data.data[0].username="";
+                username.placeholder = (data.data.data[0].username == " ")||(data.data.data[0].username == "") || (data.data.data[0].username == null) || (data.data.data[0].username == undefined) ? "请输入姓名" : data.data.data[0].username;
+                //手机号
+                // data.data.data[0].phone="";
+                phone.placeholder = (data.data.data[0].phone == " ")|| (data.data.data[0].phone == "") || (data.data.data[0].phone == null) || (data.data.data[0].phone == undefined) ? "请输入手机号" : data.data.data[0].phone;
+                // 性别
+                if (data.data.data[0].sex == "W" || data.data.data[0].sex == "w") {
+                    select_store.selectedIndex = 1; //0 男 1女
+                } else {
+                    select_store.selectedIndex = 0; //0 男 1女
+                }
+                // 生日
+                // data.data.data[0].birthday="";
+                birth.placeholder = (data.data.data[0].birthday == " ")|| (data.data.data[0].birthday == "") || (data.data.data[0].birthday == null) || (data.data.data[0].birthday == undefined) ? "请选择生日" : data.data.data[0].birthday;
+                // 城市
+                // data.data.data[0].area="";
+                region.placeholder = (data.data.data[0].area == " ")||(data.data.data[0].area == "") || (data.data.data[0].area == null) || (data.data.data[0].area == undefined) ? "请选择城市" : data.data.data[0].area;
+                //详细地址
+                detailed_address.placeholder = (data.data.data[0].address == " ")||(data.data.data[0].address == "") || (data.data.data[0].address == null) || (data.data.data[0].address == undefined) ? "请输入详细地址" : data.data.data[0].address;
+                consultant_code = data.data.data[0].consultant_code;
+            }
+        }, 'json'
+        );
+    }
+
+
+
+
+
+
+
+
+
+
+    region.onfocus = function () {
+        // 禁止唤醒手机键盘
+        document.activeElement.blur();
+        var cityPicker = new mui.PopPicker({
+            layer: 3
+        });
+        cityPicker.setData(cityData3);
+        //设置默认选择地址
+        cityPicker.pickers[0].setSelectedIndex(0);
+        cityPicker.pickers[1].setSelectedIndex(0);
+        cityPicker.pickers[2].setSelectedIndex(0);
+        //将内容显示在桌面
+        cityPicker.show(function (SelectedItem) {
+            var kk = SelectedItem[0].text + "/" + SelectedItem[1].text + "/" + SelectedItem[2].text;
+            region.value = SelectedItem[0].text + "-" + SelectedItem[1].text + "-" + SelectedItem[2].text;
+        })
+    }
+</script>
+
+</html>

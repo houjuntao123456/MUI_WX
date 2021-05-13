@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>传统日子</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery-barcode.js"></script>
+    <script src="../js/jquery-qrcode.js"></script>
+    <!-- <script src="../js/loading.js"></script> -->
+    <!-- <link rel="stylesheet" href="../css/loading.css"> -->
+    <style>
+        fieldset {
+            width: 90%;
+            margin: 0 auto;
+            /* border-radius: 10px; */
+
+        }
+
+        legend {
+            font-size: 20px;
+            margin-left: 10px;
+
+        }
+
+        .yin {
+            width: 95%;
+            margin: 0 auto;
+            border-radius: 15px;
+            box-shadow: #666 0px 0px 10px;
+            -webkit-box-shadow: #666 0px 0px 10px;
+            -moz-box-shadow: #666 0px 0px 10px;
+        }
+
+        li {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;">个人资料</h1>
+    </header>
+    <div class="mui-content">
+
+        <form class="mui-input-group">
+            <br><br>
+            <div class="yin">
+                <br><br>
+                <fieldset>
+                    <div style="width: 150px;text-align: center; margin-left: auto;margin-right: auto;">
+                        <h4>收款码</h4>
+                        <div id="qrcode"></div>
+                    </div>
+                    <legend>个人信息</legend>
+                    <li class="mui-table-view-cell">
+                        <h5>
+                            企业号:&nbsp;&nbsp;<span></span>
+                        </h5>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <h5>
+                            登录工号:&nbsp;&nbsp;<span></span>
+                        </h5>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <h5>
+                            登录姓名:&nbsp;&nbsp;<span></span>
+                        </h5>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <h5>
+                            手机号:&nbsp;&nbsp;<span></span>
+                        </h5>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <h5>
+                            员工角色:&nbsp;&nbsp;<span></span>
+                        </h5>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <h5>
+                            员工职位:&nbsp;&nbsp;<span></span>
+                        </h5>
+                    </li>
+                    <!-- <li class="mui-table-view-cell">
+                        <h5>
+                            PC端权限:&nbsp;&nbsp;<span></span>
+                        </h5>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <h5>
+                            手机端权限:&nbsp;&nbsp;<span></span>
+                        </h5>
+                    </li> -->
+                    <li class="mui-table-view-cell">
+                        <h5>
+                            所属机构:&nbsp;&nbsp;<span></span>
+                        </h5>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <h5>
+                            管理机构:&nbsp;&nbsp;<span></span>
+                        </h5>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <h5>
+                            所属门店:&nbsp;&nbsp;<span></span>
+                        </h5>
+                    </li>
+                </fieldset>
+                <br><br>
+            </div>
+
+            <br><br>
+        </form>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        hidden_title();
+    }
+    var span = document.getElementsByTagName("span");
+    var reg_suokeduos = new RegExp("^[0-9]*$");
+    mui.post('/index.php/VipinfoStaffInfo/', {
+        // username: 'username',
+        // password: 'password'
+    }, function (data) {
+        if (data.code == 200) {
+            span[0].innerHTML = data.data.company;//企业号
+            span[1].innerHTML = data.data.data.code;//登录工号
+            span[2].innerHTML = data.data.data.name;//登录姓名
+            span[3].innerHTML = data.data.data.phone;//手机号
+            span[4].innerHTML = data.data.data.role_g;//员工角色
+            span[5].innerHTML = data.data.data.vpname;//员工职位
+            // span[6].innerHTML =data.data.data.vqname;//pc端权限
+            // span[7].innerHTML =data.data.data.vmname;//手机端权限
+            span[6].innerHTML = data.data.data.vgname;//所属机构
+            span[7].innerHTML = data.data.admin;//管理机构
+            span[8].innerHTML = data.data.data.vsname;//所属门店
+
+            let newCompany = data.data.company;
+            let strs = newCompany.substring(newCompany.length - 4);
+
+            if (newCompany == "ic") {
+                erweima('https://wechat.suokeduo.com/pay/wechat/get?company=' + data.data.company + '&storeCode=' + data.data.data.store_code + '&staffCode=' + data.data.data.code + '');
+            } else {
+                if (reg_suokeduos.test(strs)) {
+                    erweima('https://wechat.suokeduo.com/pay/wechat/get?company=' + data.data.company + '&storeCode=' + data.data.data.store_code + '&staffCode=' + data.data.data.code + '');
+                } else {
+                    erweima('https://wxauth.suokeduo.com/weChatPay/wxmPayGetCode?company=' + data.data.company + '&storeCode=' + data.data.data.store_code + '&staffCode=' + data.data.data.code + '');
+
+                }
+            }
+
+
+        }
+        //服务器返回响应，根据响应结果，分析是否登录成功；
+    }, 'json'
+    );
+    // erweima('https://vip.suokeduo.com/')
+    function erweima(eeee) {
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: eeee,
+            width: 150,
+            height: 150
+        });
+    }
+</script>
+
+</html>

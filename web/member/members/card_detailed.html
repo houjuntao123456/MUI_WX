@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="../../mui/css/mui.min.css">
+	<link rel="stylesheet" href="../../css/iconfont.css">
+	<script src="../../mui/js/muiR.js"></script>
+	<script src="../../js/stm_Pull_up_loading.js"></script>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/jquery-barcode.js"></script>
+	<script src="../../js/jquery-qrcode.js"></script>
+	<title>卡券详情</title>
+	<style type="text/css">
+		.style_h3 {
+			text-align: center;
+			color: red;
+			line-height: 30px;
+		}
+
+		.style_css1 {
+			margin: 0;
+			padding: 50px 10px 0 10px;
+		}
+
+		.text_align {
+			text-align: center;
+		}
+
+		.width_left {
+			width: 25%;
+			float: left;
+		}
+
+		.width_left p {
+			color: #000000;
+		}
+
+		.width_right {
+			width: 75%;
+			display: inline-block;
+		}
+
+		.table_style {
+			margin: 40px 0;
+		}
+
+		.table_style tr {
+			line-height: 30px;
+		}
+
+		.table_style th {
+			width: 20%;
+		}
+
+		.table_style h4 {
+			line-height: 30px;
+		}
+
+		.p-1 {
+			padding: 10px;
+		}
+
+		.m-b {
+			margin-bottom: 10px;
+		}
+
+		.qrcode_style {
+			width: 150px;
+			margin: 0 auto;
+		}
+
+		.barcode_style {
+			/* width: 310px; */
+			margin: 25px auto;
+		}
+	</style>
+</head>
+
+<body>
+	<header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+		<a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+		<h1 class="mui-title" style="color:white;">卡券详情</h1>
+	</header>
+	<div class="mui-card style_css1">
+		<div class="mui-card-content">
+			<!-- <div class="mui-col-xs-12">
+				<img src="../../images/n1.png" width="100%">
+			</div> -->
+			<div class="mui-col-xs-12">
+				<h3 class="style_h3" id="card_name">200元代金券</h3>
+			</div>
+			<div class="mui-col-xs-12 p-1 m-b">
+				<!-- <div class="width_left"><p>使用限制：</p></div>
+				<div class="width_right"><p>1</p></div> -->
+				<div class="width_left">
+					<p>有效期限：</p>
+				</div>
+				<div class="width_right">
+					<p id="card_time">2019-03-22-至2019-12-31</p>
+				</div>
+				<div class="width_left">
+					<p>卡券号码：</p>
+				</div>
+				<div class="width_right">
+					<p id="card_code">KQ001116484(ERP核销请输入卡券号码)</p>
+				</div>
+			</div>
+			<div class="mui-col-xs-12 m-b">
+				<div class="qrcode_style">
+					<div id="qrcode" class="p16"></div>
+				</div>
+				<div class="barcode_style">
+					<div id="barcode" style="margin: 0 auto;"></div>
+				</div>
+			</div>
+			<!-- <div class="mui-col-xs-12 table_style text_align">
+				<div class="mui-col-xs-12"><h4>卡券记录</h4></div>
+				<div class="mui-col-xs-12">
+					<table>
+						<tr><th>卡券类型</th><th>核销时间</th><th>核销数量</th></tr>
+						<tr><td>现金券</td><td>2019-08-15</td><td>1</td></tr>
+					</table>
+				</div>
+			</div> -->
+		</div>
+	</div>
+
+
+	<script>
+		var loc = location.href;
+		var n1 = loc.length;
+		var n2 = loc.indexOf('=');
+		var n3 = loc.indexOf('#');
+		var n4 = loc.indexOf('*');
+		var n5 = loc.indexOf('&');
+		var n6 = loc.indexOf('%');
+		var card_code = decodeURI(loc.substr(n2 + 1, n3 - n2 - 1));
+		//从*开始 长度
+		var code = decodeURI(loc.substr(n4 + 1, n5 - n4 - 1));
+		var card_type = decodeURI(loc.substr(n6 + 1, n1 - n6 - 1));
+
+		window.onload = function () {
+			mui.post('/index.php/CouponListMalist/', {
+				code: code,
+				type: card_type
+			}, function (data) {
+				if (data.code == 200) {
+					if (data.data.card_name == "" || data.data.card_name == null || data.data.card_name == undefined) {
+						data.data.card_name = "";
+					}
+					if (data.data.time == "" || data.data.time == null || data.data.time == undefined) {
+						data.data.time = "";
+					}
+					if (data.data.code == "" || data.data.code == null || data.data.code == undefined) {
+						data.data.code = "";
+					}
+					document.getElementById("card_name").innerHTML = data.data.card_name;
+					document.getElementById("card_time").innerHTML = data.data.time;
+					document.getElementById("card_code").innerHTML = data.data.code;
+				}
+				//服务器返回响应，根据响应结果，分析是否登录成功；
+
+			}, 'json');
+		}
+
+		// 二维码
+		erweima(code);
+		function erweima(eeee) {
+			var qrcode = new QRCode(document.getElementById("qrcode"), {
+				text: eeee,
+				width: 150,
+				height: 150
+			});
+			//条形的二维码
+			$("#barcode").barcode(
+				eeee,
+				"code128",//数字个数
+				{
+					barWidth: 1,
+					barHeight: 50,
+					fontSize: 16,
+					// bgColor: 'transparent',
+				});
+		}
+	</script>
+
+
+</body>
+
+</html>

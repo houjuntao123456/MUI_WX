@@ -1,0 +1,324 @@
+<html>
+
+<head>
+    <title>生日回访</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jweixin-1.4.0.js"></script>
+    <script src="../js/vconsole.js"></script>
+
+    <script src="../js/loading.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <style>
+        /* * { touch-action: pan-y; } */
+        .mui-off-canvas-left,
+        .mui-off-canvas-right {
+            width: 90%;
+        }
+
+        * {
+            touch-action: none;
+        }
+
+
+
+        .border_b {
+            border-bottom: 1px solid #eee;
+        }
+
+        .border_b label {
+            font-size: 15px;
+        }
+
+        #select_store {
+            color: rgb(105, 104, 104);
+        }
+
+        .but_cx_all {
+            height: 53px;
+        }
+
+        .but_cx {
+            width: 93%;
+            background-color: #007aff;
+            color: white;
+        }
+
+        .mui-button-row {
+            padding-top: 10px;
+        }
+
+        .mui-input-row select {
+            font-size: 15px;
+        }
+
+        /* 
+        .mui-control-content {
+            background-color: white;
+            min-height: 220px;
+        } */
+
+        /* .mui-control-content .mui-loading {
+            margin-top: 50px;
+        } */
+        .mui-slider .mui-slider-group .mui-slider-item {
+            height: auto;
+        }
+
+        .mui-control-content {
+            display: block
+        }
+
+        .mui-table-view-cell:after {
+            left: 0;
+        }
+
+        .list_left_one {
+            width: 20%;
+            float: left;
+            margin-top: 10px;
+        }
+
+        .list_left_two {
+            width: 53%;
+            float: left;
+            text-align: left;
+            margin-left: 10px;
+        }
+
+        .list_left_two h4 {
+            font-weight: normal;
+            font-size: 16px;
+        }
+
+        .list_left_two p {
+            line-height: 20px;
+            font-size: 12px;
+        }
+
+        .list_left_three {
+            width: 22%;
+            float: right;
+        }
+
+        .list_left_three button {
+            padding: 7px 10px;
+            color: #77a1f8;
+            border: 1px solid #77a1f8;
+        }
+
+        .border-b {
+            border-bottom: 2px solid #007aff !important;
+        }
+
+        .padd-bg {
+            padding: 10px 10px;
+            background: #fff;
+        }
+
+        .title-but {
+            position: absolute;
+            z-index: 2;
+            right: 0;
+            top: 0;
+            width: 40%;
+        }
+
+        .title-but span {
+            float: right;
+            line-height: 44px;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .xuanzhong {
+            background: url(../images/ico_checkon.svg) no-repeat right bottom;
+            background-size: 25px 25px;
+            background-color: rgba(212, 229, 246, 0);
+            color: #00a4ff;
+        }
+
+        .dis {
+            display: none;
+        }
+
+        .mui-control-item.mui-active {
+            width: 3%;
+        }
+
+        .mui-segmented-control .mui-control-item {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;" id="back_kjWrite"></a>
+        <h1 class="mui-title" style="color:white;">生日回访<span id="nums" class="mui-badge  mui-badge-primary dis">0</span>
+        </h1>
+        <div class="title-but">
+            <span class="dis" id="menu" onclick="cluste_hai()">群发</span>
+            <span id="menu_query">查询</span>
+        </div>
+    </header>
+    <!-- 更改 -->
+
+    <!-- 手势动作 mui-draggable -->
+    <div class="mui-off-canvas-wrap   mui-slide-in mui-content">
+        <!-- 主页面容器 -->
+        <div class="mui-inner-wrap">
+            <!-- 菜单容器 -->
+            <aside class="mui-off-canvas-left">
+                <div class="mui-scroll-wrapper" style="background-color: #e4eaf5">
+                    <!-- style="padding-left:5px;" -->
+                    <div class="mui-scroll">
+                        <!-- 筛选模板 -->
+                        <div class="mui-input-row mui-select border_b"
+                            style="width:95%;margin:0 auto;border-bottom: 1px solid #eee;background-color: white;">
+                            <label>所属机构：</label>
+                            <select name="" id="all_organization" onchange="clerkChange()">
+                                <!-- <option value="">不限机构</option> -->
+                            </select>
+                        </div>
+                        <div class="mui-input-row mui-select border_b"
+                            style="width:95%;margin:0 auto;border-bottom: 1px solid #eee;background-color: white;">
+                            <label>所属门店：</label>
+                            <select name="" id="all_stores" onchange="gradeChange()">
+                                <!-- <option value="">不限门店</option> -->
+                            </select>
+                        </div>
+                        <div class="mui-input-row mui-select border_b"
+                            style="width:95%;margin:0 auto;border-bottom: 1px solid #eee;background-color: white;">
+                            <label>所属店员：</label>
+                            <select name="" id="all_clerk">
+                                <!-- <option value="">不限店员</option> -->
+                            </select>
+                        </div>
+                        <div class="mui-input-row mui-select border_b"
+                            style="width:95%;margin:0 auto;border-bottom: 1px solid #eee;background-color: white;">
+                            <label>绑定微信：</label>
+                            <select name="" id="all_tying">
+                                <option value="true">不限</option>
+                                <option value="1">绑定</option>
+                                <option value="0">未绑定</option>
+                            </select>
+                        </div>
+                        <div class="mui-button-row but_cx_all border_b">
+                            <!-- <button type="button" data-loading-icon="mui-spinner mui-spinner-white"
+                                    style="width:15%;background-color:#007aff;color:white;" class="mui-btn mui-btn-primary"
+                                    onclick="all_election()">全选</button> -->
+
+                            <button type="button" data-loading-icon="mui-spinner mui-spinner-white"
+                                data-loading-text="查询中" class="mui-btn mui-btn-primary"
+                                style="width:75%;background-color:#007aff;color:white;" id="query">立即查询</button>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+            </aside>
+            <!-- 主页面标题 -->
+            <div id="slider" class="mui-slider" style="height: 100px;">
+                <div id="sliderSegmentedControl"
+                    class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                    <a class="mui-control-item mui-active border-b" id="j_today" style="width: 1%;">今日生日</a>
+                    <a class="mui-control-item" id="z_lately" style="width: 1%;">临近生日(1~7天)</a>
+                    <a class="mui-control-item" id="y_thisMonth" style="width: 1%;">本月生日</a>
+                </div>
+                <div class="mui-slider-group">
+                    <div class="mui-slider-item mui-control-content">
+                        <div class="mui-content">
+                            <div id="segmentedControli" class="padd-bg" style="display: block;">
+                                <div class="mui-segmented-control">
+                                    <a class="mui-control-item mui-active width_style" id="jr_unconsumed">30天未消费</a>
+                                    <a class="mui-control-item" id="jr_consumption">30天有消费</a>
+                                    <a class="mui-control-item" id="jr_return_visit">今日已回访</a>
+                                    <a class="mui-control-item" id="jr_noreturn_visit">今日未回访</a>
+                                </div>
+                            </div>
+                            <div id="segmentedControls" class="padd-bg" style="display: none;">
+                                <div class="mui-segmented-control">
+                                    <a class="mui-control-item mui-active" id="zj_uncon">30天未消费</a>
+                                    <a class="mui-control-item" id="zj_consu">30天有消费</a>
+                                    <a class="mui-control-item" id="zj_retur">1-7日已回访</a>
+                                    <a class="mui-control-item" id="zj_nore">1-7日未回访</a>
+                                </div>
+                            </div>
+                            <div id="segmentedControld" class="padd-bg" style="display: none;">
+                                <div class="mui-segmented-control">
+                                    <a class="mui-control-item mui-active" id="three_unconsumed3">30天未消费</a>
+                                    <a class="mui-control-item" id="three_consumption3">30天有消费</a>
+                                    <a class="mui-control-item" id="return_visit3">30天已回访</a>
+                                    <a class="mui-control-item" id="noreturn_visit3">30天未回访</a>
+                                </div>
+                            </div>
+                            <!-- <div id="datacont">
+                                <div class="mui-control-content">
+                                    <div id="pullrefresh" class="mui-scroll-wrapper">
+                                        <div class="mui-scroll">
+                                            <ul class="mui-table-view" id="datalist">
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 主页面内容容器 -->
+            <div id="pullrefresh" class="mui-scroll-wrapper" style="top: 102px;">
+                <div class="mui-scroll">
+                    <ul class="mui-table-view" id="datalist">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../js/hudong.js"></script>
+<script src="../js/birthday-member.js"></script>
+<script>
+
+    //加载动画
+    var load = new Loading();
+    load.init();
+    // load.start();
+    // load.stop();
+    mui.init({
+        swipeBack: true //启用右滑关闭功能
+    });
+    (function ($) {
+        $('.mui-scroll-wrapper').scroll({
+            indicators: true //是否显示滚动条
+        });
+    })(mui);
+
+    // var vConsole = new VConsole();
+      // 点击查询
+        document.getElementById("menu_query").onclick = function () {
+            mui('.mui-off-canvas-wrap').offCanvas().toggle();
+        }
+</script>
+<!-- 
+
+
+
+</html>

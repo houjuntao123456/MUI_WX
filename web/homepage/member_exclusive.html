@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/vconsole.js"></script>
+    <title>专属</title>
+    <style>
+        .mui-content>.mui-card:first-child {
+            margin-top: 0px;
+        }
+
+        .mui-card {
+            margin: 0;
+            box-shadow: none;
+        }
+
+        .mui-card-header {
+            font-size: 16px;
+            font-weight: bold;
+            min-height: 35px;
+            padding: 10px 15px;
+        }
+
+        /* #ececed */
+        .mui-card-header:after {
+            background-color: #ddd;
+        }
+
+        .mui-btn,
+        button {
+            padding: 5px 12px;
+        }
+
+        textarea {
+            padding: 10px 10px;
+            border-radius: 0;
+            border: 1px solid #eee;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:#fff;"></a>
+        <h1 class="mui-title" style="color:#fff;">专属</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <div class="mui-card">
+            <div class="mui-card-header">
+                VIP专属信息
+                <div style="width: 40%;">
+                    <button class="mui-btn mui-btn-primary mui-btn-outlined" onclick="setFocus()">编辑</button>
+                    <button id="alter" class="mui-btn mui-btn-primary mui-btn-outlined">修改</button>
+                </div>
+            </div>
+            <div class="mui-card-content">
+                <div class="mui-card-content-inner">
+                    <textarea id="exclusive" cols="30" rows="20" placeholder="请填写专属信息" readonly="readonly"></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+
+
+<!-- 卡券 -->
+<script>
+    // 获取传过来的参数
+    var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('=');
+    var idd = decodeURI(loc.substr(n2 + 1, n1 - n2));
+    console.log(idd);
+
+    window.onload = function () {
+        remarkData();
+    }
+    var remark_id = '';
+    function remarkData() { //获取专属内容
+        mui.post('/index.php/UserlistExclusive/', {
+            code: idd
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                if ((data.data.remarks == "") || (data.data.remarks == " ") || (data.data.remarks == null) || (data.data.remarks == undefined)) {
+                    remark_id = data.data.id;
+                    document.getElementById('exclusive').value = "";
+                } else {
+                    remark_id = data.data.id;
+                    document.getElementById('exclusive').value = data.data.remarks;
+                }
+            }
+        }, 'json');
+    }
+
+    //编辑专属内容
+    function setFocus() {
+        document.getElementById("exclusive").removeAttribute("readonly"); //删除不可编辑属性
+        document.getElementById('exclusive').focus(); //文本内添加光标
+        document.getElementById('exclusive').style.borderColor = '#ddd'; //更改边框颜色
+    }
+
+    //修改专属内容
+    document.getElementById("alter").addEventListener("tap", function () {
+        remarkAlter();
+    });
+    function remarkAlter() {
+        mui.post('/index.php/UserlistEditExclusive/', {
+            id: remark_id,
+            remarks: document.getElementById('exclusive').value
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                mui.toast('修改成功');
+                document.getElementById('exclusive').setAttribute("readonly", "readonly"); //添加不可编辑属性
+                document.getElementById('exclusive').style.borderColor = '#eee';
+            } else if (data.code == 400) {
+                mui.toast('请先编辑文本');
+                document.getElementById("exclusive").removeAttribute("readonly"); //删除不可编辑属性
+                document.getElementById('exclusive').focus(); //文本内添加光标
+                document.getElementById('exclusive').style.borderColor = '#ddd'; //更改边框颜色
+            }
+        }, 'json');
+    }
+</script>
+
+</html>

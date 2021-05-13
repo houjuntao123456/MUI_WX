@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./mui/css/mui.css">
+    <script src="./mui/js/mui.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="./js/iconfont/iconfont.css">
+    <title>商品-支付</title>
+    <style>
+        body {
+            background-color: #ABD0FD;
+        }
+        .mui-row {
+            position: fixed;
+            top: 150px;
+            width: 100%;
+        }
+
+        .mui-card {
+            box-shadow: none;
+            border-radius: 10px;
+        }
+
+        .mui-card .module_img {
+            content: ' ';
+            z-index: 1;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            /* background: url(../payment/images/module.jpg) center 0 no-repeat;
+            background-size: cover; */
+            padding: 8%;
+            text-align: center;
+            font-family: '微软雅黑';
+        }
+
+        .module_img .iconfont {
+            font-size: 40px;
+            color: #22ac38;
+            vertical-align: 0.45em;
+        }
+
+        .discount_module {
+            padding: 15px;
+        }
+
+        .discount_module h5 {
+            font-size: 16px;
+            font-family: '微软雅黑';
+            letter-spacing: 1px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            width: 100%;
+            float: left;
+            border: 1px solid #eee;
+            margin: 5px 0;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 5px;
+            font-family: '微软雅黑';
+            letter-spacing: 1px;
+        }
+        #pay_list li a{
+            padding: 10px;
+            line-height: 28px;
+            display: block;
+            color: #22ac38;
+        }
+
+        #pay_list span {
+            font-weight: bold;
+        }
+
+        .active {
+            /* border: 1px solid #22ac38; */
+            border: 3px solid transparent;
+            background-image: linear-gradient(#fff, #fff), linear-gradient(#fecc69, #ffa356);
+            box-sizing: border-box;
+            background-clip: padding-box, border-box;
+            background-origin: padding-box, border-box;
+
+        }
+
+        .but {
+            position: fixed;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            width: 100%;
+            height: 45px;
+            background: #007aff;
+            text-align: center;
+            line-height: 45px;
+            letter-spacing: 1px;
+        }
+
+        .but p {
+            color: #fff;
+            font-family: '微软雅黑';
+            font-size: 16px;
+        }
+
+        .but .iconfont {
+            vertical-align: -0.15em;
+            color: #fff;
+            font-size: 25px;
+        }
+
+        .mui-popup {
+            font-family: '微软雅黑';
+            width: 95%;
+        }
+
+        .mui-popup-title+.mui-popup-text {
+            margin: 10px 0 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 1px solid #EEE;
+            width: 100%;
+            text-align: center;
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        /* table样式 */
+        table tr th:nth-child(1),
+        tr td:nth-child(1) {
+            width: 25%;
+        }
+
+        table tr th:nth-child(2),
+        tr td:nth-child(2) {
+            width: 25%;
+        }
+
+        table tr th:nth-child(3),
+        tr td:nth-child(3) {
+            width: 25%;
+        }
+
+        table tr th:nth-child(4),
+        tr td:nth-child(4) {
+            width: 25%;
+        }
+
+        .cover {
+            width: 100%;
+            height: 220px;
+            position: relative;
+        }
+
+        .cover:after {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            box-shadow: 0px -30px 20px -5px rgb(171, 208, 253) inset;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            font-weight: normal;
+            font-size: 16px;
+            color: #E48907;
+        }
+
+
+        .icon-duigou {
+            color: #dddddd;
+            float: right;
+        }
+
+        #pay_gift li {
+            width: 45%;
+            float: left;
+            margin-left: 10px;
+            background: #F5F4F4;
+            padding: 0;
+            position: relative;
+            font-size: 15px;
+            line-height: 35px;
+            color: #777;
+        }
+
+        #pay_gift span {
+            display: block;
+            font-weight: normal;
+            font-size: 18px;
+            color: #D8AF0F;
+            border-top: 1px #ddd dashed;
+            line-height: 35px;
+        }
+
+        #pay_gift .sicon {
+            padding-right: 10px;
+            position: absolute;
+            right: -2px;
+            top: -1px;
+            border: none;
+            color: #dddddd;
+            font-size: 22px;
+        }
+        .icon-act,
+        #pay_gift .icon-duigou {
+            color: #E48907;
+        }
+        #sheet1{
+            height: 385px;
+            background-color:#F17619;
+            /* background-image: linear-gradient(rgb(214, 58, 33), #f99118); */
+            background: url(images/detabg.jpg) no-repeat;
+            background-size: cover;
+        }
+        .img_title{
+            width: 35px;
+            margin: 15px auto 0 auto;
+        }
+        .detailed h2{
+            background-color: #c32c21;
+            line-height: 30px;
+            font-weight: normal;
+            font-family: '黑体';
+            font-size: 17px;
+            border-radius: 20px;
+            color: #fff;
+            text-align: center;
+            width: 85%;
+            margin: 0 auto 20px auto;
+            padding: 0 8px;
+        }
+        .detailed p{
+            /* background-color: #c32c21; */
+            /* width: 70%;
+            margin: 0 auto 15px auto;
+            padding: 0 8px; */
+            color: #fff;
+            font-family: '黑体';
+            line-height: 35px;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        .detailed span{
+            background-color: #f99118;
+        }
+        .welfare{
+            position: relative;
+            width: 80%;
+            height: 36px;
+            background-color: #c32c21;
+            margin: 0 auto 20px auto;
+            overflow: hidden;
+        }
+        .welfare p{width: 20%;}
+        .welfare_span{
+            position: absolute;
+            width: 65%;
+            right: 3px;
+            top: 3px;
+            height: 30px;
+            background: #F99118;
+            line-height: 30px;
+            color: #fff;
+            font-family: '黑体';
+            font-size: 16px;
+        }
+        .box{
+            border-top: 20px solid rgba(0,0,0,0);
+            border-right: 0 solid rgba(0,0,0,0);
+            border-bottom: 30px solid #F99118;
+            border-left: 38px solid rgba(0,0,0,0);
+            position: absolute;
+            top: -20px;
+            left: -38px;
+        }
+        .welfare_deta{
+            background: #c32c21;
+            width: 80%;
+            margin: 0 auto;
+            padding-bottom: 10px;
+            margin-bottom: 70px;
+        }
+        .welfare_deta p{
+            margin-bottom: 0px;
+        }
+        .display_b{
+            display: block;
+        }
+        .display_n{
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="pay">
+    <div class="cover">
+        <!-- <img src="images/bj.jpg" alt="活动页面"> -->
+        <img src="images/cz.jpg" alt="活动页面">
+    </div>
+
+    <div class="mui-scroll-wrapper">
+        <div class="mui-row mui-scroll">
+            <div class="mui-card">
+                <div class="mui-card-content module_img">
+                    <span class="iconfont icon-icon1"></span>
+                    <h3>￥<span>1888.88</span></h3>
+                </div>
+            </div>
+            <div class="mui-card">
+                <div class="mui-card-content module_img" style="padding: 10px;">
+                    <h4><span>(点击查看商品信息)</span></h4>
+                </div>
+            </div>
+            <div class="mui-card" style="padding-bottom:15px;">
+                <div class="mui-card-content discount_module">
+                    <ul id="pay_list">
+                        <h5>充值活动：</h5>
+                        <li num="20000"><a href="">充20000.00 / <span>得20888.00</span> <span class="iconfont icon-duigou"></span></a></li>
+                        <li num="10000"><a href="">充10000.00 / <span>得15000.00</span> <span class="iconfont icon-duigou"></span></a></li>
+                        <li num="1000"><a href="">充1000.00 / <span>得1285.00</span> <span class="iconfont icon-duigou"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mui-card" style="margin-bottom: 220px;padding-bottom:15px;">
+                <div class="mui-card-content discount_module">
+                    <ul id="pay_gift">
+                        <h5>充值有礼：</h5>
+                        <li money="20000">充20000 <span class="iconfont icon-yuanxing sicon"></span> <span>得20058</span>
+                        </li>
+                        <li money="10000">充10000 <span class="iconfont icon-yuanxing sicon"></span> <span>得10058</span>
+                        </li>
+                        <li money="1000">充1000 <span class="iconfont icon-yuanxing sicon"></span> <span>得1058</span>
+                        </li>
+                        <li money="150">充150 <span class="iconfont icon-yuanxing sicon"></span> <span>得158</span></li>
+                        <li money="100">充100 <span class="iconfont icon-yuanxing sicon"></span> <span>得128</span></li>
+                        <li money="50">充50 <span class="iconfont icon-yuanxing sicon"></span> <span>得58</span></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action">
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll detailed">
+                <div class="img_title"><img src="images/sj.png" alt="指引"></div>
+                <h2>双十二购物狂欢节, 全民抢实惠</h2>
+                <div class="welfare">
+                    <p>赠积分</p>
+                    <div class="welfare_span">1000积分<div class='box'></div></div>
+                </div>
+                <div class="welfare">
+                    <p>赠卡券</p>
+                    <div class="welfare_span">购物满199减100，代金券1张<div class='box'></div></div>
+                </div>
+                <div class="welfare_deta">
+                    <p>详情</p>
+                    <p>双十二代金券2张，元旦代金券1张，新年代金券2张，价值38棉拖鞋一双</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="but"> </div>
+</body>
+
+
+<script>
+    var pNum = ''; 
+    var pMoney = '';
+    var giftMoney = '';
+    window.onload = function () {
+        pMoney = $('h3').text().substring(1);
+        var payP = document.createElement('p');
+        payP.innerHTML = '<span class="iconfont icon-weixin"></span>微信支付(' + pMoney + ')';
+        $('.but').append(payP);
+    }
+    //赠送详情
+    mui("#sheet1").on('tap', '.welfare', function () {
+        mui.toast(this.innerText, { duration: 'long', type: 'div' })
+    })
+
+    //充值活动
+    mui("#pay_list").on('tap', 'li', function () {
+        if ($(this).hasClass('active')) {
+            mui('#sheet1').popover('hide');
+            var tspan = $(this.getElementsByClassName('icon-duigou')[0]); //获取当前li里的.icon-duigou
+            tspan.removeClass("icon-act"); //向当前含有.icon-duigou类的span标签里 添加icon-act类
+            $(this).removeClass("active");
+        } else {
+            $('.icon-duigou').removeClass('icon-act'); //获取所有.icon-duigou
+            var tspan = $(this.getElementsByClassName('icon-duigou')[0]); //获取当前li里的.icon-duigou
+            tspan.addClass("icon-act"); //向当前含有.icon-duigou类的span标签里 添加icon-act类
+            $(this).addClass("active").siblings().removeClass("active");
+            pNum = this.getAttribute("num"); //获取充值金额
+            mui('#sheet1').popover('show');
+        }
+        
+       
+    })
+    //充值有礼
+    mui("#pay_gift").on('tap', 'li', function () {
+        var gspan = $(this.getElementsByClassName('sicon')[0]);
+        if (gspan.hasClass("icon-duigou")) { //如果是选中状态 则取消选中
+            gspan.removeClass('icon-duigou');
+            gspan.addClass("icon-yuanxing");
+            giftMoney = '';
+        } else {
+            $('.sicon').removeClass('icon-duigou');
+            $('.sicon').addClass('icon-yuanxing');
+            gspan.removeClass('icon-yuanxing');
+            gspan.addClass("icon-duigou");
+            giftMoney = this.getAttribute("money"); //获取充值金额
+            // console.log(giftMoney);
+        }
+    })
+
+    mui("h4").on('tap', 'span', function () { //点击查看通用门店
+        let payStore = '<div><table text-align="right" border="1"><tr><th>商品名称</th><th>尺码</th><th>颜色</th><th>价格</th></tr></table><div class="mui-scroll-wrapper" style="top:80px"><div class="mui-scroll" id ="mountains" style="padding-left: 15px;padding-right: 15px;"></div></div> </div>';
+        mui.alert(payStore, '商品信息', function () { });
+
+
+        document.getElementsByClassName("mui-popup-text")[0].style.height = '300px';
+        mui('.mui-scroll-wrapper').scroll({
+            deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+        // let pppp = '<table text-align="right" border="1"><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr><tr><td>女士皮衣</td><td>M</td><td>红色</td><td>89</td></tr></table>'
+        // document.getElementById("mountains").innerHTML = pppp;
+        document.getElementById("mountains").appendChild(buildTable(tableData));
+    })
+    let tableData = [
+        {
+            '商品名称': "女士皮衣",
+            '尺码': "M",
+            '颜色': "红色",
+            '价格': 89
+        },
+        { '商品名称': "小羊皮", '尺码': "365", '颜色': "青春活力", '价格': 189 },
+        { '商品名称': "短靴", '尺码': "37", '颜色': "黑色", '价格': 158 },
+        { '商品名称': "老爹鞋", '尺码': "37", '颜色': "白色", '价格': 160 },
+        { '商品名称': "卫衣", '尺码': "M", '颜色': "黄色", '价格': 88 }, 
+        { '商品名称': "小蜗牛项链", '尺码': "M", '颜色': "玫瑰金", '价格': 199 },
+        { '商品名称': "蜜透粉底", '尺码': "M", '颜色': "黑盒", '价格': 56 },
+        { '商品名称': "蛋糕裙", '尺码': "M", '颜色': "杏色", '价格': 89 },
+        { '商品名称': "喇叭裤", '尺码': "2尺", '颜色': "黑色", '价格': 89 },
+        { '商品名称': "女士皮衣", '尺码': "M", '颜色': "红色", '价格': 89 }
+    ];
+    // 创建表格
+    function buildTable(data) {
+        let table = document.createElement("table");
+        let tr = document.createElement("tr");
+        // 通过 for in 循环遍历对象,得到对象的属性,为表头添加内容
+        // for (let i in data[0]) {
+        //     // let th = document.createElement("th");
+        //     // th.innerText = i;
+        //     // tr.appendChild(th);
+        // }
+        // table.appendChild(tr);
+        // 通过 forEach 循环遍历对象数组,为表格添加行
+        data.forEach((value, index) => {
+            let tr = document.createElement("tr");
+            // 通过 for in 循环遍历对象,得到对象的属性,给每行添加内容
+            for (let index1 in data[index]) {
+                let td = document.createElement("td");
+                td.innerText = data[index][index1];
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        });
+        //设置表格的对齐属性,和边框属性
+        table.setAttribute("text-align", "right");
+        table.setAttribute("border", "1");
+        console.log(table);
+        return table;
+    }
+
+
+    //提交
+    mui(".but").on('tap', 'p', function () {
+        console.log(pNum);
+        console.log(pMoney);
+        console.log(giftMoney);
+        // mui.post('/index.php/../', {
+        //     payNum: pNum,
+        //     payMoney: pMoney
+        // },function(data){
+        //     //服务器返回响应，根据响应结果，分析是否登录成功；
+        // },'json');
+    })
+    // function payUpload(){ }
+
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+</script>
+
+</html>

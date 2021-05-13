@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <script src="../mui/js/muiR.js"></script>
+    <script src="../js/stm_Pull_up_loading.js"></script>
+    <title>会员资料</title>
+</head>
+<style>
+    /* 样式 */
+    .oa-contact-cell.mui-table .mui-table-cell {
+        padding: 11px 0;
+        vertical-align: middle;
+    }
+
+    .oa-contact-cell {
+        position: relative;
+        margin: -11px 0;
+    }
+
+    .oa-contact-content {
+        width: 100%;
+
+    }
+
+    .oa-contact-name,
+    oa-contact-position {
+        float: left;
+    }
+
+    li {
+        border: none;
+    }
+
+    .mui-table-view-cell::after {
+        left: 0px;
+        background-color: #ececed;
+    }
+
+    .mui-table-view::after {
+        background-color: #ececed;
+    }
+
+
+
+    .RadioStyle input {
+        display: none
+    }
+
+    .RadioStyle {
+        width: 100%;
+        /* margin-top: 6px; */
+        margin-left: auto;
+        margin-right: auto;
+        /* border-top: 1px solid #ccc; */
+    }
+
+    .RadioStyle label {
+        /* display: block; */
+        /* border-bottom: 1px solid #D4CCCC; */
+        position: relative;
+        padding: 20px 15px;
+        /* padding: 2px 10px 2px 5px;
+            line-height: 23px;
+            min-width: 60px;
+            text-align: center;
+            margin-left: 5px;
+            margin-bottom: 5px;
+            float: left;
+            margin-top: 5px;
+            border-radius: 4px;
+            color: #6c6c6f */
+    }
+
+    .RadioStyle input:checked+label {
+        background: url(../images/ico_checkon.svg) no-repeat right bottom;
+        background-size: 25px 25px;
+        background-color: rgba(212, 229, 246, 0);
+        color: #00a4ff;
+    }
+
+    .dis {
+        display: none;
+    }
+</style>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;">详细资料<span id="nums" class="mui-badge  mui-badge-primary dis">0</span>
+        </h1>
+        <a style="float: right;line-height: 44px;color: white;" id="menu" onclick="cluste_hai(this)">发送</a>
+    </header>
+    <!-- 详细资料 -->
+    <div id="pullrefresh" class=" mui-content mui-scroll-wrapper ">
+        <div class="mui-scroll">
+            <ul class="mui-table-view mui-table-view-chevron RadioStyle" id="member_data">
+                <!-- 里面详细内容 -->
+
+                <!--                 
+                <li class="mui-table-view-cell" style="padding-left:5%;padding-right:5%;">
+                    <div class="mui-slider-cell">
+                        <div class="oa-contact-cell mui-table">
+                                <input type="checkbox" id="hhh" phone="13513068789" onclick="checked_box(this)">
+                                <label for="hhh" class="mui-table-cell" style="width:80px;">
+                                    <img src="../images/suoke.jpg"
+                                        style="width:100%;border: 1px solid #eee;border-radius:50%;" />
+                                </label>
+
+                            <div class="oa-contact-content mui-table-cell" style="padding-top:10px;padding-left: 12px;">
+                                <div class="mui-clearfix" style="text-align:left;line-height: 28px;width: 80%;">
+                                    <h4 class="oa-contact-name">侯军涛</h4>&nbsp;
+                                    <span class="oa-contact-position mui-h5">19970117</span>
+                                </div>
+                                <p>
+                                    <span style="font-size:16px;">¥</span>15000
+                                    <span style="font-size:16px;">&nbsp;/&nbsp;</span>20<span>次
+                                        / 20件</span>
+                                    <button style="float: right;" onclick="member(this)"
+                                        name="' + data.data.data[i].code">会员档案</button>
+                                </p>
+                                <p> 15</p>
+                                <p><span>手机号:</span>15030579478</p>
+                            </div>
+                        </div>
+                    </div>
+                </li> -->
+
+
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+    //js控制页面输出详细资料
+    var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('=');
+    var n3 = loc.indexOf('*');
+    var n4 = loc.indexOf('#');
+    var idd = decodeURI(loc.substr(n2 + 1, n3 - n2 - 5)); 
+    var code = decodeURI(loc.substr(n3 + 1, n4 - n3 - 9));
+    var bar_code = decodeURI(loc.substr(n4 + 1, n1 - n4));
+    var rfm_type = localStorage.getItem("cargo_type");
+    
+    window.onload = function () {
+        opop('/index.php/webCargoGuestLook/', idd, code, bar_code, rfm_type);
+    }
+    function member(e) {
+        location.href = '../homepage/member_data.html?' + 'code=' + e.getAttribute("name");
+    }
+
+</script>
+
+</html>

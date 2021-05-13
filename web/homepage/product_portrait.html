@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="../mui/css/mui.css">
+	<script src="../mui/js/mui.js"></script>
+	<script src="../js/vconsole.js"></script>
+	<script src="../js/hidden-titile.js"></script>
+	<link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+	<script src="../mui/js/mui.dtpicker.js"></script>
+	<link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+	<script src="../mui/js/mui.picker.min.js"></script>
+	<link rel="stylesheet" href="../css/Animate.css">
+	<link rel="stylesheet" href="../css/wx_con_group.css">
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/hidden-titile.js"></script>
+	<script src="../js/loading.js"></script>
+	<link rel="stylesheet" href="../css/loading.css">
+	<title>精准营销</title>
+</head>
+<style>
+	.mui-off-canvas-left,
+	.mui-off-canvas-right {
+		width: 100%;
+	}
+
+	body {
+		background-color: #fdfeff;
+
+	}
+
+	.group_tj {
+		padding-top: 3px;
+		padding-bottom: 10px;
+		margin-top: 10px;
+		width: 97%;
+		margin-left: auto;
+		margin-right: auto;
+		border-radius: 5px;
+		box-shadow: #cecbcb 0px 0px 5px;
+		-webkit-box-shadow: #cecbcb 0px 0px 5px;
+		-moz-box-shadow: #cecbcb 0px 0px 5px;
+		background-color: #fdfeff;
+	}
+
+	.group_sx {
+		font-size: 10px;
+		width: 95%;
+		margin-left: auto;
+		margin-right: auto;
+		padding-bottom: 4px;
+
+	}
+
+	.group_show {
+		/* padding-top: 20px;
+		border-bottom: 0px; */
+		border: 1px solid #ecebeb;
+		margin: 15px;
+	}
+
+	.group_show legend {
+		font-size: 17px;
+		font-family: fantasy;
+		text-align: center;
+		padding: 10px;
+	}
+
+	/* 标签样式 */
+	.RadioStyle input,
+	.checkboxStyle input {
+		display: none
+	}
+
+	.checkboxStyle label {
+		/* border: 1px solid #00a4ff; */
+		padding: 2px 5px 2px 5px;
+		line-height: 28px;
+		min-width: 75px;
+		text-align: center;
+		float: left;
+		margin: 0px;
+		margin-left: 5px;
+		margin-bottom: 5px;
+		border-radius: 5px;
+		font-size: 14px;
+		background: #faf6f6;
+
+	}
+
+	.checkboxStyle input:checked+label {
+		color: #00a4ff;
+		border-radius: 10px;
+		background: #d4e5f6;
+		font-size: 14px;
+	}
+
+	.RadioStyle label {
+		border: 1px solid #00a4ff;
+		padding: 2px 10px 2px 10px;
+		line-height: 23px;
+		min-width: 60px;
+		text-align: center;
+		margin-left: 10px;
+		margin-bottom: 5px;
+		float: left;
+		margin-top: 5px;
+		border-radius: 4px;
+		color: #6c6c6f;
+		font-size: 14px;
+		letter-spacing: 1px;
+	}
+
+	.RadioStyle input:checked+label {
+		background: url(../images/ico_checkon.svg) no-repeat right bottom;
+		background-size: 25px 25px;
+		background-color: #d4e5f6;
+		color: #00a4ff
+	}
+
+	p>span {
+		word-break: break-all;
+	}
+
+	.inpu_textarea {
+		margin: 0px;
+		padding: 0px;
+		font-size: 10px;
+	}
+
+	.animated {
+		animation-duration: 1.5s;
+	}
+
+	.jsdkaf {
+		overflow: hidden;
+		/*自动隐藏文字*/
+		text-overflow: ellipsis;
+		/*文字隐藏后添加省略号*/
+		white-space: nowrap;
+		-webkit-line-clamp: 1;
+		/*想要显示的行数*/
+		-webkit-box-orient: vertical;
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+
+	/* 标签样式 */
+</style>
+
+<body>
+
+	<!-- 侧滑导航根容器 -->
+	<!-- 手势动作 mui-draggable -->
+	<div class="mui-off-canvas-wrap   mui-slide-in mui-content ">
+		<!-- 主页面容器 -->
+		<div class="mui-inner-wrap" style="background-color: #fff;">
+			<!-- 菜单容器 -->
+			<aside class="mui-off-canvas-right">
+				<header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+					<a class="mui-icon mui-icon-back" style="color:white;" id="close_moban"></a>
+					<h1 class="mui-title" style="color:white;">筛选模板</h1>
+				</header>
+				<div class="mui-scroll-wrapper" style="background-color: #fff;top: 44px;">
+					<div class="mui-scroll" id="scroll_height" style="padding-bottom: 65px;">
+						<div class="cont" style="width: 100%;">
+							<!--  <div class="biz_title">
+                                <h2>发展历程</h2>
+                                <p>CONMPANY HISTORY</p>
+                            </div> -->
+							<div class="biz_timtline-box">
+								<div class="biz_timeline" id="biz_timeline_moban">
+									<!-- <div class="biz-timeline-box  clearfix animated">
+										<div class="biz_timeline-time">2013.02</div>
+										<div class="biz_timeline-node"></div>
+										<div class="biz_timeline-eventbox">
+											<div class="biz_timeline-event">公司成立</div>
+										</div>
+									</div> -->
+								</div>
+								<div class="biz_longString"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</aside>
+			<!-- 主页面标题 -->
+			<!--  头部-->
+			<header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+				<a class="mui-icon mui-icon-back mui-action-back" style="color:white;"></a>
+				<h1 class="mui-title" style="color:white;">产品画像</h1>
+				<span style="float:right;line-height:44px;color:white;" id="show_moban">模板</span>
+				<!-- 浮动显示 -->
+				<div class="group_tj animated flipInY">
+					<!-- <fieldset class="group_sx">
+                        <legend style="font-size: 20px;font-family: fantasy;text-align: center;">筛选条件</legend>
+                        <textarea id='' type="" class='inpu_textarea' name=" ">烘干机打开</textarea>
+                    </fieldset> -->
+					<div class="mui-row" style="text-align: center;padding-bottom: 7px;">
+						<div class="mui-col-xs-4 mui-col-sm-4">
+							<button type="button" class="mui-btn" style="font-size: 12px;"
+								onclick="cancel()">重置筛选</button>
+						</div>
+						<div class="mui-col-xs-4 mui-col-sm-4">
+							<button type="button" class="mui-btn mui-btn-warning" style="font-size: 12px;"
+								onclick="preservation()">保存模板</button>
+						</div>
+						<div class="mui-col-xs-4 mui-col-sm-4">
+							<button type="button" class="mui-btn mui-btn-primary" style="font-size: 12px;"
+								onclick="confirm()">确定筛选</button>
+						</div>
+					</div>
+				</div>
+			</header>
+			<!-- 主页面内容容器 -->
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll" style="padding-top: 120px;">
+					<!-- 主界面具体展示内容 -->
+					<!-- 会员信息 -->
+					<fieldset class="group_show">
+						<legend style="font-size: 20px;font-family: fantasy;text-align: center;">基本信息</legend>
+						<!-- 复选标签 -->
+						<div class="RadioStyle" id="checkbox_biaoqian">
+							<div class="mui-row" id="check_size">
+								<p value="level_code" value_name2="尺码">尺码: &nbsp;<span style="color:#00a4ff"></span></p>
+								<!-- <span>
+																	<input type="checkbox" id="box0" name="box" value="开卡会员"
+																		onclick="checkbox_lable(this)" value_num="HYJB15620501915311"><label
+																		for="box0">开卡会员</label>
+																</span> -->
+
+							</div>
+							<div class="mui-row" id="check_color">
+								<p value="level_code" value_name2="颜色">颜色: &nbsp;<span style="color:#00a4ff"></span></p>
+								<!-- <span>
+									<input type="checkbox" id="box0" name="box" value="开卡会员"
+										onclick="checkbox_lable(this)" value_num="HYJB15620501915311"><label
+										for="box0">开卡会员</label>
+								</span> -->
+
+							</div>
+
+
+						</div>
+					</fieldset>
+					<!-- 会员信息 -->
+					<fieldset class="group_show">
+						<legend style="font-size: 20px;font-family: fantasy;text-align: center;">扩展信息</legend>
+						<!-- 复选标签 -->
+						<div class="RadioStyle" id="checkbox_fuxuan">
+
+							<!-- <div class="mui-row">
+								<p value="level_code">颜色: &nbsp;<span style="color:#00a4ff"></span></p>
+								<span>
+									<input type="checkbox" id="box0" name="box" value="开卡会员"
+										onclick="checkbox_lable(this)" value_num="HYJB15620501915311"><label
+										for="box0">开卡会员</label>
+								</span>
+
+							</div> -->
+
+
+
+						</div>
+					</fieldset>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+<script>
+	//加载动画
+	var load = new Loading();
+	load.init();
+	load.start();
+	window.onload = function () {
+		hidden_title();
+	}
+	// 帮助后端清除缓存
+	function clern_server() {
+		mui.post('/index.php/webCustomerCacheNull/', {
+		}, function (data) {
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+			if (data.code == 200) {
+				// 缓存清除成功;
+			}
+		}, 'json'
+		);
+	}
+
+
+
+
+	clern_server();
+	mui('.mui-scroll-wrapper').scroll({
+		deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+	});
+	// 控制样式,还原属性
+	var yuan = "";
+	// hidden_title();
+	// 取消筛选
+	function cancel() {
+		history.go(0);
+	}
+
+	// 保存模板
+	function preservation() {
+		var content_txt = "";
+		for (o = 0; o < hjt.length; o++) {
+			if (hjt[o]['value'].length == 1) {
+				content_txt += hjt[o]['name'] + ':' + hjt[o]['value'] + "<br>"
+			} else {
+				content_txt += hjt[o]['name'] + ':' + hjt[o]['value'].join() + "<br>"
+			}
+		}
+		content_txt = "<div style='text-align:left;font-size:15px;'>" + content_txt + "</div>"
+		mui.confirm('', '选择需要保存的模板', ['专场营销', '画像模板'], function (e) {
+			// e.index == 1
+			if (e.index == 1) {
+				// 画像模板
+				mui.prompt('', '请输入保存模板名称', '保存模板', ['取消', '确定'], function (e) {
+					if (e.index == 1) {
+						if (e.value != "") {
+							mui.post('/index.php/webCommodityScreeningPreservations/', {
+								text: '【' + e.value + '】' + '<br>' + content_txt
+							}, function (data) {
+								//服务器返回响应，根据响应结果，分析是否登录成功；
+								if (data.code == 200) {
+									mui.toast('模板 [ ' + e.value + ' ] 已保存', {
+										duration: 'long',
+										type: 'div'
+									})
+									window_moban();
+									// 保存成功清除缓存
+									clern_server();
+								} else if (data.code == 400) {
+									mui.toast(data.msg, {
+										duration: 'long',
+										type: 'div'
+									})
+								}
+							}, 'json'
+							);
+
+
+						} else {
+							mui.toast('模板不能为空', {
+								duration: 'long',
+								type: 'div'
+							})
+							return false;
+						}
+
+					} else {
+						// 取消
+					}
+				})
+
+			} else {
+				// 跟进模板
+				mui.prompt('', '请输入保存模板名称', '保存模板', ['取消', '确定'], function (e) {
+					if (e.index == 1) {
+						if (e.value != "") {
+							mui.post('/index.php/webCommoditySpecial/', {
+								text: '【' + e.value + '】' + '<br>' + content_txt
+							}, function (data) {
+								//服务器返回响应，根据响应结果，分析是否登录成功；
+								if (data.code == 200) {
+									mui.toast('模板 [ ' + e.value + ' ] 已保存', {
+										duration: 'long',
+										type: 'div'
+									})
+									window_moban();
+									// 保存成功清除缓存
+									clern_server();
+								} else if (data.code == 400) {
+									mui.toast(data.msg, {
+										duration: 'long',
+										type: 'div'
+									})
+								}
+							}, 'json'
+							);
+
+
+						} else {
+							mui.toast('模板不能为空', {
+								duration: 'long',
+								type: 'div'
+							})
+							return false;
+						}
+
+					} else {
+						// 取消
+					}
+				})
+			}
+		})
+	}
+
+	// 确认筛选
+	function confirm() {
+		if (arrar == "") {
+			mui.toast('请勾选筛选所需要的条件', {
+				duration: 'long',
+				type: 'div'
+			});
+		} else {
+			localStorage.setItem("huancun", 'false');
+			location.href = "../homepage/product_portrait_son_2.html?condition=false";
+		}
+
+
+	}
+
+	// 颜色
+	var check_color = document.getElementById("check_color");
+	function checkbox_color() {
+		mui.post('/index.php/webCommodityScreeningColor/', {
+		}, function (data) {
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+			if (data.code == 200) {
+				for (i = 0; i < data.data.length; i++) {
+					var span = document.createElement("span");
+					span.innerHTML = '<input type="checkbox" id="color' + i + '" name="box" value="color" onclick="check_box_color_size(this)" value_num="' + data.data[i].color + '">'
+						+ '<label for="color' + i + '">' + data.data[i].color + '</label>'
+					check_color.appendChild(span);
+				}
+			}
+			// }
+		}, 'json'
+		);
+	}
+	checkbox_color();
+
+	// 尺码
+	var check_size = document.getElementById("check_size");
+	function checkbox_size() {
+		mui.post('/index.php/webCommodityScreeningSize/', {
+		}, function (data) {
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+
+			if (data.code == 200) {
+				for (i = 0; i < data.data.length; i++) {
+					var span = document.createElement("span");
+					span.innerHTML = '<input type="checkbox" id="size' + i + '" name="box" value="sizes" onclick="check_box_color_size(this)" value_num="' + data.data[i].sizes + '">'
+						+ '<label for="size' + i + '">' + data.data[i].sizes + '</label>'
+					check_size.appendChild(span);
+				}
+			}
+			load.stop();
+			// }
+		}, 'json'
+		);
+	}
+	checkbox_size();
+	function check_box_color_size(value) {
+		var val = value.getAttribute("value_num");
+		var kk = value.getAttribute("id");
+		var pp = document.getElementById(kk).parentNode.parentNode.firstElementChild.firstElementChild;
+		var value_name = document.getElementById(kk).parentNode.parentNode.firstElementChild.getAttribute("value_name2");
+		if (value.checked == true) {
+			// 选中
+			var span = document.createElement("span");
+			span.id = 'i' + kk;
+
+			span.innerHTML = value.getAttribute("value_num") + ',';
+			pp.appendChild(span);
+
+			Pd(true, kk);
+			Pdvalue(true, value.getAttribute("value_num"), value_name)
+		} else {
+			//取消
+			pp.removeChild(document.getElementById('i' + kk))
+			Pd(false, kk);
+			Pdvalue(false, value.getAttribute("value_num"), value_name)
+		}
+
+		checkbox_ajax(value.value, value.getAttribute("value_num"));
+	}
+
+
+	// 会员卡
+
+	function checkbox_ajax(key, val) {
+		mui.post('/index.php/webCommodityScreeningCache/', {
+			key: key,
+			val: val
+		}, function (data) {
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+			if (data.code == 200) {
+			}
+		}, 'json'
+		);
+	}
+	window_fuxuan();
+	// 复选框
+	var checkbox_fuxuan = document.getElementById("checkbox_fuxuan");
+	function window_fuxuan() {
+		mui.post('/index.php/webCommodityScreeningLabel/', {
+		}, function (data) {
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+			if (data.code == 200) {
+				for (i = 0; i < data.data.length; i++) {
+					var div = document.createElement("div");
+					div.className = 'mui-row';
+					div.id = "bq" + i;
+					div.innerHTML = '<p style="padding-top:10px;" value="' + data.data[i].name + '">' + data.data[i].name +
+						': &nbsp;<span style="color:#00a4ff"></span></p>'
+					checkbox_fuxuan.appendChild(div);
+					opopopo(div.id, data.data[i].name, data.data.length - 1, data.data[i].code);
+				}
+			}
+
+			// }
+		}, 'json'
+		);
+	}
+
+	function opopopo(id, name, numbers, code) {
+		mui.post('/index.php/webCommodityScreeningLabelInfo/', {
+			name: name
+		}, function (data) {
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+			var xiao_id = document.getElementById(id);
+			if (data.code == 200) {
+				for (i = 0; i < data.data.length; i++) {
+					var div = document.createElement("span");
+					div.innerHTML = '<input type="checkbox" id="' + id + i + 'y' + '" value="' + data.data[i].info + '" value_num="' + data.data[i].info + '" code="' + code + '" idd="' + data.data[i].id + '" onclick="checkbox_lable(this)" />' +
+						'<label for="' + id + i + 'y' + '">' + data.data[i].info + '</label>'
+					xiao_id.appendChild(div);
+				}
+			}
+			// 控制移除加载
+			if (id == ('bq' + numbers)) {
+				load.stop();
+			}
+		}, 'json');
+	}
+
+
+
+	function checkbox_lable(g) {
+		var val = g.getAttribute("value_num");
+		var kk = g.getAttribute("id");
+		var pp = document.getElementById(kk).parentNode.parentNode.firstElementChild.firstElementChild;
+		var value_name = document.getElementById(kk).parentNode.parentNode.firstElementChild.getAttribute("value");
+		if (g.checked == true) {
+			// 选中
+			var span = document.createElement("span");
+			span.id = 'i' + kk;
+			span.innerHTML = g.getAttribute("value") + ',';
+			pp.appendChild(span);
+
+			Pd(true, kk);
+			Pdvalue(true, g.getAttribute("value"), value_name)
+		} else {
+			// 取消
+			pp.removeChild(document.getElementById('i' + kk))
+			Pd(false, kk);
+			Pdvalue(false, g.getAttribute("value"), value_name)
+
+		}
+
+		var key = document.getElementById(kk).parentNode.parentNode.firstElementChild.getAttribute("value");
+		var code = g.getAttribute("code");
+		var idd = g.getAttribute("idd");
+		checkbox_ajax(code, idd);
+	}
+
+
+</script>
+
+
+<script type="text/javascript">
+	var animat = document.getElementsByClassName("animated");
+	// 打开弹框
+	document.getElementById("show_moban").addEventListener("tap", function () {
+		mui('.mui-off-canvas-wrap').offCanvas().show();
+
+		for (i = 0; i < animat.length; i++) {
+			if (i % 2 == 0) {
+				animat[i].classList.add("bounceInLeft");
+			} else {
+				animat[i].classList.add("bounceInRight");
+			}
+		}
+
+	});
+
+	// 关闭弹框
+	document.getElementById("close_moban").addEventListener("tap", function () {
+		mui('.mui-off-canvas-wrap').offCanvas().close();
+		for (i = 0; i < animat.length; i++) {
+			if (i % 2 == 0) {
+				animat[i].classList.remove("bounceInLeft");
+			} else {
+				animat[i].classList.remove("bounceInRight");
+			}
+		}
+	});
+
+	// 
+	mui(".biz_timtline-box").on('tap', '.biz_timeline-event', function () {
+		//获取id
+		var id = this.getAttribute("idd");
+		var name_content = this.getAttribute("name_content");
+		mui.confirm('', '请选择操作', ['删除', '详情', '筛选'], function (e) {
+			// e.index == 1
+			if (e.index == 2) {
+				location.href = "../homepage/product_portrait_son_2.html?condition=" + id;
+				localStorage.setItem("huancun", id);
+			} else if (e.index == 1) {
+				mui.alert('', name_content, ['了解'], function (e) { })
+
+			} else {
+				mui.post('/index.php/webCustomerScreenDel/', {
+					id: id
+				}, function (data) {
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+					if (data.code == 200) {
+						history.go(0);
+					}
+				}, 'json'
+				);
+			}
+		})
+	})
+	var biz_timeline_moban = document.getElementById("biz_timeline_moban");
+
+	function window_moban() {
+		mui.post('/index.php/webCommodityScreeningScreenLists/', {
+		}, function (data) {
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+			if (data.code == 200) {
+				biz_timeline_moban.innerHTML = "";
+				for (i = 0; i < data.data.length; i++) {
+					var div = document.createElement("div");
+					div.className = "biz-timeline-box  clearfix animated";
+					div.innerHTML = '<div class="biz_timeline-eventbox">'
+						+ '<div class="biz_timeline-event jsdkaf" idd="' + data.data[i].id + '" name_content="' + data.data[i].title + '">' + data.data[i].title + '</div>'
+						+ '</div>'
+					biz_timeline_moban.appendChild(div);
+				}
+				$(".biz_longString").css('height', document.getElementById("biz_timeline_moban").clientHeight + 157);
+			}
+		}, 'json'
+		);
+	}
+	window_moban()
+
+
+
+	var arrar = [];
+	function Pd(TF, kk) {
+		if (TF) {
+			// 选中
+			arrar.push(kk);
+			// console.log(arrar);
+		} else {
+			// 取消
+			for (i = 0; i < arrar.length; i++) {
+				if (arrar[i] == kk) {
+					arrar.splice(i, 1);
+				}
+			}
+			// console.log(arrar);
+		}
+	}
+
+
+	var hjt = [];
+	var si_ll = [];
+	var myObj = {};
+	var content = false;
+	function Pdvalue(TF, kk, value_name) {
+		if (TF) {
+			// 选中
+			if (hjt.length == 0) {
+				si_ll = [kk];
+				myObj = {
+					"name": value_name,
+					"value": si_ll
+				}
+				hjt.push(myObj);
+
+			} else {
+				for (l = 0; l < hjt.length; l++) {
+					if (hjt[l]['name'] == value_name) {
+						hjt[l]['value'].push(kk);
+						content = true;
+						break;
+					} else {
+						content = false;
+
+					}
+				}
+				if (!content) {
+					si_ll = [kk];
+					myObj = {
+						"name": value_name,
+						"value": si_ll
+					}
+					hjt.push(myObj);
+				}
+
+			}
+		} else {
+			// 取消
+			for (l = 0; l < hjt.length; l++) {
+				if (hjt[l]['name'] == value_name) {
+					for (i = 0; i < hjt[l]['value'].length; i++) {
+						if (hjt[l]['value'][i] == kk) {
+							hjt[l]['value'].splice(i, 1);
+						}
+					}
+
+				}
+			}
+		}
+	}
+
+
+</script>
+
+</html>

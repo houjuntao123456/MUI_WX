@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>跟进会员</title>
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../css/iconfont.css">
+     <script src="../mui/js/mui.min.js"></script> 
+    <!-- <script src="../mui/js/muiR.js"></script> -->
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/loading.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+</head>
+<style>
+p{
+  margin-bottom: 5px;
+}
+a{
+    color: black;
+}
+.butt{
+    width: 300px;
+    background-color: #007aff;
+    height: 40px;
+    border: 1px solid #007aff;
+    font-size: 16px;
+    color: white;
+}
+</style>
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" id="a_title" style="color:white;"></a>
+        <h1 class="mui-title" id="title_" style="color:white;">跟进会员</h1>
+    </header>
+    <!-- 头部选择器 -->
+    <div id="da" class="mui-content">
+        <!-- body内容 -->
+        <div id="xiao" class="mui-content">
+          <div id="form_css">
+                <div class="mui-input-row mui-search" style="height:40px;width: 90%;margin: 10px auto">
+                        <input type="search" class="mui-input-clear" placeholder="请输入会员姓名,卡号" style="background-color:white;"id="phone_num">
+                </div>
+                <!-- 查询 -->
+          <div class="mui-button-row" style="height: 45px;margin-top: -10px;">
+            <button type="button" class="mui-btn mui-btn-blue" style="width:300px;" id="query">查询</button>
+          </div>
+        </div> 
+          <!-- 下拉刷新内容 -->
+          <div id="pullrefresh" class="mui-scroll-wrapper ">
+              <div class="mui-scroll">
+                  <!--数据列表-->
+                  <div id="qqq" style="width: 100%;">
+                        <!-- <div style="border-radius:10px 10px 0px 0px;border-bottom:#ccc solid 1px;float: left;width: 100%;background-color: white;margin-top:5px;">
+                                <div style="height: 80px;width:25%;text-align: center;float: left;">
+                                   <img src="../images/1.jpg" alt="" style="width: 60px;height: 60px;border-radius:50px;margin-top:9px;">
+                                </div>
+                                <div style="width:75%;float: left;">
+                                    
+                                   <p style="font-size: 15px;padding-top:5px;float: left;width: 80%;"> <span style="color: black;float: left;">刘天华</span><span style="padding-left:5px;float: left;">卡号:</span><span style="color: rgb(236, 157, 10);float: left;">12345678910</span></p>
+                                   <div style="width:80%;float: left;font-size:14px;color:rgb(102, 102, 102); ">
+                                        回访内容: <span>尊敬的刘天华女士:</span>
+                                        <span>少时诵诗书所所所所所所所所所所所所所所所所所所少时诵诗书所所所所所所所所所所所所所所所所所所所所所所所所所所少时诵诗书所所所所所所所所所所所所所所所所所所</span>
+                                   </div>
+                                   <p style="float: left;width: 80%;">回访日期: <span>2019-11-11</span></p>
+                                   <p style="float: left;width: 80%;">回访人: <span>死神</span></p>
+                                   <p style="float: left;width: 80%;">回访主题: <span>短信 日常回访</span></p>
+                                </div>
+                                <div style="float: left; border-radius:0px 0px 10px 10px; width: 100%;height: 40px;text-align: center;line-height: 40px;background-color:chocolate ;"><a style="text-decoration: none;color: #fff;" href="">查看更多信息</a></div> 
+                        </div> -->
+                       
+                  </div>
+              </div>
+            </div>
+         
+        </div>
+        
+    </div>
+</body>
+<script>
+        var load = new Loading();
+    load.init();
+    // load.start();
+    // load.stop();
+  //a标签不能用
+  mui('body').on('tap','a',function(){
+    window.top.location.href=this.href;
+  });
+  var pp = document.getElementById("form_css");
+  var vop = document.getElementById("pullrefresh");
+  window.onload = function () {
+    vop.style.marginTop = pp.clientHeight + 60 + 'px';
+    pullupRefresh();
+    
+  }
+        var code = window.location.href.split("?")[4].split("=")[1];//带来code
+        var starttime = window.location.href.split("?")[4].split("=")[2];//带来开始时间
+        var endtime = window.location.href.split("?")[4].split("=")[3];//带来的结束时间
+        var zhuang = window.location.href.split("?")[4].split("=")[4];//状态
+            // 点击按钮查询
+  var query = document.getElementById("query");
+  var  phone_num1 = document.getElementById("phone_num").value;
+  query.onclick = function () {
+    document.getElementById("qqq").innerHTML = "";
+    count = 0;
+    phone_num1 = document.getElementById("phone_num").value;
+    mui('#pullrefresh').pullRefresh().refresh(true);
+    pullupRefresh();
+  }
+</script>
+<script>
+  
+mui.init({
+  
+        pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+                callback: pulldownRefresh
+            },
+            up: {
+                contentrefresh: '正在加载...',
+                // auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+	/**
+	 * 下拉刷新具体业务实现
+	 */
+    function pulldownRefresh() {
+    }
+	/**
+	 * 上拉加载具体业务实现
+	 */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+    function pullupRefresh() {
+        load.start();
+            mui.post('/index.php/RepurchaseFollowMember/', {
+                start:starttime,
+                end:endtime,
+                staff:code,
+                total_status:zhuang,
+                search:phone_num1,
+                page: ++count,//分页
+                limit: limit_num//每页的条数
+            }, function (data) {
+                console.log(data)
+                // 服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    setTimeout(function () { 
+                        mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                        // var table = document.body.querySelector('.mui-table-view');
+                        var qq = document.getElementById("qqq");
+                        for (i = 0; i < data.data.data.length; i++) {
+                            var li = document.createElement('div');
+                            if (data.data.data[i].user_name==null && data.data.data[i].content==null) {
+                                // li.className = 'mui-table-view-cell';
+                            li.style = "border-radius:10px 10px 0px 0px;border-bottom:#ccc solid 1px;float: left;width: 100%;background-color: white;margin-top:5px;"
+                            li.innerHTML = '<div style="height: 80px;width:25%;text-align: center;float: left;">'
+                                   +'<img src="'+data.data.data[i].img+'" alt="" style="width: 60px;height: 60px;border-radius:50px;margin-top:9px;">'
+                                +'</div>'
+                                +'<div style="width:75%;float: left;">'
+                                +'<p style="font-size: 15px;padding-top:5px;float: left;width: 80%;"> <span style="color: black;float: left;"></span><span style="padding-left:5px;float: left;">卡号:</span><span style="color: rgb(236, 157, 10);float: left;">'+data.data.data[i].user_code+'</span></p>'
+                                +'<div style="width:80%;float: left;font-size:14px;color:rgb(102, 102, 102); ">'
+                                +'回访内容:<span></span>'
+                                +'</div>'
+                                +'<p style="float: left;width: 80%;">回访日期: <span>'+data.data.data[i].time_g+'</span></p>'
+                                +'<p style="float: left;width: 80%;">回访人: <span>'+data.data.data[i].vsname+'</span></p>'
+                                +'<p style="float: left;width: 80%;">回访方式: <span>'+data.data.data[i].visit_mode+'</span></p>'
+                                +'</div>'
+                                +'<div style="float: left; border-radius:0px 0px 10px 10px; width: 100%;height: 40px;text-align: center;line-height: 40px;background-color:#007aff ;">'
+                                +'<button class="butt" code="'+data.data.data[i].user_code+'" onclick="member(this)">查看更多信息'
+                                +'</div>'
+                            qq.appendChild(li);
+                            }else if (data.data.data[i].user_name==null) {
+                                // li.className = 'mui-table-view-cell';
+                            li.style = "border-radius:10px 10px 0px 0px;border-bottom:#ccc solid 1px;float: left;width: 100%;background-color: white;margin-top:5px;"
+                            li.innerHTML = '<div style="height: 80px;width:25%;text-align: center;float: left;">'
+                                   +'<img src="'+data.data.data[i].img+'" alt="" style="width: 60px;height: 60px;border-radius:50px;margin-top:9px;">'
+                                +'</div>'
+                                +'<div style="width:75%;float: left;">'
+                                +'<p style="font-size: 15px;padding-top:5px;float: left;width: 80%;"> <span style="color: black;float: left;"></span><span style="padding-left:5px;float: left;">卡号:</span><span style="color: rgb(236, 157, 10);float: left;">'+data.data.data[i].user_code+'</span></p>'
+                                +'<div style="width:80%;float: left;font-size:14px;color:rgb(102, 102, 102); ">'
+                                +'回访内容:<span>'+data.data.data[i].content+'</span>'
+                                +'</div>'
+                                +'<p style="float: left;width: 80%;">回访日期: <span>'+data.data.data[i].time_g+'</span></p>'
+                                +'<p style="float: left;width: 80%;">回访人: <span>'+data.data.data[i].vsname+'</span></p>'
+                                +'<p style="float: left;width: 80%;">回访方式: <span>'+data.data.data[i].visit_mode+'</span></p>'
+                                +'</div>'
+                                +'<div style="float: left; border-radius:0px 0px 10px 10px; width: 100%;height: 40px;text-align: center;line-height: 40px;background-color:#007aff ;">'
+                                +'<button class="butt" code="'+data.data.data[i].user_code+'" onclick="member(this)">查看更多信息'
+                                +'</div>'
+                            qq.appendChild(li);
+                            } else if (data.data.data[i].content==null) {
+                                // li.className = 'mui-table-view-cell';
+                            li.style = "border-radius:10px 10px 0px 0px;border-bottom:#ccc solid 1px;float: left;width: 100%;background-color: white;margin-top:5px;"
+                            li.innerHTML = '<div style="height: 80px;width:25%;text-align: center;float: left;">'
+                                   +'<img src="'+data.data.data[i].img+'" alt="" style="width: 60px;height: 60px;border-radius:50px;margin-top:9px;">'
+                                +'</div>'
+                                +'<div style="width:75%;float: left;">'
+                                +'<p style="font-size: 15px;padding-top:5px;float: left;width: 80%;"> <span style="color: black;float: left;"></span><span style="padding-left:5px;float: left;">卡号:</span><span style="color: rgb(236, 157, 10);float: left;">'+data.data.data[i].user_code+'</span></p>'
+                                +'<div style="width:80%;float: left;font-size:14px;color:rgb(102, 102, 102); ">'
+                                +'回访内容:<span>无</span>'
+                                +'</div>'
+                                +'<p style="float: left;width: 80%;">回访日期: <span>'+data.data.data[i].time_g+'</span></p>'
+                                +'<p style="float: left;width: 80%;">回访人: <span>'+data.data.data[i].vsname+'</span></p>'
+                                +'<p style="float: left;width: 80%;">回访方式: <span>'+data.data.data[i].visit_mode+'</span></p>'
+                                +'</div>'
+                                +'<div style="float: left; border-radius:0px 0px 10px 10px; width: 100%;height: 40px;text-align: center;line-height: 40px;background-color:#007aff ;">'
+                                +'<button class="butt" code="'+data.data.data[i].user_code+'" onclick="member(this)">查看更多信息'
+                                +'</div>'
+                            qq.appendChild(li);
+                            } else {
+                                // li.className = 'mui-table-view-cell';
+                            li.style = "border-radius:10px 10px 0px 0px;border-bottom:#ccc solid 1px;float: left;width: 100%;background-color: white;margin-top:5px;"
+                            li.innerHTML = '<div style="height: 80px;width:25%;text-align: center;float: left;">'
+                                   +'<img src="'+data.data.data[i].img+'" alt="" style="width: 60px;height: 60px;border-radius:50px;margin-top:9px;">'
+                                +'</div>'
+                                +'<div style="width:75%;float: left;">'
+                                +'<p style="font-size: 15px;padding-top:5px;float: left;width: 80%;"> <span style="color: black;float: left;">'+data.data.data[i].user_name+'</span><span style="padding-left:5px;float: left;">卡号:</span><span style="color: rgb(236, 157, 10);float: left;">'+data.data.data[i].user_code+'</span></p>'
+                                +'<div style="width:80%;float: left;font-size:14px;color:rgb(102, 102, 102); ">'
+                                +'回访内容:<span>'+data.data.data[i].content+'</span>'
+                                +'</div>'
+                                +'<p style="float: left;width: 80%;">回访日期: <span>'+data.data.data[i].time_g+'</span></p>'
+                                +'<p style="float: left;width: 80%;">回访人: <span>'+data.data.data[i].vsname+'</span></p>'
+                                +'<p style="float: left;width: 80%;">回访方式: <span>'+data.data.data[i].visit_mode+'</span></p>'
+                                +'</div>'
+                                +'<div style="float: left; border-radius:0px 0px 10px 10px; width: 100%;height: 40px;text-align: center;line-height: 40px;background-color:#007aff ;">'
+                                +'<button class="butt" code="'+data.data.data[i].user_code+'" onclick="member(this)">查看更多信息'
+                                +'</div>' 
+                            qq.appendChild(li);
+                            }
+                        }load.stop();
+                    }, 1000);
+                }
+               
+            }, 'json'
+            );
+        
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+//     mui("body").on("tap",".spa",function ttt(e){  
+//         location.href = '../homepage/member_data.html?' + 'code=' + e.getAttribute("code")
+// })
+    function member(e){
+        location.href = '../homepage/member_data.html?' + 'code=' + e.getAttribute("code")
+    }
+</script>
+</html>

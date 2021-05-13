@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../mui/css/mui.css">
+    <link rel="stylesheet" href="../css/iconfont_centent.css">
+    <script src="../mui/js/mui.js"></script>
+    <!-- <script src="../mui/js/muiR.js"></script> -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+
+
+    <script src="../js/vconsole.js"></script>
+    <title>上传照片</title>
+    <style>
+        .mui-scroll-wrapper {
+            top: 130px;
+            background-color: white;
+        }
+
+        .mui-scroll-wrapper-top {
+            top: 95px;
+        }
+
+        /* 搜索框 */
+        .search_div {
+            text-align: center;
+            margin-top: 8px;
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+        }
+
+        .search_div>input {
+            background-color: white;
+            margin-bottom: 8px;
+            width: 95%;
+        }
+
+        /* 搜索历史 */
+        .history {
+            background: white;
+            max-height: 35px;
+            line-height: 35px;
+            border-bottom: 1px solid #ccc;
+
+        }
+
+        .history>:nth-child(1) {
+            color: blueviolet;
+            padding-left: 10px;
+        }
+
+        .history>:nth-child(2) {
+            color: black;
+            padding-right: 10px;
+        }
+
+        .history>:nth-child(2)>span {
+            margin-top: 5px;
+        }
+
+        .display_none {
+            display: none;
+        }
+
+        /* 控制ul上下的边框 */
+        .mui-table-view:before {
+            height: 0px;
+        }
+
+        .mui-table-view:after {
+            height: 0px;
+        }
+
+        /* 控制图片大小和top */
+        .mui-table-view .mui-media-object {
+            line-height: 70px;
+            max-width: 70px;
+            height: 70px;
+            margin-top: 15px;
+        }
+
+        .over_flow {
+            overflow: hidden;
+        }
+
+        .yinying {
+            border-radius: 5px;
+            box-shadow: #666 0px 0px 3px;
+            -webkit-box-shadow: #666 0px 0px 3px;
+            -moz-box-shadow: #666 0px 0px 3px;
+
+        }
+
+        li {
+            width: 95%;
+            margin: 20px auto;
+            /* margin-top: 20px; */
+        }
+
+        .mui-media-body>h5 {
+            margin-top: 5px;
+            color: #222;
+            padding-left: 10px;
+            letter-spacing: 1px;
+        }
+
+        .mui-media-body>h5>span {
+            font-size: 13px;
+            color: #777;
+        }
+
+        .mui-search.mui-active:before {
+            left: 13px;
+            top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="mui-bar mui-bar-nav" style="background-color: #007AFF;">
+        <a class="mui-action-back  mui-icon mui-icon-back mui-pull-left" style="color:white;"></a>
+        <a class="mui-icon  mui-icon-extra mui-icon-extra-sweep mui-pull-right" style="color:white;"></a>
+        <h1 class="mui-title" id="ppp" style="color:white;">商品搜索</h1>
+    </header>
+    <div class="mui-content">
+
+        <!-- 照片显示 -->
+        <div style="width: 100%; height: 100%; background-color: rgba(60, 63, 63, 0.493);position: absolute; z-index: 3;top: 0px;"
+            id="show_qunyu" class="display_none">
+            <div id="show_div">
+                <img src="" alt="" id="show_img">
+
+            </div>
+        </div>
+
+        <!-- 上传照片 -->
+        <input type="file" accept="image/*" multiple id="upload_picture" class="display_none"
+            onchange="uploadImageHandle(this,0.5)">
+        <div class="mui-input-row mui-search search_div">
+            <input type="search" id="sesame" placeholder="请输入款号、简码">
+        </div>
+        <div class="mui-row history" id="serch_history">
+            <div class="mui-col-xs-6 mui-col-sm-6">搜索历史</div>
+            <div class="mui-col-xs-6 mui-col-sm-6">
+                <span class="mui-icon mui-icon-trash mui-pull-right" onclick="delect_history()"></span>
+            </div>
+        </div>
+        <!-- 区域滚动 -->
+
+        <div id="pullrefresh" class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <!-- 搜索历史 -->
+                <ul class="mui-table-view" id="serch_history_xiangxi">
+                    <!-- <li class="mui-table-view-cell">
+                        <a class="mui-navigate-right">Item 1</a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a class="mui-navigate-right">Item 2</a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a class="mui-navigate-right">Item 3</a>
+                    </li> -->
+                </ul>
+                <ul class="mui-table-view display_none" id="product">
+                    <!-- 搜索结果 -->
+                    <!-- <li class="mui-table-view-cell mui-media yinying">
+                       
+                        <a href="javascript:;">
+                            <img class="mui-media-object mui-pull-left" src="../images/suoke.jpg" style="border-radius:10px;">
+                            <span class="mui-media-object mui-pull-right iconfont icon-mn_shangchuantupian_fill tubiao"
+                                style="font-size: 33px;"></span>
+                            <div class="mui-media-body">
+                                <h5>
+                                    品牌:&nbsp;&nbsp;<span>唯帅男裤</span>
+                                </h5>
+                                <h5>
+                                    名称:&nbsp;&nbsp;<span>牛仔裤</span>
+                                </h5>
+                                <h5>
+                                    款号:&nbsp;&nbsp;<span>93N002-1</span>
+                                </h5>
+                                <h5>
+                                    零售价:&nbsp;&nbsp;<span>138.0</span>
+                                </h5>
+                                <h5>
+                                    颜色:&nbsp;&nbsp;<span>蓝色!</span>
+                                </h5>
+                                <h5>
+                                    尺码:&nbsp;&nbsp;<span>唯帅男裤</span>
+                                </h5>
+                            </div>
+                        </a>
+                    </li> -->
+                </ul>
+                <!-- <h1>肯定死垃圾了888</h1> -->
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    // var vConsole = new VConsole();
+    var load = new Loading();
+    load.init();
+    // load.start();
+    // load.stop();
+    var ajax_value = "";
+    
+    hidden_title();
+    window.onload = function () {
+        // 加载缓存
+        record_loading();
+        // 光标直接定位到文本框内
+        // document.getElementById("sesame").focus();
+        // 给文本框内赋值
+        // document.getElementById("sesame").value = "2";
+    }
+    // 点击缓存历史
+    mui("#serch_history_xiangxi").on('tap', '.mui-navigate-right', function () {
+        // 阻止冒泡
+        event.stopPropagation();
+        // 将text显示到搜索框中
+        document.getElementById("sesame").value = this.innerHTML;
+        // 光标直接定位到文本框内
+        document.getElementById("sesame").focus();
+        // 搜索历史,品牌隐藏
+        mui("#serch_history")[0].classList.add("display_none");
+        mui("#serch_history_xiangxi")[0].classList.add("display_none");
+        mui("#product")[0].classList.remove("display_none");
+        mui("#pullrefresh")[0].classList.add("mui-scroll-wrapper-top");
+        // 资料显清空
+        mui("#product")[0].innerHTML = "";
+        // 启用上拉加载
+        mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
+        mui('#pullrefresh').pullRefresh().refresh(true);
+        // 后台加载数据
+        ajax_value = this.innerHTML;
+        count = 0;
+        background_loading(true);
+    })
+
+    mui("#pullrefresh")[0].addEventListener("tap", function () {
+        document.getElementById("sesame").blur();
+    });
+    var title_size;
+    var color;
+    var img_src;
+    // 点击上传照片触发事件
+    mui("#product").on('tap', '.tubiao', function () {
+        $('#upload_picture').click();
+        // 获取点击上传的款号
+        title_size = this.parentNode.childNodes[5].firstElementChild.nextElementSibling.firstElementChild.innerHTML;
+        color = this.parentNode.childNodes[5].lastElementChild.firstElementChild.innerHTML;
+        img_src = this.parentNode.childNodes[1];
+        if (localStorage.getItem("array_name") != null) {
+            // 1.创建数组接受缓存中的记录
+            var array = localStorage.getItem("array_name").split(',');
+            // 2.向数组中添加你点击过得数据
+            for (i = 0; i < array.length; i++) {
+                //2-1 去重 [indexOf() 方法可返回数组中某个指定的元素位置]
+                if (array.indexOf(title_size) == -1) {
+                    array.push(title_size);
+                }
+            }
+            //   3.将新的数组重新加入缓存中
+            localStorage.setItem("array_name", array);
+        } else {
+            var array = [];
+            array.push(title_size);
+            localStorage.setItem("array_name", array);
+        }
+    })
+
+    // 搜索框
+    $(function () {
+        $('#sesame').bind('input propertychange', function () {
+            // $('#result').html($(this).val().length + ' characters');
+            // 跟据文本框进行刷新
+            if (this.value.length == 0) {
+                // 搜索框没有参数
+                mui("#serch_history")[0].classList.remove("display_none");
+                mui("#serch_history_xiangxi")[0].classList.remove("display_none");
+                mui("#product")[0].classList.add("display_none");
+
+                // 控制滚动区域位置
+                mui("#pullrefresh")[0].classList.remove("mui-scroll-wrapper-top");
+                // 将缓存拿出
+                record_loading();
+            } else {
+                //  搜索框有参数
+                // 清空资料
+                mui("#product")[0].innerHTML = "";
+                // 搜索历史隐藏
+                mui("#serch_history")[0].classList.add("display_none");
+                mui("#serch_history_xiangxi")[0].classList.add("display_none");
+                // 资料显示
+                mui("#product")[0].classList.remove("display_none");
+                // 控制滚动区域位置
+                mui("#pullrefresh")[0].classList.add("mui-scroll-wrapper-top");
+                // 启用上拉加载
+                mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
+                mui('#pullrefresh').pullRefresh().refresh(true)
+                ajax_value = this.value;
+                count = 0;
+                background_loading(true);
+            }
+        });
+    })
+
+</script>
+<!-- 加载 -->
+<script>
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+                height: 1,
+                auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: down_u
+            },
+            up: {
+                height: 50,
+                contentrefresh: '正在加载...',
+                contentnomore: '没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+                auto: false,//可选,默认false.首次加载自动上拉刷新一次
+                callback: background_loading
+            }
+        }
+    });
+    // 通过记录加载  在本地缓存中加载
+    function record_loading() {
+        // 禁用上拉加载
+        mui('#pullrefresh').pullRefresh().disablePullupToRefresh();
+        mui("#serch_history_xiangxi")[0].innerHTML = "<h3 style='text-align:center;'>暂无更多历史</h3>";
+        if (localStorage.getItem("array_name") != null) {
+            // 1.创建数组接受缓存中的记录
+            var array_serch = localStorage.getItem("array_name").split(',');
+            for (h = 0; h < array_serch.length; h++) {
+                var li = document.createElement('li');
+                li.className = 'mui-table-view-cell';
+                li.innerHTML = '<a class="mui-navigate-right">' + array_serch[h] + '</a>';
+                // insertBefore
+                mui("#serch_history_xiangxi")[0].insertBefore(li, mui("#serch_history_xiangxi")[0].firstElementChild);
+                // mui("#serch_history_xiangxi")[0].
+            }
+
+        } else {
+            // mui("#serch_history_xiangxi")[0].innerHTML="<h3 style='text-align:center;'>暂无更多历史</h3>"
+
+        }
+    }
+
+
+    //通过后台加载
+    function background_loading(tt) {
+        load.start();
+        mui.post('/index.php/webGoodsIndex/', {
+            where: ajax_value,
+            page: ++count,
+            limit: limit_num
+        }, function (data) {
+            if (data.code == 200) {
+                setTimeout(function () {
+                    if (tt) {
+                        document.getElementById("product").innerHTML = "";
+                    }
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。。
+                    for (i = 0; i < data.data.data.length; i++) {
+                        data.data.data[i].img = (data.data.data[i].img == "" || data.data.data[i].img == null) ? '../images/sp.png' : data.data.data[i].img;
+                        data.data.data[i].name = (data.data.data[i].name == "" || data.data.data[i].name == null) ? "" : data.data.data[i].name;
+                        data.data.data[i].code = (data.data.data[i].code == "" || data.data.data[i].code == null) ? "" : data.data.data[i].code;
+                        data.data.data[i].price = (data.data.data[i].price == "" || data.data.data[i].price == null) ? "" : data.data.data[i].price;
+                        data.data.data[i].color = (data.data.data[i].color == "" || data.data.data[i].color == null) ? "" : data.data.data[i].color;
+                        data.data.data[i].size = (data.data.data[i].size == "" || data.data.data[i].size == null) ? "" : data.data.data[i].size;
+                        var li = document.createElement("li");
+                        li.className = "mui-table-view-cell mui-media yinying";
+                        li.innerHTML = '<a href="javascript:;">'
+                            + ' <img class="mui-media-object mui-pull-left enlarge_picture" src="' + data.data.data[i].img + '" style="border-radius:10px;">'
+                            + ' <span class="mui-media-object mui-pull-right iconfont icon-shangchuanzhaopian tubiao" style="font-size: 33px;"></span>'
+                            + ' <div class="mui-media-body">'
+                            + ' <h5>名称:&nbsp;&nbsp;<span>' + data.data.data[i].name + '</span></h5>'
+                            + ' <h5>款号:&nbsp;&nbsp;<span>' + data.data.data[i].code + '</span></h5>'
+                            + '<h5> 零售价:&nbsp;&nbsp;<span>' + data.data.data[i].price + '</span></h5>'
+                            + '<h5> 颜色:&nbsp;&nbsp;<span>' + data.data.data[i].color + '</span></h5>'
+                            // + '<h5> 尺码:&nbsp;&nbsp;<span>' + data.data.data[i].size + '</span></h5>'
+                            + '</div>'
+                            + ' </a>'
+                        document.getElementById("product").appendChild(li);
+                    }
+                    load.stop();
+                }, 1000);
+            }
+
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+
+
+
+    }
+    function update_Photo(img, file) {
+        // 上传图片
+      
+
+        load.start();
+        var data = new FormData();
+        data.append('file', file);
+        data.append('model', 'goods');
+        data.append('code', title_size);
+        data.append('color', color);
+        $.ajax({
+            data: data,
+            type: "POST",
+            url: '/index.php/UserlistUploadImg/',
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (JSON.parse(data).code == 200) {
+                      img_src.setAttribute("src", img);
+                    mui.toast('上传成功', {
+                        duration: 'long',
+                        type: 'div'
+                    });
+
+                } else if (JSON.parse(data).code == 400) {
+                    mui.toast(JSON.parse(data).msg, {
+                        duration: 'long',
+                        type: 'div'
+                    });
+                }
+                load.stop();
+            },
+            error: function (xhr) {
+                mui.toast('上传失败,照片尺寸过大,照片尺寸不能大于4M', {
+                    duration: 'long',
+                    type: 'div'
+                });
+                load.stop();
+            }
+        }, 'JSON');
+    }
+
+
+    // 删除历史
+    function delect_history() {
+        localStorage.removeItem("array_name");
+        record_loading();
+    }
+
+    function down_u() {
+        // 禁用下拉
+        mui("#pullrefresh").pullRefresh().setStopped(true);
+    }
+
+
+    /*
+     * 上拉加载具体业务实现
+     */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 5;
+
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0008 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+
+</script>
+
+<script>
+    var file_File = ""; //接收file变量
+    var base64_YS = "";//接收压缩的base64编码
+    function uploadImageHandle(File_domain, Multiple) {
+        // 创建实例
+        var reader = new FileReader();
+        var img = document.createElement('img');
+        // 读取上传的图片的信息(lastModified, lastModifiedDate, name, size, type等)
+        var file = File_domain.files[0];
+        // 记下上传的图片的name, 后面会用到
+        var flieName = File_domain.files[0].name;
+        console.log(flieName);
+        // 记下上传的图片的类型, 后面会用到
+        var fileType = file.type;
+        // 生成canvas画布
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
+        // MDN: 该方法会读取指定的 Blob 或 File 对象。读取操作完成的时候，
+        // readyState 会变成已完成（DONE），并触发 loadend 事件，
+        // 同时 result 属性将包含一个data:URL格式的字符串（base64编码）以表示所读取文件的内容。
+        // 也就是说, 将File对象转化为base64位字符串
+        reader.readAsDataURL(file);
+        // 上一步是异步操作, 读取完成后会执行onload事件, 而base64的字符串在e.target.rusult中
+        reader.onload = function (e) {
+            // 获得图片dom
+            var base64 = e.target.result
+            img.src = base64;
+            //  console.log(base64.length+ base64);
+            //   create_content(789, '的暑假', base64);
+        };
+
+        img.onload = function () {
+            // 图片原始尺寸
+            var originWidth = this.width;
+            var originHeight = this.height;
+
+            console.log('width' + originWidth);
+            console.log('width' + originHeight);
+            // 最大尺寸限制
+            var maxWidth = this.width * Multiple,
+                maxHeight = this.height * Multiple;
+            console.log('maxWidth' + maxWidth)
+            console.log('maxHeight' + maxHeight)
+            // 目标尺寸
+            var targetWidth = originWidth,
+                targetHeight = originHeight;
+            // 图片尺寸超过800x800的限制
+            if (originWidth > maxWidth || originHeight > maxHeight) {
+                if (originWidth / originHeight > maxWidth / maxHeight) {
+                    // 更宽，按照宽度限定尺寸
+                    targetWidth = maxWidth;
+                    targetHeight = Math.round(
+                        maxWidth * (originHeight / originWidth)
+                    );
+                } else {
+                    targetHeight = maxHeight;
+                    targetWidth = Math.round(
+                        maxHeight * (originWidth / originHeight)
+                    );
+                }
+            }
+            // canvas对图片进行缩放
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+            // 清除画布
+            context.clearRect(0, 0, targetWidth, targetHeight);
+            // 将图片划到canvas上
+            context.drawImage(img, 0, 0, targetWidth, targetHeight);
+            // 把canvas转成base64格式并去除头
+            var base64 = canvas
+                .toDataURL(fileType)
+            // .replace(/^data:image\/(jpeg|jpg|png|gif);base64,/, '');
+            base64_YS = base64;
+            file_File = base_flie(base64, flieName);
+
+
+            update_Photo(base64_YS, file_File)
+        };
+    }
+
+
+    function base_flie(dataurl, filename) {//将base64转换为文件
+        var arr = dataurl.split(',');
+        var mime = arr[0].match(/:(.*?);/)[1];
+        var bstr = atob(arr[1]);
+        var n = bstr.length;
+        var u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, { type: mime });
+    }
+</script>
+<!-- 放大图片 -->
+<script>
+    // 点击上传照片触发事件
+    mui("#product").on('tap', '.enlarge_picture', function () {
+        console.log('放大');
+        console.log(this.width);
+
+        // 给回显图片传入路径
+        document.getElementById("show_qunyu").classList.remove('display_none');
+        document.getElementById("show_img").setAttribute("src", this.src);
+        // 照片
+
+        var show_div = document.getElementById("show_div");
+
+        var windowW = $(window).width();//获取当前窗口宽度  
+        var windowH = $(window).height();//获取当前窗口高度  
+        var realWidth = document.getElementById("show_img").width;//获取图片真实宽度  
+        var realHeight = document.getElementById("show_img").height;//获取图片真实高度  
+        var imgWidth, imgHeight;
+        var scale = 1;//缩放尺寸，当图片真实宽度和高度大于窗口宽度和高度时进行缩放  
+        if (realHeight > windowH * scale) {//判断图片高度  
+            imgHeight = windowH * scale;//如大于窗口高度，图片高度进行缩放  
+            imgWidth = imgHeight / realHeight * realWidth;//等比例缩放宽度  
+            if (imgWidth > windowW * scale) {//如宽度扔大于窗口宽度  
+                imgWidth = windowW * scale;//再对宽度进行缩放  
+            }
+        } else if (realWidth > windowW * scale) {//如图片高度合适，判断图片宽度  
+            imgWidth = windowW * scale;//如大于窗口宽度，图片宽度进行缩放  
+            imgHeight = imgWidth / realWidth * realHeight;//等比例缩放高度  
+        } else {//如果图片真实高度和宽度都符合要求，高宽不变  
+            imgWidth = realWidth;
+            imgHeight = realHeight;
+        }
+
+        document.getElementById("show_img").style.width = imgWidth + 'px';//以最终的宽度对图片缩放  
+        var w = (windowW - imgWidth) / 2;//计算图片与窗口左边距  
+        var h = (windowH - imgHeight) / 2;//计算图片与窗口上边距  
+
+        show_div.style.marginTop = h + 'px';
+        show_div.style.marginLeft = w + 'px';
+    })
+
+
+    $("#show_qunyu").click(function () {
+        document.getElementById("show_qunyu").classList.add('display_none');
+    })
+</script>
+
+</html>

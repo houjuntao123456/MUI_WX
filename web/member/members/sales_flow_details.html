@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../mui/css/mui.css">
+    <script src="../../mui/js/mui.js"></script>
+    <title>商品信息</title>
+	<style type="text/css">
+		.mui-card{overflow: unset;margin:0;box-shadow:none;}
+		.mui-content > .mui-table-view:first-child { margin-top: 5px;}
+		.mui-table-view::before{ background-color: #fff; }
+		.mui-table-view-cell::after{ background-color: #fff; }
+		.all_style{
+			width: 100%;margin-left: 0;box-shadow: none;
+			border-bottom: 1px solid #e7e6e6;border-top: 1px solid #e7e6e6;
+		}
+		.all_style p{
+			padding:5px 15px 0 15px;
+			color: #323232;
+		}
+		.all_style p span{float: right;}
+		.all_style p span b{color: red;}
+		.m_t_48{margin-top: 48px;}
+		.m_t_5{margin-top: 5px;}
+	</style>
+</head>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg title_display" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" id="h1_title" style="color:white;">商品信息</h1>
+    </header>
+	<div class="mui-card">
+		<!--内容区-->
+		<div class="mui-card-content all_style m_t_48">
+			<p>商品条码: <span>10231373547</span></p>
+			<p>商品名称: <span>浅蓝色牛仔裤</span></p>
+		</div>
+	</div>
+	<div class="mui-card">
+		<!--内容区-->
+		<div class="mui-card-content all_style m_t_5">
+			<p>原单价: <span>￥<b>286</b></span></p>
+			<p>享受折扣: <span>0.9</span></p>
+			<p>折扣价: <span>￥<b>168</b></span></p>
+			<p>购买数量: <span>3</span></p>
+			<p>原价小计: <span>286</span></p>
+			<p>折后小计: <span>168</span></p>
+			<p>获得积分: <span>168</span></p>
+		</div>
+	</div>
+	<div class="mui-card">
+		<!--内容区-->
+		<div class="mui-card-content all_style m_t_5">
+			<p>促销员工号: <span>10231373547</span></p>
+			<p>促销员: <span>小雨</span></p>
+			<p>门店: <span>北京瑾瑜裤店</span></p>
+			<p>状态: <span>已完成</span></p>
+			<p>下单时间: <span>2019-01-01 23:59:59</span></p>
+			<p>退货时间: <span>2019-01-01 23:59:59</span></p>
+		</div>
+	</div>
+</body>
+<script>
+    //获取父页面
+    var hd = window.parent.document.getElementById("hd");
+    //页面的margin-top
+    var hh = window.parent.document.getElementsByClassName("mui-iframe-wrapper");
+    window.onload = function () {
+        hd.style.display = "none";
+        hh[0].style.top = "0px";
+    }
+    
+</script>
+
+</html>

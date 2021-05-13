@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SOCOR</title>
+    <link rel="stylesheet" href="../mui/css/mui.css">
+    <script src="../mui/js/mui.js"></script>
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+    <script src="../js/vconsole.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+    <style>
+        .suoke:before {
+            content: ' ';
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: url(../images/loginbg.png) center 0 no-repeat;
+            background-size: cover;
+        }
+
+        .shanghui {
+            background-color: #16453B;
+        }
+
+
+        .mui-input-group:after {
+            height: 0px;
+        }
+
+        .mui-input-group .mui-input-row::after {
+            height: 0px;
+        }
+
+        .mui-input-row label {
+            width: 16%;
+            margin-left: 20px;
+        }
+
+        .mui-content {
+            background: none;
+        }
+
+        .bor_bot {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .input_css {
+            border-bottom: 1px solid white !important;
+            color: white !important;
+            /* background-color: white; */
+            /* border-radius: 0 0 5px 5px !important; */
+            border-top: white !important;
+            font-size: 15px !important;
+            float: left !important;
+        }
+
+        input::-webkit-input-placeholder {
+            color: #eee;
+        }
+
+        input::-moz-placeholder {
+            /* Mozilla Firefox 19+ */
+            color: #eee;
+        }
+
+        input:-moz-placeholder {
+            /* Mozilla Firefox 4 to 18 */
+            color: #eee;
+        }
+
+        input:-ms-input-placeholder {
+            /* Internet Explorer 10-11 */
+            color: #eee;
+        }
+
+
+        .mui-input-row label~input {
+            width: 66%;
+        }
+
+        .mui-icon {
+            font-size: 30px;
+            color: #356396;
+        }
+
+        .mui-input-group .mui-input-row {
+            height: 66px;
+        }
+
+        .display {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="suoke" id="body_color">
+
+    <div class="mui-content" style="text-align: center;">
+        <br><br><br>
+        <img src="../logo/suoke.png" alt="" width="180px" id="Logo" class="imglogo">
+        <br>
+        <br>
+        <br>
+
+        <form class="mui-input-group mui-content" style="border:0px;">
+            <!-- 姓名  margin-left: -5px;margin-top:-4px;-->
+            <div class="mui-input-row bor_bot">
+                <label><span class="mui-icon mui-icon-contact" id="title1" style="color: white;"></span></label>
+                <input type="text" class="mui-input-clear input_css" placeholder="姓名" id="username">
+            </div>
+
+            <!-- 手机号 -->
+            <div class="mui-input-row bor_bot">
+                <label><span class="mui-icon mui-icon-phone" id="title2" style="color: white;"></span></label>
+                <input type="text" class="mui-input-clear input_css" placeholder="手机号" id="phone">
+            </div>
+            <!-- 确定绑卡 -->
+            <div class="mui-button-row" style="margin-top:10px;">
+                <button id="buttons" type="button" class="mui-btn mui-btn-primary"
+                    style="width: 70%;font-size: 16px;border-radius: 50px; border: 1px solid white;"
+                    onclick="submission()">登&nbsp;&nbsp;录</button>
+            </div>
+            <!-- 新会员注册 -->
+            <div class="mui-button-row display" style="margin-top:10px;" id="new_member">
+                <button type="button" id="member_button" class="mui-btn mui-btn-primary"
+                    onclick="JavaScript:location.href='./user_registration.html'"
+                    style="width: 70%;font-size: 16px;border-radius: 50px;border: 1px solid white;">新会员注册</button>
+            </div>
+        </form>
+
+    </div>
+
+
+
+</body>
+<script src="../js/wechat_authentication.js"></script>
+<script>
+    var strs_suoke_duoss = $.cookie("company").substring($.cookie("company").length - 4);
+    if($.cookie("company")=="ic"){
+        document.getElementById("member_button").setAttribute("onclick", "JavaScript:location.href='https://wechat.suokeduo.com/wechat/membercard/get?company=" + $.cookie("company") + "'")
+    }
+    if (reg_suokeduos.test(strs_suoke_duoss)) {
+        console.log(789);
+        document.getElementById("member_button").setAttribute("onclick", "JavaScript:location.href='https://wechat.suokeduo.com/wechat/membercard/get?company=" + $.cookie("company") + "'")
+    }
+</script>
+<script>
+    var load = new Loading();
+    load.init();
+
+    // var vConsole = new VConsole();
+
+    var Logo = document.getElementById("Logo");
+    (function () {
+        if (decodeURIComponent(getQueryVariable("company")) == "") {
+            Logo.src = '../logo/suoke.png';
+        } else {
+            if (decodeURIComponent(getQueryVariable("company")) == 'shanghui') {
+                document.getElementById("body_color").className = decodeURIComponent(getQueryVariable("company"));
+                document.getElementById("Logo").style.width = "120px";
+                document.getElementById("buttons").classList.add(decodeURIComponent(getQueryVariable("company")));
+                document.getElementById("member_button").classList.add(decodeURIComponent(getQueryVariable("company")));
+            }
+            Logo.src = "../logo/" + decodeURIComponent(getQueryVariable("company")) + '.png';
+        }
+    })();
+
+
+
+    //修改数据库
+    (function () {
+        mui.post('/index.php/dataBase/', {
+            database: $.cookie("company"),
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                if (data.data.x_status == 1) {
+                    // 1显示 0隐藏
+                    document.getElementById("new_member").classList.remove("display");
+                }
+                automatic();
+            }
+        }, 'json');
+    })();
+
+    // 自动登录
+    function automatic() {
+        mui.post('/index.php/UserlistIssetOpenid/', {
+            openId: $.cookie("openId"),
+            img: $.cookie("headImgUrl"),
+            company: $.cookie("company")
+        }, function (data) {
+            if (data.code == 200) {
+                location.href = "./personal_center.html";
+            }
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+
+</script>
+
+<script>
+    //提交进行验证
+    var username = document.getElementById("username");
+    var phone = document.getElementById("phone");
+    var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+    function submission() {
+        if (username.value == "" && phone.value == "") {
+            mui.alert('姓名和手机号不能为空', '提示', '确定'['div']);
+        } else if (username.value == "") {
+            mui.alert('姓名不能为空', '提示', '确定'['div']);
+        } else if (phone.value == "") {
+            mui.alert('手机号不能为空', '提示', '确定'['div']);
+        } else if (!myreg.test(phone.value)) {
+            mui.alert('手机号格式不正确', '提示', '确定'['div']);
+            let compss = decodeURIComponent(getQueryVariable("company"));
+            if ((compss == 'suoke') || (compss == 'suokeduo')) {
+                if (username.value == "admin" && phone.value == "123456") {
+                    var vConsole = new VConsole();
+                    return false;
+                }
+            }
+        } else {
+            load.start();
+            mui.ajax('/index.php/UserlistvipCache/', {
+                data: {
+                    openId: $.cookie("openId"),
+                    username: username.value,
+                    phone: document.getElementById("phone").value,
+                    img: $.cookie("headImgUrl")
+                },
+                dataType: 'json',//服务器返回json格式数据
+                type: 'post',//HTTP请求类型
+                timeout: 10000,//超时时间设置为10秒；
+                // processData:false,
+                headers: { 'Content-Type': 'application/json' },
+                success: function (data) {
+                    if (data.code == 200) {
+                        load.stop();
+                        mui.toast('登录成功请稍等', {
+                            duration: 'long',
+                            type: 'div'
+                        });
+                        setTimeout(function () {
+                            location.href = "./personal_center.html";
+                        }, 1000);
+                    } else if (data.code == 400) {
+                        load.stop();
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        });
+                    }
+                },
+                error: function (xhr, type, errorThrown) {
+                    load.stop();
+                    //异常处理；
+                }
+            });
+        }
+    }
+
+</script>
+<!-- o9osQwUghKSMhf1ZGF3oclpiEvtc -->
+<!-- o9osQwUghKSMhf1ZGF3oclpiEvtc -->
+<!-- ogx1nwc_vpQTPcNx9hEIDm8ezbOg -->
+<!-- o9osQwUghKSMhf1ZGF3oclpiEvtc -->
+<!-- o9osQwUghKSMhf1ZGF3oclpiEvtc -->
+
+<!-- $(function () {
+        let cookieJSON = $.cookie(decodeURIComponent(getQueryVariable("company")) + "_openId") ? $.cookie(decodeURIComponent(getQueryVariable("company")) + "_openId") : "";
+        if (cookieJSON == "" || cookieJSON == " " || cookieJSON == undefined || cookieJSON == 'undefined') {
+            $.ajax({
+                type: 'GET',
+                dataType: 'JSONP',
+                url: 'https://wxauth.suokeduo.com/card/snsapi_userinfo/index?company=' + decodeURIComponent(getQueryVariable("company")),
+                //需要页面传入值
+                success: function (data) {
+                    //这获取到用户的信息了；把这个信息放到cookie中
+                    $.cookie(decodeURIComponent(getQueryVariable("company")) + "_openId", data['openId'], { path: '/', expires: 1 });
+                    // $.cookie("wx_user", data, { path: '/', expires: 1 });
+                    $.cookie("openId", data['openId'], { path: '/', expires: 1 });
+                    //  $.cookie("openId", "", { path: '/' });
+
+                    $.cookie("headImgUrl", data['headImgUrl'], {
+                        path: '/',
+                        expires: 1
+                    });
+                    $.cookie("nickname", data['nickname'], {
+                        path: '/',
+                        expires: 1
+                    });
+                    oppId = data['openId'];
+                    imgg = data['headImgUrl']
+                    // window.reload();//刷新这个页面；或者啥都不做行；类似，这行代码不要也行
+                    modify_mysql();
+                    // sign_in();//登录
+                },
+                error: function (data) {
+                    // modify_mysql();
+                    // 将下边这个baidu替换成实际当前请求的页面
+                    location.href = "https://wxauth.suokeduo.com/card/snsapi_userinfo/forword?redirect_url="
+                        + 'https://wx.suokeduo.com/member/bonding_card.html?company='
+                        + decodeURIComponent(getQueryVariable("company")) + '&company= ' + decodeURIComponent(getQueryVariable("company"));
+                }
+            })
+        } else {
+            $.cookie("openId", $.cookie(decodeURIComponent(getQueryVariable("company")) + "_openId"), { path: '/', expires: 1 });
+            oppId = $.cookie(decodeURIComponent(getQueryVariable("company")) + "_openId");
+            imgg = $.cookie("headImgUrl");
+            modify_mysql();
+            // sign_in();//登录
+        }
+    }); -->
+
+</html>

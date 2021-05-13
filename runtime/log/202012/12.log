@@ -1,0 +1,152 @@
+---------------------------------------------------------------
+[2020-12-12T10:25:26+08:00] 127.0.0.1 POST suokeduo.com/index.php/dataBase/
+[运行时间：0.112875s] [吞吐率：8.86req/s] [内存消耗：2,420.97kb] [文件加载：60]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'dataBase/',
+  'route' => 'Login/database',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'myself_openid_suoke=ogx1nwc_vpQTPcNx9hEIDm8ezbOg; myself_head_image_suoke="https://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEK7zXhTKo8rPFH192VgkBI98H0k5DwOoSm6e2M9KViafeIcIYibLU5jRzCUgYetjLRa1M1cKBS9JDHg/132"; myself_nick_name_suoke=%E6%9C%88%E4%B8%8B%E7%8B%AC%E9%85%8C; company=suoke; locaton=http%3A%2F%2Fsuokeduo.com%2F%3Fcompany%3Dsuoke; openId=ogx1nwc_vpQTPcNx9hEIDm8ezbOg; nickname=%E6%9C%88%E4%B8%8B%E7%8B%AC%E9%85%8C; headImgUrl=https%3A%2F%2Fthirdwx.qlogo.cn%2Fmmopen%2Fvi_32%2FPiajxSqBRaEK7zXhTKo8rPFH192VgkBI98H0k5DwOoSm6e2M9KViafeIcIYibLU5jRzCUgYetjLRa1M1cKBS9JDHg%2F132',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://suokeduo.com/?company=suoke',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://suokeduo.com',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '14',
+  'connection' => 'close',
+  'host' => 'suokeduo.com',
+)
+[ info ] [ PARAM ] array (
+  'database' => 'suoke',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.068382s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `company`.`vip_business` [ RunTime:0.011276s ]
+[ sql ] [ SQL ] SELECT `x_status` FROM `company`.`vip_business` WHERE  `code` = 'suoke' LIMIT 1 [ RunTime:0.004465s ]
+---------------------------------------------------------------
+[2020-12-12T10:25:26+08:00] 127.0.0.1 POST suokeduo.com/index.php/Userlistopenid/
+[运行时间：0.101621s] [吞吐率：9.84req/s] [内存消耗：2,529.31kb] [文件加载：64]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'Userlistopenid/',
+  'route' => 'Weixin/openid',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'myself_openid_suoke=ogx1nwc_vpQTPcNx9hEIDm8ezbOg; myself_head_image_suoke="https://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEK7zXhTKo8rPFH192VgkBI98H0k5DwOoSm6e2M9KViafeIcIYibLU5jRzCUgYetjLRa1M1cKBS9JDHg/132"; myself_nick_name_suoke=%E6%9C%88%E4%B8%8B%E7%8B%AC%E9%85%8C; company=suoke; locaton=http%3A%2F%2Fsuokeduo.com%2F%3Fcompany%3Dsuoke; openId=ogx1nwc_vpQTPcNx9hEIDm8ezbOg; nickname=%E6%9C%88%E4%B8%8B%E7%8B%AC%E9%85%8C; headImgUrl=https%3A%2F%2Fthirdwx.qlogo.cn%2Fmmopen%2Fvi_32%2FPiajxSqBRaEK7zXhTKo8rPFH192VgkBI98H0k5DwOoSm6e2M9KViafeIcIYibLU5jRzCUgYetjLRa1M1cKBS9JDHg%2F132; PHPSESSID=fs7dkvvikl75sser369thctk57',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://suokeduo.com/?company=suoke',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://suokeduo.com',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '49',
+  'connection' => 'close',
+  'host' => 'suokeduo.com',
+)
+[ info ] [ PARAM ] array (
+  'openId' => 'ogx1nwc_vpQTPcNx9hEIDm8ezbOg',
+  'company' => 'suoke',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.035257s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_staff` [ RunTime:0.028260s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_staff` WHERE  `openid` = 'ogx1nwc_vpQTPcNx9hEIDm8ezbOg' ORDER BY `invalid_time` DESC [ RunTime:0.006586s ]
+[ sql ] [ SQL ] UPDATE `suoke`.`vip_staff`  SET `invalid_time` = 1608344726  WHERE  `id` = 999999 [ RunTime:0.007237s ]
+---------------------------------------------------------------
+[2020-12-12T10:25:27+08:00] 127.0.0.1 POST suokeduo.com/index.php/UserlistViplist/
+[运行时间：0.075411s] [吞吐率：13.26req/s] [内存消耗：2,625.45kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'UserlistViplist/',
+  'route' => 'Userlist/viplist',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'myself_openid_suoke=ogx1nwc_vpQTPcNx9hEIDm8ezbOg; myself_head_image_suoke="https://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEK7zXhTKo8rPFH192VgkBI98H0k5DwOoSm6e2M9KViafeIcIYibLU5jRzCUgYetjLRa1M1cKBS9JDHg/132"; myself_nick_name_suoke=%E6%9C%88%E4%B8%8B%E7%8B%AC%E9%85%8C; company=suoke; locaton=http%3A%2F%2Fsuokeduo.com%2F%3Fcompany%3Dsuoke; openId=ogx1nwc_vpQTPcNx9hEIDm8ezbOg; nickname=%E6%9C%88%E4%B8%8B%E7%8B%AC%E9%85%8C; headImgUrl=https%3A%2F%2Fthirdwx.qlogo.cn%2Fmmopen%2Fvi_32%2FPiajxSqBRaEK7zXhTKo8rPFH192VgkBI98H0k5DwOoSm6e2M9KViafeIcIYibLU5jRzCUgYetjLRa1M1cKBS9JDHg%2F132; PHPSESSID=fs7dkvvikl75sser369thctk57',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://suokeduo.com/index_centent.html',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://suokeduo.com',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => 'suokeduo.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.027213s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`view_vip_staff` [ RunTime:0.015258s ]
+[ sql ] [ SQL ] SELECT `code`,`name`,`vpname`,`vgname`,`vsname`,`m_auth_code` FROM `suoke`.`view_vip_staff` WHERE  `code` = 'boss' LIMIT 1 [ RunTime:0.007864s ]
+---------------------------------------------------------------
+[2020-12-12T10:25:29+08:00] 127.0.0.1 POST suokeduo.com/index.php/VipinfoStaffInfo/
+[运行时间：0.390631s] [吞吐率：2.56req/s] [内存消耗：2,442.63kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'VipinfoStaffInfo/',
+  'route' => 'Vipinfo/staffInfo',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'myself_openid_suoke=ogx1nwc_vpQTPcNx9hEIDm8ezbOg; myself_head_image_suoke="https://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEK7zXhTKo8rPFH192VgkBI98H0k5DwOoSm6e2M9KViafeIcIYibLU5jRzCUgYetjLRa1M1cKBS9JDHg/132"; myself_nick_name_suoke=%E6%9C%88%E4%B8%8B%E7%8B%AC%E9%85%8C; company=suoke; locaton=http%3A%2F%2Fsuokeduo.com%2F%3Fcompany%3Dsuoke; openId=ogx1nwc_vpQTPcNx9hEIDm8ezbOg; nickname=%E6%9C%88%E4%B8%8B%E7%8B%AC%E9%85%8C; headImgUrl=https%3A%2F%2Fthirdwx.qlogo.cn%2Fmmopen%2Fvi_32%2FPiajxSqBRaEK7zXhTKo8rPFH192VgkBI98H0k5DwOoSm6e2M9KViafeIcIYibLU5jRzCUgYetjLRa1M1cKBS9JDHg%2F132; PHPSESSID=fs7dkvvikl75sser369thctk57',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://suokeduo.com/homepage/personal_data.html',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://suokeduo.com',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => 'suokeduo.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.018926s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`view_vip_staff` [ RunTime:0.324301s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`view_vip_staff` WHERE  `code` = 'boss' LIMIT 1 [ RunTime:0.009200s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_org` [ RunTime:0.007911s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_org` WHERE  `code` IN ('ZZJG15459825114064') [ RunTime:0.005211s ]

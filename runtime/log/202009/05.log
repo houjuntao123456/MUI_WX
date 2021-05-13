@@ -1,0 +1,151 @@
+---------------------------------------------------------------
+[2020-09-05T10:18:06+08:00] 10.10.10.34 POST 10.10.10.34/index.php/UserlistViplist/
+[运行时间：0.096228s] [吞吐率：10.39req/s] [内存消耗：2,556.83kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'UserlistViplist/',
+  'route' => 'Userlist/viplist',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=9hd16bkn3pic1lv2pu9vei8jbn; company=suoke; locaton=http%3A%2F%2F10.10.10.34%2F%3Fcompany%3Dsuoke',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.34/index_centent.html',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.34',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => '10.10.10.34',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.028158s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`view_vip_staff` [ RunTime:0.016635s ]
+[ sql ] [ SQL ] SELECT `code`,`name`,`vpname`,`vgname`,`vsname`,`m_auth_code` FROM `suoke`.`view_vip_staff` WHERE  `code` = 'boss' LIMIT 1 [ RunTime:0.011910s ]
+---------------------------------------------------------------
+[2020-09-05T10:18:09+08:00] 10.10.10.34 POST 10.10.10.34/index.php/RfmActiveStore/
+[运行时间：0.110541s] [吞吐率：9.05req/s] [内存消耗：2,591.73kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'RfmActiveStore/',
+  'route' => 'RfmActive/storeSel',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=9hd16bkn3pic1lv2pu9vei8jbn; company=suoke; locaton=http%3A%2F%2F10.10.10.34%2F%3Fcompany%3Dsuoke',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.34/homepage/r_report.html',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.34',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => '10.10.10.34',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.018765s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_staff` [ RunTime:0.014353s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_staff` WHERE  `code` = 'boss' LIMIT 1 [ RunTime:0.009561s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_store` [ RunTime:0.012867s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `suoke`.`vip_store` WHERE  `status` = 0 LIMIT 1 [ RunTime:0.008664s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_store` WHERE  `status` = 0 [ RunTime:0.019764s ]
+---------------------------------------------------------------
+[2020-09-05T10:18:14+08:00] 10.10.10.34 POST 10.10.10.34/index.php/ModelanalysisR/
+[运行时间：0.103491s] [吞吐率：9.66req/s] [内存消耗：2,498.60kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'ModelanalysisR/',
+  'route' => 'Modelanalysis/R',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=9hd16bkn3pic1lv2pu9vei8jbn; company=suoke; locaton=http%3A%2F%2F10.10.10.34%2F%3Fcompany%3Dsuoke',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.34/homepage/r_report.html',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.34',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '10',
+  'connection' => 'close',
+  'host' => '10.10.10.34',
+)
+[ info ] [ PARAM ] array (
+  'store' => '9998',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.025245s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_rfm_r` [ RunTime:0.015005s ]
+[ sql ] [ SQL ] SELECT `r_intervalone`,`r_intervaltwo` FROM `suoke`.`vip_rfm_r` WHERE  `store_code` = '9998' [ RunTime:0.012600s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`view_vipinfo` [ RunTime:0.016249s ]
+[ sql ] [ SQL ] SELECT `rfm_days` FROM `suoke`.`view_vipinfo` WHERE  `store_code` = '9998' [ RunTime:0.010173s ]
+---------------------------------------------------------------
+[2020-09-05T10:18:17+08:00] 10.10.10.34 POST 10.10.10.34/index.php/UserlistViplist/
+[运行时间：0.308375s] [吞吐率：3.24req/s] [内存消耗：2,556.84kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'UserlistViplist/',
+  'route' => 'Userlist/viplist',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=9hd16bkn3pic1lv2pu9vei8jbn; company=suoke; locaton=http%3A%2F%2F10.10.10.34%2F%3Fcompany%3Dsuoke',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.34/index_centent.html',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.34',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => '10.10.10.34',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011079s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`view_vip_staff` [ RunTime:0.257753s ]
+[ sql ] [ SQL ] SELECT `code`,`name`,`vpname`,`vgname`,`vsname`,`m_auth_code` FROM `suoke`.`view_vip_staff` WHERE  `code` = 'boss' LIMIT 1 [ RunTime:0.011459s ]

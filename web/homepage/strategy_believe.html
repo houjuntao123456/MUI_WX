@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>相信策略</title>
+    <script src="../js/vconsole.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.css">
+    <script src="../mui/js/mui.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/loading.js"></script>
+    <style>
+        .mui-off-canvas-left,
+        .mui-off-canvas-right {
+            width: 100%;
+        }
+
+        .mui-table-view-cell.mui-active {
+            background-color: #efeff0;
+        }
+
+        .mui-table-view-cell::after {
+            right: 15px;
+            background-color: #e8e8e8;
+        }
+
+        .mui-popover {
+            height: 140px;
+        }
+
+        .mui-content {
+            background: #fff
+        }
+
+        /* 控制弹框 */
+        #popover a {
+            text-align: center;
+        }
+
+        /* 标题table */
+        .table {
+            width: 100%;
+            background-color: #FFFFFF;
+            position: absolute;
+            left: 0px;
+        }
+
+        .table>thead>tr {
+            border-bottom: 2px solid #ddd;
+        }
+
+        .table>thead>tr>th {
+            padding: 9px 0px 9px 0px;
+            border-bottom-width: 2px;
+            border: 1px solid #ddd;
+        }
+
+        /* 具体内容table */
+        .table2 {
+            width: 100%;
+            background-color: #FFFFFF;
+        }
+
+        .table2>tbody>tr>td {
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 4px 0px 4px 0px;
+            background-color: #F9F9F9;
+        }
+
+        .table2>tbody>tr>td:nth-child(1) {
+            width: 40%;
+        }
+
+        .table2>tbody>tr>td:nth-child(2) {
+            width: 60%;
+        }
+
+        .table2>tbody>tr>td:nth-child(2)>button {
+            padding-top: 4px;
+            padding-bottom: 4px;
+        }
+
+        .table2 textarea {
+            width: 90%;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        .dis {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- 手势动作 mui-draggable -->
+    <div id="offCanvasWrapper" class="mui-off-canvas-wrap   mui-slide-in mui-content">
+        <div class="mui-inner-wrap">
+            <!-- 菜单容器 -->
+            <aside class="mui-off-canvas-right" id="asides">
+                <header class="mui-bar mui-bar-nav mui-bar-nav-bg"
+                    style="background-color:#007aff; padding-left: 0px;padding-right:0px;">
+                    <a class="mui-icon mui-icon-back"
+                        style="color:white; padding-left:15px;" id="cans"></a>
+                    <h1 id="ttt" class="mui-title" style="color:white;width: 50%;margin: 0 auto;">话术标准</h1>
+                </header>
+                <div class="mui-scroll-wrapper" style="background-color: #FFFFFF;top: 44px;">
+                    <!--  style="padding-left:20px;" -->
+                    <!-- mui('#offCanvasWrapper').offCanvas('show'); -->
+                    <div class="mui-scroll">
+                        <div id="member_h">
+                        </div>
+                    </div>
+            </aside>
+            <!-- 主页面内容容器 -->
+            <!--  头部-->
+            <header class="mui-bar mui-bar-nav mui-bar-nav-bg"
+                style="background-color:#007aff; padding-left: 0px;padding-right:0px;">
+                <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back mui-action-back"
+                    style="color:white; padding-left:15px;"></a>
+                <h1 id="ttt" class="mui-title" style="color:white;width: 50%;margin: 0 auto;">相信策略</h1>
+                <a href="#popover" style="float: right;line-height: 44px;color: white;margin-right: 10px;"
+                    id="menu">相信产品</a>
+                <table class="table" id="titie_table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40%;">策略内容</th>
+                            <th style="width: 60%;">
+                                话术标准
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </header>
+            <div class="mui-scroll-wrapper" id="pullrefresh" style="top: 85px;">
+                <div class="mui-scroll">
+                    <!-- 主界面具体展示内容 -->
+                    <div class="mui-row" style="margin-bottom:3px;">
+                        <table class="table2">
+                            <tbody id="table2_conter">
+                                <!-- <tr>
+                                            <td>30分钟感谢回访</td>
+                                            <td>
+                                                <textarea disabled="" rows="5" id="skills" style="overflow-y:visible;">好久好久大按个煽风点火建行卡电话否举案说法加花生酱暗黑风咔哒胡椒粉和静安寺福利卡号</textarea>
+                                            </td>
+                                        </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 弹框区域 -->
+    <div id="popover" class="mui-popover">
+        <div class="mui-popover-arrow"></div>
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <ul class="mui-table-view" id="popover_ul">
+                    <li class="mui-table-view-cell"><a href="#" value="相信产品" code='1'>相信产品</a></li>
+                    <li class="mui-table-view-cell"><a href="#" value="相信价值" code='2'>相信价值</a></li>
+                    <li class="mui-table-view-cell"><a href="#" value="相信人品" code='3'>相信人品</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 控制弹框 -->
+    <script>
+        // var vConsole = new VConsole();
+        //加载动画
+        var load = new Loading();
+        load.init();
+        // 弹框区域
+        mui('#popover').on('tap', 'a', function (e) {
+            mui("#menu")[0].innerHTML = this.innerHTML;
+            mui('#popover').popover('toggle');
+            moban(this);
+        })
+        //滚动区域
+        mui('.mui-scroll-wrapper').scroll({
+            deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+        function moban(obj) {
+            document.getElementById("table2_conter").innerHTML = '';
+            count = 0;
+            type_type = obj.getAttribute('code')
+            mui('#pullrefresh').pullRefresh().refresh(true);
+            pullupRefresh();
+        }
+        // 点击查看按钮
+        mui(".table2").on('tap', '.mui-btn-primary', function () {
+            mui('#offCanvasWrapper').offCanvas('show'); 
+            mui("#member_h")[0].innerHTML = this.getAttribute("secph");
+        })
+         //点击返回主页面
+            document.getElementById("cans").addEventListener("tap", function () {
+                mui('#offCanvasWrapper').offCanvas('close');
+            });
+    </script>
+</body>
+<script>
+    window.onload = function () {
+        hidden_title();
+        mui('#popover').popover('toggle', document.getElementById("menu"));
+    }
+</script>
+<script>
+    var type_type = '1';
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            // down: {
+            //     callback: pulldownRefresh
+            // },
+            up: {
+                contentrefresh: '正在加载...',
+                auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+	/**
+	 * 下拉刷新具体业务实现
+	 */
+    // function pulldownRefresh() {
+
+    // }
+	/**
+	 * 上拉加载具体业务实现
+	 */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+    function pullupRefresh() {
+        load.start()
+        mui.post('/index.php/webRebelieveIndex/', {
+            id: type_type,
+            page: ++count,//分页
+            limit: limit_num//每页的条数
+        }, function (data) {
+            // 服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                    if (data.data.count == 0) {
+                        mui("#titie_table")[0].classList.add("dis");
+                    } else {
+                        mui("#titie_table")[0].classList.remove("dis");
+                        for (let i = 0; i < data.data.data.length; i++) {
+                            var tr = document.createElement('tr');
+                            tr.innerHTML = ' <td>' + data.data.data[i].content + '</td>'
+                                + ' <td><button type="button" class="mui-btn mui-btn-primary" secph=' + data.data.data[i].standard + '>查看</button></td>' //<textarea disabled="" rows="1" id="skills" style="overflow-y:visible;">' + data.data.data[i].standard + '</textarea>
+                            document.getElementById("table2_conter").appendChild(tr);
+                        }
+                    }
+                    load.stop();
+                }, 1000);
+            } else {
+                load.stop();
+            }
+        }, 'json'
+        );
+    }
+
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+
+    // 解决手机端textarea无法滑动问题(触发textarea滑动的时候，产生了冒泡事件，引起了整个页面的滑动)
+    window.addEventListener('touchmove', function (e) {
+        let target = e.target
+        if (target && target.tagName === 'TEXTAREA') {
+            e.stopPropagation();
+        }
+    }, true)
+
+</script>
+
+</html>

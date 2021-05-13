@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="../../mui/css/mui.css">
+		<script src="../../mui/js/mui.js"></script>
+		<script src="../../js/jquery.min.js"></script>
+		<!-- <script src="./js/jquery.min.js"></script> -->
+		<title>线下门店</title>
+		<style>
+		.mui-select:before{
+			top: 11px;
+			color: rgba(170, 170, 170);
+		}
+		select{padding: 10px 22px;margin-bottom: 5px;}
+		.mui-card{   
+			margin: 0;
+			box-shadow:none;
+			border-bottom: 1px solid #f1f1f1;
+		}
+		.dline{
+			letter-spacing: 1px;
+			padding: 15px 10px 10px 20px;
+			z-index: 2;
+			/* top: -40px; */
+		}
+		.dline h3{
+			font-size: 18px;
+			line-height: 35px;
+			color: #2F75CF;
+		}
+		.dline p{
+			color: rgb(105, 104,104);
+			line-height: 15px;
+		}
+		.dline p:nth-child(5) a{
+			display: inline-block;
+			width: 23%;
+			color: #2F75CF;
+			margin-top: 10px;
+			font-size: 14px;
+		}
+		.mui-pull-bottom-pocket {z-index: 1;}
+		.mui-bar-nav ~ .mui-content .mui-pull-top-pocket{top:0;}
+		.mui-icon-phone:before,
+		.mui-icon-location:before,
+		.mui-icon-weixin:before,
+		.mui-icon-map:before{font-size: 20px;margin-right: 5px;}
+		</style>
+	</head>
+
+	<body>
+		<!-- 头部 -->
+		<header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#2F75CF;box-shadow: none;">
+			<a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+			<h1 class="mui-title" style="color:white;">线下门店</h1>
+		</header>
+		<div class="mui-content">
+			<!-- <div class="mui-row">
+				<div class="mui-col-xs-4 mui-select">
+					<select name="" style="color:rgb(105, 104,104)" id="province" onchange="">
+						<option value="">选择省份</option>
+					</select>
+				</div>
+				<div class="mui-col-xs-4 mui-select">
+					<select name="" style="color:rgb(105, 104,104)" id="city" onchange="">
+						<option value="">选择城市</option>
+					</select>
+				</div>
+				<div class="mui-col-xs-4 mui-select">
+					<select name="" style="color:rgb(105, 104,104)" id="sort" onchange="">
+						<option value="">智能排序</option>
+					</select>
+				</div>
+			</div> -->
+			<div class="mui-row">
+				<div id="pullrefresh" class="mui-scroll-wrapper" style="top: 44px;">
+					<div class="mui-scroll">
+						<div id="dataline">
+
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+
+	</body>
+
+<script>
+	mui.init({
+		pullRefresh: {
+			container: '#pullrefresh',
+			up: {
+				contentrefresh: '正在加载...',
+				auto: true,//可选,默认false.首次加载自动上拉刷新一次
+				callback: pullupRefresh
+			}
+		}
+	});
+	/**
+	 * 上拉加载具体业务实现
+	 */
+	// 重新开启加载
+	// mui('#pullrefresh').pullRefresh().refresh(true);
+	// 分页计数
+	var count = 0;
+	// 分的条数
+	var limit_num = 10;
+	function pullupRefresh() {
+		mui.post('/index.php/UserlistOfflineStore/', {
+// 			orgwhere: select_store.options[select_store.selectedIndex].value,
+// 			storewhere: select_clerk.options[select_clerk.selectedIndex].value,
+			page: ++count,//分页
+			limit: limit_num//每页的条数
+		}, function (data) {
+			// 服务器返回响应，根据响应结果，分析是否登录成功；
+			if (data.code == 200) {
+				setTimeout(function () {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+					var dataline = document.getElementById("dataline");
+					for (i = 0; i < data.data.data.length; i++) {
+						var diline = document.createElement('div');
+						diline.className = 'mui-card dline';
+						diline.innerHTML = '<h3>'+data.data.data[i].name+'</h3>'
+						+	'<p>'+ data.data.data[i].address+'</p>'
+						+	'<p>'+ data.data.data[i].full_address +'</p>'
+						+	'<p>联系热线：'+ data.data.data[i].phone +'</p>'
+						+	'<p>'
+						+		'<a class="mui-icon mui-icon-phone" href=tel:'+data.data.data[i].phone+'>电话</a>'
+						// +		'<a class="mui-icon mui-icon-location">导航</a>'
+						// +		'<a class="mui-icon mui-icon-weixin" href="../../homepage/wx_chat2.html">客服</a>'
+						// +		'<a class="mui-icon mui-icon-map">8.1km</a>'
+						+	'</p>'
+						dataline.appendChild(diline);
+					}
+				}, 1000);
+			}
+		}, 'json');
+	}
+	mui('.mui-scroll-wrapper').scroll({
+		indicators: false, //是否显示滚动条
+	});
+	mui('body').on('tap', 'a', function () {
+        window.location.href = this.href;
+    });
+	
+</script>
+
+
+</html>

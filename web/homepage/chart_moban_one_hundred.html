@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+    <title>100天跟进模板</title>
+    <style>
+        /* 搜索框 */
+        .search_div {
+            text-align: center;
+            margin-top: 8px;
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+        }
+
+        .search_div>input {
+            background-color: white;
+            margin-bottom: 8px;
+            width: 95%;
+        }
+
+        p {
+            background-color: #007aff;
+            color: white;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 20px;
+            font-size: 15px;
+            border-radius: 0px 0px 10px 10px;
+            width: 95%;
+            position: absolute;
+            z-index: 2;
+            margin: 8px 8px;
+        }
+
+        .mui-table-view-cell.mui-collapse .mui-collapse-content {
+            padding: 0
+        }
+
+        .see {
+            width: 90.7%;
+            margin: 0 auto;
+            border: 1px solid #cccccc;
+            margin: 8px 15px;
+            padding-top: 10%;
+        }
+
+        .see div {
+            font-size: 15px;
+        }
+
+        .see_xiangqing {
+            width: 95%;
+            margin: 0 auto;
+            /* border: 1px solid blue; */
+        }
+
+        .see_xiangqing>.mui-row {
+            margin-top: 10px;
+            line-height: 40px;
+            max-height: 40px;
+            font-size: 18px;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .see_xiangqing>.mui-row :first-child {
+            color: #333;
+        }
+
+        .see_xiangqing>.mui-row :last-child {
+            color: #777;
+        }
+
+        .right {
+            text-align: center;
+        }
+
+        .mui-table-view-chevron .mui-table-view-cell {
+            padding-right: 10px;
+        }
+
+        /* .yinying {
+            border-radius: 5px;
+            box-shadow: #666 0px 0px 10px;
+            -webkit-box-shadow: #666 0px 0px 10px;
+            -moz-box-shadow: #666 0px 0px 10px;
+
+        } */
+
+        .button_div {
+            margin-top: 10px;
+            text-align: center;
+            padding-bottom: 10px;
+        }
+
+        .button1 {
+            position: relative;
+            /** 相对布局 **/
+        }
+
+        .button1:active {
+            top: 2px;
+            /**向下偏移2px **/
+        }
+
+        textarea {
+            font-size: 14px;
+            border: none;
+            padding: 0;
+            color: #777;
+        }
+
+        .mui-placeholder span,
+        #member_data {
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+
+        .mui-table-view-cell:after,
+        .mui-table-view:after {
+            background-color: #e6e5e5;
+            left: 0px;
+        }
+
+        .mui-search.mui-active::before {
+            left: 15px;
+            top: 60%;
+        }
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;" id="back_jxbb"></a>
+        <h1 class="mui-title" style="color:white;">100天跟进模板</h1>
+    </header>
+    <!-- 大佛IG后家 -->
+    <div class="mui-content">
+        <!-- 内容头 -->
+        <div class="mui-input-row mui-search search_div">
+            <input type="search" id="sesame" placeholder="请输入模板">
+        </div>
+
+        <!-- 区域滚动 -->
+        <div class="mui-scroll-wrapper" id="pullrefresh" style="top: 95px;">
+            <!--这里放置真实显示的DOM内容-->
+            <div class="mui-scroll">
+                <ul class="mui-table-view mui-table-view-chevron" id="member_data">
+                    <!-- <li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">面板1</a>
+                        <div class="mui-collapse-content ">
+                            <p>查看详情</p>
+                            <div class="see yinying" style="border: 1px solid #cccccc;">
+                                <div class="see_xiangqing">
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-4 mui-col-sm-4 right">互动名称:</div>
+                                        <div class="mui-col-xs-8 mui-col-sm-8">飞得更高</div>
+                                    </div>
+                                </div>
+                                <div class="see_xiangqing">
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-4 mui-col-sm-4 right">互动名称:</div>
+                                        <div class="mui-col-xs-8 mui-col-sm-8">飞得更高</div>
+                                    </div>
+                                </div>
+                                <div class="see_xiangqing">
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-4 mui-col-sm-4 right">时间(天):</div>
+                                        <div class="mui-col-xs-8 mui-col-sm-8">飞得更高</div>
+                                    </div>
+                                </div>
+                                <div class="see_xiangqing">
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-4 mui-col-sm-4 right">互动目的:</div>
+                                        <div class="mui-col-xs-8 mui-col-sm-8">飞得更高</div>
+                                    </div>
+                                </div>
+                                <div class="see_xiangqing">
+                                    <div class="mui-row">
+                                        <div class="mui-col-xs-4 mui-col-sm-4 right">互动方式:</div>
+                                        <div class="mui-col-xs-8 mui-col-sm-8">飞得更高</div>
+                                    </div>
+                                </div> -->
+                    <!-- 执行话术 -->
+                    <!-- <fieldset class="see_xiangqing" style="padding-bottom: 0px;">
+                                    <legend style="font-size: 20px;">执行话术</legend>
+                                    <textarea name="" id="" rows="5" cols="30" readonly>阿达是否开奖号三</textarea>
+                                </fieldset>
+                                <div class="button_div">
+                                    <button type="button" class="mui-btn mui-btn-primary button1" style="width: 50%;"
+                                        onclick="javascript:alert(123)">确定</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+    var load = new Loading();
+    load.init();
+    load.start();
+
+    var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('=');
+    var n3 = loc.indexOf('*');
+    var code = decodeURI(loc.substr(n2 + 1, n3 - n2 - 11));
+    var level_code = decodeURI(loc.substr(n3 + 1, n1 - n3));
+
+    window.onload = function () {
+        moban("");
+        var nav = window.parent.document.getElementById("nav");
+        nav.style.display = "";
+        hh[0].style.bottom = "50px";
+    }
+    $(function () {
+        $('#sesame').bind('input propertychange', function () {
+            // input_length = this.value.length
+            moban(this.value);
+
+        });
+    })
+    var member_data = document.getElementById('member_data');
+    function moban(search) {
+        mui.post('/index.php/WreHundredList/', {
+            code: code,
+            search: search
+        }, function (data) {
+            member_data.innerHTML = "";
+            if (data.code == 200) {
+                if (data.data.count == 0) {
+                    var li = document.createElement('li');
+                    li.className = "mui-table-view-cell mui-collapse";
+                    li.style = " text-align: center;font-size: 20px;padding-top: 100px;padding-bottom: 100px;"
+                    li.innerHTML = "<h2>暂无模板</h2><br><h4>请在电脑端先建立所需模板</>";
+                    member_data.appendChild(li);
+                } else {
+                    for (i = 0; i < data.data.data.length; i++) {
+                        if (data.data.data[i].name == "" || data.data.data[i].name == null || data.data.data[i].name == undefined) {
+                            data.data.data[i].name = "";
+                        }
+                        if (data.data.data[i].vgname == "" || data.data.data[i].vgname == null || data.data.data[i].vgname == undefined) {
+                            data.data.data[i].vgname = "";
+                        }
+                        if (data.data.data[i].time == "" || data.data.data[i].time == null || data.data.data[i].time == undefined) {
+                            data.data.data[i].time = "";
+                        }
+                        if (data.data.data[i].purpose == "" || data.data.data[i].purpose == null || data.data.data[i].purpose == undefined) {
+                            data.data.data[i].purpose = "";
+                        }
+                        if (data.data.data[i].function == "" || data.data.data[i].function == null || data.data.data[i].function == undefined) {
+                            data.data.data[i].function = "";
+                        }
+
+                        var li = document.createElement('li');
+                        li.className = "mui-table-view-cell mui-collapse";
+                        li.innerHTML = '<a class="mui-navigate-right" href="#">' + data.data.data[i].name + '</a>'
+                            + ' <div class="mui-collapse-content">'
+                            + ' <p>查看详情</p>'
+                            + ' <div class="see yinying" style="border: 1px solid #cccccc;">'
+                            + ' <div class="see_xiangqing">'
+                            + ' <div class="mui-row">'
+                            + ' <div class="mui-col-xs-4 mui-col-sm-4 right">组织机构:</div>'
+                            + ' <div class="mui-col-xs-8 mui-col-sm-8">' + data.data.data[i].vgname + '</div>'
+                            + ' </div>'
+                            + ' </div >'
+                            + ' <div class="see_xiangqing">'
+                            + ' <div class="mui-row">'
+                            + ' <div class="mui-col-xs-4 mui-col-sm-4 right">互动名称:</div>'
+                            + ' <div class="mui-col-xs-8 mui-col-sm-8">' + data.data.data[i].name + '</div>'
+                            + ' </div>'
+                            + ' </div>'
+                            + ' <div class="see_xiangqing">'
+                            + ' <div class="mui-row">'
+                            + ' <div class="mui-col-xs-4 mui-col-sm-4 right">时间(天):</div>'
+                            + ' <div class="mui-col-xs-8 mui-col-sm-8">' + data.data.data[i].time + '</div>'
+                            + ' </div>'
+                            + ' </div>'
+                            + ' <div class="see_xiangqing">'
+                            + ' <div class="mui-row">'
+                            + ' <div class="mui-col-xs-4 mui-col-sm-4 right">互动目的:</div>'
+                            + ' <div class="mui-col-xs-8 mui-col-sm-8">' + data.data.data[i].purpose + '</div>'
+                            + ' </div>'
+                            + ' </div>'
+                            + ' <div class="see_xiangqing">'
+                            + ' <div class="mui-row">'
+                            + ' <div class="mui-col-xs-4 mui-col-sm-4 right">互动方式:</div>'
+                            + ' <div class="mui-col-xs-8 mui-col-sm-8">' + data.data.data[i].function + '</div>'
+                            + ' </div>'
+                            + ' </div>'
+                            + ' <fieldset class="see_xiangqing" style="padding-bottom: 0px;margin-top: 20px;border: 1px dashed #eee;">'
+                            + ' <legend style="font-size: 16px;text-align:center;color: #333;padding: 0 10px;">执行话术</legend>'
+                            + ' <textarea name="" id="" rows="10" cols="30">' + data.data.data[i].speech + '</textarea>'
+                            + ' </fieldset>'
+                            + ' <div class="button_div">'
+                            + ' <button type="button" class="mui-btn mui-btn-primary button1" style="width: 50%;" moban_code ="' + data.data.data[i].code + '" speech="' + data.data.data[i].speech + '" onclick="send(this)">发送</button>'
+                            + ' </div>'
+                            + ' </div>'
+                            + ' </div>'
+                        member_data.appendChild(li);
+                    }
+                    mui('.mui-scroll-wrapper').scroll().scrollTo(0, 0, 100);//100毫秒滚动到顶
+                }
+            }
+            load.stop();
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+    }
+
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+
+
+    function send(e) {
+        let valll = e.parentNode.previousElementSibling.lastElementChild.value;
+        load.start();
+        mui.post('/index.php/WreHundredRecord/', {
+            username: localStorage.getItem("hd_username"),
+            vip_code: code,
+            level: level_code,
+            template_code: e.getAttribute("moban_code")
+        }, function (data) {
+            if (data.code == 200) {
+                location.href = '../homepage/wx_chat3_one_hundred.html?' + 'code=' + code + 'speech*' + valll;
+                load.stop();
+            } else if (data.code == 400) {
+                mui.toast(data.msg, {
+                    duration: 'long',
+                    type: 'div'
+                })
+                load.stop();
+            }
+
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+        }, 'json'
+        );
+
+    }
+</script>
+
+</html>

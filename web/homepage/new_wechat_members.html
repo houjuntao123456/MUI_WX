@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>门店微会员</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <!-- <script src="../mui/js/mui.min.js"></script> -->
+    <script src="../mui/js/muiR.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+    <script src="../mui/js/mui.dtpicker.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/vconsole.js"></script>
+    <style>
+        body {
+            font-size: 15px;
+        }
+
+        .span_font_style {
+            /* background-color: #3abeee; */
+            background: -webkit-linear-gradient(0deg, rgba(233, 153, 4, 0.973), #f5f10cf1);
+            /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(0deg, rgba(247, 168, 23, 0.973), #f5f10cf1);
+            /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(0deg, rgba(233, 153, 4, 0.973), #f5f10cf1);
+            /* Firefox 3.6 - 15 */
+            background: linear-gradient(0deg, rgba(233, 153, 4, 0.973), #f5f10cf1);
+            /* 标准的语法（必须放在最后） */
+            /* 标准的语法（必须放在最后） */
+            color: white;
+            background-color: orange;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+
+        li {
+            list-style: none;
+            background-color: white;
+            border-right: 1px solid #cccccc;
+            border-bottom: 1px solid #cccccc;
+            text-align: center;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .li_style {
+            border-right: none;
+            height: 147px;
+        }
+
+        .li_photo_style {
+            border: 1px solid black;
+        }
+
+        .div_style {
+            text-align: left;
+            overflow: hidden;
+            line-height: 40px;
+        }
+
+        .div_style_1 {
+            border-bottom: 1px solid #cccccc;
+        }
+
+        .input_style {
+            float: right;
+            margin-bottom: 10px;
+        }
+
+        select {
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            /* select居中 */
+            text-align-last: center;
+        }
+
+        .title_display {
+            display: none;
+        }
+
+        /* 样式 */
+        .oa-contact-cell.mui-table .mui-table-cell {
+            padding: 8px 0 0 0;
+            vertical-align: middle;
+        }
+
+        .oa-contact-cell {
+            position: relative;
+            /* margin-left: 10px; */
+        }
+
+        .oa-contact-content {
+            width: 60%;
+
+        }
+
+        .oa-contact-name {
+            width: 100%;
+        }
+
+        .oa-contact-name,
+        oa-contact-position {
+            float: left;
+        }
+
+        li {
+            border: none;
+        }
+
+        .mui-select::before {
+            color: rgb(11, 80, 246);
+        }
+
+        /* .mui-scroll-wrapper {
+      margin-top: 20px;
+    } */
+
+        .mui-btn-danger {
+            border: 1px solid #1b69f2;
+            background-color: #1b69f2;
+            font-size: 15px;
+            letter-spacing: 2px;
+            padding: 5px 12px;
+        }
+
+        .mui-table-view-cell:after {
+            left: 0;
+            background-color: #ececed;
+        }
+
+        .mui-table-view::before {
+            background-color: #ececed;
+        }
+
+        .mui-table-view:after {
+            background-color: #ececed;
+        }
+
+        .mui-search .mui-placeholder,
+        .mui-input-row select {
+            font-size: 14px;
+            height: 30px;
+        }
+
+        .mui-content>.mui-table-view:first-child {
+            margin-top: 0px;
+        }
+
+        /* .mui-table-view-cell {
+            padding: 10px 15px;
+        } */
+
+        .nstyle {
+            text-align: center;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .nstyle h3 {
+            display: inline-block;
+            font-size: 20px;
+            color: #f5a473;
+        }
+
+        .mui-search:before {
+            top: 60%;
+        }
+
+        .tall {
+            margin: 0 auto;
+            text-align: center;
+            margin-top: 5px;
+            border-radius: 10px;
+            background-color: rgba(226, 226, 226, 0.93);
+            width: 100%;
+            font-size: 16px;
+            height: 40px;
+            line-height: 40px;
+            color: #333;
+        }
+
+        .mui-pull-bottom-pocket {
+            margin-top: 15%;
+        }
+
+        .mui-table-view-chevron .mui-table-view-cell {
+            padding-right: 0;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .mui-table-view-cell {
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;" id="back_jxbb"></a>
+        <h1 class="mui-title" style="color:white;">微会员新增</h1>
+        <div class="tall">当前总人数为: <span id="zpolper" style="color: chocolate">0</span>人 </div>
+    </header>
+    <!-- 内容 -->
+    <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+        <div class="mui-scroll">
+            <!--数据列表-->
+            <ul class="mui-table-view mui-table-view-chevron" style="top: 50px;">
+                <!-- 里面详细内容 -->
+                <!-- <li class="mui-table-view-cell" style="padding-left:5px;padding-right: 11px;">
+                <div class="mui-slider-cell">
+                        <div class="oa-contact-cell mui-table">
+                  <div class="mui-table-cell" style="width:100px;height:100px;">
+                    
+
+                            <img src="./images/g.jpg" style="width:79%;height:100%;border: 1px solid black;border-radius:50%;margin-left: 10px;" />
+                          </div>
+              
+                          <div class="oa-contact-content mui-table-cell" style="padding-top:10px;padding-left: 12px;">
+                            <div class="mui-clearfix" style="text-align:left;line-height: 28px;width: 100%;padding: 12px 0 0 0;">
+                              <h4 class="oa-contact-name">叶文洁<span style="font-size:12px;color:#757171;margin-left: 15px;font-weight: normal;">1970-08-20</span></h4>
+                              <p class="mui-h6" style="text-align:left;width: 80%;margin: 0;">
+                                <span style="font-weight:bold;font-size:15px;">¥</span>
+                                <span>25.5</span>
+                                <span>&nbsp;/</span>
+                                <span>1</span>
+                                <span>&nbsp;积分</span>
+                              </p>
+                              <p style="font-size:15px;color: #757171;">
+                                订单时间 <span class="oa-contact-position mui-h5"style="color:#97989c;">1964-12-27</span>
+                              </p>
+                            </div>
+                          </div>
+              
+                          <div class="mui-table-cell">
+                            <button style="padding: 7px 10px;color: #77a1f8;border: 1px solid #77a1f8;">会员资料</button>
+                            <button style="padding: 7px 10px;color: #77a1f8;border: 1px solid #77a1f8;margin-top:5%;">修改等级</button>
+                          </div>
+              
+                        </div>
+                    </div>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+</body>
+
+<script>
+    var json = JSON.parse(localStorage.getItem("data_huancun_member"));
+    console.log(JSON.parse(localStorage.getItem("data_huancun_member")).type)
+    //    查看微会员 
+    window.onload = function () {
+        // console.log(json);
+    }
+
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            up: {
+                contentrefresh: '正在加载...',
+                auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+
+    var count = 0;
+    // 分的条数
+    var limit_num = 30;
+    function pullupRefresh() {
+        // load.start();
+        mui.post('/index.php/OrgWMemberNewly/', {
+            code: json.code,
+            type: json.type,
+            startTime: json.startTime,
+            endTime: json.endTime,
+            page: ++count,
+            limit: limit_num
+        }, function (data) {
+            if (data.code == 200) {
+                document.getElementById("zpolper").innerHTML = data.data.count;
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                    var table = document.body.querySelector('.mui-table-view');
+                    if (data.data.count == 0) {
+                        var li = document.createElement('li');
+                        li.className = 'mui-table-view-cell';
+                        // li.style = 'padding:10px;text-align:center;'
+                        li.innerHTML = '<h1>暂无数据</h1>'
+                        table.appendChild(li);
+                    } else {
+                        for (i = 0; i < data.data.data.length; i++) {
+                            var wexin_title = "";
+                            // alert(data.count.data.length)
+                            // 进行判断,如果为空执行默认路径的图片
+                            if (data.data.data[i].img == "" || data.data.data[i].img == null || data.data.data[i].img == " ") {
+                                data.data.data[i].img = "../images/suoke.jpg";
+                            } else {
+                                wexin_title = '<span class="mui-icon mui-icon-weixin" style="position: relative;top:10px;right: -36%;;z-index: 999;color: #80D640;"></span>';
+                            }
+                            if (data.data.data[i].username == "" || data.data.data[i].username == null || data.data.data[i].username == undefined) {
+                                data.data.data[i].username = '&nbsp;';
+                            }
+                            if (data.data.data[i].birthday == "" || data.data.data[i].birthday == null || data.data.data[i].birthday == undefined) {
+                                data.data.data[i].birthday = '';
+                            }
+                            if (data.data.data[i].total_consumption == "" || data.data.data[i].total_consumption == null || data.data.data[i].total_consumption == undefined) {
+                                data.data.data[i].total_consumption = 0;
+                            }
+                            if (data.data.data[i].consumption_number == "" || data.data.data[i].consumption_number == null || data.data.data[i].consumption_number == undefined) {
+                                data.data.data[i].consumption_number = 0;
+                            }
+                            if (data.data.data[i].consumption_times == "" || data.data.data[i].consumption_times == null || data.data.data[i].consumption_times == undefined) {
+                                data.data.data[i].consumption_times = '';
+                            }
+                            if (data.data.data[i].r_days == null || data.data.data[i].r_days == undefined || data.data.data[i].r_days == "") {
+                                data.data.data[i].r_days = "未消费";
+                            } else if (data.data.data[i].r_days != "未消费") {
+                                data.data.data[i].r_days = "未消费" + data.data.data[i].r_days + "天";
+                            }
+                            if (data.data.data[i].return_visit == null || data.data.data[i].return_visit == undefined || data.data.data[i].return_visit == "") {
+                                data.data.data[i].return_visit = "未回访";
+                            } else if (data.data.data[i].return_visit != "未回访") {
+                                data.data.data[i].return_visit = parseInt(data.data.data[i].return_visit.replace(/,/g, ""));
+                                if (data.data.data[i].return_visit > 365) {
+                                    data.data.data[i].return_visit = "未回访365+天";
+                                } else {
+                                    data.data.data[i].return_visit = "未回访" + data.data.data[i].return_visit + "天";
+                                }
+                            }
+
+                            var li = document.createElement('li');
+                            li.className = 'mui-table-view-cell';
+                            li.style = 'padding:5px 15px;margin-top:0;';
+                            li.innerHTML = '<div class="mui-slider-cell">'
+                                + '<div class="oa-contact-cell mui-table">'
+                                + '<div class="mui-table-cell" style="width:70px;margin-left: 10px;">'
+                                + wexin_title
+                                + '<img src="' + data.data.data[i].img + '" alt="暂无图片"style="width:100%;border: 1px solid #eee;border-radius:50%;" />'
+                                + '</div>'
+
+                                + '<div class="oa-contact-content mui-table-cell" style="padding-top:0px;padding-left: 12px;">'
+                                + '<div class="mui-clearfix" style="text-align:left;line-height: 28px;width: 100%;">'
+                                + '<h4 class="oa-contact-name">' + data.data.data[i].username + '<span style="font-size:12px;color:#757171;margin-left: 15px;font-weight: normal;">' + data.data.data[i].birthday + '</span></h4>'
+                                + '<p class="mui-h6" style="text-align:left;width: 80%;margin-bottom: 0px;line-height:20px;">'
+                                + '<span style="font-weight:bold;font-size:15px;">¥</span>'
+                                + '<span> ' + data.data.data[i].total_consumption + '</span>'
+                                + '<span>&nbsp;/</span>'
+                                + '<span> ' + data.data.data[i].consumption_times + '</span>'
+                                + '<span>次 / ' + data.data.data[i].consumption_number + '件</span>'
+                                + '</p>'
+                                + '<p style="font-size:12px;color: #757171;line-height: 25px;">'
+                                + '<span class="oa-contact-position" style="color:#97989c;">' + data.data.data[i].r_days + '</span> / '
+                                + '<span class="oa-contact-position" style="color:#97989c;">' + data.data.data[i].return_visit + '</span>'
+                                + '</p>'
+                                + '</div>'
+                                + '</div>'
+                                + '<div class="mui-table-cell" style="width: 25%;">'
+                                + '<button style="padding: 7px 10px;color: #77a1f8;border: 1px solid #77a1f8;" name="' + data.data.data[i].code + '"onclick="member(this)">会员资料</button>'
+                                + '<button style="padding: 7px 10px;color: #77a1f8;border: 1px solid #77a1f8;margin-top:7%;" name="' + data.data.data[i].code + '"onclick="grade(this)">修改等级</button>'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>'
+                            table.appendChild(li);
+                        }
+                    }
+                    // load.stop();
+                }, 1000);
+            }
+        }, 'json'
+        );
+    }
+
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+    // 点击按钮,将参数传递到另一个页面
+    function member(e) {
+        location.href = '../homepage/member_data.html?' + 'code=' + e.getAttribute("name");
+    }
+    function grade(e) {
+        location.href = '../homepage/member_grade.html?' + 'code=' + e.getAttribute("name");
+    }
+</script>
+
+
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>卡券详情</title>
+    <link rel="stylesheet" href="../mui/css/mui.css">
+    <script src="../mui/js/mui.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <style>
+        .kajuan {
+            height: 50px;
+            line-height: 50px;
+            background-color: white
+        }
+
+        .kajuan>p {
+            color: black;
+            padding-left: 15px;
+        }
+
+        .kajuan>p>span {
+            float: right;
+            margin-right: 15px;
+        }
+
+        .kajuan_red {
+            color: red;
+        }
+
+        .display_none {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg title_display" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" style="color:white;" id="card_title">卡券详情</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <h3 class="display_none" id="index_content" style="text-align: center;">暂无卡劵详情!</h3>
+        <div id="dingdan">
+            <!-- 卡劵号 -->
+            <div class="mui-row" style="border-bottom: 1px solid #caccd1;">
+                <div class="kajuan">
+                    <p>卡劵号:<span class="kajuan_red" id="card_name"></span></p>
+                </div>
+            </div>
+            <!-- 卡劵名称 -->
+            <div class="mui-row" style="border-bottom: 1px solid #caccd1;">
+                <div class="kajuan">
+                    <p>卡劵名称:<span id="name_name"></span></p>
+                </div>
+            </div>
+            <!-- 卡劵类型 -->
+            <div class="mui-row" style="border-bottom: 1px solid #caccd1;">
+                <div class="kajuan">
+                    <p>卡劵类型:<span id="type_name"></span></p>
+                </div>
+            </div>
+            <!-- 卡劵种类 -->
+            <div class="mui-row" style="border-bottom: 1px solid #caccd1;">
+                <div class="kajuan">
+                    <p>卡劵种类:<span id="species_name"></span></p>
+                </div>
+            </div>
+            <!-- 卡劵内容 -->
+            <div class="mui-row" style="border-bottom: 1px solid #caccd1;">
+                <div class="kajuan">
+                    <p><span id="kjnr" style="float: left;margin-right: 0px;"></span>:<span id="content_name"></span>
+                    </p>
+                </div>
+            </div>
+            <div class="mui-row" style="border-bottom: 1px solid #caccd1;">
+                <div class="kajuan">
+                    <p>赠送门店:<span id="send_name"></span></p>
+                </div>
+            </div>
+            <div class="mui-row" style="border-bottom: 1px solid #caccd1;">
+                <div class="kajuan">
+                    <p>适用门店:<span id="off_name"></span></p>
+                </div>
+            </div>
+            <div class="mui-row" style=" background-color: white;padding-top: 10px; padding-bottom: 20px;">
+                <fieldset>
+                    <legend>说明备注</legend>
+                    <textarea rows="4" cols="10" id="text_area" placeholder="" style="margin-bottom: 0px;"
+                        disabled></textarea>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('=');
+    var n3 = loc.indexOf('#');
+    var n4 = loc.indexOf('*');
+    var n5 = loc.indexOf('@');
+    var code = decodeURI(loc.substr(n2 + 1, n3 - n2 - 1));
+    // var card_type = decodeURI(loc.substr(n4 + 1, n5 - n4 - 1));
+    var route = decodeURI(loc.substr(n5 + 1, n1 - n5));
+    if (route == 'send') {
+        // 赠送详情
+        mui("#card_title")[0].innerHTML = '赠送卡劵详情';
+    } else if (route == 'off') {
+        //   核销详情
+        mui("#card_title")[0].innerHTML = '核销卡劵详情';
+    }
+    function qq() {
+        mui.post('/index.php/GiveCouponCardDetails/', {
+            code: code
+            // type: card_type
+        }, function (data) {
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                if (data.data.length == 0) {
+                    document.getElementById("dingdan").classList.add("display_none");
+                    document.getElementById("index_content").classList.remove("display_none");
+                } else {
+                    mui("#card_name")[0].innerHTML = data.data[0].card_code; //卡号
+                    mui("#name_name")[0].innerHTML = data.data[0].card_name; //名称
+                    mui("#type_name")[0].innerHTML = (data.data[0].type == "") || (data.data[0].type == undefined) ? "" : data.data[0].type; //类型
+                    mui("#species_name")[0].innerHTML = (data.data[0].type_name == "") || (data.data[0].type_name == undefined) ? "" : data.data[0].type_name; //种类
+                    if (data.data[0].card_type == 0) {
+                        mui("#kjnr")[0].innerHTML = '卡劵金额';
+                        mui("#content_name")[0].innerHTML = data.data[0].card_many + '元'; //内容
+                    } else if (data.data[0].card_type == 1) {
+                        mui("#kjnr")[0].innerHTML = '卡劵折扣';
+                        mui("#content_name")[0].innerHTML = data.data[0].card_many + '折'; //内容
+                    } else if (data.data[0].card_type == 2) {
+                        mui("#kjnr")[0].innerHTML = '礼品名称';
+                        mui("#content_name")[0].innerHTML = data.data[0].card_many; //内容
+                    }
+                    mui("#send_name")[0].innerHTML = data.data[0].g_store_name; //赠送门店
+                    if (route == 'send') {
+                        // 赠送详情
+                        mui("#off_name")[0].innerHTML = data.data[0].off_store_name; //核销门店
+                        mui("#text_area")[0].placeholder = data.data[0].remark; //说明备注
+                    } else if (route == 'off') {
+                        //   核销详情
+                        mui("#off_name")[0].innerHTML = data.data[0].o_store_name; //核销门店
+                        mui("#text_area")[0].placeholder = data.data[0].remarking; //说明备注
+                    }
+                }
+            }
+        }, 'json'
+        );
+    }
+    window.onload = function () {
+        qq();
+    }
+</script>
+
+</html>

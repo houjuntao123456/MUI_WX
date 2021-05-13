@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../mui/css/mui.min.css">
+    <script src="../../mui/js/mui.min.js"></script>
+    <link rel="stylesheet" href="../../css/card_coupon.css">
+    <script src="../../js/jquery.min.js"></script>
+    <title>次/月卡</title>
+    <style>
+        .bottom_color {
+            color: #007aff;
+            border-bottom: 2px solid #007aff;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript: history.go(-1);" class="mui-icon mui-icon-back" id="a_title" style="color:white;"></a>
+        <h1 class="mui-title" id="title_" style="color:white;">次/月卡</h1>
+    </header>
+
+    <!-- 内容 -->
+    <div class="mui-content">
+        <!-- 卡券 -->
+        <div id="kkquan">
+            <div class="mui-row" id="form_css">
+                <div class="mui-col-sm-4 mui-col-xs-4 bottom_color form_card" id="div1">
+                    购买次/月卡
+                </div>
+                <div class="mui-col-sm-4 mui-col-xs-4 form_card" id="div2">
+                    购买套餐
+                </div>
+                <div class="mui-col-sm-4 mui-col-xs-4 form_card" id="div3">
+                    我的卡劵
+                </div>
+            </div>
+
+            <div id="pullrefresh2" class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <!--数据列表-->
+                    <div id="show" class="display_none">
+                        <span class="mui-icon mui-icon-info"></span>
+                        <br>
+                        <span id="span1">您还没有卡券~</span>
+                    </div>
+                    <!-- 次卡 -->
+
+                    <div id="times" style="padding: 10px 2px;">
+                        <h5 style="font-size: 20px;">&nbsp;&nbsp;购买次卡</h5>
+                        <div id="cardw" style="display: block;">
+                            <div class="stamp stamp05">
+                                <div class="par">
+                                    <p>每天一只螃蟹</p>
+                                    <p> <span>￥0.05</span>10000次</p>
+                                    <p>有效期:0212-01-15</p>
+                                    <p>2019-45-12</p>
+                                </div>
+                                <div class="copy">
+                                    <p><span style="text-decoration: line-through; font-size: 16px;">￥78912</span></p>
+                                    <p>购买</p>
+                                </div>
+                                <i></i>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- 月卡 -->
+
+                    <div id="month" style="padding: 10px 2px;">
+                        <h5 style="font-size: 20px;">&nbsp;&nbsp;购买月卡</h5>
+                        <div id="cardw" style="display: block;">
+
+                            <div class="stamp stamp06">
+                                <div class="par">
+                                    <p>每天一只螃蟹</p>
+                                    <p> <span>￥0.05</span>10000次</p>
+                                    <p>有效期:0212-01-15</p>
+                                    <p>2019-45-12</p>
+                                </div>
+
+                                <div class="copy">
+                                    <p><span style="text-decoration: line-through; font-size: 16px;">￥78912</span></p>
+                                    <p>购买</p>
+                                </div>
+                                <i></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 套餐 -->
+                    <div id="taocan" class="display_none" style="padding: 10px 2px;">
+                        <h5 style="font-size: 20px;">&nbsp;&nbsp;购买套餐</h5>
+                        <div id="cardw" style="display: block;">
+                            <div class="stamp stamp07">
+                                <div class="par">
+                                    <p>每天一只螃蟹</p>
+                                    <p> <span>￥0.05</span>10000次</p>
+                                    <p>有效期:0212-01-15</p>
+                                    <p>2019-45-12</p>
+                                </div>
+
+                                <div class="copy">
+                                    <p><span style="text-decoration: line-through; font-size: 16px;">￥78912</span></p>
+                                    <p>购买</p>
+                                </div>
+                                <i></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 我的卡劵 -->
+                    <div id="my_card" class="display_none" style="padding: 10px 2px;">
+                        <div id="cardw" style="display: block;">
+                            <div class="stamp stamp02">
+                                <div class="par">
+                                    <p>每天一只螃蟹</p>
+                                    <p> <span>￥0.05</span>10000次</p>
+                                    <p>有效期:0212-01-15</p>
+                                    <p>2019-45-12</p>
+                                </div>
+
+                                <div class="copy">
+                                    <p><span style="text-decoration: line-through; font-size: 16px;">￥78912</span></p>
+                                    <p>购买</p>
+                                </div>
+                                <i></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+</body>
+<script>
+    mui("#form_css").on('tap', '.form_card', function (event) {
+        this.classList.add('bottom_color');
+        if (this.id == "div1") {
+            mui("#div2")[0].classList.remove('bottom_color');
+            mui("#div3")[0].classList.remove('bottom_color');
+
+
+            mui("#times")[0].classList.remove('display_none');
+            mui("#month")[0].classList.remove('display_none');
+            mui("#taocan")[0].classList.add('display_none');
+            mui("#my_card")[0].classList.add('display_none');
+
+        } else if (this.id == "div2") {
+            mui("#div1")[0].classList.remove('bottom_color');
+            mui("#div3")[0].classList.remove('bottom_color');
+
+            mui("#times")[0].classList.add('display_none');
+            mui("#month")[0].classList.add('display_none');
+            mui("#taocan")[0].classList.remove('display_none');
+            mui("#my_card")[0].classList.add('display_none');
+        } else {
+            mui("#div1")[0].classList.remove('bottom_color');
+            mui("#div2")[0].classList.remove('bottom_color');
+
+            mui("#times")[0].classList.add('display_none');
+            mui("#month")[0].classList.add('display_none');
+            mui("#taocan")[0].classList.add('display_none');
+            mui("#my_card")[0].classList.remove('display_none');
+        }
+
+    })
+
+
+
+
+
+
+
+
+
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+</script>
+</script>
+
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="../mui/css/mui.css">
+	<script src="../mui/js/mui.js"></script>
+	<script src="../js/jquery.min.js"></script>
+	<!-- <script src="./js/jquery.min.js"></script> -->
+	<link rel="stylesheet" href="../mui/css/icons-extra.css">
+	<script src="../mui/fonts/mui-icons-extra.ttf"></script>
+	<script src="../js/jquery-barcode.js"></script>
+	<script src="../js/jquery-qrcode.js"></script>
+	<script src="../js/jquery.cookie.js "></script>
+	<script src="../js/vconsole.js"></script>
+	<title>SOCOR</title>
+	<style>
+		.mr1 {
+			margin: 5px auto 5px auto;
+		}
+
+		.mr2 {
+			margin: 0 auto;
+		}
+
+		.p16 {
+			padding: 18px 40px;
+		}
+
+		#div_X,
+		#div_J {
+			width: 100%;
+			background-color: #fff;
+			/* border-radius: 10px; */
+			-moz-box-shadow: 0px 0px 2px #cce0f2;
+			/* 老的 Firefox */
+			box-shadow: 0px 0px 2px #cce0f2;
+			height: 40px;
+			color: rgb(128, 118, 118);
+			font-size: 16px;
+			line-height: 40px;
+			padding-left: 20px;
+			letter-spacing: 2px;
+		}
+
+		#div_X span,
+		#div_J span {
+			font-size: 16px;
+			float: right;
+			line-height: 40px;
+			margin-right: 15px;
+		}
+
+		#barcode {
+			/* width: 300px !important; */
+			/* margin: 5px auto;
+			padding-top: 18px !important; */
+		}
+
+		.tops_bj {
+			background-color: #2F75CF;
+			margin-top: 15px;
+			height: 200px;
+		}
+
+		.span_s {
+			font-weight: normal;
+			font-size: 16px;
+			color: rgb(128, 118, 118);
+			padding-left: 12px;
+			line-height: 35px;
+			background: #fff;
+			margin: 1px;
+		}
+
+		.head_box {
+			width: 85px;
+			height: 85px;
+			margin-left: 48px;
+			border: 2px solid #fff;
+			border-radius: 50%;
+			float: left;
+		}
+
+		.head_img {
+			width: 100%;
+			height: 100%;
+			border: 1px solid black;
+			border-radius: 50%;
+		}
+
+		.head_p {
+			text-align: center;
+			color: white;
+			font-size: 20px;
+			margin-top: 10px;
+			/* float: left;
+			line-height: 30px;
+			margin-left: 57px; */
+		}
+
+		.cont_code {
+			width: 85%;
+			background-color: white;
+			height: 175px;
+			border-radius: 5px;
+		}
+
+		.cont_qrcode {
+			width: 88px;
+			border: 4px solid #fff;
+			background: #fff;
+			height: 88px;
+			/* margin-left: 8px; */
+		}
+
+		.p_text {
+			color: white;
+			font-size: 14px;
+			text-align: center;
+			/* margin-left: 20px;
+			float: left; */
+		}
+
+		.mui-bar-nav~.mui-content {
+			padding-top: 29px;
+		}
+
+		li {
+			list-style: none;
+			background-color: white;
+			text-align: center;
+		}
+
+		#kpl_1 {
+			display: block;
+		}
+
+		.dis {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- 头部 -->
+	<header class="mui-bar mui-bar-nav mui-bar-nav-bg title_display"
+		style="background-color:#2F75CF;box-shadow: 0 0 1px rgb(255, 255, 255);">
+		<!-- <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a> -->
+		<h1 class="mui-title" id="h1_title" style="color:white;">会员中心</h1>
+	</header>
+	<div class="mui-content">
+
+		<div class="mui-row tops_bj">
+			<div class="mui-col-sm-6 mui-col-xs-6" style="margin-top: 15px;">
+				<div class="mui-row">
+					<div class="mui-col-xs-12">
+						<div class="head_box"><img src="../images/zw.jpg" class="head_img" id="head_img" /></div>
+					</div>
+					<div class="mui-col-xs-12">
+						<p class="head_p"><span id="username"></span></p>
+						<p id="kpl_2" class="p_text">
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="mui-col-sm-6 mui-col-xs-6" style="margin-top: 15px;">
+				<div class="cont_code">
+					<div id="qrcode" class="p16"></div>
+					<div id="barcode"></div>
+				</div>
+			</div>
+		</div>
+		<h3 class="span_s mui-row">
+			<div class="mui-col-sm-6 mui-col-xs-6">我的积分:<span id="jf_1" style="color: red;">00.00</span></div>
+			<div class="mui-col-sm-6 mui-col-xs-6">我的储值:<span id="sy_1" style="color: red;">00.00</span></div>
+
+			<!-- <span style="float: right;margin-right:10px;">
+				我的积分:<span id="integral" style="color: red;">00.00</span>
+			</span> -->
+
+		</h3>
+		<!-- <div class="cont_code">
+			<div id="barcode"></div>
+		</div> -->
+		<!-- <a href="homepage/sales_flow.html"> -->
+		<!-- 轮播 -->
+		<div class="mui-slider">
+			<div class="mui-slider-group mui-slider-loop" id="lodup">
+				<!-- <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img height="150px" src="../images/3.jpg" /></a></div>
+
+					<div class="mui-slider-item"><a href="#"><img height="150px" src="../images/1.jpg" /></a></div>
+				<div class="mui-slider-item"><a href="#"><img height="150px" src="../images/2.jpg" /></a></div>
+				<div class="mui-slider-item"><a href="#"><img height="150px" src="../images/3.jpg" /></a></div>
+
+				<div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img height="150px" src="../images/1.jpg" /></a></div> -->
+			</div>
+		</div>
+		<div id="div_X" class="mr1" onclick="javascript:location.href ='members/personal_data.html'">完善个人资料<span
+				class="mui-icon mui-icon-forward "></span>
+		</div>
+		<div id="div_X" class="mr1" onclick="javascript:location.href ='members/my_exclusive_privilege.html'">专属特权<span
+				class="mui-icon mui-icon-forward "></span>
+		</div>
+		<!-- 模块 -->
+		<div class="mui-row">
+			<!-- <div class="mui-col-xs-4 mui-col-sm-4">
+				<li class="mui-table-view-cell">
+					<a href="###">
+						<span class="mui-icon-extra mui-icon-extra-order" style="color:#f88b2a;"></span>
+						<p>订单评价</p>
+					</a>
+				</li>
+			</div>
+			<div class="mui-col-xs-4 mui-col-sm-4">
+				<li class="mui-table-view-cell">
+					<a href="###">
+						<span class="mui-icon-extra mui-icon-extra-regist" style="color:#55cebc;"></span>
+						<p>会员签到</p>
+					</a>
+				</li>
+			</div>
+			<div class="mui-col-xs-4 mui-col-sm-4">
+				<li class="mui-table-view-cell">
+					<a href="members/receiving_card.html">
+						
+						<span class="mui-icon-extra mui-icon-extra-new" style="color:#ff7b94;"></span>
+						<p>卡劵领取</p>
+					</a>
+				</li>
+			</div> -->
+
+			<div class="mui-col-xs-4 mui-col-sm-4">
+				<li class="mui-table-view-cell">
+					<a href="../member/members/integral_pipelining.html">
+						<span class="mui-icon-extra mui-icon-extra-gold" style="color:#55cebc;"></span>
+						<p>积分流水</p>
+					</a>
+				</li>
+			</div>
+			<div class="mui-col-xs-4 mui-col-sm-4">
+				<li class="mui-table-view-cell">
+					<a href="../member/members/stored_water.html">
+						<span class="mui-icon mui-icon-extra mui-icon-extra-topic" style="color:#239df7;"></span>
+						<p>储值流水</p>
+					</a>
+				</li>
+			</div>
+			<div class="mui-col-xs-4 mui-col-sm-4">
+				<li class="mui-table-view-cell">
+					<a href="../member/members/sales_flow.html">
+						<span class="mui-icon-extra mui-icon-extra-prech" style="color:#f88b2a;"></span>
+						<p>消费订单</p>
+					</a>
+				</li>
+			</div>
+			<div class="mui-col-xs-4 mui-col-sm-4">
+				<li class="mui-table-view-cell">
+					<a href="../member/members/exclusive_consultant.html">
+						<span class="mui-icon-extra mui-icon-extra-university" style="color:#239df7;"></span>
+						<p>专属顾问</p>
+					</a>
+				</li>
+			</div>
+			<div class="mui-col-xs-4 mui-col-sm-4">
+				<li class="mui-table-view-cell">
+					<a href="../member/members/offline_store.html">
+						<span class="mui-icon-extra mui-icon-extra-hotel" style="color:#f88b2a;"></span>
+						<p>线下门店</p>
+					</a>
+				</li>
+			</div>
+			<div class="mui-col-xs-4 mui-col-sm-4">
+				<li class="mui-table-view-cell">
+					<a href="../member/members/my_suoke_card.html">
+						<span class="mui-icon-extra mui-icon-extra-card" style="color:#55cebc;"></span>
+						<p>我的卡劵</p>
+					</a>
+				</li>
+			</div>
+			<div class="mui-col-xs-4 mui-col-sm-4" id="jifen">
+				<li class="mui-table-view-cell">
+					<a href="members/point_exchange.html">
+
+						<span class="mui-icon-extra mui-icon-extra-new" style="color:#ff7b94;"></span>
+						<p>积分兑换</p>
+					</a>
+				</li>
+			</div>
+
+		</div>
+	</div>
+	<br>
+</body>
+
+
+<script>
+	// var vConsole = new VConsole();
+	// $.cookie("openId", 'oIIYF1aMmCAPT-1wasC1Ynk6jnqU', { path: '/' }, 1000);
+	var head_img = document.getElementById("head_img");
+	// 用户名
+	var username = document.getElementById("username");
+	//var kh = document.getElementById("kpl_1");
+	var ks = document.getElementById("kpl_2");
+	// 余额
+	var balance = document.getElementById("jf_1");
+	// 剩余储值
+	var stored = document.getElementById("sy_1");
+	// 储存卡号
+	var code = "";
+	// 头像获取方法
+	console.log($.cookie("headImgUrl"))
+	if ($.cookie("headImgUrl") != "") {
+		head_img.src = $.cookie("headImgUrl");
+	} else {
+		head_img.src = '../images/zw.jpg';
+	}
+	// 进来加载的方法
+	$(function () {
+		mui.post('/index.php/VipinfoSel/', {
+			openid: $.cookie("openId")
+		}, function (data) {
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+			if (data.code == 200) {
+				$.cookie("code", data.data.code, { path: '/' }, 1000);
+				// 卡号储存
+				code = data.data.code;
+				if (data.data.username != "") {
+					username.innerHTML = data.data.username;
+				}
+				if (data.data.residual_integral == "") {
+					data.data.residual_integral = "";
+				}
+				if (data.data.residual_value == "") {
+					data.data.residual_value = "";
+				}
+				balance.innerHTML = data.data.residual_integral;
+				stored.innerHTML = data.data.residual_value;
+				// integral.innerHTML = data.data.residual_integral;
+				if (data.data.code == "") {
+					erweima('0000000000');
+				} else {
+					erweima(data.data.code);
+					//kh.innerHTML = data.data.code;
+					//ks.innerHTML = '会员级别<span id="kpl_1">Y123456456</span>';
+					if (data.data.vlname == "" || data.data.vlname == " " || data.data.vlname == null || data.data.vlname == undefined) {
+						data.data.vlname = "";
+					}
+					ks.innerHTML = '<span style="font-size:16px;color:#E8D6D6;font-weight:bold;">' + data.data.vlname + '</span>'
+						+ '<span id="kpl_1" style="">' + data.data.code + '</span>';
+
+				}
+			}
+		}, 'json'
+		);
+	});
+	//正常二维码
+
+	// 二维码
+	// erweima('YG212313132')
+	function erweima(eeee) {
+		var qrcode = new QRCode(document.getElementById("qrcode"), {
+			text: eeee,
+			width: 80,
+			height: 80
+		});
+		//条形的二维码
+		$("#barcode").barcode(
+			eeee,
+			"code93",//数字个数
+			{
+				barWidth: 1,
+				barHeight: 30,
+				fontSize: 12,
+				bgColor: 'transparent',
+			});
+	}
+
+
+
+	var lodup = document.getElementById("lodup");
+	lodup_photo();
+	function lodup_photo() {
+		mui.post('/index.php/UserlistAdvertisement/', {
+			openid: $.cookie("openId")
+		}, function (data) {
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+			if (data.code == 200) {
+				if (data.data.count == 0) {
+					lodup.innerHTML = "暂无广告图,请上传后,再试!"
+				} else {
+					for (var i = 0; i < data.data.length; i++) {
+						if (data.data[i].display == 0) {
+							var div = document.createElement("div");
+							div.className = "mui-slider-item";
+							  let src_g='';
+							   if (data.data[i].img.indexOf("http") != -1) {
+								src_g = data.data[i].img
+							} else {
+								src_g = 'http://vip.suokeduo.com' + data.data[i].img
+							}
+							div.innerHTML = '<a href="#"><img height="150px" src="' + src_g + '" /></a>';
+							lodup.appendChild(div);
+
+						}
+					}
+
+					for (var h = 0; h < data.data.length; h++) {
+						if (data.data[h].display == 0) {
+							var div = document.createElement("div");
+							div.className = "mui-slider-item mui-slider-item-duplicate";
+							  let src_g = '';
+							if (data.data[i].img.indexOf("http") != -1) {
+								src_g = data.data[i].img
+							} else {
+								src_g = 'http://vip.suokeduo.com' + data.data[i].img
+							}
+							div.innerHTML = '<a href="#"><img height="150px" src="' + src_g + '" /></a>';
+							lodup.appendChild(div);
+							break;
+
+						}
+					}
+					for (var m = (data.data.length - 1); m > 0; m--) {
+						if (data.data[m].display == 0) {
+							var div = document.createElement("div");
+							div.className = "mui-slider-item mui-slider-item-duplicate";
+						  let src_g = '';
+							if (data.data[i].img.indexOf("http") != -1) {
+								src_g = data.data[i].img
+							} else {
+								src_g = 'http://vip.suokeduo.com' + data.data[i].img
+							}
+							div.innerHTML = '<a href="#"><img height="150px" src="' + src_g + '" /></a>';
+							lodup.insertBefore(div, lodup.firstChild);
+							break;
+						}
+					}
+
+					var gallery = mui('.mui-slider');
+					gallery.slider({
+						interval: 2000//自动轮播周期，若为0则不自动播放，默认为0；
+					});
+
+				}
+			}
+
+		}, 'json'
+		);
+
+
+	}
+
+	modify_mysql();
+	function modify_mysql() {
+		mui.post('/index.php/dataBase/', {
+			database: $.cookie("company"),
+		}, function (data) {
+			// console.log(data.data.x_status);
+			//服务器返回响应，根据响应结果，分析是否登录成功；
+			if (data.code == 200) {
+				if (data.data.x_status == 1) {
+					// 1显示 0隐藏
+					document.getElementById("jifen").classList.remove("dis");
+				} else if (data.data.x_status == 0) {
+					document.getElementById("jifen").classList.add("dis");
+				}
+			}
+
+		}, 'json'
+		);
+	}
+
+</script>
+
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <script src="../js/vconsole.js"></script> -->
+    <link rel="stylesheet" href="../../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../../css/iconfont.css">
+    <script src="../../mui/js/muiR.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jquery.cookie.js "></script>
+    <title>积分流水</title>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg title_display" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+        <h1 class="mui-title" id="h1_title" style="color:white;">积分流水</h1>
+    </header>
+    <div class="mui-content mui-scroll-wrapper" id="pullrefresh">
+        <div class="mui-scroll">
+            <ul class="mui-table-view">
+
+                <!-- <li class="mui-table-view-cell mui-collapse mui-active">
+                    <a class="mui-navigate-right" href="#">途径: <span>候二哈</span> </a>
+                    <div class="mui-collapse-content">
+                        <p>会员卡号: <span style="float: right">1234567</span> </p>
+                        <div
+                            style="width: 90%;border-top: 1px solid rgb(165, 165, 165);margin-left: 50px;margin-top:5px;margin-bottom: 5px;">
+                        </div>
+                        <p>积分: <span style="float: right">11544557986</span> </p>
+                        <div
+                            style="width: 90%;border-top: 1px solid rgb(165, 165, 165);margin-left: 50px;margin-top:5px;margin-bottom: 5px;">
+                        </div>
+                        <p>途径: <span style="float: right">候二哈</span> </p>
+                        <div
+                            style="width: 90%;border-top: 1px solid rgb(165, 165, 165);margin-left: 50px;margin-top:5px;margin-bottom: 5px;">
+                        </div>
+                        <p>结余: <span style="float: right">0.123</span> </p>
+                        <div
+                            style="width: 90%;border-top: 1px solid rgb(165, 165, 165);margin-left: 50px;margin-top:5px;margin-bottom: 5px;">
+                        </div>
+                        <p>操作店面: <span style="float: right">候二哈</span> </p>
+                        <div
+                            style="width: 90%;border-top: 1px solid rgb(165, 165, 165);margin-left: 50px;margin-top:5px;margin-bottom: 5px;">
+                        </div>
+                        <p>积分时间: <span style="float: right">2019-01-01 23:59:59</span> </p>
+                        <div
+                            style="width: 90%;border-top: 1px solid rgb(165, 165, 165);margin-left: 50px;margin-top:5px;margin-bottom: 5px;">
+                        </div>
+                    </div>
+                </li> -->
+
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+    // var vConsole = new VConsole();
+    //js控制页面输出详细资料
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+                callback: pulldownRefresh
+            },
+            up: {
+                contentrefresh: '正在加载...',
+                auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+
+    /**
+       * 下拉刷新具体业务实现
+       */
+    function pulldownRefresh() {
+    }
+    /**
+     * 上拉加载具体业务实现
+     */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+    function pullupRefresh() {
+        mui.post('/index.php/webViplistIntegralFlow/', {
+            code: $.cookie("code"),
+            // code: '13773033340',
+            page: ++count,
+            limit: limit_num
+        }, function (data) {
+            console.log(data);
+            //服务器返回响应，根据响应结果，分析是否登录成功；
+            if (data.code == 200) {
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                    var table = document.body.querySelector('.mui-table-view');
+                    for (i = 0; i < data.data.data.length; i++) {
+                        // 名称
+                        data.data.data[i].vip_name = (data.data.data[i].vip_name == "") || (data.data.data[i].vip_name == undefined) || (data.data.data[i].vip_name == null) ? "" : data.data.data[i].vip_name;
+                        // 途径
+                        data.data.data[i].road = (data.data.data[i].road == "") || (data.data.data[i].road == undefined) || (data.data.data[i].road == null) ? "" : data.data.data[i].road;
+                        // 操作店面
+                        data.data.data[i].store_name = (data.data.data[i].store_name == "") || (data.data.data[i].store_name == undefined) || (data.data.data[i].store_name == null) ? "" : data.data.data[i].store_name;
+
+                        // 进行判断,如果为空执行默认路径的图片
+                        var li = document.createElement('li');
+                        li.className = 'mui-table-view-cell mui-collapse';
+                        li.innerHTML = '<a class="mui-navigate-right" href="#">' + '会员名称: ' + '<span>' + data.data.data[i].vip_name + '</span>' + '</a>'
+                            + '<div class="mui-collapse-content">'
+                            + '<p>' + '会员卡号: ' + '<span style="float: right">' + data.data.data[i].vip_code + '</span>' + '</p>'
+                            + '<div style="width: 90%;border-top: 1px solid rgb(165, 165, 165);margin-left: 50px;margin-top:5px;margin-bottom: 5px;">'
+                            + '</div>'
+                            + '<p>' + '积分:' + '<span style="float: right">' + data.data.data[i].integral + '</span>' + '</p>'
+                            + '<div style="width: 90%;border-top: 1px solid rgb(165, 165, 165);margin-left: 50px;margin-top:5px;margin-bottom: 5px;">'
+                            + '</div>'
+                            + '<p>' + '途径: ' + '<span style="float: right">' + data.data.data[i].road + '</span>' + '</p>'
+                            + '<div style="width: 90%;border-top: 1px solid rgb(165, 165, 165);margin-left: 50px;margin-top:5px;margin-bottom: 5px;">'
+                            + '</div>'
+                            + '<p>' + '操作店面:' + '<span style="float: right">' + data.data.data[i].store_name + '</span>' + ' </p>'
+                            + '<div style="width: 90%;border-top: 1px solid rgb(165, 165, 165);margin-left: 50px;margin-top:5px;margin-bottom: 5px;">'
+                            + '</div>'
+                            + '<p>' + '积分时间:' + '<span style="float: right">' + data.data.data[i].create_time + '</span>' + '</p>'
+                            + '</div>'
+                        table.appendChild(li);
+                    }
+                }, 1000);
+            }
+            // }
+        }, 'json'
+        );
+    }
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: false, //是否显示滚动条
+    });
+
+</script>
+
+</html>

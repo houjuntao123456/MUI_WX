@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <script src="../js/vconsole.js"></script>
+    <script src="../js/loading.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <title>足迹</title>
+    <style>
+        /* 标签样式 */
+        .RadioStyle input,
+        .checkboxStyle input {
+            display: none
+        }
+
+        .checkboxStyle label {
+            /* border: 1px solid #00a4ff; */
+            padding: 2px 5px 2px 5px;
+            line-height: 28px;
+            min-width: 75px;
+            text-align: center;
+            float: left;
+            margin: 0px;
+            margin-left: 5px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+            background: #faf6f6;
+
+        }
+
+        .checkboxStyle input:checked+label {
+            color: #00a4ff;
+            border-radius: 10px;
+            background: #d4e5f6;
+            font-size: 14px;
+        }
+
+        .RadioStyle label {
+            border: 1px solid #00a4ff;
+            padding: 2px 10px 2px 10px;
+            line-height: 23px;
+            min-width: 60px;
+            text-align: center;
+            margin-left: 5px;
+            margin-bottom: 5px;
+            float: left;
+            margin-top: 5px;
+            border-radius: 4px;
+            color: #6c6c6f
+        }
+
+        .RadioStyle input:checked+label {
+            background: url(../images/ico_checkon.svg) no-repeat right bottom;
+            background-size: 25px 25px;
+            background-color: #d4e5f6;
+            color: #00a4ff
+        }
+
+        /* li {
+            border-bottom: 1px solid #ccc;
+        } */
+        .mui-table-view-cell:after,
+        .mui-table-view:after {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:#fff;"></a>
+        <h1 class="mui-title" style="color:#fff;">足迹</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <div style="width: 100%; background-color: white;padding: 8px 0 8px 0;overflow: hidden; border-bottom: 1px solid #ccc;font-size: 14px;"
+            class="RadioStyle">
+            <div class="mui-row">
+                <div class="mui-col-sm-3 mui-col-xs-3" style="padding-left: 10px;">
+                    <span>
+                        <input type="radio" id="love1" name="radio1" value="1" value_num="false"
+                            onclick="radio_label(this)" />
+                        <label for="love1">电话</label>
+                    </span>
+                </div>
+                <div class="mui-col-sm-3 mui-col-xs-3">
+                    <span>
+                        <input type="radio" id="love2" name="radio1" value="2" value_num="false"
+                            onclick="radio_label(this)" />
+                        <label for="love2">短信</label>
+                    </span>
+                </div>
+                <div class="mui-col-sm-3 mui-col-xs-3">
+                    <span>
+                        <input type="radio" id="love3" name="radio1" value="3" value_num="false"
+                            onclick="radio_label(this)" />
+                        <label for="love3">视图</label>
+                    </span>
+                </div>
+                <div class="mui-col-sm-3 mui-col-xs-3">
+                    <span>
+                        <input type="radio" id="love4" name="radio1" value="4" value_num="false"
+                            onclick="radio_label(this)" />
+                        <label for="love4">微信</label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- 足迹 -->
+        <div id="pullrefresh" class=" mui-scroll-wrapper " style="top:103px;">
+            <div class="mui-scroll">
+                <!--数据列表-->
+                <ul class="mui-table-view" id="member_data">
+                    <!-- mui-table-view-chevron-->
+                    <!-- 里面详细内容 -->
+                    <!-- <li class="mui-table-view-cell mui-collapse">
+                        <div class="mui-row" style="background-color: white;margin-top: 10px;">
+                            <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center">
+                                <p>2019-09-14</p>
+                                <p> 星期六</p>
+                            </div>
+                            <div class="mui-col-sm-9 mui-col-xs-9">
+                                <p style="color: black;font-size: 16px;"><span>【店员群发回访】</span>
+                                    <span>【2019-12-11】</span></p>
+                                <div style="font-size: 14px;">
+                                    爱上看见的哈酒的哈涉及到哈客户达科技和大海的骄傲好看的黄金卡三等奖
+                                </div>
+                            </div>
+                        </div>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var load = new Loading();
+    load.init();
+    // load.start();
+    // 获取传过来的参数
+    var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('=');
+    var idd = decodeURI(loc.substr(n2 + 1, n1 - n2));
+    var value = "";
+    mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+
+    function radio_label(e) {
+        value = e.value;
+        document.getElementById("member_data").innerHTML = "";
+        mui('#pullrefresh').pullRefresh().refresh(true);
+        count = 0;
+        pullupRefresh();
+    }
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            down: {
+                //    height: 50,
+                // callback: pulldownRefresh
+            },
+            up: {
+                height: 50,
+                contentrefresh: '正在加载...',
+                auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                callback: pullupRefresh
+            }
+        }
+    });
+    /**
+     * 下拉刷新具体业务实现
+     */
+    function pulldownRefresh() {
+
+    }
+    /**
+     * 上拉加载具体业务实现
+     */
+    // 重新开启加载
+    // mui('#pullrefresh').pullRefresh().refresh(true);
+    // 分页计数
+    var count = 0;
+    // 分的条数
+    var limit_num = 10;
+    function pullupRefresh() {
+        load.start();
+        mui.post('/index.php/ReturnVisitList/', {
+            vip_code: idd,
+            search: value,
+            page: ++count,
+            limit: limit_num,
+        }, function (data) {
+            if (data.code == 200) {
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                    if (data.data.count == 0) {
+                        var li = document.createElement("li");
+                        li.className = 'mui-table-view-cell mui-collapse';
+                        li.style = "text-align:center;"
+                        li.innerHTML = "没有更多数据了 !!!";
+                        document.getElementById("member_data").appendChild(li);
+                    } else {
+                        for (i = 0; i < data.data.data.length; i++) {
+                            if (data.data.data[i].content == "" || data.data.data[i].content == null) {
+                                data.data.data[i].content = "";
+                            }
+                            var li = document.createElement("li");
+                            li.className = 'mui-table-view-cell mui-collapse';
+                            li.innerHTML =
+                                '<div class="mui-row" style="background-color: white;margin-top: 10px;">'
+                                + ' <div class="mui-col-sm-3 mui-col-xs-3" style="text-align: center">'
+                                + ' <p>' + data.data.data[i].time_g + '</p>'
+                                + '  </div>'
+                                + ' <div class="mui-col-sm-9 mui-col-xs-9">'
+                                + ' <p style="color: black;font-size: 16px;"><span>【' + data.data.data[i].visit_mode + '】</span>'
+                                + '</p>'
+                                + '<div style="font-size: 14px;">'
+                                + data.data.data[i].content
+                                + '</div>'
+                                + ' </div>'
+                                + ' </div>'
+                            document.getElementById("member_data").appendChild(li);
+                        }
+                    }
+
+                    load.stop();
+                }, 1000);
+            }
+        }, 'json'
+        );
+    }
+
+
+</script>
+
+</html>

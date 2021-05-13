@@ -1,0 +1,391 @@
+<html>
+
+<head>
+    <title>v票详情</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <script src="../js/muiduojiazai.js"></script>
+    <!-- <script src="../mui/js/mui.min.js"></script> -->
+    <!-- <script src="../mui/js/mui.pulltorefresh2.js"></script> -->
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jweixin-1.4.0.js"></script>
+    <script src="../js/vconsole.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/loading.js"></script>
+    <link rel="stylesheet" href="../mui/css/icons-extra.css">
+    <link rel="stylesheet" href="../mui/fonts/mui-icons-extra.ttf">
+    <style>
+        body,
+        .mui-content {
+            background-color: #fff;
+        }
+
+        .div_kjzs {
+            text-align: center;
+            height: 45px;
+            line-height: 45px;
+            background-color: #efeff4;
+            color: #607D8B;
+
+        }
+
+        .active {
+            border-bottom: 2px solid rgb(65, 148, 242);
+        }
+
+        .dis_none {
+            display: none;
+        }
+
+
+        .mui-collapse-content>.mui-row {
+            border-bottom: 1px solid #efefef;
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+        }
+
+        .mui-collapse-content>.mui-row>:first-child {
+            font-size: 15px;
+            /* color: #505050; */
+            padding-left: 25px;
+        }
+
+        .mui-collapse-content>.mui-row>:last-child {
+            padding-left: 25px;
+            font-size: 15px;
+            /* color: rgb(139, 139, 139); */
+        }
+
+
+
+        .mui-table-view-cell.mui-collapse .mui-collapse-content {
+            padding: 0;
+        }
+
+        .ppppppp {
+            background: url(../../images/ico_checkon.svg) no-repeat right bottom;
+            background-size: 25px 25px;
+            background-color: rgba(212, 229, 246, 0);
+            ;
+            color: #00a4ff
+        }
+        .mui-table-view-cell:after{left: 0;}
+        .mui-table-view-cell>a:not(.mui-btn){
+            color: #333;
+            font-family: '微软雅黑';
+            font-size: 15px;
+        }
+        .mui-card-content{
+            border-top: 1px solid#eee;
+        }
+        .bt{
+            height: 35px;
+            line-height: 35px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;" id="back_kjWrite"></a>
+        <h1 class="mui-title" style="color:white;">v票详情</h1>
+    </header>
+    <!-- 内容 -->
+    <div class="mui-content">
+        <div class="mui-row">
+            <div class="mui-col-xs-6 mui-col-sm-6 div_kjzs active" name="jiangli">
+                <span>奖励记录</span>
+            </div>
+            <div class="mui-col-xs-6 mui-col-sm-6 div_kjzs" name="jilu">
+                <span>兑换记录</span>
+            </div>
+        </div>
+        <div id="form_css" style="margin-top: 5px;">
+        </div>
+        <div>
+            
+            <!-- v票奖励 -->
+            <div id="jiangli">
+                <div id="pullrefresh" class="mui-scroll-wrapper" style="top: 93px;">
+                    <div class="mui-scroll">
+                        <div class="mui-card" id="qqq">
+                            <!--内容区-->
+                            <div class="mui-card-content">
+                                <!-- <ul class="mui-table-view" id="qqq">  -->
+                                    <!-- <li class="mui-table-view-cell mui-collapse">
+                                        <a class="mui-navigate-right" href="#">兑换记录</a> -->
+                                        <!-- <div class="mui-collapse-content" style="margin-top:10px; border-radius: 20px; color: white; background-image: url(../images/bj2.jpg);background-size:cover;background-repeat: no-repeat;">
+                                            <div class="mui-row">
+                                                <div class="mui-col-xs-5 mui-col-sm-5">姓名:</div>
+                                                <div class="mui-col-xs-7 mui-col-sm-7">金猪呱呱将</div>
+                                            </div>
+                                            <div class="mui-row">
+                                                <div class="mui-col-xs-5 mui-col-sm-5">工号:</div>
+                                                <div class="mui-col-xs-7 mui-col-sm-7">2789811</div>
+                                            </div>
+                                            <div class="mui-row">
+                                                <div class="mui-col-xs-5 mui-col-sm-5">奖励时间:</div>
+                                                <div class="mui-col-xs-7 mui-col-sm-7">2012-13-19</div>
+                                            </div>
+                                            <div class="mui-row">
+                                                <div class="mui-col-xs-5 mui-col-sm-5">奖励标准:</div>
+                                                <div class="mui-col-xs-7 mui-col-sm-7">300的萨法三</div>
+                                            </div>
+                                            <div class="mui-row">
+                                                <div class="mui-col-xs-5 mui-col-sm-5">操作员:</div>
+                                                <div class="mui-col-xs-7 mui-col-sm-7">二狗子</div>
+                                            </div>
+                                            <div class="mui-row">
+                                                <div class="mui-col-xs-5 mui-col-sm-5">数量:</div>
+                                                <div class="mui-col-xs-7 mui-col-sm-7">二狗子</div>
+                                            </div>
+                                        </div> -->
+                                    <!-- </li> -->
+                                <!-- </ul> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 兑换记录 -->
+            <div id="jilu" class="dis_none">
+                <div id="pullrefresh1" class="mui-scroll-wrapper" style="top: 93px;">
+                    <div class="mui-scroll">
+                        <div class="mui-card" id="ddd">
+                            <!--内容区-->
+                            <div class="mui-card-content" >
+                                <!-- <ul class="mui-table-view" > 
+                                    <li class="mui-table-view-cell mui-collapse">
+                                        <a class="mui-navigate-right" href="#">兑换记录</a>
+                                        <div class="mui-collapse-content"style="border-radius: 20px;color: white; background-image: url(../images/bj2.jpg);background-size:contain;background-repeat: no-repeat;">
+                                            <div class="mui-row">
+                                                <div class="mui-col-xs-5 mui-col-sm-5">姓名:</div>
+                                                <div class="mui-col-xs-7 mui-col-sm-7">金猪呱呱将</div>
+                                            </div>
+                                            <div class="mui-row">
+                                                <div class="mui-col-xs-5 mui-col-sm-5">工号:</div>
+                                                <div class="mui-col-xs-7 mui-col-sm-7">2789811</div>
+                                            </div>
+                                            <div class="mui-row">
+                                                <div class="mui-col-xs-5 mui-col-sm-5">兑换时间:</div>
+                                                <div class="mui-col-xs-7 mui-col-sm-7">2012-13-19</div>
+                                            </div>
+                                            <div class="mui-row">
+                                                <div class="mui-col-xs-5 mui-col-sm-5">奖励标准:</div>
+                                                <div class="mui-col-xs-7 mui-col-sm-7">300的萨法三</div>
+                                            </div>
+                                            <div class="mui-row">
+                                                <div class="mui-col-xs-5 mui-col-sm-5">操作员:</div>
+                                                <div class="mui-col-xs-7 mui-col-sm-7">二狗子</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var load = new Loading();
+    load.init();
+    var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('=');
+    var txt = decodeURI(loc.substr(n2+1,n1-n2));
+
+    $('.div_kjzs').click(function () {
+        let id = $(this).attr("name");
+        $(this).addClass('active').siblings().removeClass('active');  //当前元素添加样式同胞元素移除样式
+        $('#' + id).removeClass('dis_none').siblings().addClass('dis_none');
+    })
+    var pp = document.getElementById("form_css");
+    var pullrefresh = document.getElementById("pullrefresh");
+    var pullrefresh1 = document.getElementById("pullrefresh1");
+    window.onload = function () {
+        hidden_title();
+        pullrefresh.style.marginTop = pp.clientHeight + 0 + 'px';
+        pullrefresh1.style.marginTop = pp.clientHeight + 0 + 'px';
+        
+    }
+    // function elook(){
+    //     mui.post("/index.php/webVnumber/",{},function(data){
+    //         //  console.log(data);
+    //          document.getElementById("namecard").innerHTML = data.data.staff_name;
+    //          document.getElementById("namecode").innerHTML = data.data.staff_code;
+    //          document.getElementById("namemub").innerHTML = data.data.number;
+    //         // document.getElementById("Yong").innerHTML = data.data;
+    //     },'json')
+    // }
+</script>
+<script>
+// 分页计数
+var count = 0;
+var count1 = 0
+// 分的条数
+var limit_num = 10;
+            mui.init({
+
+            pullRefresh :[{
+
+            container : '#pullrefresh',
+
+            up: {
+
+            height:50,//可选.默认50.触发上拉加载拖动距离
+
+            auto:true,//可选,默认false.自动上拉加载一次
+
+            contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+
+            contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+
+            callback : function (){
+                load.start();
+                            mui.post('/index.php/webReward_record/', {
+                                    code:txt,
+                                    page: ++count,//分页
+                                    limit: limit_num//每页的条数
+                                }, function (data) {
+                                    
+                                    // console.log(data);
+                                    // 服务器返回响应，根据响应结果，分析是否登录成功；
+                                    if (data.code == 200) { 
+                                        setTimeout(function () {
+                                            mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                                            // var table = document.body.querySelector('.mui-table-view');
+                                            var qq = document.getElementById("qqq");
+                                            qq.className = 'mui-card';
+                                            for (i = 0; i < data.data.data.length; i++) {
+                                                var li = document.createElement('div');
+                                                li.className = 'mui-card-content';
+                                                li.innerHTML = '<div class="mui-collapse-content" style="margin-top:10px; border-radius: 20px; color: white; background-image: url(../images/bj2.jpg);background-size:cover;background-repeat: no-repeat;">'
+                                                            +'<div class="mui-row" style="margin-top:-10px;">'
+                                                            +'<div class="mui-col-xs-5 mui-col-sm-5">姓名:</div>'
+                                                            +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].name+'</div>'
+                                                            +'</div>'
+                                                            +'<div class="mui-row">'
+                                                            +'<div class="mui-col-xs-5 mui-col-sm-5">工号:</div>'
+                                                            +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].code+'</div>'
+                                                            +'</div>'
+                                                            +'<div class="mui-row">'
+                                                            +'<div class="mui-col-xs-5 mui-col-sm-5">奖励时间:</div>'
+                                                            +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].time+'</div>'
+                                                            +'</div>'
+                                                            +'<div class="mui-row">'
+                                                            +'<div class="mui-col-xs-5 mui-col-sm-5">奖励标准:</div>'
+                                                            +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].remarks+'</div>'
+                                                            +'</div>'
+                                                            +'<div class="mui-row">'
+                                                            +'<div class="mui-col-xs-5 mui-col-sm-5">操作员:</div>'
+                                                            +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].operator_name+'</div>'
+                                                            +'</div>'
+                                                            +'<div class="mui-row">'
+                                                            +'<div class="mui-col-xs-5 mui-col-sm-5">数量:</div>'
+                                                            +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].v_number+'</div>'
+                                                            +'</div>'
+                                                            +'</div>'
+                                                qq.appendChild(li);
+                                            }
+                                        }, 1000);
+                                        
+                                    }
+                                    load.stop();
+                                }, 'json'
+                                );
+
+            }  //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+
+            }
+
+            },{
+
+            container : '#pullrefresh1',
+
+            up : {
+
+            height:50,//可选.默认50.触发上拉加载拖动距离
+
+            auto:true,//可选,默认false.自动上拉加载一次
+
+            contentrefresh : "正在加载2...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+
+            contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+
+            callback : function (){
+                // load.start();
+                        mui.post('/index.php/webExchange_record/', {
+                                        code:txt,
+                                        page: ++count1,//分页
+                                        limit: limit_num//每页的条数
+                                    }, function (data) {
+                                        // console.log(data)
+                                        // 服务器返回响应，根据响应结果，分析是否登录成功；
+                                        if (data.code == 200) { 
+                                            setTimeout(function () {
+                                                mui('#pullrefresh1').pullRefresh().endPullupToRefresh((count1 > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                                                // var table = document.body.querySelector('.mui-table-view');
+                                                var dd = document.getElementById("ddd");
+                                                for (i = 0; i < data.data.data.length; i++) {
+                                                    var li = document.createElement('div');
+                                                    li.className = 'mui-card-content';
+                                                    li.innerHTML = '<div class="mui-collapse-content" style="margin-top:10px; border-radius: 20px; color: white; background-image: url(../images/bj2.jpg);background-size:cover;background-repeat: no-repeat;">'
+                                                                +'<div class="mui-row"style="margin-top:-10px;">'
+                                                                +'<div class="mui-col-xs-5 mui-col-sm-5">姓名:</div>'
+                                                                +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].name+'</div>'
+                                                                +'</div>'
+                                                                +'<div class="mui-row">'
+                                                                +'<div class="mui-col-xs-5 mui-col-sm-5">工号:</div>'
+                                                                +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].code+'</div>'
+                                                                +'</div>'
+                                                                +'<div class="mui-row">'
+                                                                +'<div class="mui-col-xs-5 mui-col-sm-5">兑换时间:</div>'
+                                                                +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].time+'</div>'
+                                                                +'</div>'
+                                                                +'<div class="mui-row">'
+                                                                +'<div class="mui-col-xs-5 mui-col-sm-5">兑换详情:</div>'
+                                                                +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].remarks+'</div>'
+                                                                +'</div>'
+                                                                +'<div class="mui-row">'
+                                                                +'<div class="mui-col-xs-5 mui-col-sm-5">操作员:</div>'
+                                                                +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].operator_name+'</div>'
+                                                                +'</div>'
+                                                                +'<div class="mui-row">'
+                                                                +'<div class="mui-col-xs-5 mui-col-sm-5">数量:</div>'
+                                                                +'<div class="mui-col-xs-7 mui-col-sm-7">'+data.data.data[i].v_number+'</div>'
+                                                                +'</div>'
+                                                                +'</div>'
+                                                    dd.appendChild(li);
+                                                }
+                                            }, 1000);
+                                            
+                                        }
+                                        // load.stop();
+                                    }, 'json'
+                                    );
+
+            }  //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+
+            }
+
+            }]
+
+            })
+
+mui('.mui-scroll-wrapper').scroll({
+indicators: false, //是否显示滚动条
+});
+</script>
+</html>

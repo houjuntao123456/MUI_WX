@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>门店业绩</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="stylesheet" href="../mui/css/mui.min.css">
+  <script src="../mui/js/mui.min.js"></script>
+  <script src="../js/echarts.min.js"></script>
+  <link rel="stylesheet" href="../mui/css/mui.dtpicker.css">
+  <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+  <link rel="stylesheet" href="../css/loading.css">
+  <script src="../mui/js/mui.dtpicker.js"></script>
+  <script src="../mui/js/mui.picker.min.js"></script>
+  <script src="../js/hidden-titile.js"></script>
+  <script src="../js/chart_Own.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/loading.js"></script>
+  <style>
+    .border_color {
+      border-bottom: 1px solid #007aff;
+      height: 10px;
+    }
+
+    .bg_style {
+      background-color: white;
+      line-height: 30px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+
+    .table_td {
+      width: 20%;
+      text-align: center;
+      /*   border-bottom: 1px solid #cccccc;
+      border-top: 1px solid #cccccc;
+      border-left: 1px solid #cccccc; */
+      line-height: 40px;
+    }
+
+    .module1 {
+      text-align: center;
+      line-height: 35px;
+      height: 35px;
+      margin: 3px 10px 10px 10px;
+      border-radius: 5px;
+      background-color: white;
+    }
+
+    .module-echarts {
+      background-color: white;
+      /* margin: 0 10px; */
+    }
+
+    .module-echarts h4 {
+      line-height: 35px;
+      margin-left: 10px;
+    }
+
+    .module2 table {
+      width: 100%;
+    }
+
+    .module2 table tr:nth-child(1) {
+      line-height: 35px;
+      background: #CCE4FF;
+    }
+    #mo_cont_tr tr:nth-child(1){
+      background: #fff;
+    }
+    .module2 table tr th {
+      font-weight: normal;
+      font-size: 16px;
+      width: 20%;
+    }
+
+    .module3 {
+      height: 40px;
+      line-height: 30px;
+      color: #7a7878;
+      font-size: 15px;
+      padding-left: 20px;
+    }
+
+    .module4 {
+      background: #E5F1FF;
+    }
+        /* 控制侧滑距离*/
+          .mui-off-canvas-left,
+        .mui-off-canvas-right {
+            width: 90%;
+        }
+        .table_css {
+            margin-left: 10px;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 0 10px 0 10px;
+            font-size: 17px;
+            color: #000;
+        }
+        .input_css {
+            border: none;
+            font-size: 14px;
+            width: 100%;
+            color: rgb(105, 104, 104);
+            padding: 13px 0px 0px 17px;
+            margin-left: 3px;
+            background: none;
+        }
+        .mui-select-style {
+          border-top: 1px #e3e4e8 solid;
+          border-bottom: 1px #e3e4e8 solid;
+          width: 99%;
+          margin: 2px auto 0 auto;
+          background: #fff;
+        }
+        .font-col-size{font-size: 14px;color: red;padding-left: 20px;padding-top: 5px;}
+				.mui-table-view-cell:after{left:0;}
+        .table_th{position: fixed;top: 44px;z-index: 2;}
+		    .vh{visibility: hidden;}
+  </style>
+</head>
+
+<body>
+  <!--  头部-->
+  <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+    <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+    <h1 class="mui-title" style="color:white;">门店业绩报表</h1>
+      <span style="float:right;line-height:44px;color:white;" id="menu_query">日期</span>
+  </header>
+  <div class="module2">
+    <table class="table_th vh">
+      <!-- 总计 -->
+      <tr>
+        <th>业绩</th>
+        <th>单数</th>
+        <th>客单价</th>
+        <th>件数</th>
+        <th>连带率</th>
+      </tr>
+    </table>
+  </div>
+<!-- 侧滑导航根容器 -->
+<!-- 如果想要手势侧滑将mui-draggable 加入下面类 -->
+<div class="mui-off-canvas-wrap ">
+  <!-- 主页面容器 -->
+  <div class="mui-inner-wrap">
+    <!-- 菜单容器 -->
+    <aside class="mui-off-canvas-left">
+      <div class="mui-scroll-wrapper" style="background-color: #e4eaf5">
+        <div class="mui-scroll" style="padding-top:48px;">
+          <!-- 菜单具体展示内容 -->
+          <!-- 上导航1 -->
+          <div class="mui-col-sm-12 mui-col-xs-12 font-col-size">*根据日期查看近七天的数据</div>
+          <div class="mui-row mui-select-style">
+            <div class="mui-col-sm-3 mui-col-xs-3 table_css">
+              选择日
+            </div>
+            <div class="mui-col-sm-8 mui-col-xs-8">
+              <input type=" text" class="input_css" value="" id="day" placeholder="年-月-日">
+            </div>
+          </div>
+					<div class="mui-col-sm-12 mui-col-xs-12 font-col-size">*根据月份查看近七个月的数据</div>
+          <div class="mui-row mui-select-style">
+            <div class="mui-col-sm-3 mui-col-xs-3 table_css">
+              选择月
+            </div>
+            <div class="mui-col-sm-8 mui-col-xs-8">
+              <input type=" text" class="input_css" value="" id="month" placeholder="年-月">
+            </div>
+          </div>
+<!-- 
+          <div class="mui-row mui-select-style">
+            <div class="mui-col-sm-3 mui-col-xs-3 table_css">
+              开始时间
+            </div>
+            <div class="mui-col-sm-8 mui-col-xs-8">
+              <input type=" text" class="input_css" value="" id="start" placeholder="年-月-日 时:分:秒">
+            </div>
+          </div>
+
+          <div class="mui-row mui-select-style">
+            <div class="mui-col-sm-3 mui-col-xs-3 table_css">
+              结束时间
+            </div>
+            <div class="mui-col-sm-8 mui-col-xs-8">
+              <input type=" text" class="input_css" value="" id="end" placeholder="年-月-日 时:分:秒">
+            </div>
+          </div>
+           -->
+        </div>
+      </div>
+    </aside>
+   <!-- 主页面内容容器 -->
+   <div class="mui-content mui-scroll-wrapper" id="content-scroll">
+     <div class="mui-scroll">
+       <!-- 主界面具体展示内容 -->
+       <!-- 总部 -->
+       <div class="mui-row module-echarts" style="margin-top:48px;">
+         <h4>总部</h4>
+         <div class="mui-col-12 mui-col-sm-12" id="main" style="height:300px;width:100%;"></div>
+         <h4 id="current_num"></h4> 
+         <!-- 当前日业绩 -->
+       </div>
+       <!-- 小内容 -->
+       <div style="background-color:white;">
+         <div class="mu-row module2">
+           <table>
+             <!-- 总计 -->
+             <tr>
+               <th>业绩</th>
+               <th>单数</th>
+               <th>客单价</th>
+               <th>件数</th>
+               <th>连带率</th>
+             </tr>
+           </table>
+           <table id="mo_cont_tr"></table>
+         </div>
+       </div>
+    </div>
+   </div>
+  </div>
+</div>
+</body>
+<script>
+    //加载动画
+      var load = new Loading();
+      load.init();
+
+  var ys_qh = document.getElementsByClassName("ys_qh");
+  var sj = document.getElementsByClassName("sj");
+  var type="";
+  // 基于准备好的dom，初始化echarts实例
+  var myChart = echarts.init(document.getElementById('main'), 'light');
+  
+  window.onload = function () {
+		hidden_title();
+		time_new(); 
+  }
+  //  点击日
+  var day = document.getElementById("day");
+  day.onfocus = function () {
+    document.activeElement.blur();
+    var dtpicker = new mui.DtPicker({
+      type: "date",//设置日历初始视图模式 
+      beginDate: new Date(1970, 01, 01),//设置开始日期 
+      endDate: new Date(2070, 01, 01),//设置结束日期 
+      labels: ['年', '月', '日'],//设置默认标签区域提示语 
+    });
+    //将时间显示
+    dtpicker.show(function (items) {
+      // sj[0].innerHTML = items.y.value;
+      // sj[1].innerHTML = items.m.value;
+      // sj[2].innerHTML = items.d.value;
+      day.value = items.y.value + "-" + items.m.value + "-" + items.d.value;
+      type='d';
+      cNum(type);
+      mendian1(type, day.value);
+      	//判断是否为显示状态
+      if (mui('.mui-off-canvas-wrap').offCanvas().isShown()) {
+        mui('.mui-off-canvas-wrap').offCanvas().toggle();
+      }
+    
+      load.start();
+    })
+  }
+  // 点击月
+  var month = document.getElementById("month");
+  month.onfocus = function () {
+    document.activeElement.blur();
+    var dtpicker = new mui.DtPicker({
+      type: "month",//设置日历初始视图模式 
+      beginDate: new Date(1970, 01, 01),//设置开始日期 
+      endDate: new Date(2070, 01, 01),//设置结束日期 
+      labels: ['年', '月'],//设置默认标签区域提示语 
+    });
+    //将时间显示
+    dtpicker.show(function (items) {
+      month.value = items.y.value + "-" + items.m.value;
+      type='m';
+      cNum(type);
+      mendian1(type, month.value);
+      	//判断是否为显示状态
+      if (mui('.mui-off-canvas-wrap').offCanvas().isShown()) {
+        mui('.mui-off-canvas-wrap').offCanvas().toggle();
+      }
+       load.start();
+    })
+  }
+  
+
+//   // 点击自定义开始
+//   var kk;//开始时间戳
+//   var kk1;//开始时间的数据
+//   var ll;//结束时间戳
+//   var ll1;//结束时间的数据
+//   var start = document.getElementById("start");
+//   start.onfocus = function () {
+//     document.activeElement.blur();
+//     var dtpicker = new mui.DtPicker({
+//       type: "date",//设置日历初始视图模式 
+//       beginDate: new Date(1970, 01, 01),//设置开始日期 
+//       endDate: new Date(2070, 01, 01),//设置结束日期 
+//       labels: ['年', '月', '日'],//设置默认标签区域提示语 
+//     });
+//     //将时间显示
+//     dtpicker.show(function (items) {
+//       // sj[0].innerHTML = items.y.value;
+//       // sj[1].innerHTML = items.m.value;
+//       // sj[2].innerHTML = items.d.value;
+//       kk = items.y.value + "-" + items.m.value + "-" + items.d.value;
+//       kk1 = items.y.value + "-" + items.m.value + "-" + items.d.value;
+//       kk = Date.parse(kk);
+//       start.value = items.y.value + "-" + items.m.value + "-" + items.d.value;
+//     })    
+//   }
+//   //点击结束
+//   var end = document.getElementById("end");
+//  end.onfocus=function() {
+//    document.activeElement.blur();
+//     var dtpicker = new mui.DtPicker({
+//       type: "date",//设置日历初始视图模式 
+//       beginDate: new Date(1970, 01, 01),//设置开始日期 
+//       endDate: new Date(2070, 01, 01),//设置结束日期 
+//       labels: ['年', '月', '日'],//设置默认标签区域提示语 
+//     });
+//     //将时间显示
+//     dtpicker.show(function (items) {
+//       ll = items.y.value + "-" + items.m.value + "-" + items.d.value;
+//       ll1 =items.y.value + "-" + items.m.value + "-" + items.d.value;
+//       ll = Date.parse(ll);
+//       if (kk > ll) {
+//         mui.alert('开始时间不能大于结束时间', '提示', '确定'['div']);
+//       } else {
+//         end.value = items.y.value + "-" + items.m.value + "-" + items.d.value;
+//          type = 'c';
+//         mendian(type, kk1, ll1);
+//       } 
+     
+//     })
+//   }
+
+	/* 
+	 myDate.getFullYear(); //年
+	 myDate.getMonth() + 1; //月
+	 myDate.getDate();//日 
+	 */
+	//获取当前时间
+	function time_new(){
+		var myDate = new Date();
+		var currentTime = myDate.getFullYear() +"-"+ if_time(myDate.getMonth()+1) +"-"+ if_time(myDate.getDate());
+		cNum('d');
+    mendian1('d',currentTime);
+	}
+	//特殊处理，如果是日或者月小于10，自动补0
+	function if_time(tnum){
+		if( tnum < 10 ){
+			return '0' + tnum;
+		}else{
+			return tnum;
+		}
+	}
+  //当前日月切换
+  var currNum = document.getElementById("current_num");
+  function cNum(type){
+    if( type == 'd') {
+      currNum.innerHTML = '当前日业绩';
+    } else if( type == 'm' ) {
+      currNum.innerHTML = '当前月业绩';
+    } else {
+      currNum.innerHTML = '当前日业绩';
+    }
+  }
+
+
+  var mo_cont_tr = document.getElementById("mo_cont_tr");
+	// 参数 自定义日期
+  // function mendian(type,e,end){
+  //   mui.post('/index.php/store_achievement/',{
+  //     type:type,
+  //     ttime:e,
+  //     end:end
+  //   },function(data){
+  //    pdata(data);
+  //   },'json'
+  //   );
+  // } 
+	//参数 月 日
+  function mendian1(type,check){
+    load.start();
+    mui.post('/index.php/OrgAchievementStoreSel/',{
+			type: type,
+			check: check
+    },function(data){
+			pdata(data);
+		},'json');
+  }
+	
+	//显示的数据\日期
+	function pdata(data){
+		 if(data.code == 200){
+				dateTime = [data.data.pic[0], data.data.pic[1], data.data.pic[2], data.data.pic[3], data.data.pic[4], data.data.pic[5], data.data.pic[6]];
+				outPutData = [data.data.time[0], data.data.time[1], data.data.time[2], data.data.time[3], data.data.time[4], data.data.time[5], data.data.time[6]];
+				chart();      
+		  //服务器返回响应，根据响应结果，分析是否登录成功; data.table.length
+		  var mo_cont = "";
+		  if(data.code == 200){
+				if(data.data.table.length!==0){
+					for (i = 0; i < data.data.table.length; i++) {
+					  mo_cont = mo_cont
+					    + '<tr>'
+					    + '<td colspan="5" class="module3">' + data.data.table[i].name + '</td>'
+							+ '</tr>'
+							+ '<tr class="module4">'
+							+ '<td class="table_td" style="border-left:none">' + data.data.table[i].achievement + '</td>'
+							+ '<td class="table_td">' + data.data.table[i].codeNumber + '</td>'
+							+ '<td class="table_td">' + data.data.table[i].custUnitPrice + '</td>'
+							+ '<td class="table_td">' + data.data.table[i].number + '</td>'
+							+ '<td class="table_td">' + data.data.table[i].joint + '</td>'
+					    + '</tr>'
+					}
+					mo_cont_tr.innerHTML = mo_cont;
+				}else{
+					mo_cont_tr.innerHTML ='<tr><td colspan="5" class="module3" style="text-align:center">暂无数据</td></tr>'	
+				}
+			
+		  }
+        load.stop();
+		}
+	}
+  var scroll = mui('#content-scroll').scroll();
+		document.getElementById('content-scroll').addEventListener('scroll', function (e){
+			if(scroll.y < -380) {
+				$(".table_th").removeClass("vh");
+			} else {
+				$(".table_th").addClass("vh");
+			}
+		});
+</script>
+
+<script >
+  document.getElementById("menu_query").addEventListener("tap", function () {
+     mui('.mui-off-canvas-wrap').offCanvas().toggle();
+    });
+ (function($) {
+ 	$('.mui-scroll-wrapper').scroll({
+ 		indicators: true //是否显示滚动条
+ 	});
+ })(mui);
+  </script>
+</html>

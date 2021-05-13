@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>精准营销</title>
+		<script src="../js/vconsole.js"></script>
+		<link rel="stylesheet" href="../mui/css/mui.css">
+		<script src="../mui/js/mui.js"></script>
+		<script src="../js/hidden-titile.js"></script>
+		<link rel="stylesheet" href="../css/loading.css">
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/loading.js"></script>
+		<link rel="stylesheet" href="../css/iconfont_tubiao2.css">
+		<script src="../js/echarts.min.js"></script>
+		<script src="../js/rfm_echarts.js"></script>
+		<style>
+			.iconfont {
+				font-family: "iconfont" !important;
+				font-size: 35px;
+				font-style: normal;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+			.scss {
+				width: 96%;
+				border: 1px #ecebeb solid;
+				margin: 0 auto;
+				height: 90px;
+				margin-top: 10px;
+				border-radius: 10px;
+				background-color: white
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--  头部-->
+		<header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+			<a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+			<h1 id="ttt" class="mui-title" style="color:white;width: 50%;margin: 0 auto;">精准营销</h1>
+		</header>
+		<div class="mui-content">
+			<!-- 手动 -->
+			<!-- <div onclick="javascript:location.href='###'" class="mui-row"
+            style="width: 90%;border: 1px #ccc solid;margin:0 auto;height:90px;margin-top:10px;border-radius: 10px;background-color: white">
+            <div class="mui-col-xs-2 mui-col-sm-2" style="padding-left:10px;line-height: 90px;">
+                <span class="iconfont" style="color: #007aff">&#xe729;</span>
+            </div>
+            <div  class="mui-col-xs-9 mui-col-sm-9">
+                <p style="color: black;font-size:16px;margin-top: 15px;">手动选择会员群发</p>
+                <p>选择会员列表中的会员进行精确群发</p>
+            </div>
+            <div class="mui-col-xs-1 mui-col-sm-1" style="line-height: 90px;">
+                <span class="mui-icon mui-icon-forward" style="color: rgb(161, 161, 161);"></span>
+            </div>
+        </div> -->
+			<!-- 标签 -->
+			<!-- <div onclick="javascript:location.href='###'" class="mui-row"
+            style="width: 90%;border: 1px #ccc solid;margin:0 auto;height:90px;margin-top:10px;border-radius: 10px;background-color: white">
+            <div class="mui-col-xs-2 mui-col-sm-2" style="padding-left:10px;line-height: 90px;">
+                <span class="iconfont" style="color: #007aff">&#xe632;</span>
+            </div>
+            <div class="mui-col-xs-9 mui-col-sm-9">
+                <p style="color: black;font-size:16px;margin-top: 15px;">选择标签组群发</p>
+                <p>给某个标签内的所有会员群发消息(个人归属)</p>
+            </div>
+            <div class="mui-col-xs-1 mui-col-sm-1" style="line-height: 90px;">
+                <span class="mui-icon mui-icon-forward" style="color: rgb(161, 161, 161);"></span>
+            </div>
+        </div> -->
+			<!-- 筛选 -->
+			<div onclick="javascript:location.href='../homepage/wx_condition_group.html'" class="mui-row scss">
+				<div class="mui-col-xs-2 mui-col-sm-2" style="padding-left:10px;line-height: 90px;">
+					<span class="iconfont" style="color: #007aff">&#xe60b;</span>
+				</div>
+				<div class="mui-col-xs-9 mui-col-sm-9">
+					<p style="color: black;font-size:16px;margin-top: 15px;">顾客画像精准筛选</p>
+					<p>会员人数太多,可根据筛选条件筛选后群发</p>
+				</div>
+				<div class="mui-col-xs-1 mui-col-sm-1" style="line-height: 90px;">
+					<span class="mui-icon mui-icon-forward" style="color: rgb(161, 161, 161);"></span>
+				</div>
+			</div>
+			<!-- rfm -->
+			<!-- <div onclick="javascript:location.href='###'" class="mui-row"
+            style="width: 90%;border: 1px #ccc solid;margin:0 auto;height:90px;margin-top:10px;border-radius: 10px;background-color: white">
+            <div class="mui-col-xs-2 mui-col-sm-2" style="padding-left:10px;line-height: 90px;">
+                <span class="iconfont" style="color: #007aff">&#xe639;</span>
+            </div>
+            <div class="mui-col-xs-9 mui-col-sm-9">
+                <p style="color: black;font-size:16px;margin-top: 15px;">按RFM分类条件群发</p>
+                <p>按RFM分类条件群发</p>
+            </div>
+            <div class="mui-col-xs-1 mui-col-sm-1" style="line-height: 90px;">
+                <span class="mui-icon mui-icon-forward" style="color: rgb(161, 161, 161);"></span>
+            </div>
+        </div> -->
+			<!-- 历史 -->
+			<!-- <div onclick="javascript:location.href='###'" class="mui-row"
+            style="width: 90%;border: 1px #ccc solid;margin:0 auto;height:90px;margin-top:10px;border-radius: 10px;background-color: white">
+            <div class="mui-col-xs-2 mui-col-sm-2" style="padding-left:10px;line-height: 90px;">
+                <span class="iconfont" style="color: #007aff">&#xe673;</span>
+            </div>
+            <div class="mui-col-xs-9 mui-col-sm-9">
+                <p style="color: black;font-size:16px;margin-top: 15px;">发送历史</p>
+                <p>已经发送过的记录,可继续群发或重新发送</p>
+            </div>
+            <div class="mui-col-xs-1 mui-col-sm-1" style="line-height: 90px;">
+                <span class="mui-icon mui-icon-forward" style="color: rgb(161, 161, 161);"></span>
+            </div>
+        </div> -->
+			<!-- 黏贴 -->
+			<!-- <div onclick="javascript:location.href='###'" class="mui-row"
+            style="width: 90%;border: 1px #ccc solid;margin:0 auto;height:90px;margin-top:10px;border-radius: 10px;background-color: white">
+            <div class="mui-col-xs-2 mui-col-sm-2" style="padding-left:10px;line-height: 90px;">
+                <span class="iconfont" style="color: #007aff">&#xe616;</span>
+            </div>
+            <div class="mui-col-xs-9 mui-col-sm-9">
+                <p style="color: black;font-size:16px;margin-top: 15px;">粘贴卡号群发</p>
+                <p>通过粘贴要接收的会员卡号进行消息群发</p>
+            </div>
+            <div class="mui-col-xs-1 mui-col-sm-1" style="line-height: 90px;">
+                <span class="mui-icon mui-icon-forward" style="color: rgb(161, 161, 161);"></span>
+            </div>
+        </div> -->
+			<div class="mui-row" style="width: 90%;margin:0 auto;height:90px;margin-top:10px;border-radius: 10px;">
+				<div class="mui-col-xs-2 mui-col-sm-2" style="padding-left:10px;line-height: 90px;">
+
+				</div>
+				<div class="mui-col-xs-9 mui-col-sm-9">
+
+				</div>
+				<div class="mui-col-xs-1 mui-col-sm-1" style="line-height: 90px;">
+
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		window.onload = function() {
+			hidden_title();
+		}
+	</script>
+
+</html>

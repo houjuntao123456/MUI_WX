@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>传统日子</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="stylesheet" href="../mui/css/mui.min.css">
+  <!-- <script src="../mui/js/mui.min.js"></script> -->
+  <script src="../mui/js/muiR.js"></script>
+  <script src="../js/hidden-titile.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/loading.js"></script>
+  <link rel="stylesheet" href="../css/loading.css">
+  <style>
+    .mui-off-canvas-left,
+    .mui-off-canvas-right {
+      width: 90%;
+    }
+
+    .oa-contact-cell.mui-table .mui-table-cell {
+      /* padding: 11px 0; */
+      vertical-align: middle;
+    }
+
+    .oa-contact-cell {
+      position: relative;
+      /* margin: 4px 0; */
+    }
+
+    .oa-contact-content {
+      width: 100%;
+
+    }
+
+    .oa-contact-name,
+    oa-contact-position {
+      float: left;
+    }
+
+    li {
+      border: none;
+      list-style: none;
+    }
+
+
+    .mui-table-view-chevron .mui-table-view-cell {
+      padding-right: 10px;
+    }
+
+    .session_style {
+      width: 90%;
+      margin-top: 4px;
+      margin: 0 auto;
+      margin-bottom: 4px;
+      background: #D0EEFF;
+      border: 1px solid #99D3F5;
+      color: #6c6c6f;
+      /*#6c6c6f;*/
+      border-radius: 8px;
+      line-height: 35px;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .search_div {
+      text-align: center;
+      margin-top: 8px;
+      padding-bottom: 0px;
+      margin-bottom: 0px;
+    }
+
+    .search_div>input {
+      background-color: white;
+      margin-bottom: 8px;
+      width: 95%;
+    }
+
+    .mui-table-view-cell {
+      padding: 0;
+    }
+
+    .mui-table-view-cell:after {
+      left: 0;
+      background-color: #dfdee4;
+    }
+    .mui-search.mui-active:before {
+        left: 10px;
+        top: 25px;
+    }
+    input[type=search] {
+        font-size: 15px;
+    }
+    .mui-search .mui-placeholder {
+        font-size: 15px;
+    }
+    .mui-input-row select{
+        font-size: 15px;
+        letter-spacing: 1px;
+    }
+    .mui-search .mui-placeholder .mui-icon{
+        margin-right: 10px;
+    }
+    .title-but{
+      position: absolute;z-index: 2;right: 0;top: 0;width: 40%;
+    }
+    .title-but span{
+      float: right;line-height: 44px;color: white;margin-right: 10px;
+    }
+    .xuanzhong {
+      background: url(../images/ico_checkon.svg) no-repeat right bottom;
+      background-size: 25px 25px;
+      background-color: rgba(212, 229, 246, 0);
+      color: #00a4ff;
+    }
+
+    .dis {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!--  头部-->
+  <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+    <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:white;"></a>
+    <h1 class="mui-title" style="color:white;">传统日子<span id="nums" class="mui-badge  mui-badge-primary dis">0</span></h1>
+    <div class="title-but">
+      <span class="dis" id="menu" onclick="cluste_hai()">群发</span>
+      <span id="menu_query" >查询</span>
+    </div>
+  </header>
+  <!-- 侧滑导航根容器 -->
+  <!-- 手势动作 mui-draggable -->
+  <div class="mui-off-canvas-wrap   mui-slide-in mui-content">
+    <!-- 主页面容器 -->
+    <div class="mui-inner-wrap ">
+      <!-- 菜单容器 -->
+      <aside class="mui-off-canvas-left">
+        <div class="mui-scroll-wrapper" style="background-color: #e4eaf5">
+          <!-- style="padding-left:5px;" -->
+          <div class="mui-scroll">
+            <!-- 筛选模板 -->
+            <!-- 搜索框 -->
+            <div class="mui-input-row mui-search search_div">
+              <input type="search" id="sesame" placeholder="请输入电话号、卡号">
+            </div>
+            <!-- 组织 -->
+            <div class="mui-input-row mui-select"
+              style="width:95%;margin:0 auto;border-bottom: 1px solid #eee;background-color: white;">
+              <label></label>
+              <select name="" style="color:rgb(105, 104,104)" id="selec_org" onchange="all_select_org()">
+                <!-- <option value="">选择组织</option> -->
+              </select>
+            </div>
+            <!-- 选择门店： -->
+            <div class="mui-input-row mui-select"
+              style="width:95%;margin:0 auto;border-bottom: 1px solid #eee;background-color: white;">
+              <label></label>
+              <select name="" style="color:rgb(105, 104,104)" id="select_store" onchange="all_select_store()">
+                <!-- <option value="">选择门店</option> -->
+              </select>
+            </div>
+            <!-- 选择导购： -->
+            <div class="mui-input-row mui-select"
+              style="border-bottom: 1px solid #eee;background-color: white;width:95%;margin:0 auto;">
+              <label></label>
+              <select name="" style="color:rgb(105, 104,104)" id="select_shopping">
+                <!-- <option value="">选择导购</option> -->
+              </select>
+            </div>
+            <!-- 选择导购： -->
+            <div class="mui-input-row mui-select"
+              style="border-bottom: 1px solid #eee;background-color: white;width:95%;margin:0 auto;">
+              <label></label>
+              <select name="" style="color:rgb(105, 104,104)" id="shaixuan">
+                <!-- <option value="">精准筛选</option> -->
+              </select>
+            </div>
+
+
+
+            <p style="text-align:center;margin-top: 10px;">
+              <!-- <button type="button" class="mui-btn mui-btn-primary button1" style="width: 15%;" onclick="all_election(1)">全选</button> -->
+              <button type="button" class="mui-btn mui-btn-primary button1" style="width: 60%;" id="chanxun">确定</button>
+            </p>
+
+
+
+          </div>
+
+        </div>
+      </aside>
+      <!-- 主页面标题 -->
+
+      <!-- 主页面内容容器 -->
+      <div class="mui-scroll-wrapper" id="pullrefresh">
+        <div class="mui-scroll">
+          <!-- 主界面具体展示内容 -->
+          <div class="mui-row" style="margin-bottom:3px;">
+            <ul class="mui-table-view li-style" id="ul_come">
+
+
+
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+<script src="../js/hudong.js"></script>
+<script>
+  var load = new Loading();
+  load.init();
+
+  //筛选模板ID
+  var screen_template = document.getElementById('screen_template');
+  // 主界面容器的ID
+  var ul_content = document.getElementById("ul_come");
+  // 控制初始化分页插件
+  var kk = true;
+  // 往分页中传数据
+  var session_id = "";
+  // 页面初始化的方法
+  window.onload = function () {
+    onload_select_innerHTML();
+    hidden_title();
+  }
+
+  var shaixuan = document.getElementById("shaixuan");
+
+   // 下拉框初始赋值
+   function onload_select_innerHTML() {
+    // 给组织加载多余
+    var option_selec_org = document.createElement("option");
+    option_selec_org.value = "";
+    option_selec_org.innerHTML = "选择组织";
+    document.getElementById("selec_org").appendChild(option_selec_org);
+    // 门店加载多余 
+    var option_select_store = document.createElement("option");
+    option_select_store.value = "";
+    option_select_store.innerHTML = "选择门店";
+    document.getElementById("select_store").appendChild(option_select_store);
+    // 选择导购加载多余
+    var option_select_shopping = document.createElement("option");
+    option_select_shopping.value = "";
+    option_select_shopping.innerHTML = "选择导购";
+    document.getElementById("select_shopping").appendChild(option_select_shopping);
+    // 精准筛选加载多余
+    var option_select_shaixuan = document.createElement("option");
+    option_select_shaixuan.value = "";
+    option_select_shaixuan.innerHTML = "精准筛选";
+    shaixuan.appendChild(option_select_shaixuan);
+    window_screen();
+  }
+ 
+  function window_screen() {
+    mui.post('/index.php/UserlistwapFilterlist/', {
+    }, function (data) {
+      if (data.code == 200) {
+        for (i = 0; i < data.data.length; i++) {
+          var option = document.createElement('option');
+          option.value = data.data[i].id;
+          option.innerHTML = data.data[i].filtertitle;
+          // document.getElementById("select_store").appendChild(option);
+          // 将节点添加入
+          shaixuan.appendChild(option);
+        }
+        // mui('.mui-off-canvas-wrap').offCanvas().toggle();
+      }
+      //服务器返回响应，根据响应结果，分析是否登录成功；
+    }, 'json'
+    );
+  }
+</script>
+<script>
+  // 组织
+  var selec_org = document.getElementById("selec_org");
+  // 门店
+  var select_store = document.getElementById("select_store");
+  // 店员
+  var select_shopping = document.getElementById("select_shopping");
+  // 进来加载组织
+  select_org();
+  function select_org() {
+    mui.post('/index.php/UserlistOrg/', {
+    }, function (data) {
+      //服务器返回响应，根据响应结果，分析是否登录成功；
+      if (data.code == 200) {
+        for (i = 0; i < data.data.length; i++) {
+          var option = document.createElement('option');
+          option.value = data.data[i].code;
+          option.innerHTML = data.data[i].name
+          document.getElementById("selec_org").appendChild(option);
+        }
+      }
+    }, 'json'
+    );
+  }
+
+
+  // 选择组织触发
+  function all_select_org() {
+    mui.post('/index.php/UserlistStore/', {
+      code: selec_org.options[selec_org.selectedIndex].value
+    }, function (data) {
+      //服务器返回响应，根据响应结果，分析是否登录成功；
+      if (data.code == 200) {
+        document.getElementById("select_store").innerHTML = '<option value="">选择门店</option>'
+        for (i = 0; i < data.data.length; i++) {
+          var option = document.createElement('option');
+          option.value = data.data[i].code;
+          option.innerHTML = data.data[i].name;
+          document.getElementById("select_store").appendChild(option);
+        }
+      }
+    }, 'json'
+    );
+  }
+
+  // 选择门店 店员下拉发生改变
+  function all_select_store() {
+    mui.post('/index.php/UserlistStaff/', {
+      code: select_store.options[select_store.selectedIndex].value
+    }, function (data) {
+      //服务器返回响应，根据响应结果，分析是否登录成功；
+      if (data.code == 200) {
+        document.getElementById("select_shopping").innerHTML = '<option value="">选择导购</option>'
+        for (i = 0; i < data.data.length; i++) {
+          var option = document.createElement('option');
+          option.value = data.data[i].code;
+          option.innerHTML = data.data[i].name;
+          document.getElementById("select_shopping").appendChild(option);
+        }
+      }
+    }, 'json'
+    );
+  }
+
+
+  // 点击按钮查询
+  var query = document.getElementById("chanxun");
+  query.onclick = function () {
+    org = selec_org.options[selec_org.selectedIndex].value;
+    store = select_store.options[select_store.selectedIndex].value;
+    staff = select_shopping.options[select_shopping.selectedIndex].value;
+    Hd_id=document.getElementById("shaixuan").options[document.getElementById("shaixuan").selectedIndex].value;
+    load.start();
+    document.getElementById("ul_come").innerHTML = "";
+    count = 0;
+    mui('#pullrefresh').pullRefresh().refresh(true);
+    pullupRefresh();
+    mui('.mui-off-canvas-wrap').offCanvas().toggle();
+  }
+
+</script>
+<script>
+
+  mui.init({
+    pullRefresh: {
+      container: '#pullrefresh',
+      up: {
+        contentrefresh: '正在加载...',
+        auto: true,//可选,默认false.首次加载自动上拉刷新一次
+        callback: pullupRefresh
+      }
+    }
+  });
+  // mui('.mui-off-canvas-wrap').offCanvas().toggle();
+
+  /**
+   * 上拉加载具体业务实现
+   */
+  // 重新开启加载
+  // mui('#pullrefresh').pullRefresh().refresh(true);
+  // 分页计数
+  var Hd_id = "";
+  var org = "";
+  var store = "";
+  var staff = "";
+  var count = 0;
+  // 分的条数
+  var limit_num = 10;
+  function pullupRefresh() {
+    load.start();
+    mui.post('/index.php/WreFieldPeople/', {
+      search: document.getElementById("sesame").value,
+      id: Hd_id,
+      org: org,
+      store: store,
+      staff: staff,
+      page: ++count,
+      limit: limit_num
+    }, function (data) {
+      if (data.code == 200) {
+        setTimeout(function () {
+          mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+          var ul_come = document.getElementById('ul_come');
+          if (data.data.count == 0) {
+            var li = document.createElement('li');
+            li.className = 'mui-table-view-cell';
+            li.style = 'padding-top:5px;padding-bottom: 11px;text-align:center;';
+            li.innerHTML = "<h1>暂无数据</h1>"
+            ul_come.appendChild(li);
+            document.getElementById("menu").classList.add("dis");
+          } else {
+            document.getElementById("menu").classList.remove("dis");
+            for (i = 0; i < data.data.data.length; i++) {
+              if (data.data.data[i].img == "") {
+                data.data.data[i].img = '../images/suoke.jpg';
+              }
+              if (data.data.data[i].username == "" || data.data.data[i].username == undefined) {
+                data.data.data[i].username = "";
+              }
+              if (data.data.data[i].birthday == "" || data.data.data[i].birthday == undefined) {
+                data.data.data[i].birthday = "";
+              }
+              if (data.data.data[i].total_consumption == "" || data.data.data[i].total_consumption == undefined) {
+                data.data.data[i].total_consumption = 0;
+              }
+              if (data.data.data[i].consumption_times == "" || data.data.data[i].consumption_times == undefined) {
+                data.data.data[i].consumption_times = 0;
+              }
+              if (data.data.data[i].consumption_number == "" || data.data.data[i].consumption_number == undefined || data.data.data[i].consumption_number == null) {
+                data.data.data[i].consumption_number = 0;
+              }
+              
+              if (data.data.data[i].rfm_days == null || data.data.data[i].rfm_days == undefined || data.data.data[i].rfm_days == "") {
+                data.data.data[i].rfm_days = "未消费";
+              } else if (data.data.data[i].rfm_days != "未消费") {
+                data.data.data[i].rfm_days = "未消费" + data.data.data[i].rfm_days + "天";
+              }
+
+              if (data.data.data[i].visit_g == null || data.data.data[i].visit_g == undefined) {
+                data.data.data[i].visit_g = "未回访";
+              } else if (data.data.data[i].visit_g != "未回访") {                
+                data.data.data[i].visit_g  = parseInt(data.data.data[i].visit_g .replace(/,/g, ""));
+                if(data.data.data[i].visit_g  > 365){
+                  data.data.data[i].visit_g  = "未回访365+天";
+                } else{
+                  data.data.data[i].visit_g  = "未回访" + data.data.data[i].visit_g + "天";
+                }
+              }
+                 var li = document.createElement('li');
+                 li.className = 'mui-table-view-cell';
+                 li.innerHTML = '<div class="mui-slider-cell">'
+                   + '<div class="oa-contact-cell mui-row">'
+                   // + '<div class="mui-table-cell" style="width:80px;">'
+                   +'<div class="mui-col-xs-3 mui-col-sm-3">'
+                   + ' <div class="mui-table-cell xuanze all_quanxuan" code="' + data.data.data[i].code + '"phone="' + data.data.data[i].phone + '" style="width:80px;top:3px;left:3px;">'
+                   + '<img src="' + data.data.data[i].img + '" alt="暂无图片"style="width:100%;border-radius:50%;" />'
+                   + '</div>'
+                   +'</div>'
+                   + '<div class="mui-table-cell mui-col-xs-6 mui-col-sm-6">'
+                   + '<div class="mui-clearfix" style="text-align:left;line-height: 28px;width: 100%;margin-top: 8%;">'
+                   + '<h4 class="oa-contact-name">' + data.data.data[i].username + '</h4>&nbsp;&nbsp;<span style="font-size:12px;color:#757171;">' + data.data.data[i].birthday + '</span>'
+
+                   + '<p class="mui-h6" style="text-align:left;width: 80%;margin-bottom: 0px;line-height: 22px;">'
+                   + '<span style="font-weight:bold;font-size:15px;">¥</span>'
+                   + '<span> ' + data.data.data[i].total_consumption + '</span>'
+                   + '<span>&nbsp;/</span>'
+                   + '<span> ' + data.data.data[i].consumption_times + '</span>'
+                   + '<span>次 / ' + data.data.data[i].consumption_number + '件</span>'
+                   + '</p>'
+                   + '<p style="font-size:14px;color: #757171;line-height:22px;">' + data.data.data[i].rfm_days + ' / ' + data.data.data[i].visit_g
+                   + '</p>'
+                   + '</div>'
+                   + '</div>'
+                   + '<div class="mui-col-xs-3 mui-col-sm-3" style="padding-top:5px;">'
+                   + '<button style="padding: 7px 10px;color: #77a1f8;border: 1px solid #77a1f8;margin-top:5%;margin-right:3%;" name="' + data.data.data[i].code + '"onclick="memberdata(this)">会员档案</button>'
+                   + '<button style="padding: 7px 10px;color: #77a1f8;border: 1px solid #77a1f8;margin-top:4%;margin-right:3%;" code="' + data.data.data[i].code + '" level_code="' + data.data.data[i].level_code + ' " username="' + data.data.data[i].username + '" onclick="member(this)">专场跟进</button>'
+                   + '</div>'
+                   + '</div>'
+                   + '</div>'
+                 ul_come.appendChild(li);
+            }
+          }
+          load.stop();
+        }, 1000);
+        // mui('.mui-off-canvas-wrap').offCanvas().toggle();
+      }
+    }, 'json'
+    );
+  }
+  mui('.mui-scroll-wrapper').scroll({
+    indicators: false, //是否显示滚动条
+  });
+  // 点击筛选
+  document.getElementById("menu_query").onclick = function () {
+    mui('.mui-off-canvas-wrap').offCanvas().toggle();
+  }
+  // 滚动的系数
+  mui('.mui-scroll-wrapper').scroll({
+    deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+  });
+
+  // 点击按钮,将参数传递到另一个页面
+  function memberdata(e) {
+    location.href = '../homepage/member_data.html?' + 'code=' + e.getAttribute("name");
+  }
+  function member(e) {
+    localStorage.setItem("hd_username", e.getAttribute("username"));
+    location.href = '../homepage/chart_moban_traditional_days.html?' + 'code=' + e.getAttribute("code") + "level_code*" + e.getAttribute("level_code");
+  }
+</script>
+
+</html>

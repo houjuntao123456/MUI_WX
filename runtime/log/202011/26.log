@@ -1,0 +1,1586 @@
+---------------------------------------------------------------
+[2020-11-26T09:19:37+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsQuery/
+[运行时间：0.419400s] [吞吐率：2.38req/s] [内存消耗：2,705.06kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsQuery/',
+  'route' => 'WxSell/goodsQuery',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/payment/commodity_payment.html',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '21',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => '',
+  'page' => '1',
+  'limit' => '10',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.100648s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_sys_con` [ RunTime:0.014010s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_sys_con` LIMIT 1 [ RunTime:0.014803s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.015370s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods` LIMIT 0,10 [ RunTime:0.014381s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `suoke`.`vip_goods` LIMIT 1 [ RunTime:0.029438s ]
+---------------------------------------------------------------
+[2020-11-26T09:19:37+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webStackableCoupon/
+[运行时间：0.105021s] [吞吐率：9.52req/s] [内存消耗：2,708.19kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webStackableCoupon/',
+  'route' => 'WxSell/StackableCoupon',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/payment/commodity_payment.html',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '20',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'vip_code' => '',
+  'money' => '0.00',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.017802s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_coupon_record` [ RunTime:0.015457s ]
+[ sql ] [ SQL ] SELECT `card_name`,`card_type`,`card_many`,`money`,code as value,`week`,`a_hsi`,`b_hsi` FROM `suoke`.`vip_coupon_record` WHERE  `vip_code` = ''  AND `status` = 0  AND `card_type` <> 2  AND `money` <= 0  AND `start_time` <= 1606353577  AND `end_time` >= 1606353577 [ RunTime:0.013164s ]
+---------------------------------------------------------------
+[2020-11-26T12:11:13+08:00] 10.10.10.38 POST 10.10.10.38/index.php/dataBase/
+[运行时间：1.435456s] [吞吐率：0.70req/s] [内存消耗：2,418.98kb] [文件加载：60]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'dataBase/',
+  'route' => 'Login/database',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/?company=suoke',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '14',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'database' => 'suoke',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:1.088675s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `company`.`vip_business` [ RunTime:0.023094s ]
+[ sql ] [ SQL ] SELECT `x_status` FROM `company`.`vip_business` WHERE  `code` = 'suoke' LIMIT 1 [ RunTime:0.017811s ]
+---------------------------------------------------------------
+[2020-11-26T12:11:13+08:00] 10.10.10.38 POST 10.10.10.38/index.php/Userlistopenid/
+[运行时间：0.163727s] [吞吐率：6.11req/s] [内存消耗：2,527.31kb] [文件加载：64]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'Userlistopenid/',
+  'route' => 'Weixin/openid',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/?company=suoke',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '49',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'openId' => 'o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'company' => 'suoke',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.023332s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_staff` [ RunTime:0.020812s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_staff` WHERE  `openid` = 'o9osQwUghKSMhf1ZGF3oclpiEvtc' ORDER BY `invalid_time` DESC [ RunTime:0.037352s ]
+[ sql ] [ SQL ] UPDATE `suoke`.`vip_staff`  SET `invalid_time` = 1606968673  WHERE  `id` = 1000014 [ RunTime:0.015996s ]
+---------------------------------------------------------------
+[2020-11-26T12:11:15+08:00] 10.10.10.38 POST 10.10.10.38/index.php/UserlistViplist/
+[运行时间：0.116315s] [吞吐率：8.60req/s] [内存消耗：2,623.45kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'UserlistViplist/',
+  'route' => 'Userlist/viplist',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/index_centent.html',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.030542s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`view_vip_staff` [ RunTime:0.031064s ]
+[ sql ] [ SQL ] SELECT `code`,`name`,`vpname`,`vgname`,`vsname`,`m_auth_code` FROM `suoke`.`view_vip_staff` WHERE  `code` = '10008' LIMIT 1 [ RunTime:0.015039s ]
+---------------------------------------------------------------
+[2020-11-26T12:11:18+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelIndex/
+[运行时间：0.450794s] [吞吐率：2.22req/s] [内存消耗：2,457.92kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelIndex/',
+  'route' => 'Goods/labelIndex',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags.html?t=1606363875635',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '21',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => '',
+  'page' => '1',
+  'limit' => '20',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.015855s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.127502s ]
+[ sql ] [ SQL ] SELECT frenum as code,`name`,`price`,`bar_code` FROM `suoke`.`vip_goods` GROUP BY `frenum` LIMIT 0,20 [ RunTime:0.081491s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) AS think_count FROM `suoke`.`vip_goods` GROUP BY `frenum` ) `_group_count_` LIMIT 1 [ RunTime:0.161319s ]
+---------------------------------------------------------------
+[2020-11-26T12:11:21+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabel/
+[运行时间：0.124920s] [吞吐率：8.01req/s] [内存消耗：2,456.96kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabel/',
+  'route' => 'Goods/label',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.039584s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_label` [ RunTime:0.024442s ]
+[ sql ] [ SQL ] SELECT `name`,`code`,`type` FROM `suoke`.`vip_goods_label` WHERE  `type` = '扩展型'  AND `status` = 1 [ RunTime:0.020117s ]
+---------------------------------------------------------------
+[2020-11-26T12:11:21+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelInfo/
+[运行时间：0.131484s] [吞吐率：7.61req/s] [内存消耗：2,463.08kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelInfo/',
+  'route' => 'Goods/labelInfo',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '50',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-6531300126',
+  'label_code' => 'goods15742124741549',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.026574s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_label_info` [ RunTime:0.025706s ]
+[ sql ] [ SQL ] SELECT `id`,info name,`label_code` FROM `suoke`.`vip_goods_label_info` WHERE  `label_code` = 'goods15742124741549' [ RunTime:0.015996s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_labels` [ RunTime:0.014528s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods_labels` WHERE  `goods_code` = 'IGX-6531300126'  AND `label_code` = 'goods15742124741549' [ RunTime:0.013016s ]
+---------------------------------------------------------------
+[2020-11-26T12:11:22+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelInfo/
+[运行时间：0.141869s] [吞吐率：7.05req/s] [内存消耗：2,461.84kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelInfo/',
+  'route' => 'Goods/labelInfo',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '50',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-6531300126',
+  'label_code' => 'goods15742124882349',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.025707s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_label_info` [ RunTime:0.016545s ]
+[ sql ] [ SQL ] SELECT `id`,info name,`label_code` FROM `suoke`.`vip_goods_label_info` WHERE  `label_code` = 'goods15742124882349' [ RunTime:0.013928s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_labels` [ RunTime:0.014037s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods_labels` WHERE  `goods_code` = 'IGX-6531300126'  AND `label_code` = 'goods15742124882349' [ RunTime:0.018510s ]
+---------------------------------------------------------------
+[2020-11-26T12:12:35+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsClickLabel/
+[运行时间：0.116460s] [吞吐率：8.59req/s] [内存消耗：2,463.14kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsClickLabel/',
+  'route' => 'Goods/clickLabel',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '71',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-653131121',
+  'id' => '251',
+  'name' => '麻',
+  'label_code' => 'goods15742124741549',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.028241s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.024014s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods` WHERE  `code` = 'IGX-653131121' [ RunTime:0.020396s ]
+---------------------------------------------------------------
+[2020-11-26T12:12:41+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelIndex/
+[运行时间：0.136532s] [吞吐率：7.32req/s] [内存消耗：2,458.58kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelIndex/',
+  'route' => 'Goods/labelIndex',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags.html?t=1606363875635',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '34',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-653131121',
+  'page' => '1',
+  'limit' => '20',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.019535s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.021474s ]
+[ sql ] [ SQL ] SELECT frenum as code,`name`,`price`,`bar_code` FROM `suoke`.`vip_goods` WHERE  `frenum` LIKE 'IGX-653131121%' GROUP BY `frenum` LIMIT 0,20 [ RunTime:0.025653s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) AS think_count FROM `suoke`.`vip_goods` WHERE  `frenum` LIKE 'IGX-653131121%' GROUP BY `frenum` ) `_group_count_` LIMIT 1 [ RunTime:0.026211s ]
+---------------------------------------------------------------
+[2020-11-26T12:12:43+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabel/
+[运行时间：0.113543s] [吞吐率：8.81req/s] [内存消耗：2,456.96kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabel/',
+  'route' => 'Goods/label',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.023896s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_label` [ RunTime:0.026671s ]
+[ sql ] [ SQL ] SELECT `name`,`code`,`type` FROM `suoke`.`vip_goods_label` WHERE  `type` = '扩展型'  AND `status` = 1 [ RunTime:0.024372s ]
+---------------------------------------------------------------
+[2020-11-26T12:12:43+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelInfo/
+[运行时间：0.147492s] [吞吐率：6.78req/s] [内存消耗：2,463.08kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelInfo/',
+  'route' => 'Goods/labelInfo',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '50',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-6531300126',
+  'label_code' => 'goods15742124741549',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.022000s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_label_info` [ RunTime:0.033647s ]
+[ sql ] [ SQL ] SELECT `id`,info name,`label_code` FROM `suoke`.`vip_goods_label_info` WHERE  `label_code` = 'goods15742124741549' [ RunTime:0.010638s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_labels` [ RunTime:0.023065s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods_labels` WHERE  `goods_code` = 'IGX-6531300126'  AND `label_code` = 'goods15742124741549' [ RunTime:0.011830s ]
+---------------------------------------------------------------
+[2020-11-26T12:12:44+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelInfo/
+[运行时间：0.126738s] [吞吐率：7.89req/s] [内存消耗：2,461.84kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelInfo/',
+  'route' => 'Goods/labelInfo',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '50',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-6531300126',
+  'label_code' => 'goods15742124882349',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.016649s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_label_info` [ RunTime:0.024956s ]
+[ sql ] [ SQL ] SELECT `id`,info name,`label_code` FROM `suoke`.`vip_goods_label_info` WHERE  `label_code` = 'goods15742124882349' [ RunTime:0.020594s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_labels` [ RunTime:0.013705s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods_labels` WHERE  `goods_code` = 'IGX-6531300126'  AND `label_code` = 'goods15742124882349' [ RunTime:0.010271s ]
+---------------------------------------------------------------
+[2020-11-26T12:13:06+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsClickLabel/
+[运行时间：0.106141s] [吞吐率：9.42req/s] [内存消耗：2,463.14kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsClickLabel/',
+  'route' => 'Goods/clickLabel',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '71',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-653131121',
+  'id' => '251',
+  'name' => '麻',
+  'label_code' => 'goods15742124741549',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.030659s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.023078s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods` WHERE  `code` = 'IGX-653131121' [ RunTime:0.012746s ]
+---------------------------------------------------------------
+[2020-11-26T12:15:49+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsClickLabel/
+[运行时间：0.127755s] [吞吐率：7.83req/s] [内存消耗：2,463.14kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsClickLabel/',
+  'route' => 'Goods/clickLabel',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '71',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-653131121',
+  'id' => '250',
+  'name' => '棉',
+  'label_code' => 'goods15742124741549',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.028193s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.031080s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods` WHERE  `code` = 'IGX-653131121' [ RunTime:0.023409s ]
+---------------------------------------------------------------
+[2020-11-26T12:15:59+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelIndex/
+[运行时间：0.348597s] [吞吐率：2.87req/s] [内存消耗：2,458.58kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelIndex/',
+  'route' => 'Goods/labelIndex',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags.html?t=1606363875635',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '34',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-653131121',
+  'page' => '1',
+  'limit' => '20',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.022590s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.222196s ]
+[ sql ] [ SQL ] SELECT frenum as code,`name`,`price`,`bar_code` FROM `suoke`.`vip_goods` WHERE  `frenum` LIKE 'IGX-653131121%' GROUP BY `frenum` LIMIT 0,20 [ RunTime:0.025715s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) AS think_count FROM `suoke`.`vip_goods` WHERE  `frenum` LIKE 'IGX-653131121%' GROUP BY `frenum` ) `_group_count_` LIMIT 1 [ RunTime:0.034127s ]
+---------------------------------------------------------------
+[2020-11-26T12:16:02+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabel/
+[运行时间：0.097102s] [吞吐率：10.30req/s] [内存消耗：2,456.96kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabel/',
+  'route' => 'Goods/label',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.021950s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_label` [ RunTime:0.021680s ]
+[ sql ] [ SQL ] SELECT `name`,`code`,`type` FROM `suoke`.`vip_goods_label` WHERE  `type` = '扩展型'  AND `status` = 1 [ RunTime:0.014421s ]
+---------------------------------------------------------------
+[2020-11-26T12:16:02+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelInfo/
+[运行时间：0.250000s] [吞吐率：4.00req/s] [内存消耗：2,463.08kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelInfo/',
+  'route' => 'Goods/labelInfo',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '50',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-6531300126',
+  'label_code' => 'goods15742124741549',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.022061s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_label_info` [ RunTime:0.025999s ]
+[ sql ] [ SQL ] SELECT `id`,info name,`label_code` FROM `suoke`.`vip_goods_label_info` WHERE  `label_code` = 'goods15742124741549' [ RunTime:0.025047s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_labels` [ RunTime:0.125601s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods_labels` WHERE  `goods_code` = 'IGX-6531300126'  AND `label_code` = 'goods15742124741549' [ RunTime:0.011031s ]
+---------------------------------------------------------------
+[2020-11-26T12:16:03+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelInfo/
+[运行时间：0.152681s] [吞吐率：6.55req/s] [内存消耗：2,461.84kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelInfo/',
+  'route' => 'Goods/labelInfo',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '50',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-6531300126',
+  'label_code' => 'goods15742124882349',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.018228s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_label_info` [ RunTime:0.023519s ]
+[ sql ] [ SQL ] SELECT `id`,info name,`label_code` FROM `suoke`.`vip_goods_label_info` WHERE  `label_code` = 'goods15742124882349' [ RunTime:0.033599s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_labels` [ RunTime:0.024223s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods_labels` WHERE  `goods_code` = 'IGX-6531300126'  AND `label_code` = 'goods15742124882349' [ RunTime:0.018824s ]
+---------------------------------------------------------------
+[2020-11-26T12:16:12+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsClickLabel/
+[运行时间：0.120103s] [吞吐率：8.33req/s] [内存消耗：2,463.14kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsClickLabel/',
+  'route' => 'Goods/clickLabel',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '71',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-653131121',
+  'id' => '251',
+  'name' => '麻',
+  'label_code' => 'goods15742124741549',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.038372s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.022589s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods` WHERE  `code` = 'IGX-653131121' [ RunTime:0.011263s ]
+---------------------------------------------------------------
+[2020-11-26T12:28:14+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelIndex/
+[运行时间：0.184842s] [吞吐率：5.41req/s] [内存消耗：2,460.69kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelIndex/',
+  'route' => 'Goods/labelIndex',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags.html?t=1606363875635',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '34',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-653131121',
+  'page' => '1',
+  'limit' => '20',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.063385s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.026179s ]
+[ sql ] [ SQL ] SELECT frenum as code,`name`,`price`,`bar_code` FROM `suoke`.`vip_goods` WHERE  `frenum` LIKE 'IGX-653131121%' GROUP BY `frenum` LIMIT 0,20 [ RunTime:0.018648s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) AS think_count FROM `suoke`.`vip_goods` WHERE  `frenum` LIKE 'IGX-653131121%' GROUP BY `frenum` ) `_group_count_` LIMIT 1 [ RunTime:0.022587s ]
+---------------------------------------------------------------
+[2020-11-26T12:28:59+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabel/
+[运行时间：0.137530s] [吞吐率：7.27req/s] [内存消耗：2,456.96kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabel/',
+  'route' => 'Goods/label',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.023029s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_label` [ RunTime:0.034337s ]
+[ sql ] [ SQL ] SELECT `name`,`code`,`type` FROM `suoke`.`vip_goods_label` WHERE  `type` = '扩展型'  AND `status` = 1 [ RunTime:0.037203s ]
+---------------------------------------------------------------
+[2020-11-26T12:28:59+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelInfo/
+[运行时间：0.154189s] [吞吐率：6.49req/s] [内存消耗：2,463.08kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelInfo/',
+  'route' => 'Goods/labelInfo',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '50',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-6531300126',
+  'label_code' => 'goods15742124741549',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.021751s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_label_info` [ RunTime:0.029698s ]
+[ sql ] [ SQL ] SELECT `id`,info name,`label_code` FROM `suoke`.`vip_goods_label_info` WHERE  `label_code` = 'goods15742124741549' [ RunTime:0.019464s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_labels` [ RunTime:0.014787s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods_labels` WHERE  `goods_code` = 'IGX-6531300126'  AND `label_code` = 'goods15742124741549' [ RunTime:0.015234s ]
+---------------------------------------------------------------
+[2020-11-26T12:29:00+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelInfo/
+[运行时间：0.138933s] [吞吐率：7.20req/s] [内存消耗：2,461.84kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelInfo/',
+  'route' => 'Goods/labelInfo',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '50',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-6531300126',
+  'label_code' => 'goods15742124882349',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.026615s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_label_info` [ RunTime:0.023299s ]
+[ sql ] [ SQL ] SELECT `id`,info name,`label_code` FROM `suoke`.`vip_goods_label_info` WHERE  `label_code` = 'goods15742124882349' [ RunTime:0.015535s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_labels` [ RunTime:0.019640s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods_labels` WHERE  `goods_code` = 'IGX-6531300126'  AND `label_code` = 'goods15742124882349' [ RunTime:0.010387s ]
+---------------------------------------------------------------
+[2020-11-26T12:29:01+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsClickLabel/
+[运行时间：0.122826s] [吞吐率：8.14req/s] [内存消耗：2,463.14kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsClickLabel/',
+  'route' => 'Goods/clickLabel',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '71',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-653131121',
+  'id' => '251',
+  'name' => '麻',
+  'label_code' => 'goods15742124741549',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.029027s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.013831s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods` WHERE  `code` = 'IGX-653131121' [ RunTime:0.019583s ]
+---------------------------------------------------------------
+[2020-11-26T12:29:03+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsClickLabel/
+[运行时间：0.105342s] [吞吐率：9.49req/s] [内存消耗：2,463.14kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsClickLabel/',
+  'route' => 'Goods/clickLabel',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '71',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-653131121',
+  'id' => '251',
+  'name' => '麻',
+  'label_code' => 'goods15742124741549',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.019377s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.024060s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods` WHERE  `code` = 'IGX-653131121' [ RunTime:0.014742s ]
+---------------------------------------------------------------
+[2020-11-26T12:29:03+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsClickLabel/
+[运行时间：0.109375s] [吞吐率：9.14req/s] [内存消耗：2,463.14kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsClickLabel/',
+  'route' => 'Goods/clickLabel',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=IGX-653131121id&IGX-6531300126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '71',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-653131121',
+  'id' => '251',
+  'name' => '麻',
+  'label_code' => 'goods15742124741549',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.027053s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.019287s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods` WHERE  `code` = 'IGX-653131121' [ RunTime:0.020789s ]
+---------------------------------------------------------------
+[2020-11-26T12:32:31+08:00] 10.10.10.38 POST 10.10.10.38/index.php/UserlistViplist/
+[运行时间：0.189990s] [吞吐率：5.26req/s] [内存消耗：2,623.45kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'UserlistViplist/',
+  'route' => 'Userlist/viplist',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/index_centent.html',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.055857s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`view_vip_staff` [ RunTime:0.055925s ]
+[ sql ] [ SQL ] SELECT `code`,`name`,`vpname`,`vgname`,`vsname`,`m_auth_code` FROM `suoke`.`view_vip_staff` WHERE  `code` = '10008' LIMIT 1 [ RunTime:0.034763s ]
+---------------------------------------------------------------
+[2020-11-26T12:32:32+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webCargoGuest/
+[运行时间：0.145573s] [吞吐率：6.87req/s] [内存消耗：2,686.46kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webCargoGuest/',
+  'route' => 'CargoGuest/index',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/cargo_precision.html',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '21',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => '',
+  'page' => '1',
+  'limit' => '20',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.031227s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.024836s ]
+[ sql ] [ SQL ] SELECT frenum as code,`bar_code`,`color`,`sizes` FROM `suoke`.`vip_goods` LIMIT 0,20 [ RunTime:0.015612s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `suoke`.`vip_goods` LIMIT 1 [ RunTime:0.032862s ]
+---------------------------------------------------------------
+[2020-11-26T12:32:35+08:00] 10.10.10.38 POST 10.10.10.38/index.php/UserlistViplist/
+[运行时间：0.116402s] [吞吐率：8.59req/s] [内存消耗：2,623.45kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'UserlistViplist/',
+  'route' => 'Userlist/viplist',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/index_centent.html',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.026992s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`view_vip_staff` [ RunTime:0.024874s ]
+[ sql ] [ SQL ] SELECT `code`,`name`,`vpname`,`vgname`,`vsname`,`m_auth_code` FROM `suoke`.`view_vip_staff` WHERE  `code` = '10008' LIMIT 1 [ RunTime:0.021412s ]
+---------------------------------------------------------------
+[2020-11-26T12:32:36+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelIndex/
+[运行时间：0.362879s] [吞吐率：2.76req/s] [内存消耗：2,460.60kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelIndex/',
+  'route' => 'Goods/labelIndex',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags.html?t=1606365155428',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '21',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => '',
+  'page' => '1',
+  'limit' => '20',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.032604s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.027797s ]
+[ sql ] [ SQL ] SELECT frenum as code,`name`,`price`,`bar_code` FROM `suoke`.`vip_goods` GROUP BY `frenum` LIMIT 0,20 [ RunTime:0.081085s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) AS think_count FROM `suoke`.`vip_goods` GROUP BY `frenum` ) `_group_count_` LIMIT 1 [ RunTime:0.174445s ]
+---------------------------------------------------------------
+[2020-11-26T12:32:45+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabel/
+[运行时间：0.115701s] [吞吐率：8.64req/s] [内存消耗：2,456.95kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabel/',
+  'route' => 'Goods/label',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=id&IGX-31835504126',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.037898s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_label` [ RunTime:0.024287s ]
+[ sql ] [ SQL ] SELECT `name`,`code`,`type` FROM `suoke`.`vip_goods_label` WHERE  `type` = '扩展型'  AND `status` = 1 [ RunTime:0.013239s ]
+---------------------------------------------------------------
+[2020-11-26T12:32:45+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelInfo/
+[运行时间：0.144190s] [吞吐率：6.94req/s] [内存消耗：2,462.15kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelInfo/',
+  'route' => 'Goods/labelInfo',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=id&IGX-31835504126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '51',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-31835504126',
+  'label_code' => 'goods15742124741549',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.022581s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_label_info` [ RunTime:0.019887s ]
+[ sql ] [ SQL ] SELECT `id`,info name,`label_code` FROM `suoke`.`vip_goods_label_info` WHERE  `label_code` = 'goods15742124741549' [ RunTime:0.011122s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_labels` [ RunTime:0.029831s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods_labels` WHERE  `goods_code` = 'IGX-31835504126'  AND `label_code` = 'goods15742124741549' [ RunTime:0.015282s ]
+---------------------------------------------------------------
+[2020-11-26T12:32:46+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelInfo/
+[运行时间：0.166940s] [吞吐率：5.99req/s] [内存消耗：2,461.82kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelInfo/',
+  'route' => 'Goods/labelInfo',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags_news.html?code=id&IGX-31835504126',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '51',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => 'IGX-31835504126',
+  'label_code' => 'goods15742124882349',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.023807s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_label_info` [ RunTime:0.027462s ]
+[ sql ] [ SQL ] SELECT `id`,info name,`label_code` FROM `suoke`.`vip_goods_label_info` WHERE  `label_code` = 'goods15742124882349' [ RunTime:0.028426s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods_labels` [ RunTime:0.023150s ]
+[ sql ] [ SQL ] SELECT * FROM `suoke`.`vip_goods_labels` WHERE  `goods_code` = 'IGX-31835504126'  AND `label_code` = 'goods15742124882349' [ RunTime:0.017309s ]
+---------------------------------------------------------------
+[2020-11-26T12:32:55+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelIndex/
+[运行时间：0.487546s] [吞吐率：2.05req/s] [内存消耗：2,460.60kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelIndex/',
+  'route' => 'Goods/labelIndex',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags.html?t=1606365155428',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '21',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => '',
+  'page' => '1',
+  'limit' => '20',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.120528s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.081549s ]
+[ sql ] [ SQL ] SELECT frenum as code,`name`,`price`,`bar_code` FROM `suoke`.`vip_goods` GROUP BY `frenum` LIMIT 0,20 [ RunTime:0.077212s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) AS think_count FROM `suoke`.`vip_goods` GROUP BY `frenum` ) `_group_count_` LIMIT 1 [ RunTime:0.167305s ]
+---------------------------------------------------------------
+[2020-11-26T12:33:14+08:00] 10.10.10.38 POST 10.10.10.38/index.php/UserlistViplist/
+[运行时间：0.494883s] [吞吐率：2.02req/s] [内存消耗：2,623.45kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'UserlistViplist/',
+  'route' => 'Userlist/viplist',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/index_centent.html',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.065590s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`view_vip_staff` [ RunTime:0.151567s ]
+[ sql ] [ SQL ] SELECT `code`,`name`,`vpname`,`vgname`,`vsname`,`m_auth_code` FROM `suoke`.`view_vip_staff` WHERE  `code` = '10008' LIMIT 1 [ RunTime:0.237339s ]
+---------------------------------------------------------------
+[2020-11-26T12:33:18+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelIndex/
+[运行时间：0.703353s] [吞吐率：1.42req/s] [内存消耗：2,460.60kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelIndex/',
+  'route' => 'Goods/labelIndex',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags.html?t=1606365193987',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '21',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => '',
+  'page' => '1',
+  'limit' => '20',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.134566s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.042235s ]
+[ sql ] [ SQL ] SELECT frenum as code,`name`,`price`,`bar_code` FROM `suoke`.`vip_goods` GROUP BY `frenum` LIMIT 0,20 [ RunTime:0.324475s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) AS think_count FROM `suoke`.`vip_goods` GROUP BY `frenum` ) `_group_count_` LIMIT 1 [ RunTime:0.165380s ]
+---------------------------------------------------------------
+[2020-11-26T12:33:21+08:00] 10.10.10.38 POST 10.10.10.38/index.php/UserlistViplist/
+[运行时间：0.138709s] [吞吐率：7.21req/s] [内存消耗：2,623.45kb] [文件加载：61]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'UserlistViplist/',
+  'route' => 'Userlist/viplist',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/index_centent.html',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '0',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.068362s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`view_vip_staff` [ RunTime:0.016855s ]
+[ sql ] [ SQL ] SELECT `code`,`name`,`vpname`,`vgname`,`vsname`,`m_auth_code` FROM `suoke`.`view_vip_staff` WHERE  `code` = '10008' LIMIT 1 [ RunTime:0.012035s ]
+---------------------------------------------------------------
+[2020-11-26T12:33:24+08:00] 10.10.10.38 POST 10.10.10.38/index.php/webGoodsLabelIndex/
+[运行时间：0.338628s] [吞吐率：2.95req/s] [内存消耗：2,460.60kb] [文件加载：62]
+[ info ] [ LANG ] D:\www\wx\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'rule' => 'webGoodsLabelIndex/',
+  'route' => 'Goods/labelIndex',
+  'option' => 
+  array (
+    'merge_rule_regex' => false,
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=ksek1oo05acn1md4c8s8dc3dks; company=suoke; locaton=http%3A%2F%2F10.10.10.38%2F%3Fcompany%3Dsuoke; openId=o9osQwUghKSMhf1ZGF3oclpiEvtc',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://10.10.10.38/homepage/product_tags.html?t=1606365200844',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/0.7.0 MicroMessenger/6.3.9 Language/zh_CN webview/0',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://10.10.10.38',
+  'accept' => 'application/json',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'content-length' => '21',
+  'connection' => 'close',
+  'host' => '10.10.10.38',
+)
+[ info ] [ PARAM ] array (
+  'code' => '',
+  'page' => '1',
+  'limit' => '20',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.029478s ] mysql:host=db.suokeduo.com;dbname=;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `suoke`.`vip_goods` [ RunTime:0.024463s ]
+[ sql ] [ SQL ] SELECT frenum as code,`name`,`price`,`bar_code` FROM `suoke`.`vip_goods` GROUP BY `frenum` LIMIT 0,20 [ RunTime:0.076016s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM ( SELECT count(*) AS think_count FROM `suoke`.`vip_goods` GROUP BY `frenum` ) `_group_count_` LIMIT 1 [ RunTime:0.167699s ]

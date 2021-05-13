@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../css/app.css">
+
+    <!-- <script src="../mui/js/mui.min.js"></script> -->
+    <script src="../mui/js/muiR.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/vconsole.js"></script>
+    <script src="../js/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../css/loading.css">
+    <script src="../js/loading.js"></script>
+    <title>会员群发微信</title>
+    <!-- RFM和消费画像的群发微信 -->
+</head>
+<style type="text/css">
+    /* .short_all {
+			position: relative;
+			display: contents;
+		} */
+
+    .cont_style {
+        position: absolute;
+        width: 100%;
+        /* height: 75%; */
+        z-index: 1;
+        bottom: 170px;
+        top: 50px;
+    }
+
+    .cont_css p {
+        font-size: 14px;
+        color: #636262;
+        margin-left: 10px;
+        letter-spacing: 1px;
+    }
+
+    .cont_css span {
+        background-color: white;
+        display: inline-block;
+        padding: 8px 10px;
+        margin: 0px 55px 0px 5px;
+        font-size: 14px;
+        letter-spacing: 1px;
+        border: 1px solid #ece8e8;
+        border-radius: 5px;
+    }
+
+    .frame_style {
+        width: 100%;
+        margin: 0 auto;
+        height: 165px;
+        position: absolute;
+        bottom: 48px;
+        left: 0;
+        border-top: 1px solid #eae7e7;
+        /* border-radius: 5px; */
+        background: #FFF;
+        right: 0;
+        z-index: 2;
+    }
+
+    .text_style {
+        width: 100%;
+        height: 100%;
+        color: rgb(116, 116, 116);
+        font-size: 14px;
+        margin-bottom: 0px;
+        border: none;
+        letter-spacing: 1px;
+        padding: 10px;
+    }
+
+    .btn_style {
+        width: 100%;
+        margin: 0 auto;
+        height: 48px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-top: 1px solid #eae7e7;
+        background: #FFF;
+        right: 0;
+        z-index: 2;
+    }
+
+    .short_btn {
+        width: 30%;
+        height: 40px;
+        position: absolute;
+        right: 3px;
+        bottom: 2px;
+    }
+
+    .display_none {
+        display: none;
+    }
+
+    .ShaShiDi {
+        height: 160px;
+        /* display: flex; */
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        /*为了效果明显，可以将如下边框打开，看一下效果*/
+        /* border:1px solid black; */
+    }
+
+    .ShaShiDi img {
+        width: auto;
+        height: 100%;
+    }
+
+    .ShaShiDi span {
+        font-size: 50px;
+        position: absolute;
+        top: 40px;
+    }
+</style>
+
+<body>
+    <!--  头部-->
+    <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff">
+        <a href="javascript:history.go(-1)" class="mui-icon mui-icon-back" style="color:#fff;"></a>
+        <h1 class="mui-title" style="color:#fff;">微信群发</h1>
+        <a style="float: right;line-height: 44px;color: white;" id="menu"><span
+                class="mui-icon mui-icon-image"></span></a>
+    </header>
+
+    <div class="mui-content short_all">
+        <!-- 区域内容 -->
+        <div class="cont_style">
+            <div class="mui-scroll-wrapper" id="pullrefresh">
+                <div class="mui-scroll">
+                    <div class="cont_css" id="text_wb">
+
+                        <!-- <p class="gyhgjh">模板1<span onclick="beijin(this);" value="">天空一片晴朗，快乐心中徜徉</span></p>
+						<p>模板2<span onclick="beijin(this);">快乐心中徜徉，天空一片晴朗</span></p>
+						<p>模板3<span onclick="beijin(this);">自由随风飘荡，身体力行健康</span></p>
+						<p>模板4<span onclick="beijin(this);">身体力行健康，自由随风飘荡</span></p>
+						<p>模板5<span onclick="beijin(this);">奋劲儿热情高涨，顺利成就梦想</span></p>
+						<p>模板6<span onclick="beijin(this);">顺利成就梦想，奋劲儿热情高涨</span></p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 短信发送框 -->
+        <div class="frame_style ">
+            <textarea class="mui-input-clear text_style display_none" placeholder="请选择模板或输入内容"
+                onfocus="this.placeholder=''" onblur="this.placeholder='请选择模板或输入内容'" id="text1"></textarea>
+
+            <div class="ShaShiDi " id="ShaShiDi">
+                <img src="../images/g1.jpg" alt="" id="ShaShiDi_img">
+                <span class="mui-icon mui-icon-trash"></span>
+            </div>
+
+        </div>
+
+        <!-- 发送按钮 -->
+        <div class="btn_style">
+            <span id="text_size_limit"
+                style="height: 40px; position: absolute;left: 3px;bottom: 2px;line-height: 40px;font-size: 15px;">已经输入<span
+                    id="size_nums" style="font-size: 18px;color: #EAB275;">0</span>个字</span>
+
+            <span id="text_img_limit" class="display_none"
+                style="height: 40px; position: absolute;left: 3px;bottom: 2px;line-height: 40px;font-size: 15px;">每个月只能发4次图片!!!</span>
+            <button type="button" class="mui-btn mui-btn-warning short_btn" onclick="send()">发送</button>
+        </div>
+    </div>
+
+    <!-- 图片 -->
+    <input type="file" accept="image/*" multiple id="upload_picture" class="display_none"
+        onchange="uploadImageHandle(this,0.5)">
+    <script>
+        $(function () {
+            $('#text1').bind('input propertychange', function () {
+                // input_length = this.value.length
+                // $('#result').html($(this).val().length + ' characters');
+                // 跟据文本框进行刷新
+                document.getElementById("size_nums").innerHTML = this.value.length;
+                content = this.value;
+                huiyuan_type = 'text';
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        var loc = location.href;
+        var n1 = loc.length;
+        var n2 = loc.indexOf('=');
+        var n3 = loc.indexOf('*');
+        var n4 = loc.indexOf('#');
+        var idd = decodeURI(loc.substr(n2 + 1, n3 - n2 - 5));
+        var code = decodeURI(loc.substr(n3 + 1, n4 - n3 - 9));
+        var bar_code = decodeURI(loc.substr(n4 + 1, n1 - n4));
+
+        var load = new Loading();
+        load.init();
+
+        mui('.mui-scroll-wrapper').scroll({
+            deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+        });
+
+        mui("#menu").on('tap', 'span', function () {
+            // mui.alert('67个字算一条短信!!!!', '注意', '确定', null, 'div')
+            $('#upload_picture').click();
+        })
+        var perDiv = null;
+        var framet = document.getElementById('text1');
+        mui(".cont_css").on('tap', 'span', function () {
+            if (perDiv) perDiv.style.backgroundColor = 'white';
+            if (perDiv) perDiv.style.color = '#636262';
+            this.style.backgroundColor = 'orange';
+            this.style.color = "white";
+            perDiv = this;
+            framet.value = this.getAttribute("value");
+            content = this.getAttribute("value");
+            huiyuan_type = 'text';
+            document.getElementById("size_nums").innerHTML = framet.value.length
+        })
+        var text_wb = document.getElementById("text_wb");
+        // 检验手机号
+        // var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
+        var content;
+        var huiyuan_type;
+        function send() {
+            load.start();
+            if (localStorage.getItem("rfm_type") == "R") {
+                mui.post('/index.php/webCargoGuestCardM/', {
+                    id: idd,
+                    wxchat: 1, //短信2 微信1
+                    store_code: code,
+                    type: huiyuan_type,
+                    message_content: content,
+                    rfm_type: 'r',
+                    bar_code: bar_code
+                }, function (data) {
+                    if (data.code == 200) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                        document.getElementById("text1").value = "";
+                        content = "";
+                    } else if (data.code == 400) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                    load.stop();
+                    //服务器返回响应，根据响应结果，分析是否登录成功；
+                }, 'json'
+                );
+            } else if (localStorage.getItem("rfm_type") == "F") {
+                mui.post('/index.php/webCargoGuestCardM/', {
+                    id: idd,
+                    wxchat: 1, //短信2 微信1
+                    store_code: code,
+                    type: huiyuan_type,
+                    message_content: content,
+                    rfm_type: 'f',
+                    bar_code: bar_code
+                }, function (data) {
+
+                    if (data.code == 200) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                        document.getElementById("text1").value = "";
+                        content = "";
+                    } else if (data.code == 400) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                    load.stop();
+                    //服务器返回响应，根据响应结果，分析是否登录成功；
+                }, 'json'
+                );
+            } else if (localStorage.getItem("rfm_type") == "M") {
+                mui.post('/index.php/webCargoGuestCardM/', {
+                    id: idd,
+                    wxchat: 1, //短信2 微信1
+                    store_code: code,
+                    type: huiyuan_type,
+                    message_content: content,
+                    rfm_type: 'm',
+                    bar_code: bar_code
+                }, function (data) {
+                    if (data.code == 200) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                        document.getElementById("text1").value = "";
+                        content = "";
+                    } else if (data.code == 400) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                    load.stop();
+                    //服务器返回响应，根据响应结果，分析是否登录成功；
+                }, 'json'
+                );
+            } else if (localStorage.getItem("rfm_type") == "N") {
+                mui.post('/index.php/webCargoGuestCardM/', {
+                    id: idd,
+                    wxchat: 1, //短信2 微信1
+                    store_code: code,
+                    type: huiyuan_type,
+                    message_content: content,
+                    rfm_type: 'n',
+                    bar_code: bar_code
+                }, function (data) {
+                    if (data.code == 200) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                        document.getElementById("text1").value = "";
+                        content = "";
+                    } else if (data.code == 400) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                    load.stop();
+                    //服务器返回响应，根据响应结果，分析是否登录成功；
+                }, 'json'
+                );
+
+            } else if (localStorage.getItem("rfm_type") == "P") {
+                mui.post('/index.php/webCargoGuestCardM/', {
+                    id: idd,
+                    wxchat: 1, //短信2 微信1
+                    store_code: code,
+                    type: huiyuan_type,
+                    message_content: content,
+                    rfm_type: 'p',
+                    bar_code: bar_code
+                }, function (data) {
+                    if (data.code == 200) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                        document.getElementById("text1").value = "";
+                        content = "";
+                    } else if (data.code == 400) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                    load.stop();
+                    //服务器返回响应，根据响应结果，分析是否登录成功；
+                }, 'json'
+                );
+
+            } else if (localStorage.getItem("rfm_type") == "A") {
+                mui.post('/index.php/webCargoGuestCardM/', {
+                    id: idd,
+                    wxchat: 1, //短信2 微信1
+                    store_code: code,
+                    type: huiyuan_type,
+                    message_content: content,
+                    rfm_type: 'a',
+                    bar_code: bar_code
+                }, function (data) {
+                    if (data.code == 200) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                        document.getElementById("text1").value = "";
+                        content = "";
+                    } else if (data.code == 400) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                    load.stop();
+                    //服务器返回响应，根据响应结果，分析是否登录成功；
+                }, 'json'
+                );
+
+            } else if (localStorage.getItem("rfm_type") == "J") {
+                mui.post('/index.php/webCargoGuestCardM/', {
+                    id: idd,
+                    wxchat: 1, //短信2 微信1
+                    store_code: code,
+                    type: huiyuan_type,
+                    message_content: content,
+                    rfm_type: 'j',
+                    bar_code: bar_code
+                }, function (data) {
+                    if (data.code == 200) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                        document.getElementById("text1").value = "";
+                        content = "";
+                    } else if (data.code == 400) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                    load.stop();
+                    //服务器返回响应，根据响应结果，分析是否登录成功；
+                }, 'json'
+                );
+
+            } else if (localStorage.getItem("rfm_type") == "C") {
+                mui.post('/index.php/webCargoGuestCardM/', {
+                    id: idd,
+                    wxchat: 1, //短信2 微信1
+                    store_code: code,
+                    type: huiyuan_type,
+                    message_content: content,
+                    rfm_type: 'c',
+                    bar_code: bar_code
+                }, function (data) {
+                    if (data.code == 200) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                        document.getElementById("text1").value = "";
+                        content = "";
+                    } else if (data.code == 400) {
+                        mui.toast(data.msg, {
+                            duration: 'long',
+                            type: 'div'
+                        })
+                    }
+                    load.stop();
+                    //服务器返回响应，根据响应结果，分析是否登录成功；
+                }, 'json'
+                );
+
+            }
+        }
+    </script>
+    <script>
+        mui.init({
+            pullRefresh: {
+                container: '#pullrefresh',
+                down: {
+                    // callback: pulldownRefresh
+                },
+                up: {
+                    contentrefresh: '正在加载...',
+                    auto: true,//可选,默认false.首次加载自动上拉刷新一次
+                    callback: pullupRefresh
+                }
+            }
+        });
+	    /**
+	     * 下拉刷新具体业务实现
+	     */
+        function pulldownRefresh() {
+        }
+
+        var RadioStyle_checked = document.getElementById("RadioStyle_checked");
+	    /**
+	     * 上拉加载具体业务实现
+	     */
+        // 重新开启加载
+        // mui('#pullrefresh').pullRefresh().refresh(true);
+        // 分页计数
+        var count = 0;
+        // 分的条数
+        var limit_num = 10;
+        var numbs = 0;
+        function pullupRefresh() {
+            mui.post('/index.php/WreMessageList/', {
+                page: ++count,
+                limit: limit_num
+            }, function (data) {
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                if (data.code == 200) {
+                    setTimeout(function () {
+                        mui('#pullrefresh').pullRefresh().endPullupToRefresh((count > (data.data.count / limit_num))); //参数为true代表没有更多数据了。
+                        for (i = 0; i < data.data.data.length; i++) {
+                            var p = document.createElement("p");
+                            p.innerHTML = '模板' + (numbs + i + 1) + '<span onclick = "beijin(this);" value="' + data.data.data[i].speech + '">' + data.data.data[i].name + '</span>';
+                            text_wb.appendChild(p);
+                        }
+                        numbs = numbs + data.data.data.length;
+                    }, 1000);
+                }
+            }, 'json'
+            );
+        }
+
+        // 点击按钮,将参数传递到另一个页面
+        // 删除图片
+        mui(".ShaShiDi").on('tap', '.mui-icon-trash', function () {
+            mui("#text1")[0].classList.remove("display_none");
+            mui("#text_size_limit")[0].classList.remove("display_none");
+            mui("#text_img_limit")[0].classList.add("display_none");
+            mui("#ShaShiDi")[0].classList.add("display_none");
+            document.getElementById('text1').value = "";
+            content = '';
+            huiyuan_type = 'text';
+
+        })
+    </script>
+
+    <script>
+
+        var file_File = ""; //接收file变量
+        var base64_YS = "";//接收压缩的base64编码
+        function uploadImageHandle(File_domain, Multiple) {
+            // 创建实例
+            var reader = new FileReader();
+            var img = document.createElement('img');
+            // 读取上传的图片的信息(lastModified, lastModifiedDate, name, size, type等)
+            var file = File_domain.files[0];
+            // 记下上传的图片的name, 后面会用到
+            var flieName = File_domain.files[0].name;
+            console.log(flieName);
+            // 记下上传的图片的类型, 后面会用到
+            var fileType = file.type;
+            // 生成canvas画布
+            var canvas = document.createElement('canvas');
+            var context = canvas.getContext('2d');
+            // MDN: 该方法会读取指定的 Blob 或 File 对象。读取操作完成的时候，
+            // readyState 会变成已完成（DONE），并触发 loadend 事件，
+            // 同时 result 属性将包含一个data:URL格式的字符串（base64编码）以表示所读取文件的内容。
+            // 也就是说, 将File对象转化为base64位字符串
+            reader.readAsDataURL(file);
+            // 上一步是异步操作, 读取完成后会执行onload事件, 而base64的字符串在e.target.rusult中
+            reader.onload = function (e) {
+                // 获得图片dom
+                var base64 = e.target.result
+                img.src = base64;
+                //  console.log(base64.length+ base64);
+                //   create_content(789, '的暑假', base64);
+            };
+
+            img.onload = function () {
+                // 图片原始尺寸
+                var originWidth = this.width;
+                var originHeight = this.height;
+
+                console.log('width' + originWidth);
+                console.log('width' + originHeight);
+                // 最大尺寸限制
+                var maxWidth = this.width * Multiple,
+                    maxHeight = this.height * Multiple;
+                console.log('maxWidth' + maxWidth)
+                console.log('maxHeight' + maxHeight)
+                // 目标尺寸
+                var targetWidth = originWidth,
+                    targetHeight = originHeight;
+                // 图片尺寸超过800x800的限制
+                if (originWidth > maxWidth || originHeight > maxHeight) {
+                    if (originWidth / originHeight > maxWidth / maxHeight) {
+                        // 更宽，按照宽度限定尺寸
+                        targetWidth = maxWidth;
+                        targetHeight = Math.round(
+                            maxWidth * (originHeight / originWidth)
+                        );
+                    } else {
+                        targetHeight = maxHeight;
+                        targetWidth = Math.round(
+                            maxHeight * (originWidth / originHeight)
+                        );
+                    }
+                }
+                // canvas对图片进行缩放
+                canvas.width = targetWidth;
+                canvas.height = targetHeight;
+                // 清除画布
+                context.clearRect(0, 0, targetWidth, targetHeight);
+                // 将图片划到canvas上
+                context.drawImage(img, 0, 0, targetWidth, targetHeight);
+                // 把canvas转成base64格式并去除头
+                var base64 = canvas
+                    .toDataURL(fileType)
+                // .replace(/^data:image\/(jpeg|jpg|png|gif);base64,/, '');
+                base64_YS = base64;
+                file_File = base_flie(base64, flieName);
+
+
+                update_Photo(base64_YS, file_File)
+            };
+        }
+
+
+        function base_flie(dataurl, filename) {//将base64转换为文件
+            var arr = dataurl.split(',');
+            var mime = arr[0].match(/:(.*?);/)[1];
+            var bstr = atob(arr[1]);
+            var n = bstr.length;
+            var u8arr = new Uint8Array(n);
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new File([u8arr], filename, { type: mime });
+        }
+
+        // 上传图片
+        function update_Photo(img, file) {
+            console.log(document.getElementById("ShaShiDi_img"))
+            // 上传图片
+            var data = new FormData();
+            data.append('file', file);
+            data.append('model', 'weixin');
+            $.ajax({
+                data: data,
+                type: "POST",
+                url: '/index.php/UserlistUploadImg/',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (JSON.parse(data).code == 200) {
+                        mui("#text1")[0].classList.add("display_none");
+                        mui("#text_size_limit")[0].classList.add("display_none");
+                        mui("#text_img_limit")[0].classList.remove("display_none");
+                        mui("#ShaShiDi")[0].classList.remove("display_none");
+                        huiyuan_type = 'image';
+                        content = JSON.parse(data).msg;
+                        document.getElementById("ShaShiDi_img").setAttribute("src", JSON.parse(data).msg);
+                    } else if (JSON.parse(data).code == 400) {
+                        mui.toast(JSON.parse(data).msg, {
+                            duration: 'long',
+                            type: 'div'
+                        });
+                    }
+
+                },
+                error: function (xhr) {
+                    mui.toast('上传失败', {
+                        duration: 'long',
+                        type: 'div'
+                    });
+                }
+            }, 'JSON');
+        }
+    </script>
+</body>
+
+</html>

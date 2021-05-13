@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../mui/css/mui.min.css">
+    <link rel="stylesheet" href="../mui/css/mui.picker.min.css">
+    <!-- 返单样式表 -->
+    <link rel="stylesheet" href="../css/rorder.css">
+    <script src="../mui/js/mui.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../mui/js/mui.picker.min.js"></script>
+    <script src="../js/hidden-titile.js"></script>
+    <script src="../js/loading.js"></script>
+    <link rel="stylesheet" href="../css/loading.css">
+    <title>新建搭配</title>
+    <style>
+        * {
+            touch-action: pan-y;
+        }
+
+        .mui-card .mui-control-content {
+            padding: 10px;
+        }
+
+        .programme {
+            width: 100%;
+            display: inline-block;
+            font-size: 15px;
+        }
+
+        .programme p,
+        .programme button {
+            width: 48%;
+            display: inline-block;
+            text-align: center;
+            letter-spacing: 2px;
+            font-size: 16px;
+            border: none;
+            padding: 10px 12px;
+        }
+
+        .programme-title {
+            display: inline-block;
+            border-radius: 0;
+            border: 0;
+            background-color: rgba(229, 241, 255, 0.7);
+        }
+
+        .mui-segmented-control .mui-control-item {
+            border-left: 0;
+        }
+
+        .mui-icon-plusempty:before,
+        .mui-icon-trash:before {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable mui-slide-in">
+        <!--侧滑菜单部分-->
+        <aside id="offCanvasSide" class="mui-off-canvas-left">
+            <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+                <a class="mui-icon mui-icon-back" id="cans" style="color:white;"></a>
+                <h1 class="mui-title" style="color:white;">添加搭配</h1>
+            </header>
+            <!-- 资料 -->
+            <div id="offCanvasSideScroll" class="mui-scroll-wrapper mui-content">
+                <div class="mui-scroll">
+                    <div class="mui-input-row mui-search" id="searchForm" style="display: inline-block;">
+                        <input type="search" id="searchInput" class="mui-input-clear" placeholder="搜索货号">
+                    </div>
+                    <button id="searchs1" class="search_button"
+                        style="color: #fff;background: #007aff;float: right;margin: 7px 10px;">确定</button>
+                    <div id="xx">
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!--主界面部分-->
+        <div class="mui-inner-wrap">
+            <header class="mui-bar mui-bar-nav mui-bar-nav-bg" style="background-color:#007aff;">
+                <a class="mui-icon mui-icon-back" id="a_title" style="color:white;"></a>
+                <h1 class="mui-title" id="title_" style="color:white;">新建搭配</h1>
+                <button class="title-hold" onclick="baocun()">保存</button>
+            </header>
+            <!-- 头部选择器 -->
+            <div id="da" class="mui-content mui-scroll-wrapper">
+                <!-- body内容 -->
+                <!-- 新建返单 -->
+                <div class="mui-input-group f-size-le f_style mui-scroll">
+                    <div class="mui-input-row dateName">
+                        <label> <span>*</span> 搭配客户</label>
+                        <input type="text" class="mui-input-clear" placeholder="姓名" id="dateName">
+                    </div>
+                    <div class="mui-input-row">
+                        <label for="dateTime"> <span>*</span> 执行时间</label>
+                        <input type="text" id="dateTime" placeholder="选择时间" />
+                    </div>
+                    <div class="mui-input-row mui-select">
+                        <label> <span>*</span> 执行导购</label>
+                        <select name="" id="all_shopping">
+                        </select>
+                    </div>
+                    <div style="padding: 0px 0px 2px 0px;">
+                        <div class="programme">
+                            <button onclick="createProgramme();" class="mui-icon mui-icon-plusempty"
+                                style="color: #007aff;">新增方案</button>
+                            <button onclick="delProgramme()" class="mui-icon mui-icon-trash"
+                                style="color: #8f8f94;">删除方案</button>
+                        </div>
+                        <div id="segmentedControl" class="mui-segmented-control programme-title">
+                            <a class="mui-control-item mui-active" href="#item1" numbe="1">方案1</a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div id="programmeControl">
+                            <div class="mui-control-content mui-active" id="item1"></div>
+                            <!-- 添加图片 -->
+                            <div class="mui-input-row btnstyle">
+                                <label>服装搭配</label>
+                                <p class="prosear">添加</p>
+                            </div>
+                            <div class="imgh" id="dpimg"></div>
+                            <!-- 图片放大 -->
+                            <div id="outerdiv">
+                                <div id="innerdiv">
+                                    <img id="bigimg" src="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hxcss">
+                        <label>核心卖点 (三个核心卖点)</label>
+                        <textarea name="" id="hxtext" rows="5" placeholder="请填写(三个核心卖点)"></textarea>
+                    </div>
+                    <div class="topcss">
+                        <label>TOP (时间、地点、场合)</label>
+                        <textarea name="" id="toptext" rows="5" placeholder="请填写此搭配适合地(时间、地点、场合)"></textarea>
+                    </div>
+                    <div class="ztcss">
+                        <label>整体搭配 (上、中、下、里、外)</label>
+                        <textarea name="" id="zttext" rows="5" placeholder="请填写整体搭配(上、中、下、里、外)"></textarea>
+                    </div>
+                    <div class="wtcss">
+                        <label>顾客可能问题</label>
+                        <textarea name="" id="wttext" rows="5" placeholder="请填写顾客可能提出的异议"></textarea>
+                    </div>
+                    <div class="hscss">
+                        <label>回答问题话术</label>
+                        <textarea name="" id="hstext" rows="5" placeholder="请填写回应话术"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div id="search_alll" class="display_none">
+                <div id="search_all">
+                    <div style="border-bottom: 1px solid rgb(226, 226, 226);">
+                        <div class="mui-input-row mui-search search_div">
+                            <input type="search" id="searchs" class="mui-input-clear search_input" placeholder="请输入名称">
+                        </div>
+                        <button id="query" class="search_button" style="color: #fff;background: #007aff;">确定</button>
+                        <button id="cancel" class="search_button">取消</button>
+                    </div>
+                </div>
+                <div id="pullrefresh" class="mui-scroll-wrapper" style="top: 95px;">
+                    <div class="mui-scroll">
+                        <div id="data_n">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- off-canvas backdrop -->
+            <div class="mui-off-canvas-backdrop"></div>
+        </div>
+    </div>
+</body>
+<script src="../mui/js/mui.pullToRefresh.js"></script>
+<script src="../mui/js/mui.pullToRefresh.material.js"></script>
+<script src="../js/rorder.js"></script>
+<script>
+    window.onload = function () {
+        hidden_title();
+        onload_select_innerHTML();
+        onload_select();
+        imgClearCache();
+        kolko();
+    }
+
+    function imgClearCache(){
+        mui.post('/index.php/webReturnClearCache/', {
+        }, function (data) {
+            if (data.code == 200) {
+                // mui.toast('图片缓存清除')
+                console.log('图片缓存清除');
+            }
+        }, 'json');
+    }
+    //会员搜索-------------------------
+    //点击客户姓名 搜索客户页面
+    mui(".mui-input-group").on('tap', '.dateName', function () {
+        document.activeElement.blur();
+        document.getElementById('search_alll').classList.remove('display_none');
+        //js 禁止唤醒手机键盘
+        document.getElementById('da').classList.add('display_none');
+    })
+    //点击取消 返回
+    document.getElementById("cancel").addEventListener("tap", function () {
+        document.getElementById('search_alll').classList.add('display_none');
+        document.getElementById('da').classList.remove('display_none');
+    });
+    //点击确定 搜索会员
+    document.getElementById("query").addEventListener("tap", function () {
+        document.getElementById('data_n').innerHTML = "";
+        mui('#offCanvasSideScroll').pullRefresh().refresh(true);
+        count = 0;
+        pullupRefresh();
+    });
+
+
+    // 商品搜索-------------------------
+    //禁止滑动主界面的时候出现侧滑菜单
+    $('.mui-inner-wrap').on('drag', function (event) {
+        event.stopPropagation();
+    });
+
+    //跳转商品搜索页面
+    mui('#programmeControl').on('tap', '.prosear', function (e) {
+        // document.getElementById('dpimg2').innerHTML = 'dfhakfhakfhk';
+        e.preventDefault();//阻止提交form事件
+        mui('#offCanvasSide').offCanvas().show();
+    })
+
+    //点击返回图标
+    document.getElementById("cans").addEventListener("tap", function () {
+        mui('#offCanvasWrapper').offCanvas('close');
+    });
+    //点击搜索
+    document.getElementById("searchs1").addEventListener("tap", function () {
+        document.getElementById('xx').innerHTML = "";
+        // mui('#offCanvasSideScroll').pullRefresh().enablePullupToRefresh();
+        mui('#offCanvasSideScroll').pullRefresh().refresh(true);
+        count2 = 0;
+        pullupSearchs();
+    });
+
+    mui('.mui-scroll-wrapper').scroll({
+        indicators: true, //是否显示滚动条
+    });
+
+</script>
+<script>
+    mui('#segmentedControl').on('tap', '.mui-control-item', function () {
+        //获取id
+        let numbes = this.getAttribute("numbe");
+        // console.log(numbes);
+        center_txt(numbes);
+        read_programme(numbes);
+    })
+</script>
+
+</html>
